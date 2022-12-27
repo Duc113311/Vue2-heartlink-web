@@ -1,32 +1,42 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+    <div
+      v-show="isShowIconApp"
+      class="absolute z-20 img-app w-full h-full flex justify-center"
+    >
+      <img
+        class="w-40"
+        src="./assets/icon/ic_icon_app (1).svg"
+        alt=""
+        srcset=""
+      />
+    </div>
+    <div class="tracking-wide absolute z-10 w-full h-full">
+      <router-view />
+    </div>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+  name: "app-view",
 
-nav {
-  padding: 30px;
-}
+  data() {
+    return {
+      isShowIconApp: true,
+    };
+  },
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  created() {
+    setTimeout(() => {
+      this.isShowIconApp = false;
+    }, 2000);
+  },
+};
+</script>
+<style lang="css">
+.img-app {
+  background: #884971;
+  opacity: 1;
 }
 </style>
