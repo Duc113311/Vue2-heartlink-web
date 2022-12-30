@@ -35,8 +35,17 @@ export default {
 };
 </script>
 <style lang="css">
+@import "@/assets/css/common.css";
+
 .img-app {
   background: #884971;
   opacity: 1;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
 }
 </style>

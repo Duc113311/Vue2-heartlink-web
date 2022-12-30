@@ -51,7 +51,7 @@
       <!-- Trang chủ -->
 
       <Header></Header>
-      <div class="w-full body-page-home relative">
+      <div v-if="!isShowDetail" class="w-full body-page-home relative">
         <Tinder
           ref="tinder"
           key-name="id"
@@ -77,7 +77,7 @@
                     <img
                       src="@/assets/icon/ic_infor.svg"
                       width="30"
-                      @click="onDetailInfor()"
+                      @click="onDetailInfor(scope.data.id)"
                       class="cursor-pointer"
                       srcset=""
                     />
@@ -103,7 +103,7 @@
                 </div>
               </div>
             </div>
-            <div class="w-full h-full flex absolute top-0 opacity-0">
+            <div class="w-full flex absolute top-0 opacity-0 h-2/4">
               <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
               <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
             </div>
@@ -143,13 +143,15 @@
           <img src="@/assets/image-tinder/help.png" @click="decide('help')" />
         </div>
       </div>
+      <DetailProfile v-if="isShowDetail" :idImage="idImage"></DetailProfile>
 
-      <Footer></Footer>
+      <Footer v-if="!isShowDetail"></Footer>
     </div>
   </div>
 </template>
 
 <script>
+import DetailProfile from "../../components/home/view/detail-profile";
 import Tinder from "vue-tinder";
 import Footer from "../../components/layout/footer-home/footer";
 import Header from "../../components/layout/header-home/header";
@@ -157,6 +159,7 @@ import source from "@/bing";
 export default {
   name: "home-page",
   components: {
+    DetailProfile,
     Footer,
     Header,
     Tinder,
@@ -166,6 +169,8 @@ export default {
       queue: [],
       offset: 0,
       history: [],
+      isShowDetail: false,
+      idImage: "",
     };
   },
 
@@ -179,6 +184,13 @@ export default {
 
     nextImageRight() {
       debugger;
+    },
+
+    onDetailInfor(value) {
+      debugger;
+      console.log(value);
+      this.idImage = value;
+      this.isShowDetail = true;
     },
     mock(count = 5, append = true) {
       const list = [];
