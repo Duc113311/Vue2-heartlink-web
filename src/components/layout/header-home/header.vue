@@ -2,8 +2,8 @@
   <div
     class="flex header-page justify-center content-center items-center text-red-400 title-logo"
   >
-    <img src="@/assets/icon/ic_home_tab.svg" class="w-5 mr-1" alt="" />
-    <span class="text-lg font-semibold">heartlink</span>
+    <img src="@/assets/icon/ic_icon_app.svg" class="w-12 mr-3" alt="" />
+    <span class="text-2xl font-semibold">heartlink</span>
   </div>
 </template>
 

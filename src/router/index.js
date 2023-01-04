@@ -28,6 +28,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "home-page" */ "../views/home/index.vue"),
   },
+
+  {
+    path: "/explore",
+    name: "explore-page",
+    component: () =>
+      import(
+        /* webpackChunkName: "explore-page" */ "../views/explore/index.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({

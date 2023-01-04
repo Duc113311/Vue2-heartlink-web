@@ -1,52 +1,5 @@
 <template>
   <div class="home-page w-full h-full">
-    <!-- <Tinder
-      ref="tinder"
-      key-name="id"
-      :queue.sync="queue"
-      :offset-y="10"
-      @submit="onSubmit"
-    >
-      <template slot-scope="scope">
-        <div
-          class="pic"
-          :style="{
-            'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`,
-          }"
-        />
-      </template>
-      <img
-        class="like-pointer"
-        slot="like"
-        src="@/assets/image-tinder/like-txt.png"
-      />
-      <img
-        class="nope-pointer"
-        slot="nope"
-        src="@/assets/image-tinder/nope-txt.png"
-      />
-      <img
-        class="super-pointer"
-        slot="super"
-        src="@/assets/image-tinder/super-txt.png"
-      />
-      <img
-        class="rewind-pointer"
-        slot="rewind"
-        src="@/assets/image-tinder/rewind-txt.png"
-      />
-    </Tinder>
-    <div class="btns">
-      <img src="@/assets/image-tinder/rewind.png" @click="decide('rewind')" />
-      <img src="@/assets/image-tinder/nope.png" @click="decide('nope')" />
-      <img
-        src="@/assets/image-tinder/super-like.png"
-        @click="decide('super')"
-      />
-      <img src="@/assets/image-tinder/like.png" @click="decide('like')" />
-      <img src="@/assets/image-tinder/help.png" @click="decide('help')" />
-    </div> -->
-
     <div class="w-full h-full home-page overflow-hidden p-2">
       <!-- Trang chủ -->
 
@@ -143,7 +96,11 @@
           <img src="@/assets/image-tinder/help.png" @click="decide('help')" />
         </div>
       </div>
-      <DetailProfile v-if="isShowDetail" :idImage="idImage"></DetailProfile>
+      <DetailProfile
+        v-if="isShowDetail"
+        @onClickNopeDetail="onClickNopeDetail"
+        :idImage="idImage"
+      ></DetailProfile>
 
       <Footer v-if="!isShowDetail"></Footer>
     </div>
@@ -178,6 +135,10 @@ export default {
     this.mock();
   },
   methods: {
+    onClickNopeDetail(value) {
+      debugger;
+      this.isShowDetail = value;
+    },
     nextImageLeft() {
       debugger;
     },

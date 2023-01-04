@@ -14,6 +14,18 @@
   padding-top: 5px;
 }
 
+.title-description-no-padding {
+  font-weight: 500;
+  color: #727694;
+  font-size: 18px;
+}
+
+.text-description-no-padding {
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 20px;
+}
+
 .text-option {
   font-size: 19px;
   border: 1px solid #ffffff;
@@ -35,7 +47,7 @@
 
 .hr-bg {
   background-color: #414858;
-  height: 2px;
+  height: 1.5px;
   border-width: 0;
 }
 

@@ -3,16 +3,32 @@
     class="w-full absolute bottom-0 right-0 footer-body flex justify-center content-center text-center cursor-pointer"
   >
     <div>
-      <img src="@/assets/icon/ic_home_tab.svg" @click="onClickHome()" />
+      <img
+        class="w-10"
+        src="@/assets/icon/ic_home_tab.svg"
+        @click="onClickHome()"
+      />
     </div>
     <div>
-      <img src="@/assets/icon/ic_explore_tab.svg" @click="onClickExplore()" />
+      <img
+        class="w-10"
+        src="@/assets/icon/ic_explore_tab.svg"
+        @click="onClickExplore()"
+      />
     </div>
     <div>
-      <img src="@/assets/icon/ic_message_tab.svg" @click="onClickMessage()" />
+      <img
+        class="w-10"
+        src="@/assets/icon/ic_message_tab.svg"
+        @click="onClickMessage()"
+      />
     </div>
     <div>
-      <img src="@/assets/icon/ic_profile_tab.svg" @click="onClickProfile()" />
+      <img
+        class="w-10"
+        src="@/assets/icon/ic_profile_tab.svg"
+        @click="onClickProfile()"
+      />
     </div>
   </div>
 </template>
@@ -30,13 +46,18 @@ export default {
   },
 
   methods: {
-    onClickHome() {},
+    onClickHome() {
+      this.$router.push({ path: "/home" });
+    },
 
-    onClickExplore() {},
+    onClickExplore() {
+      debugger;
+      this.$router.push({ path: "/explore" });
+    },
+
+    onClickMessage() {},
 
     onClickProfile() {},
-
-    async onClickMessage() {},
   },
 };
 </script>
@@ -45,7 +66,7 @@ export default {
 .footer-body {
   height: calc(100% - 91%);
   justify-content: center;
-  gap: 70px;
+  gap: 80px;
   align-items: center;
   border-top: 1px solid #373e50;
   margin-top: 10px;
