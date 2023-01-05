@@ -26,6 +26,12 @@
   font-size: 20px;
 }
 
+.title-option {
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 25px;
+}
+
 .text-option {
   font-size: 19px;
   border: 1px solid #ffffff;

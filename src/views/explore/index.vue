@@ -6,7 +6,7 @@
 
       <div class="w-full border-collapse body-explore h-full overflow-y-auto">
         <!-- Verified -->
-        <div class="w-full h-44">
+        <div class="w-full h-44 relative">
           <div class="title-verified text-2xl absolute p-12">
             Verified photo
           </div>
@@ -21,12 +21,24 @@
 
         <div class="w-full option-find">
           <div class="w-full grid gap-2 grid-explore">
+            <div class="relative">
+              <div class="w-full absolute p-10 top-28 text-center">
+                <div class="countdown"></div>
+                <div class="title-date title-option">Blind Date</div>
+                <div class="text-describe mt-9">
+                  Open hour 6pm - 12 pm (Local time)
+                </div>
+
+                <div class=""></div>
+              </div>
+              <img
+                class="imgae-explore w-full rounded-lg"
+                src="@/assets/image-dating/explore_blind_date (1).png"
+                alt=""
+                srcset=""
+              />
+            </div>
             <img
-              class="imgae-explore w-full rounded-lg"
-              src="@/assets/image-dating/explore_blind_date (1).png"
-              alt=""
-              srcset=""
-            /><img
               class="imgae-explore w-full rounded-lg"
               src="@/assets/image-dating/explore_let_be_friend (1).png"
               alt=""
