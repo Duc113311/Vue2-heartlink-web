@@ -320,14 +320,6 @@ export default {
   height: 24%;
 }
 
-.footer-body {
-  height: calc(100% - 91%);
-  justify-content: center;
-  gap: 95px;
-  align-items: center;
-  border-top: 1px solid #373e50;
-  margin-top: 10px;
-}
 .close-infor {
   position: absolute;
   top: -25px;

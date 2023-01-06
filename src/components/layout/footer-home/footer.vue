@@ -4,28 +4,28 @@
   >
     <div>
       <img
-        class="w-10"
+        class="w-9"
         src="@/assets/icon/ic_home_tab.svg"
         @click="onClickHome()"
       />
     </div>
     <div>
       <img
-        class="w-10"
+        class="w-9"
         src="@/assets/icon/ic_explore_tab.svg"
         @click="onClickExplore()"
       />
     </div>
     <div>
       <img
-        class="w-10"
+        class="w-9"
         src="@/assets/icon/ic_message_tab.svg"
         @click="onClickMessage()"
       />
     </div>
     <div>
       <img
-        class="w-10"
+        class="w-9"
         src="@/assets/icon/ic_profile_tab.svg"
         @click="onClickProfile()"
       />
