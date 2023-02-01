@@ -1,14 +1,10 @@
 <template>
-  <div class="login">
-    <div class="flex justify-center w-full h-full body-app overflow-hidden">
+  <div class="login w-full h-full relative">
+    <div
+      class="flex justify-center w-full absolute z-10 h-full body-app overflow-hidden"
+    >
       <div class="h-screen w-full image-background">
         <div class="w-full h-full back-color">
-          <!-- <nav>
-          <router-link to="/">Home</router-link> |
-          <router-link to="/about">About</router-link> |
-          <router-link to="/login">Login</router-link>
-        </nav> -->
-
           <header class="site-header">
             <NavbarPage></NavbarPage>
           </header>
@@ -35,7 +31,7 @@
               </div>
               <!-- Body -->
               <div class="h-30 justify-center flex p-10">
-                <LoginBtn></LoginBtn>
+                <LoginBtn @onShowPhoneNumber="onShowPhoneNumber"></LoginBtn>
               </div>
 
               <div
@@ -65,21 +61,33 @@
         </div>
       </div>
     </div>
+    <MyCommon v-if="isShowPhoneNumber"></MyCommon>
   </div>
 </template>
 
 <script>
+import MyCommon from "../../components/form-login/phone-number/my-common";
 import LoginBtn from "../../components/layout/btn-sign/login-btn";
 import NavbarPage from "../../components/layout/navbar-login/navbar-page";
 export default {
   components: {
+    MyCommon,
     LoginBtn,
     NavbarPage,
   },
   name: "login-page",
 
   data() {
-    return {};
+    return {
+      isShowPhoneNumber: false,
+    };
+  },
+
+  methods: {
+    onShowPhoneNumber(value) {
+      debugger;
+      this.isShowPhoneNumber = value;
+    },
   },
 };
 </script>

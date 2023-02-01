@@ -40,6 +40,22 @@
 <script>
 export default {
   name: "login-btn",
+
+  data() {
+    return {
+      isShowPhoneNumber: false,
+    };
+  },
+
+  methods: {
+    /**
+     * Login by phone number
+     * CreateBy: nvDuc
+     */
+    onClickPhoneNumber() {
+      this.$emit("onShowPhoneNumber", true);
+    },
+  },
 };
 </script>
 

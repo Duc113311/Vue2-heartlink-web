@@ -4,12 +4,7 @@
       v-show="isShowIconApp"
       class="absolute z-20 img-app w-full h-full flex justify-center"
     >
-      <img
-        class="w-40"
-        src="./assets/icon/ic_icon_app (1).svg"
-        alt=""
-        srcset=""
-      />
+      <img class="w-40" src="./assets/icon/ic_icon_app (1).svg" />
     </div>
     <div class="tracking-wide absolute z-10 w-full h-full">
       <router-view />
@@ -46,6 +41,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #ffffff;
 }
 </style>
