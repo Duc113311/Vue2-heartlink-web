@@ -36,7 +36,7 @@
 import intlTelInput from "intl-tel-input";
 import $ from "jquery";
 export default {
-  name: "component-my-name",
+  name: "my-number",
   setup() {
     return;
   },
@@ -69,17 +69,17 @@ export default {
       if (val !== "") {
         if (vnf_regex.test(val) == false) {
           this.txtCodeError = "Your phone number is not wrong format";
-          this.$emit("validateRequirePhone", { statusActive: true });
+          this.$emit("validateRequirePhone", { statusActive: false });
 
           // Số điện thoại của bạn không đúng định dạng!
         } else {
           this.txtCodeError = "";
 
-          this.$emit("validateRequirePhone", { statusActive: false });
+          this.$emit("validateRequirePhone", { statusActive: true });
         }
       } else {
         this.txtCodeError = "You are not enter the phone number";
-        this.$emit("validateRequirePhone", { statusActive: true });
+        this.$emit("validateRequirePhone", { statusActive: false });
       }
     },
     //#endregion

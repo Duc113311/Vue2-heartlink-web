@@ -31,7 +31,7 @@
               </div>
               <!-- Body -->
               <div class="h-30 justify-center flex p-10">
-                <LoginBtn @onShowPhoneNumber="onShowPhoneNumber"></LoginBtn>
+                <LoginBtn></LoginBtn>
               </div>
 
               <div
@@ -61,34 +61,24 @@
         </div>
       </div>
     </div>
-    <MyCommon v-if="isShowPhoneNumber"></MyCommon>
   </div>
 </template>
 
 <script>
-import MyCommon from "../../components/form-login/phone-number/my-common";
 import LoginBtn from "../../components/layout/btn-sign/login-btn";
 import NavbarPage from "../../components/layout/navbar-login/navbar-page";
 export default {
   components: {
-    MyCommon,
     LoginBtn,
     NavbarPage,
   },
   name: "login-page",
 
   data() {
-    return {
-      isShowPhoneNumber: false,
-    };
+    return {};
   },
 
-  methods: {
-    onShowPhoneNumber(value) {
-      debugger;
-      this.isShowPhoneNumber = value;
-    },
-  },
+  methods: {},
 };
 </script>
 

@@ -1,27 +1,30 @@
 <template>
-  <div class="w-full h-full user-profile grid p-8 top-0 absolute z-20">
+  <div class="w-full h-full user-profile grid p-8 top-0 left-0 absolute z-20">
     <div>
+      <!-- Số điện thoại -->
       <MyNumber
         v-if="screenNumber === 0"
         @validateRequirePhone="validateRequire"
       ></MyNumber>
+      <!-- Nhập mã OTP -->
       <div v-else>
         <BhBack></BhBack>
+
         <MyCode
+          :txtPhoneNumber="txtPhoneNumber"
           :sentCodeId="sentCodeId"
           :txtErrorCode="txtErrorCode"
           :valueText="valueText"
-          @onUpdateLoading="onUpdateLoading"
-          @onRenderCodeOTP="onRenderCodeOTP"
           @validateRequireCode="validateRequire"
-          :txtPhoneNumber="txtPhoneNumber"
-        ></MyCode>
+        >
+        </MyCode>
       </div>
     </div>
     <!--  -->
     <BhContinue
-      :isStatusRequire="isStatusRequire"
-      @onNextScreen="onNextScreen"
+      :isActives="isStatusRequire"
+      @onChangeContinue="onChangeContinue"
+      :isLoading="isLoadings"
     ></BhContinue>
   </div>
 </template>
@@ -31,14 +34,15 @@ import MyCode from "./my-code";
 import BhBack from "../../bh-element-ui/button/bh-back";
 import BhContinue from "../../bh-element-ui/button/bh-continue";
 import intlTelInput from "intl-tel-input";
+import MyNumber from "./my-number";
 
 import {
+  auth,
   signInWithPhoneNumber,
   RecaptchaVerifier,
   PhoneAuthProvider,
   signInWithCredential,
-} from "firebase/auth";
-import MyNumber from "./my-number";
+} from "../../../configs/firebase.js";
 export default {
   name: "my-common",
   components: {
@@ -47,117 +51,101 @@ export default {
     BhContinue,
     MyNumber,
   },
-  setup() {},
 
   data() {
     return {
-      isValue: false,
       screenNumber: 0,
       isStatusRequire: false,
-      isLoading: false,
-      txtPhoneNumber: "",
-      sentCodeId: "",
-      codeOTP: "",
+      isLoadings: false,
+      isScream: false,
       txtErrorCode: false,
       valueText: [],
-      isShowEmail: false,
+      codeOTP: "",
+      sentCodeId: "", // Mã sendCodeId firebase gửi về
     };
   },
 
   methods: {
     validateRequire(value) {
-      const statusActive = value.statusActive;
+      debugger;
+      this.isStatusRequire = value.statusActive;
       this.codeOTP = value.codeOTP;
-      this.isStatusRequire = statusActive;
-      document.querySelector(".btContinueCode").disabled = statusActive;
-      if (!statusActive) {
-        document.querySelector(".btContinueCode").style.backgroundColor =
-          "rgb(220 20 30)";
-      } else {
-        document.querySelector(".btContinueCode").style.backgroundColor =
-          "#382e41";
-      }
     },
 
     setuprecaptcha() {
+      debugger;
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
           size: "invisible",
           callback: function () {
             console.log("recature resolved");
-            this.onClickContinueCode();
           },
         },
-        this.auth
+        auth
       );
     },
 
-    async onRenderCodeOTP(value) {
-      if (value) {
-        // const recaptchaContainer = document.getElementById("recaptcha-container");
-        const appVerifier = window.recaptchaVerifier;
-        await signInWithPhoneNumber(this.auth, value, appVerifier)
-          .then((confirmationResult) => {
-            this.sentCodeId = confirmationResult.verificationId;
-            console.log(this.sentCodeId);
-          })
-          .catch((error) => {
-            this.sendCodeError = "You select bad domain";
-            console.log(error);
-            // ...
-          });
-      }
-    },
     /**
-     * Next sang scream
-     * @param {*} val
+     *
      */
-    async onNextScreen(value) {
-      this.screenNumber = this.screenNumber + value;
-
-      if (this.screenNumber === 1) {
+    async onChangeContinue(value) {
+      debugger;
+      console.log(value);
+      this.isLoadings = true;
+      this.isStatusRequire = true;
+      if (this.screenNumber === 0) {
         const mobile = document.getElementById("phone").value;
-
         console.log(mobile);
         const result = true;
         const phoneNumber = this.valCodeQR.getNumber();
         this.txtPhoneNumber = phoneNumber;
-
+        console.log(this.txtPhoneNumber);
         if (result) {
           if (phoneNumber) {
             await this.setuprecaptcha();
             // const recaptchaContainer = document.getElementById("recaptcha-container");
             const appVerifier = window.recaptchaVerifier;
-            await signInWithPhoneNumber(this.auth, phoneNumber, appVerifier)
+            await signInWithPhoneNumber(auth, phoneNumber, appVerifier)
               .then((confirmationResult) => {
                 this.sentCodeId = confirmationResult.verificationId;
+                debugger;
                 console.log(this.sentCodeId);
               })
               .catch((error) => {
                 this.sendCodeError = "You select bad domain";
-                console.log(error);
+                console.log(error, this.sendCodeError);
                 // ...
               });
           }
         }
-      } else {
+      } else if (this.screenNumber === 1) {
         if (this.sentCodeId !== "") {
+          this.$emit("onShowEmailUser", true);
+
           await this.singWithPhone(this.sentCodeId);
         } else {
           this.txtErrorCode = true;
+          this.$emit("onShowEmailUser", true);
         }
       }
+
+      setTimeout(() => {
+        this.isStatusRequire = false;
+        this.isLoadings = false;
+        this.screenNumber = this.screenNumber + 1;
+      }, 4000);
     },
 
     singWithPhone(sentCodeId) {
+      debugger;
       const credential = PhoneAuthProvider.credential(sentCodeId, this.codeOTP);
-      signInWithCredential(this.auth, credential)
+      signInWithCredential(auth, credential)
         .then(async (result) => {
           const userID = result.user.uid;
           const providerId = result.providerId;
-          console.log(providerId);
           debugger;
+          console.log(userID, providerId);
           this.isShowEmail = true;
           this.txtErrorCode = false;
 
@@ -166,9 +154,7 @@ export default {
         })
         .catch(() => {
           this.txtErrorCode = true;
-          document.querySelector(".btContinueCode").disabled = true;
-          document.querySelector(".btContinueCode").style.backgroundColor =
-            "#382e41";
+
           this.valueText = [];
         });
     },

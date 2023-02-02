@@ -34,16 +34,29 @@
         </span>
       </button>
     </div>
+
+    <MyCommon
+      v-if="isShowPhoneNumber"
+      @onShowEmailUser="onShowEmailUser"
+    ></MyCommon>
+    <MyEmail v-if="isShowEmail"></MyEmail>
   </div>
 </template>
 
 <script>
+import MyEmail from "../../form-login/email/my-email";
+import MyCommon from "../../form-login/phone-number/my-common";
 export default {
+  components: {
+    MyEmail,
+    MyCommon,
+  },
   name: "login-btn",
 
   data() {
     return {
       isShowPhoneNumber: false,
+      isShowEmail: false,
     };
   },
 
@@ -52,8 +65,13 @@ export default {
      * Login by phone number
      * CreateBy: nvDuc
      */
+
     onClickPhoneNumber() {
-      this.$emit("onShowPhoneNumber", true);
+      this.isShowPhoneNumber = true;
+    },
+
+    onShowEmailUser(value) {
+      this.isShowEmail = value;
     },
   },
 };

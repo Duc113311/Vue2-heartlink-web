@@ -1,32 +1,36 @@
 <template>
   <div class="w-full pl-10 pr-10 flex justify-center items-center">
-    <button
-      :loading="isLoading"
-      :id="btContinueId"
-      class="text-lg btContinueCode tracking-wider first-letter: text-white w-full rounded-lg p-3 color-button"
+    <el-button
+      type="danger"
+      :loading="isShowLoading"
       @click="onClickContinues"
+      v-bind:class="[isActiveContinue ? 'activeButton' : 'defaultButton']"
+      class="btContinueCode cursor-pointer text-white w-full color-button"
+      >Continue</el-button
     >
-      Continue
-    </button>
   </div>
 </template>
 
 <script>
-// import storeTokens from "../../../stores/login/store-token.js";
 export default {
   name: "bt-continue",
-  props: ["isStatusRequire", "isResultValidate", "btContinueId"],
+  props: ["isLoading", "isActives"],
   data() {
     return {
-      isLoading: false,
       isNumber: 0,
     };
   },
 
   computed: {
-    // isLoading() {
-    //   return storeTokens.state.isLoadingBtn;
-    // },
+    isShowLoading() {
+      debugger;
+      return this.isLoading;
+    },
+    isActiveContinue() {
+      debugger;
+
+      return this.isActives;
+    },
   },
 
   methods: {
@@ -34,13 +38,7 @@ export default {
      * Sự kiện click để tiếp tục
      */
     onClickContinues() {
-      if (!this.isStatusRequire) {
-        this.$emit("onNextScreen", 1);
-      }
-
-      if (this.isResultValidate) {
-        this.$emit("onNextWellcome", true);
-      }
+      this.$emit("onChangeContinue", true);
     },
   },
 };
@@ -48,14 +46,20 @@ export default {
 
 <style lang="css">
 .color-button {
-  background-color: #382e41;
   border: 1px solid #2e465c !important;
+  border-radius: 10px !important;
+  padding: 14px 20px !important;
   cursor: pointer;
 }
 
-.color-button:hover,
-.color-button:active,
-.color-button:focus {
-  background-color: #242a38;
+.defaultButton {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.activeButton {
+  background-color: rgb(220 20 30) !important;
+}
+
+.el-button.is-loading:before {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 </style>

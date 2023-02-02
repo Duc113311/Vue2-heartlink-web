@@ -6,6 +6,10 @@ import {
   signInWithPopup,
   getAuth,
   createUserWithEmailAndPassword,
+  signInWithPhoneNumber,
+  PhoneAuthProvider,
+  RecaptchaVerifier,
+  signInWithCredential,
 } from "firebase/auth";
 
 // Config
@@ -34,6 +38,10 @@ export {
   getDocs,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signInWithPhoneNumber,
+  PhoneAuthProvider,
+  RecaptchaVerifier,
+  signInWithCredential,
   auth,
   analytics,
   logEvent,

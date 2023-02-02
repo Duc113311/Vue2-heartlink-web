@@ -4,44 +4,9 @@ import { HTTP } from "../../configs/http-host";
 // Create a new store instance.
 const storeLogins = createStore({
   state() {
-    return {
-      dataUser: [],
-      tokenAccount: {},
-      isUserId: false,
-      isLogout: false,
-      isAppAccess: false,
-
-      isLoadingBtn: false,
-    };
+    return {};
   },
-  mutations: {
-    setIsLoadingButton(state, value) {
-      state.isLoadingBtn = value;
-    },
-    increment(state, data) {
-      state.dataUser = data;
-    },
-
-    setTokenAccount(state, token) {
-      state.tokenAccount = token;
-    },
-
-    setProviderId(state, data) {
-      state.providerId = data;
-    },
-
-    setUserIdExits(state, isUserId) {
-      state.isUserId = isUserId;
-    },
-
-    setLogoutApp(state, data) {
-      state.isLogout = data;
-    },
-
-    setAppAccess(state, data) {
-      state.isAppAccess = data;
-    },
-  },
+  mutations: {},
 
   actions: {
     /**

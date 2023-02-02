@@ -73,6 +73,7 @@ export default {
     },
 
     onNextOn(key, on) {
+      debugger;
       console.log(key, on);
       const indexData = document.getElementById(key);
       const valueData = indexData.value;
@@ -85,7 +86,7 @@ export default {
 
           if (this.valueCode !== "") {
             this.$emit("validateRequireCode", {
-              statusActive: false,
+              statusActive: true,
               codeOTP: this.valueCode,
             });
           }
@@ -94,10 +95,7 @@ export default {
     },
   },
 
-  created() {
-    document.querySelector(".btContinueCode").disabled = true;
-    document.querySelector(".btContinueCode").style.backgroundColor = "#382e41";
-  },
+  created() {},
 
   mounted() {},
 };
