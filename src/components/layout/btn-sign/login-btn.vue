@@ -39,15 +39,18 @@
       v-if="isShowPhoneNumber"
       @onShowEmailUser="onShowEmailUser"
     ></MyCommon>
-    <MyEmail v-if="isShowEmail"></MyEmail>
+    <MyEmail v-if="isShowEmails"></MyEmail>
+    <NewAccount v-if="isShowEmail"></NewAccount>
   </div>
 </template>
 
 <script>
+import NewAccount from "../../welcome/new-account";
 import MyEmail from "../../form-login/email/my-email";
 import MyCommon from "../../form-login/phone-number/my-common";
 export default {
   components: {
+    NewAccount,
     MyEmail,
     MyCommon,
   },
@@ -57,6 +60,7 @@ export default {
     return {
       isShowPhoneNumber: false,
       isShowEmail: false,
+      isShowEmails: false,
     };
   },
 

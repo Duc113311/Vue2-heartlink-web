@@ -1,8 +1,8 @@
 <template>
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
     <el-button
-      type="danger"
-      class="text-base text-white w-64 rounded-lg p-5 color-bt"
+      :loading="isShowLoading"
+      class="text-base text-white w-full rounded-lg p-5 color-bt"
       @click="onClickIAgree()"
       >I agree</el-button
     >
@@ -11,10 +11,17 @@
 
 <script>
 export default {
-  name: "bt-arge",
+  name: "bt-agree",
 
+  props: ["isLoading"],
   data() {
     return {};
+  },
+
+  computed: {
+    isShowLoading() {
+      return this.isLoading;
+    },
   },
 
   methods: {
@@ -22,14 +29,19 @@ export default {
      * Click show dialog
      */
     onClickIAgree() {
-      this.$emit("onShowDialogQuit", true);
+      this.$emit("onAgreeContinue", true);
     },
   },
 };
 </script>
 
 <style lang="css">
+.color-bt:hover {
+  background-color: #fd5d65 !important;
+}
 .color-bt {
-  background-color: #fd5d65;
+  background-color: #3a3f52 !important;
+  color: #ffffff !important;
+  border: none !important;
 }
 </style>
