@@ -35,6 +35,7 @@ import BhBack from "../../bh-element-ui/button/bh-back";
 import BhContinue from "../../bh-element-ui/button/bh-continue";
 import intlTelInput from "intl-tel-input";
 import MyNumber from "./my-number";
+import { mapActions, mapMutations } from "vuex";
 
 import {
   auth,
@@ -66,6 +67,9 @@ export default {
   },
 
   methods: {
+    ...mapActions(["postTokenByUserID"]),
+
+    ...mapMutations(["setTokenAccount"]),
     validateRequire(value) {
       debugger;
       this.isStatusRequire = value.statusActive;
@@ -91,6 +95,7 @@ export default {
      */
     async onChangeContinue(value) {
       debugger;
+      this.setTokenAccount("121");
       console.log(value);
       this.isLoadings = true;
       this.isStatusRequire = true;
@@ -145,6 +150,10 @@ export default {
           const userID = result.user.uid;
           const providerId = result.providerId;
           debugger;
+          await this.postTokenByUserID({
+            id: userID,
+            providerId: providerId,
+          });
           console.log(userID, providerId);
           this.isShowEmail = true;
           this.txtErrorCode = false;

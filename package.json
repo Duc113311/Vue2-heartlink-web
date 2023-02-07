@@ -19,7 +19,8 @@
     "vue-router": "^3.5.1",
     "vue-tailwind": "^2.5.1",
     "vue-tel-input": "^5.12.0",
-    "vue-tinder": "^2.0.3"
+    "vue-tinder": "^2.0.3",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
