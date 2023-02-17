@@ -2,6 +2,7 @@ import { http_request } from "../../configs/http-host";
 
 const state = {
   user: [],
+  tokenAccount: {},
 };
 
 const getters = {};
@@ -26,9 +27,9 @@ const actions = {
 };
 
 const mutations = {
-  setTokenAccount(state, id) {
+  setTokenAccount(state, token) {
     debugger;
-    state.user = id;
+    state.tokenAccount = token;
   },
 };
 

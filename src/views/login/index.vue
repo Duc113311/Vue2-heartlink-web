@@ -3,11 +3,8 @@
     <div
       class="flex justify-center w-full absolute z-10 h-full body-app overflow-hidden"
     >
-      <div class="h-screen w-full image-background">
+      <div class="w-full image-background h-full">
         <div class="w-full h-full back-color">
-          <header class="site-header">
-            <NavbarPage></NavbarPage>
-          </header>
           <div
             class="form-login justify-center flex content-center h-full items-center"
           >
@@ -66,11 +63,11 @@
 
 <script>
 import LoginBtn from "../../components/layout/btn-sign/login-btn";
-import NavbarPage from "../../components/layout/navbar-login/navbar-page";
+// import NavbarPage from "../../components/layout/navbar-login/navbar-page";
 export default {
   components: {
     LoginBtn,
-    NavbarPage,
+    // NavbarPage,
   },
   name: "login-page",
 

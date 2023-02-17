@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-full user-profile grid p-8 top-0 left-0 absolute z-20">
+  <div
+    class="w-full h-full user-profile p-8 top-0 left-0 absolute z-20 grid phone-login"
+  >
     <div>
       <!-- Số điện thoại -->
       <MyNumber
@@ -8,7 +10,7 @@
       ></MyNumber>
       <!-- Nhập mã OTP -->
       <div v-else>
-        <BhBack></BhBack>
+        <BhBack @onBackComponent="onBackComponent"></BhBack>
 
         <MyCode
           :txtPhoneNumber="txtPhoneNumber"
@@ -62,6 +64,7 @@ export default {
       txtErrorCode: false,
       valueText: [],
       codeOTP: "",
+      isHide: false,
       sentCodeId: "", // Mã sendCodeId firebase gửi về
     };
   },
@@ -90,15 +93,21 @@ export default {
       );
     },
 
+    onBackComponent(value) {
+      if (value) {
+        this.screenNumber = 0;
+      }
+    },
+
     /**
      *
      */
     async onChangeContinue(value) {
       debugger;
-      this.setTokenAccount("121");
       console.log(value);
       this.isLoadings = true;
       this.isStatusRequire = true;
+      this.isHide = true;
       if (this.screenNumber === 0) {
         const mobile = document.getElementById("phone").value;
         console.log(mobile);
@@ -154,9 +163,8 @@ export default {
             id: userID,
             providerId: providerId,
           });
+
           console.log(userID, providerId);
-          this.isShowEmail = true;
-          this.txtErrorCode = false;
 
           // Check lần show wellcome
           console.log(userID);
@@ -186,6 +194,10 @@ export default {
 }
 .user-profile {
   background-color: #232937;
-  grid-template-rows: 25fr 4fr;
+  grid-template-rows: 4fr 1fr;
+}
+
+.show-form {
+  display: none;
 }
 </style>

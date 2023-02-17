@@ -8,6 +8,7 @@
 export default {
   name: "bt-back",
 
+  props: [],
   data() {
     return {};
   },
@@ -16,7 +17,9 @@ export default {
     /**
      * Quay lại trang trước
      */
-    onClickBack() {},
+    onClickBack() {
+      this.$emit("onBackComponent", true);
+    },
   },
 };
 </script>

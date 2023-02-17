@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full user-profile absolute top-0 p-8 left-0">
+  <div class="w-full h-full user-profile absolute top-0 p-8 left-0 z-30">
     <BhBack></BhBack>
     <h2 class="mb-2 mt-10 text-xl font-bold text-white">What's your email?</h2>
 
@@ -70,6 +70,7 @@ export default {
       this.isResultValidate = validate.validateEmail(this.txtEmail);
       if (this.isResultValidate) {
         // Xét giá trị email
+        debugger;
       }
     },
 

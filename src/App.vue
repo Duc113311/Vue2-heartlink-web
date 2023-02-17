@@ -6,8 +6,12 @@
     >
       <img class="w-40" src="./assets/icon/ic_icon_app (1).svg" />
     </div>
-    <div class="tracking-wide absolute z-10 w-full h-full">
-      <router-view />
+    <div
+      class="tracking-wide layout-web w-full h-full absolute flex justify-center items-center"
+    >
+      <div class="layout-detail">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
@@ -22,11 +26,17 @@ export default {
     };
   },
 
+  methods: {},
+
   created() {
     setTimeout(() => {
       this.isShowIconApp = false;
     }, 1000);
+
+    debugger;
   },
+
+  mounted() {},
 };
 </script>
 <style lang="css">
@@ -41,5 +51,45 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.layout-detail {
+  width: 500px;
+  height: 1010px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .layout-web {
+    background: red;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .layout-web {
+    background: green;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .layout-web {
+    background: blue;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .layout-web {
+    background: orange;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .example {
+    background: pink;
+  }
 }
 </style>

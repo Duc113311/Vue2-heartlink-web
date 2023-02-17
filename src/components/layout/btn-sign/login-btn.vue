@@ -39,8 +39,8 @@
       v-if="isShowPhoneNumber"
       @onShowEmailUser="onShowEmailUser"
     ></MyCommon>
-    <MyEmail v-if="isShowEmails"></MyEmail>
-    <NewAccount v-if="isShowEmail"></NewAccount>
+    <MyEmail v-if="isShowEmail"></MyEmail>
+    <NewAccount v-if="isShowWellcome"></NewAccount>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
     return {
       isShowPhoneNumber: false,
       isShowEmail: false,
-      isShowEmails: false,
+      isShowWellcome: false,
     };
   },
 
@@ -74,7 +74,10 @@ export default {
       this.isShowPhoneNumber = true;
     },
 
+    onLoginGoogle() {},
+
     onShowEmailUser(value) {
+      debugger;
       this.isShowEmail = value;
     },
   },

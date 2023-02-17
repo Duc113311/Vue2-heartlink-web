@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 import { getAnalytics, logEvent } from "firebase/analytics";
+import { getMessaging } from "firebase/messaging";
 
 import {
   signInWithPopup,
@@ -29,6 +30,7 @@ const app = initializeApp(firebaseConfig);
 const fireStoreCore = getFirestore(app);
 const auth = getAuth(app);
 const analytics = getAnalytics();
+const messaging = getMessaging(app);
 
 auth.languageCode = "it";
 
@@ -44,5 +46,6 @@ export {
   signInWithCredential,
   auth,
   analytics,
+  messaging,
   logEvent,
 };

@@ -2,10 +2,9 @@
   <div class="w-full h-full user-profile absolute top-0 left-0 z-40 p-8">
     <div class="text-2xl w-full h-10 flex items-center text-white">
       <i class="fas fa-times"></i>
-      <button @click="onCloseDialog()">ss</button>
     </div>
     <div class="p-2 mt-10">
-      <div class="mb-20">
+      <div class="mb-48">
         <div class="flex justify-center">
           <img
             src="@/assets/image-dating/app_icon_512x512.png"
