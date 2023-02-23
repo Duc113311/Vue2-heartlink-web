@@ -12,9 +12,8 @@
 </template>
 
 <script>
-import storeUsers from "@/stores/user-profile/store-user";
-import TokenApps from "@/middleware/auth";
-import userProfiles from "@/stores/user-profile/store-user";
+import TokenApps from "@/middleware/application-storage";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "bt-location",
@@ -31,6 +30,9 @@ export default {
   computed: {},
 
   methods: {
+    ...mapMutations(["setLocation"]),
+    ...mapActions(["postInforUserProfile"]),
+
     async onHideWellcome(val) {
       this.isShowAvoid = val;
       this.$router.push({ path: "/home" });
@@ -38,22 +40,25 @@ export default {
 
     async showPosition(position) {
       if (position.coords) {
-        storeUsers.commit("setLocation", position.coords);
+        this.setLocation(position.coords);
       }
+      debugger;
+
       const userId = TokenApps.getAccessToken("userId");
       const providerId = TokenApps.getProviderId("providerId");
-      const dataUser = userProfiles.state.userProfile;
-      dataUser.userId = userId;
+      const dataUser = this.$store.state.userModule.user_profile;
       dataUser.providerId = providerId;
+      dataUser.userId = userId;
 
       console.log(dataUser);
-      await userProfiles.dispatch("postUserProfile", dataUser);
+      // await this.postInforUserProfile(dataUser);
       this.$emit("onShowAvoid", true);
     },
     /**
      * Sự kiện click để tiếp tục
      */
     onClickContinues() {
+      debugger;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
       }

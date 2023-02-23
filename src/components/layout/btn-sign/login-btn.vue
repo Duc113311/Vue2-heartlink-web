@@ -39,7 +39,7 @@
       v-if="isShowPhoneNumber"
       @onShowEmailUser="onShowEmailUser"
     ></MyCommon>
-    <MyEmail v-if="isShowEmail"></MyEmail>
+    <MyEmail v-if="isShowEmail" @onShowWelcome="onShowWelcome"></MyEmail>
     <NewAccount v-if="isShowWellcome"></NewAccount>
   </div>
 </template>
@@ -79,6 +79,10 @@ export default {
     onShowEmailUser(value) {
       debugger;
       this.isShowEmail = value;
+    },
+
+    onShowWelcome(value) {
+      this.isShowWellcome = value;
     },
   },
 };

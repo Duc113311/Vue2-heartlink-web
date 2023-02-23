@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import userModule from "./login/store-login";
+import loginModule from "./login/store-login";
+import userModule from "./user-profile/store-user";
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   actions: {},
 
   modules: {
+    loginModule,
     userModule,
   },
 });

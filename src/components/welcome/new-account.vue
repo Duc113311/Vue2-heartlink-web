@@ -4,7 +4,7 @@
       <i class="fas fa-times"></i>
     </div>
     <div class="p-2 mt-10">
-      <div class="mb-48">
+      <div class="mb-36">
         <div class="flex justify-center">
           <img
             src="@/assets/image-dating/app_icon_512x512.png"
@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <BhArge></BhArge>
+      <BhArge @onAgreeContinue="onAgreeContinue"></BhArge>
     </div>
 
     <QuitWelcome
@@ -113,6 +113,13 @@ export default {
 
     onCancelQuit() {
       this.isShowQuitSing = false;
+    },
+
+    onAgreeContinue() {
+      debugger;
+      this.$router.push({
+        path: "create-user",
+      });
     },
   },
 };

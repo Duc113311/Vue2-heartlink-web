@@ -287,12 +287,8 @@ export default {
   display: none;
 }
 
-.body-page-home {
-  height: 82%;
-}
-
 .title-logo {
-  height: 8%;
+  height: 15%;
 }
 
 .body-page {
@@ -349,6 +345,7 @@ export default {
 
 .tinder-card {
   width: 92% !important;
+  background: none !important;
 }
 
 .bg-background-shadow {

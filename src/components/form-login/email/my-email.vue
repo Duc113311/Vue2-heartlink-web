@@ -17,7 +17,10 @@
       />
     </div>
     <div class="mt-4">
-      <BhContinue></BhContinue>
+      <BhContinue
+        :isActives="isActives"
+        @onChangeContinue="onChangeContinue"
+      ></BhContinue>
     </div>
     <div class="flex mt-4 justify-center pt-3 pb-3 text-white text-xl">OR</div>
     <div class="flex mt-4 justify-center">
@@ -47,6 +50,7 @@
 import BhBack from "../../bh-element-ui/button/bh-back";
 import BhContinue from "../../bh-element-ui/button/bh-continue";
 import validate from "@/middleware/validate";
+import { mapMutations } from "vuex";
 
 export default {
   components: {
@@ -60,22 +64,27 @@ export default {
       centerDialogVisible: false,
       txtEmail: "",
       isResultValidate: false,
-      isShowFormWellcome: false,
       btEmail: "btContinueId",
+      isActives: false,
     };
   },
 
   methods: {
+    ...mapMutations(["setEmailForUser"]),
+
     onChangeInput() {
       this.isResultValidate = validate.validateEmail(this.txtEmail);
       if (this.isResultValidate) {
         // Xét giá trị email
         debugger;
+        this.isActives = true;
       }
     },
 
-    onNextWellcome(value) {
-      this.isShowFormWellcome = value;
+    onChangeContinue(value) {
+      debugger;
+      this.setEmailForUser(this.txtEmail);
+      this.$emit("onShowWelcome", value);
     },
   },
   mounted() {},

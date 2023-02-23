@@ -27,9 +27,24 @@ const actions = {
 };
 
 const mutations = {
+  /**
+   * Set giá trị cho tokenAccount
+   * @param {*} state
+   * @param {*} token: userId, accessToken, refreshToken
+   */
   setTokenAccount(state, token) {
     debugger;
     state.tokenAccount = token;
+  },
+
+  /**
+   * Set giá trị cho email
+   * @param {*} state
+   * @param {*} email
+   */
+  setEmailForUser(state, email) {
+    debugger;
+    state.email = email;
   },
 };
 

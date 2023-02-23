@@ -9,7 +9,7 @@
     <div
       class="tracking-wide layout-web w-full h-full absolute flex justify-center items-center"
     >
-      <div class="layout-detail">
+      <div class="layout-detail overflow-hidden relative">
         <router-view />
       </div>
     </div>
@@ -55,34 +55,34 @@ export default {
 
 .layout-detail {
   width: 500px;
-  height: 1010px;
+  height: 932px;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .layout-web {
-    background: red;
+    background: #b5e3ae;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .layout-web {
-    background: green;
+    background: #1b0838;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .layout-web {
-    background: blue;
+    background: #9fd2e3;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .layout-web {
-    background: orange;
+    background: #f7c49c;
   }
 }
 

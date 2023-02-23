@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginPage from "../views/login/index.vue";
-import ExplorePage from "../views/explore/index.vue";
-import ExploreVerified from "../views/explore/verified/photo-dialog.vue";
 
 Vue.use(VueRouter);
 
@@ -14,42 +12,71 @@ const routes = [
   },
 
   {
-    path: "/explore",
-    name: "explore-page",
-    component: ExplorePage,
+    path: "/dash-board",
+    name: "dash-board",
+    component: () =>
+      import(
+        /* webpackChunkName: "dash-board" */ "../views/dashboard/index.vue"
+      ),
     children: [
+      // Trang Home
       {
-        path: "",
-        name: "dashboard-page",
+        path: "/",
+        name: "home-news",
         component: () =>
           import(
-            /* webpackChunkName: "home-page" */ "../views/explore/dashboard/dashboard-page.vue"
+            /* webpackChunkName: "home-news" */ "../views/dashboard/home/index.vue"
           ),
       },
+      // Explore
       {
-        path: "photo-dialog",
-        name: "photo-dialog",
-        component: ExploreVerified,
-      },
-
-      {
-        path: "find-scream/:nameScream",
-        name: "find-page",
+        path: "/explore-new",
+        name: "explore-news",
         component: () =>
           import(
-            /* webpackChunkName: "find-page" */ "../views/explore/find-people/find-page.vue"
+            /* webpackChunkName: "explore-news" */ "../views/dashboard/explore/index.vue"
           ),
       },
+      // Message
+      {
+        path: "/message-new",
+        name: "message-new",
+        component: () =>
+          import(
+            /* webpackChunkName: "message-new" */ "../views/dashboard/message/index.vue"
+          ),
+      },
+      // Profile
     ],
   },
-
+  // Like and topic
   {
-    path: "/photo-dialog",
-    name: "photo-dialog",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: ExploreVerified,
+    path: "/like-topic-news",
+    name: "like-topic-news",
+    component: () =>
+      import(
+        /* webpackChunkName: "like-topic-news" */ "../views/like-topic/index.vue"
+      ),
+  },
+
+  // Setting
+  {
+    path: "/setting",
+    name: "setting-page",
+    component: () =>
+      import(
+        /* webpackChunkName: "setting-page" */ "../views/setting/index.vue"
+      ),
+  },
+
+  // Thêm thông tin user
+  {
+    path: "/create-user",
+    name: "create-profile",
+    component: () =>
+      import(
+        /* webpackChunkName: "create-profile" */ "../views/create-profile/index.vue"
+      ),
   },
 ];
 

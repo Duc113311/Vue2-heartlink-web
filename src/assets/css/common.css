@@ -20,6 +20,12 @@
   font-size: 18px;
 }
 
+.description-no-padding {
+  font-weight: 500;
+  color: #727694;
+  font-size: 16px;
+}
+
 .text-description-no-padding {
   font-weight: 500;
   color: #ffffff;

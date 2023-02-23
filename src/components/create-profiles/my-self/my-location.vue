@@ -1,0 +1,130 @@
+<template>
+  <div>
+    <div class="gd-location items-center h-full">
+      <div class="flex justify-center">
+        <div class="text-center h-full el-location">
+          <div class="flex justify-center items-center">
+            <img
+              src="@/assets/icon/art_location.svg"
+              width="180"
+              height="180"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="mt-10">
+            <h2 class="text-xl text-white">Enable Location</h2>
+          </div>
+          <div class="mt-6 text-base text-slate-500">
+            You will need to enable your location order to use HeartLinks
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="angle-up">
+          <div
+            class="text-2xl mb-5 text-white flex justify-center items-center"
+          >
+            <i class="fas fa-angle-up" @click="onAngleUp()"></i>
+          </div>
+        </div>
+
+        <BhLocation @onShowAvoid="onShowAvoid"></BhLocation>
+
+        <div
+          class="w-full text-base text-white mt-5 angle-down pl-10 pr-10 flex justify-center items-center"
+          @click="onTellMore()"
+        >
+          Tell me more
+          <i class="text-2xl ml-3 fas fa-angle-down" @click="onAngleDown()"></i>
+        </div>
+      </div>
+      <div v-show="isShowMeet" class="meet-people h-full">
+        <div class="flex items-center h-full">
+          <div class="text-center">
+            <div class="flex justify-center items-center">
+              <img
+                src="@/assets/icon/art_meet_people.svg"
+                width="180"
+                height="180"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div class="mt-10">
+              <h2 class="text-xl text-white">MEET PEOPLE NEARBY</h2>
+            </div>
+            <div class="mt-6 text-base text-slate-500">
+              You location will be used to show potential matches near you.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <AvoidSomeone
+      v-if="isShowAvoid"
+      @onHideWellcome="onHideWellcome"
+    ></AvoidSomeone>
+  </div>
+</template>
+
+<script>
+import BhLocation from "../../bh-element-ui/button/bh-location";
+import AvoidSomeone from "../../welcome/avoid-someone";
+export default {
+  components: {
+    BhLocation,
+    AvoidSomeone,
+  },
+  name: "my-location",
+
+  setup() {
+    return {};
+  },
+
+  data() {
+    return {
+      txtFirstName: "",
+      isShowMeet: false,
+      isShowAvoid: false,
+    };
+  },
+
+  methods: {
+    onShowAvoid(value) {
+      debugger;
+      this.isShowAvoid = value;
+    },
+    async onHideWellcome(val) {
+      this.$router.push({ path: "/home" });
+      this.isShowAvoid = val;
+    },
+
+    onTellMore() {
+      this.isShowMeet = true;
+      document.getElementsByClassName("el-location")[0].style.display = "none";
+      document.getElementsByClassName("angle-up")[0].style.display = "block";
+      document.getElementsByClassName("angle-down")[0].style.display = "none";
+      document.getElementsByClassName("meet-people")[0].style.display = "block";
+    },
+
+    onAngleUp() {
+      this.isShowMeet = false;
+      document.getElementsByClassName("meet-people")[0].style.display = "block";
+    },
+  },
+
+  mounted() {
+    document.getElementsByClassName("angle-up")[0].style.display = "none";
+  },
+};
+</script>
+
+<style lang="css">
+.gd-location {
+  display: grid;
+  grid-template-rows: 8fr 1fr;
+  overflow: hidden;
+}
+</style>

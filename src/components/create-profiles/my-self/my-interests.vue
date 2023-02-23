@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <div class="mt-10">
+      <h2 class="text-2xl text-white mb-2">My interests are</h2>
+      <span class="text-slate-500"
+        >Let everyone know what you're passionate about, by adding it to your
+        profile</span
+      >
+    </div>
+    <div class="w-full mt-4 overflow-y-auto list-interest">
+      <div class="w-full h-full">
+        <span v-for="(item, index) in listDataInterests" :key="index">
+          <button
+            @click="onSelectInterest(index)"
+            :id="index"
+            class="oftion-interests mr-3 mb-3 p-3 text-white"
+            size="large"
+          >
+            {{ item }}
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapMutations, mapState, mapActions } from "vuex";
+
+export default {
+  name: "my-interests",
+  setup() {
+    return;
+  },
+  data() {
+    return {
+      isActive: false,
+    };
+  },
+
+  computed: {
+    ...mapState(["interests", "listInterests"]),
+    listDataInterests() {
+      return this.$store.state.userModule.listInterests;
+    },
+  },
+
+  methods: {
+    ...mapActions(["getListDataInterests"]),
+    ...mapMutations(["setInterest"]),
+    onSelectInterest(val) {
+      // document.querySelector("oftion-interests")
+      this.setInterest(val);
+      const interestsData = this.$store.state.userModule.user_profile.interests;
+
+      if (this.$store.state.userModule.isActiveId) {
+        document.getElementById(val).style.backgroundColor = "red";
+        if (interestsData.length < 5) {
+          this.$emit("onStatusActive", false);
+        } else {
+          this.$emit("onStatusActive", true);
+        }
+      } else {
+        document.getElementById(val).style.backgroundColor = "#382E41";
+        if (interestsData.length < 5) {
+          this.$emit("onStatusActive", false);
+        }
+      }
+    },
+  },
+
+  created() {
+    this.getListDataInterests({
+      entityName: "interests",
+      entityId: "en",
+    });
+  },
+
+  mounted() {
+    const interestsData = this.$store.state.userModule.user_profile.interests;
+
+    for (let index = 0; index < interestsData.length; index++) {
+      const element = interestsData[index];
+      document.getElementById(element).style.backgroundColor = "red";
+    }
+    if (interestsData.length < 5) {
+      this.$emit("onStatusActive", false);
+    } else {
+      this.$emit("onStatusActive", true);
+    }
+  },
+};
+</script>
+
+<style lang="css">
+.oftion-interests:hover {
+  background-color: #5b566b;
+  color: white;
+  border: 1px solid white;
+}
+
+.oftion-interests {
+  border: 1px solid white;
+  border-radius: 8px;
+}
+.bg-active {
+  background-color: red;
+}
+
+.list-interest {
+  height: calc(100vh - 386px);
+}
+.list-interest::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.list-interest {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>
