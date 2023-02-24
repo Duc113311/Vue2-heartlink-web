@@ -1,125 +1,38 @@
 <template>
   <div class="home-page w-full h-full">
-    <div class="w-full h-full home-page overflow-hidden p-2">
-      <!-- Trang chủ -->
-
-      <Header></Header>
-      <div v-if="!isShowDetail" class="w-full body-page-home relative">
-        <Tinder
-          ref="tinder"
-          key-name="id"
-          :queue.sync="queue"
-          :offset-y="10"
-          @submit="onSubmit"
-        >
-          <template slot-scope="scope">
-            <div
-              class="pic z-8"
-              :style="{
-                'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`,
-              }"
-            />
-            <div
-              class="bg-background-shadow w-full h-full absolute top-0"
-            ></div>
-            <div class="w-full flex items-center absolute bottom-0 h-64 p-4">
-              <div class="grid w-full title-boy mb-4">
-                <div class="w-70 text-white">
-                  <div class="flex">
-                    <h3 class="text-2xl font-semibold mr-2">Ngọc Trinh</h3>
-                    <img
-                      src="@/assets/icon/ic_infor.svg"
-                      width="30"
-                      @click="onDetailInfor(scope.data.id)"
-                      class="cursor-pointer"
-                      srcset=""
-                    />
-                  </div>
-                  <span>ádasdasdas</span><br />
-                  <div class="flex">
-                    <img
-                      class="cursor-pointer"
-                      src="@/assets/icon/ic_location.svg"
-                      alt=""
-                      srcset=""
-                    />
-                    <span> 2km away</span>
-                  </div>
-                </div>
-                <div class="w-30">
-                  <img
-                    class="cursor-pointer"
-                    src="@/assets/icon/bt_like_count.svg"
-                    alt=""
-                    srcset=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="w-full flex absolute top-0 opacity-0 h-2/4">
-              <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
-              <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
-            </div>
-          </template>
-          <img
-            class="like-pointer"
-            slot="like"
-            src="@/assets/image-tinder/like-txt.png"
-          />
-          <img
-            class="nope-pointer"
-            slot="nope"
-            src="@/assets/image-tinder/nope-txt.png"
-          />
-          <img
-            class="super-pointer"
-            slot="super"
-            src="@/assets/image-tinder/super-txt.png"
-          />
-          <img
-            class="rewind-pointer"
-            slot="rewind"
-            src="@/assets/image-tinder/rewind-txt.png"
-          />
-        </Tinder>
-        <div class="btns">
-          <img
-            src="@/assets/image-tinder/rewind.png"
-            @click="decide('rewind')"
-          />
-          <img src="@/assets/image-tinder/nope.png" @click="decide('nope')" />
-          <img
-            src="@/assets/image-tinder/super-like.png"
-            @click="decide('super')"
-          />
-          <img src="@/assets/image-tinder/like.png" @click="decide('like')" />
-          <img src="@/assets/image-tinder/help.png" @click="decide('help')" />
-        </div>
+    <Vue2InteractDraggable
+      @draggedRight="draggedRight"
+      :interact-max-rotation="15"
+      :interact-out-of-sight-x-coordinate="500"
+      :interact-x-threshold="200"
+    >
+      <div class="w-14 h-14 bg-amber-300">
+        <h3>Drag me!</h3>
       </div>
-      <DetailProfile
-        v-if="isShowDetail"
-        @onClickNopeDetail="onClickNopeDetail"
-        :idImage="idImage"
-      ></DetailProfile>
-
-      <Footer v-if="!isShowDetail"></Footer>
-    </div>
+      <div class="w-14 h-14 bg-amber-300">
+        <h3>Drag me!</h3>
+      </div>
+      <div class="w-14 h-14 bg-amber-300">
+        <h3>Drag me!</h3>
+      </div>
+      <div class="w-14 h-14 bg-amber-300">
+        <h3>Drag me!</h3>
+      </div>
+      <div class="w-14 h-14 bg-amber-300">
+        <h3>Drag me!</h3>
+      </div>
+    </Vue2InteractDraggable>
   </div>
 </template>
 
 <script>
-import DetailProfile from "../../components/home/view/detail-profile";
-import Tinder from "vue-tinder";
-import Footer from "../../components/layout/footer-home/footer";
-import Header from "../../components/layout/header-home/header";
+import { Vue2InteractDraggable } from "vue2-interact";
+
 import source from "@/bing";
 export default {
   name: "home-page",
   components: {
-    DetailProfile,
-    Footer,
-    Header,
-    Tinder,
+    Vue2InteractDraggable,
   },
   data() {
     return {

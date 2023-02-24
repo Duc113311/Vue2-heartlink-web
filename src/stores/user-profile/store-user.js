@@ -36,6 +36,31 @@ const actions = {
       });
   },
 
+  async getAllListUserProfile({ commit }, data) {
+    debugger;
+    const userId = data.userId;
+    const latitude = data.latitude;
+    const longitude = data.longitude;
+    const page = data.page;
+    const pageNumber = data.pageNumber;
+    const startAge = data.startAge;
+    const endAge = data.endAge;
+    const showMeGender = data.showMeGender;
+    const location = data.location;
+
+    await http_request
+      .post(
+        `home/v1/profile?userId=${userId}&latitude=${latitude}&longitude=${longitude}&page=${page}&pageNumber=${pageNumber}&startAge=${startAge}&endAge=${endAge}&showMeGender=${showMeGender}&location=${location}`
+      )
+      .then((response) => {
+        debugger;
+        commit("setListUserProfiles", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
   /**
    * Lấy danh sách sexuals trong Database
    * @param {*} param0
@@ -43,18 +68,9 @@ const actions = {
    */
   async getListDataSexuals({ commit }, { entityName, entityId }) {
     debugger;
-    const token = localStorage.getItem("accessToken");
-    const config = {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Basic ${token}`,
-      },
-    };
+
     await http_request
-      .get(
-        `base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`,
-        config
-      )
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
       .then((response) => {
         commit("setListDataSexuals", response.data.data);
       })
@@ -217,6 +233,11 @@ const mutations = {
    */
   setListDataInterests(state, data) {
     state.listInterests = data;
+  },
+
+  setListUserProfiles(state, data) {
+    debugger;
+    state.user_profile = data;
   },
 };
 

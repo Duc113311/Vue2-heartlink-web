@@ -1,14 +1,11 @@
 <template>
   <div>
     <div class="btns">
-      <img src="@/assets/image-tinder/rewind.png" @click="decide('rewind')" />
-      <img src="@/assets/image-tinder/nope.png" @click="decide('nope')" />
-      <img
-        src="@/assets/image-tinder/super-like.png"
-        @click="decide('super')"
-      />
-      <img src="@/assets/image-tinder/like.png" @click="decide('like')" />
-      <img src="@/assets/image-tinder/help.png" @click="decide('help')" />
+      <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
+      <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
+      <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
+      <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
+      <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />
     </div>
   </div>
 </template>

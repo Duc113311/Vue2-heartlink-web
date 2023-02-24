@@ -1,8 +1,8 @@
 <template>
   <Tinder
     ref="tinder"
-    key-name="id"
-    :queue.sync="queue"
+    key-name="userId"
+    :queue.sync="listDataUser"
     :offset-y="10"
     @submit="onSubmit"
   >
@@ -10,19 +10,22 @@
       <div
         class="pic z-8"
         :style="{
-          'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`,
+          'background-image': `url(${scope.data.avatars[0].urlName})`,
         }"
       />
+      <div></div>
       <div class="bg-background-shadow w-full h-full absolute top-0"></div>
-      <div class="w-full flex items-center absolute bottom-0 h-64 p-4">
+      <div class="w-full flex items-center absolute bottom-0 h-72 p-4">
         <div class="grid w-full title-boy mb-4">
           <div class="w-70 text-white">
             <div class="flex">
-              <h3 class="text-2xl font-semibold mr-2">Ngọc Trinh</h3>
+              <h3 class="text-2xl font-semibold mr-2">
+                {{ scope.data.firstName }}
+              </h3>
               <img
                 src="@/assets/icon/ic_infor.svg"
                 width="30"
-                @click="onDetailInfor(scope.data.id)"
+                @click="onDetailInfor(scope.data.userId)"
                 class="cursor-pointer"
                 srcset=""
               />
@@ -78,7 +81,7 @@
 
 <script>
 import Tinder from "vue-tinder";
-import source from "@/bing";
+import { mapState } from "vuex";
 
 export default {
   name: "view-swipe",
@@ -93,9 +96,16 @@ export default {
     };
   },
 
-  created() {
-    this.mock();
+  computed: {
+    ...mapState("user_profile"),
+
+    listDataUser() {
+      debugger;
+      return this.$store.state.userModule.user_profile;
+    },
   },
+
+  created() {},
   methods: {
     onClickNopeDetail(value) {
       debugger;
@@ -114,24 +124,6 @@ export default {
       console.log(value);
       this.idImage = value;
       this.isShowDetail = true;
-    },
-    mock(count = 5, append = true) {
-      const list = [];
-      for (let i = 0; i < count; i++) {
-        list.push({ id: source[this.offset] });
-        this.offset++;
-      }
-      if (append) {
-        this.queue = this.queue.concat(list);
-      } else {
-        this.queue.unshift(...list);
-      }
-    },
-    onSubmit({ item }) {
-      if (this.queue.length < 3) {
-        this.mock();
-      }
-      this.history.push(item);
     },
   },
 };
@@ -206,13 +198,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 300px;
-  max-width: 355px;
+  min-width: 400px;
+  max-width: 435px;
   z-index: 9;
 }
 
 .btns img {
-  margin-right: 12px;
+  margin-right: 15px;
   box-shadow: 0 4px 9px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   cursor: pointer;
@@ -220,7 +212,7 @@ export default {
 }
 
 .btns img:nth-child(2n + 1) {
-  width: 53px;
+  width: 70px;
 }
 
 .btns img:nth-child(2n) {

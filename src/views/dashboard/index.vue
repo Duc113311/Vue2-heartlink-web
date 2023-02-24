@@ -23,12 +23,7 @@ export default {
   },
   data() {
     return {
-      queue: [],
-      offset: 0,
-      history: [],
       isShowDetail: false,
-      idImage: "",
-      isHideHeader: false,
     };
   },
 
@@ -39,9 +34,7 @@ export default {
     },
   },
 
-  mounted() {
-    debugger;
-  },
+  mounted() {},
 };
 </script>
 
