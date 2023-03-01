@@ -1,39 +1,64 @@
 <template>
-  <div class="home-page w-full h-full">
-    <Vue2InteractDraggable
-      @draggedRight="draggedRight"
-      :interact-max-rotation="15"
-      :interact-out-of-sight-x-coordinate="500"
-      :interact-x-threshold="200"
-    >
-      <div class="w-14 h-14 bg-amber-300">
-        <h3>Drag me!</h3>
+  <div class="home-page w-full h-full relative p-2">
+    <div class="w-full h-full">
+      <Header></Header>
+      <div class="body-page-home-new w-full">
+        <!-- Home -->
+        <div class="w-full h-full">
+          <div class="body-home w-full relative">
+            <!-- Body home -->
+
+            <ViewSwipe></ViewSwipe>
+
+            <ActionDating></ActionDating>
+          </div>
+
+          <div class="w-full absolute bottom-0 left-0 h-full">
+            <Footer></Footer>
+          </div>
+        </div>
+
+        <!-- Detail user -->
+        <div v-show="isDetail" class="w-full body-detail h-full">
+          <DetailProfile></DetailProfile>
+        </div>
       </div>
-      <div class="w-14 h-14 bg-amber-300">
-        <h3>Drag me!</h3>
-      </div>
-      <div class="w-14 h-14 bg-amber-300">
-        <h3>Drag me!</h3>
-      </div>
-      <div class="w-14 h-14 bg-amber-300">
-        <h3>Drag me!</h3>
-      </div>
-      <div class="w-14 h-14 bg-amber-300">
-        <h3>Drag me!</h3>
-      </div>
-    </Vue2InteractDraggable>
+    </div>
+
+    <!-- Hiển thị form chat khi cả 2 user match -->
+    <div v-show="isMatch" class="w-full h-full match-like">
+      <FormLikeToo></FormLikeToo>
+    </div>
+
+    <div v-show="isMatch" class="w-full h-full send-supper-like">
+      <FormSendSupperLike></FormSendSupperLike>
+    </div>
   </div>
 </template>
 
 <script>
-import { Vue2InteractDraggable } from "vue2-interact";
-
+import FormSendSupperLike from "../../components/home/send-supper-like/form-send-supper-like";
+import FormLikeToo from "../../components/home/match-like/form-like-too";
+import DetailProfile from "../../components/home/view/detail-profile";
+import ActionDating from "../../components/home/btn-function/action-dating";
+import ViewSwipe from "../../components/home/swipe-tinder/view-swipe";
+import Footer from "../../components/layout/footer-home/footer";
+import Header from "../../components/layout/header-home/header";
 import source from "@/bing";
+
+import { mapActions } from "vuex";
 export default {
-  name: "home-page",
   components: {
-    Vue2InteractDraggable,
+    FormSendSupperLike,
+    FormLikeToo,
+    DetailProfile,
+    ActionDating,
+    ViewSwipe,
+    Footer,
+    Header,
   },
+  name: "home-page",
+
   data() {
     return {
       queue: [],
@@ -41,13 +66,29 @@ export default {
       history: [],
       isShowDetail: false,
       idImage: "",
+      isDetail: false,
+      isMatch: false,
     };
   },
 
-  created() {
-    this.mock();
+  async created() {
+    const paramUser = {
+      userId: "CoSfrEMLItUG2lvJWWfZGqPm3VU2",
+      latitude: 21.0058814,
+      longitude: 105.7948012,
+      page: 6,
+      pageNumber: 20,
+      startAge: 18,
+      endAge: 55,
+      showMeGender: 2,
+      location: 80,
+    };
+    debugger;
+    await this.getAllListUserProfile(paramUser);
   },
   methods: {
+    ...mapActions(["getAllListUserProfile"]),
+
     onClickNopeDetail(value) {
       debugger;
       this.isShowDetail = value;
@@ -100,6 +141,14 @@ export default {
 </script>
 
 <style lang="css">
+.body-page-home-new {
+  height: calc(100% - 10%);
+}
+
+.body-home {
+  height: calc(100% - 14%);
+}
+
 .vue-tinder {
   position: absolute;
   z-index: 1;
@@ -158,50 +207,11 @@ export default {
   background-position: center;
 }
 
-.btns {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  max-width: 355px;
-  z-index: 9;
-}
-
-.btns img {
-  margin-right: 12px;
-  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btns img:nth-child(2n + 1) {
-  width: 53px;
-}
-
-.btns img:nth-child(2n) {
-  width: 65px;
-}
-
-.btns img:nth-last-child(1) {
-  margin-right: 0;
-}
-
 .home-page {
   background-color: #382e41;
 }
 .home-page::-webkit-scrollbar {
   display: none;
-}
-
-.title-logo {
-  height: 15%;
 }
 
 .body-page {
@@ -254,11 +264,6 @@ export default {
 
 .grid-anthem {
   grid-template-columns: 3fr 1fr;
-}
-
-.tinder-card {
-  width: 92% !important;
-  background: none !important;
 }
 
 .bg-background-shadow {

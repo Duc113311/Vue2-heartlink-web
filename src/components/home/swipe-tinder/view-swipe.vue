@@ -188,50 +188,11 @@ export default {
   background-position: center;
 }
 
-.btns {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 400px;
-  max-width: 435px;
-  z-index: 9;
-}
-
-.btns img {
-  margin-right: 15px;
-  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btns img:nth-child(2n + 1) {
-  width: 70px;
-}
-
-.btns img:nth-child(2n) {
-  width: 65px;
-}
-
-.btns img:nth-last-child(1) {
-  margin-right: 0;
-}
-
 .home-page {
   background-color: #382e41;
 }
 .home-page::-webkit-scrollbar {
   display: none;
-}
-
-.title-logo {
-  height: 12%;
 }
 
 .body-page {

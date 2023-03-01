@@ -54,7 +54,7 @@ export default {
 
   methods: {
     onClickHome() {
-      this.$router.push({ path: "/dash-board" });
+      this.$router.push({ path: "/home-new" });
     },
 
     onClickExplore() {

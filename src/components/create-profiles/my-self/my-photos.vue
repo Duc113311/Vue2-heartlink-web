@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-10">
+    <div v-show="!isTitle" class="mt-10">
       <h2 class="text-2xl text-white mb-2">My Photos are</h2>
       <span class="text-slate-500">Add at least 2 photos to continue</span>
     </div>
@@ -50,13 +50,7 @@
                 style="display: none; overflow: hidden"
               >
                 <div
-                  class="el-loading-spinner"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    height: 100%;
-                    width: 100%;
-                  "
+                  class="el-loading-spinner flex justify-center h-full w-full"
                 >
                   <svg viewBox="25 25 50 50" class="circular">
                     <circle
@@ -131,7 +125,14 @@ export default {
     };
   },
 
-  props: ["isShowHeader"],
+  computed: {
+    isTitle() {
+      debugger;
+      return this.isShowTitle ? this.isShowTitle : false;
+    },
+  },
+
+  props: ["isShowTitle"],
   methods: {
     ...mapMutations(["setPhotos"]),
     async toggleUpload(event, data) {

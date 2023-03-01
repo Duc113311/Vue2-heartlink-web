@@ -52,6 +52,6 @@ export default {
 }
 
 .body-page-home {
-  height: 76%;
+  height: 78%;
 }
 </style>

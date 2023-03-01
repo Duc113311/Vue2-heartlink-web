@@ -43,7 +43,9 @@ export default {
     await this.getAllListUserProfile(paramUser);
   },
 
-  mounted() {},
+  mounted() {
+    debugger;
+  },
 };
 </script>
 

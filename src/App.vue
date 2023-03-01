@@ -41,7 +41,8 @@ export default {
 </script>
 <style lang="css">
 @import "@/assets/css/common.css";
-
+@import "@/assets/css/txt-common.css";
+@import "@/assets/css/color-text.css";
 .img-app {
   background: #884971;
   opacity: 1;

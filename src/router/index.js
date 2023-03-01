@@ -10,7 +10,7 @@ const routes = [
     name: "login-page",
     component: LoginPage,
   },
-
+  // Home
   {
     path: "/dash-board",
     name: "dash-board",
@@ -79,11 +79,48 @@ const routes = [
       ),
   },
 
+  // Control
   {
     path: "/control",
     name: "home-page",
     component: () =>
       import(/* webpackChunkName: "home-page" */ "../views/home/index.vue"),
+  },
+
+  // Detail user
+  {
+    path: "/detail-user/:userId",
+    name: "detail-user",
+    component: () =>
+      import(
+        /* webpackChunkName: "detail-user" */ "../views/detail-user/index.vue"
+      ),
+  },
+
+  // Home Test detail
+  {
+    path: "/home-new",
+    name: "home-page",
+    component: () =>
+      import(/* webpackChunkName: "home-page" */ "../views/home/index.vue"),
+  },
+
+  {
+    path: "/edit-profile/:userId",
+    name: "edit-profile",
+    component: () =>
+      import(
+        /* webpackChunkName: "setting-page" */ "../views/edit-profile/index.vue"
+      ),
+  },
+
+  {
+    path: "/setting-detail",
+    name: "setting-detail",
+    component: () =>
+      import(
+        /* webpackChunkName: "setting-detail" */ "../views/setting/detail/index.vue"
+      ),
   },
 ];
 

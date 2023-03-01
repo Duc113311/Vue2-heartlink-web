@@ -1,0 +1,17 @@
+.title-user {
+  font-weight: 500;
+  font-size: 30px;
+}
+.describe-user {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.title-item {
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.size-icon {
+  font-size: 0px;
+}
