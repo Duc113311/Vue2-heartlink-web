@@ -157,19 +157,21 @@
         <!-- account setting -->
 
         <div class="w-full">
-          <div class="w-full">Account Settings</div>
+          <div class="w-full bh-item-title title-size">Account Settings</div>
           <div class="w-full flex items-center">
             <div class="w-full">
-              <div class="w-full flex style-form">
+              <div class="w-full flex form-set-input">
                 <div class="flex justify-between w-full">
-                  <div class="bh-item-title">Phone number</div>
+                  <div class="bh-item-title title-item">Phone number</div>
                   <div class="mr-5 flex items-center">
-                    <div class="mr-3">+84962282864</div>
+                    <div class="mr-3 title-item bh-text-number">
+                      +84962282864
+                    </div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
               </div>
-              <div class="w-full flex justify-center items-center">
+              <div class="w-full flex items-center bh-describe size-describe">
                 Secure your account by verifying your phone number
               </div>
             </div>
@@ -178,19 +180,19 @@
 
         <!-- discovery -->
         <div class="w-full">
-          <div class="w-full">Discovery Settings</div>
+          <div class="w-full bh-item-title title-size">Discovery Settings</div>
           <div class="w-full flex items-center">
             <div class="w-full">
-              <div class="w-full flex style-form">
+              <div class="w-full flex form-set-input">
                 <div class="flex justify-between w-full">
-                  <div class="bh-item-title">Location</div>
+                  <div class="bh-item-title title-item">Location</div>
                   <div class="mr-5 flex items-center">
-                    <div class="mr-3">My Current Location</div>
+                    <div class="mr-3 bh-text-location">My Current Location</div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
               </div>
-              <div class="w-full flex justify-center items-center">
+              <div class="w-full flex items-center bh-describe size-describe">
                 Change your location to see people in other cities
               </div>
             </div>
@@ -200,10 +202,12 @@
         <!-- golbal -->
         <div class="w-full flex justify-center items-center">
           <div class="w-full">
-            <div class="w-full style-switch">
-              <div class="name text-xl">Golbal</div>
+            <div
+              class="w-full style-switch form-set-input flex justify-between"
+            >
+              <div class="name bh-item-title title-item">Golbal</div>
 
-              <div>
+              <div class="mr-3">
                 <el-switch
                   v-model="value2"
                   active-color="#FB5D65"
@@ -218,27 +222,47 @@
           </div>
         </div>
 
-        <div class="w-full">
-          <div class="w-full">PREFERRED LANGUAGES</div>
+        <div class="w-full form-set-list">
+          <div class="w-full bh-title title-item form-set-item">
+            PREFERRED LANGUAGES
+          </div>
           <div class="w-full">
             <div>
-              <div class="w-full">English</div>
-              <div class="w-full">Vietnamese</div>
+              <div
+                class="w-full form-set-item bd-input title-input-item bh-item-title"
+              >
+                English
+              </div>
+              <div
+                class="w-full form-set-item bd-input title-input-item bh-item-title"
+              >
+                Vietnamese
+              </div>
             </div>
             <div>
-              <div>Add language...</div>
+              <div class="bh-text-location form-set-item w-full">
+                Add language...
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="w-full">
-          <div>
-            <div class="w-full flex justify-between p-3">
-              <div>MAXIMUM DISTANCE</div>
-              <div>{{ value1 }}km</div>
+        <div class="w-full mt-6">
+          <div class="form-set-list">
+            <div class="w-full flex justify-between items-center">
+              <div class="bh-title title-item form-set-item">
+                MAXIMUM DISTANCE
+              </div>
+              <div class="bh-describe">{{ value1 }}km</div>
             </div>
-            <div class="flex justify-between w-full">
-              <div>Only show people in this range</div>
+
+            <div>
+              <el-slider v-model="value3"></el-slider>
+            </div>
+            <div class="flex justify-between w-full mt-2">
+              <div class="bh-item-title title-item">
+                Only show people in this range
+              </div>
               <div>
                 <el-switch
                   v-model="value2"
@@ -248,30 +272,17 @@
                 </el-switch>
               </div>
             </div>
-            <div>
-              <el-slider v-model="value1"></el-slider>
-            </div>
           </div>
         </div>
 
-        <div class="w-full">
-          <div>
-            <div class="w-full flex justify-between p-3">
-              <div>MAXIMUM DISTANCE</div>
-              <div>{{ value }}km</div>
+        <div class="w-full mt-6">
+          <div class="form-set-list">
+            <div class="w-full flex justify-between">
+              <div class="bh-title title-item form-set-item">AGE RANGE</div>
+              <div class="bh-describe">{{ value }}</div>
             </div>
-            <div class="flex justify-between w-full">
-              <div>Only show people in this range</div>
-              <div>
-                <el-switch
-                  v-model="value2"
-                  active-color="#FB5D65"
-                  inactive-color="#5F6A86"
-                >
-                </el-switch>
-              </div>
-            </div>
-            <div>
+
+            <div class="w-full">
               <el-slider
                 v-model="value"
                 range
@@ -280,36 +291,45 @@
               >
               </el-slider>
             </div>
+            <div class="flex justify-between w-full">
+              <div class="bh-item-title title-item">
+                Only show people in this range
+              </div>
+              <div>
+                <el-switch
+                  v-model="value2"
+                  active-color="#FB5D65"
+                  inactive-color="#5F6A86"
+                >
+                </el-switch>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="w-full">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title form-set-item">
               <div>SHOW ME</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
-                  <div class="bh-item-title">Men</div>
+                <div class="flex justify-between w-full bd-input items-center">
+                  <div class="bh-item-title form-set-item">Men</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
-                  <div class="bh-item-title">Women</div>
+
+                <div class="flex justify-between w-full bd-input items-center">
+                  <div class="bh-item-title form-set-item">Women</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
-                  <div class="bh-item-title">Everyone</div>
+
+                <div class="flex justify-between w-full items-center">
+                  <div class="bh-item-title form-set-item">Everyone</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
@@ -318,7 +338,7 @@
             </div>
           </div>
 
-          <div class="w-full">
+          <div class="w-full p-3 bh-describe">
             We use these preferences to find matches. Some match suggestions may
             not fall within your desired parameters
           </div>
@@ -326,45 +346,39 @@
 
         <div class="w-full flex items-center">
           <div class="w-full">
-            <div class="w-full flex bh-title p-3 items-center">
-              <div>CONTROL WHO YOU SEE</div>
+            <div class="w-full flex bh-title items-center p-3">
+              <div class="form-set-item">CONTROL WHO YOU SEE</div>
               <div class="ml-3">
                 <div class="style-package">Sliver package</div>
               </div>
             </div>
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div
+                  class="flex justify-between w-full form-set-item items-center bd-input"
+                >
                   <div class="w-full">
-                    <div>Balance recommendations</div>
-                    <div>
+                    <div class="bh-item-title">Balance recommendations</div>
+                    <div class="bh-describe">
                       See the most relevant people to you (default settings)
                     </div>
                   </div>
                   <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
+                    <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
+
+                <div
+                  class="flex justify-between w-full form-set-item items-center"
+                >
                   <div class="w-full">
-                    <div>Recently Active</div>
-                    <div>See the most recently active people first</div>
+                    <div class="bh-item-title">Recently Active</div>
+                    <div class="bh-describe">
+                      See the most recently active people first
+                    </div>
                   </div>
                   <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
+                    <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
               </div>
@@ -375,45 +389,41 @@
         <div class="w-full flex items-center">
           <div class="w-full">
             <div class="w-full flex bh-title p-3 items-center">
-              <div>CONTROL WHO YOU SEE</div>
+              <div class="form-set-item">CONTROL WHO YOU SEE</div>
               <div class="ml-3">
                 <div class="style-package">Sliver package</div>
               </div>
             </div>
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div
+                  class="flex justify-between w-full bd-input form-set-item items-center"
+                >
                   <div class="w-full">
-                    <div>Standard</div>
-                    <div>
+                    <div class="bh-item-title title-item">Standard</div>
+                    <div class="bh-describe">
                       Only be shown to certain types of people for individual
                       recommendations
                     </div>
                   </div>
                   <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
+                    <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
+
+                <div
+                  class="flex justify-between w-full form-set-item items-center"
+                >
                   <div class="w-full">
-                    <div>Only people I've liked</div>
-                    <div>Only people you have liked will see me</div>
+                    <div class="bh-item-title title-item">
+                      Only people I've liked
+                    </div>
+                    <div class="bh-describe">
+                      Only people you have liked will see me
+                    </div>
                   </div>
                   <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
+                    <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
               </div>
@@ -427,24 +437,28 @@
               <div>SHOW ME ON CARD STACK</div>
             </div>
             <div class="w-full flex items-center">
-              <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+              <div class="w-full style-bg-common form-set-list">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
-                    <div>Show me on Card Stack</div>
-                    <div>
+                    <div class="flex justify-between items-center">
+                      <div class="form-set-item bh-item-title title-item">
+                        Show me on Card Stack
+                      </div>
+                      <div>
+                        <el-switch
+                          v-model="value2"
+                          active-color="#FB5D65"
+                          inactive-color="#5F6A86"
+                        >
+                        </el-switch>
+                      </div>
+                    </div>
+                    <div class="form-set-item bh-describe">
                       If you turn off, you will not be shown in the card stack.
                       People you have already liked may still your profile and
                       match with you. You can still see and chat with your
                       matches
                     </div>
-                  </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
                   </div>
                 </div>
               </div>
@@ -452,32 +466,28 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full title-item form-set-item bh-title">
               <div>SHOW ME</div>
             </div>
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center bh-item-title">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Only Wi-fi Only</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
+
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">On Wi-fi and mobile data</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
+
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Never autoplay videos</div>
                   <div>
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
@@ -488,107 +498,123 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
+        <div class="w-full flex items-center mt-6">
           <div class="w-full">
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
-                    <div>Q&A Events</div>
-                    <div>
+                    <div
+                      class="form-set-item bh-item-title title-item flex justify-between items-center"
+                    >
+                      <div class="">Q&A Events</div>
+                      <div>
+                        <el-switch
+                          v-model="value2"
+                          active-color="#FB5D65"
+                          inactive-color="#5F6A86"
+                        >
+                        </el-switch>
+                      </div>
+                    </div>
+                    <div class="form-set-item bh-describe">
                       Turning this off will remove Q&A event content from your
                       profile, and you'll no longer see profiles with Q&A event
                       content
                     </div>
                   </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="w-full flex items-center">
+        <div class="w-full flex items-center mt-6">
           <div class="w-full">
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
-                    <div>Show me Top picks</div>
-                    <div>
+                    <div
+                      class="form-set-item bh-item-title title-item flex justify-between items-center"
+                    >
+                      <div class="">Show me Top picks</div>
+                      <div>
+                        <el-switch
+                          v-model="value2"
+                          active-color="#FB5D65"
+                          inactive-color="#5F6A86"
+                        >
+                        </el-switch>
+                      </div>
+                    </div>
+                    <div class="form-set-item bh-describe w-full">
                       Turning this on will allow you to be shown as a featured
                       Top Pick to other users near you
                     </div>
                   </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="w-full flex items-center">
+        <div class="w-full flex items-center mt-6">
           <div class="w-full">
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
-                    <div>Send Read Receipts</div>
-                    <div>
+                    <div
+                      class="form-set-item bh-item-title title-item flex justify-between items-center"
+                    >
+                      <div class="">Send Read Receipts</div>
+                      <div>
+                        <el-switch
+                          v-model="value2"
+                          active-color="#FB5D65"
+                          inactive-color="#5F6A86"
+                        >
+                        </el-switch>
+                      </div>
+                    </div>
+                    <div class="form-set-item bh-describe w-full">
                       Turning this off will prevent any matches from activating
                       Reading Receipts in your conversation from this moment on
                       forward
                     </div>
                   </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="w-full flex items-center">
+        <div class="w-full flex items-center mt-6">
           <div class="w-full">
-            <div class="w-full flex items-center">
+            <div class="w-full flex items-center form-set-list">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
-                    <div>Activity Status</div>
-                    <div>
+                    <div
+                      class="form-set-item bh-item-title title-item flex justify-between items-center"
+                    >
+                      <div class="">Activity Status</div>
+                      <div>
+                        <el-switch
+                          v-model="value2"
+                          active-color="#FB5D65"
+                          inactive-color="#5F6A86"
+                        >
+                        </el-switch>
+                      </div>
+                    </div>
+                    <div class="form-set-item bh-describe w-full">
                       Allow other members to see if you were recently active
                       within the last 24h on HeartLink. If you have turned this
                       off, they will not be able to see your recently active
                       status
                     </div>
-                  </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
                   </div>
                 </div>
               </div>
@@ -599,15 +625,17 @@
         <div class="w-full">
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
-              <div>App Setiings</div>
+              <div class="w-full bh-item-title title-size">App Setiings</div>
             </div>
-            <div class="w-full flex items-center">
-              <div class="w-full flex justify-between">
-                <div>SHOW DISTANCE IN</div>
-                <div>km.</div>
+            <div class="w-full form-set-list">
+              <div class="w-full flex justify-between form-set-item">
+                <div class="bh-title">SHOW DISTANCE IN</div>
+                <div class="bh-describe">km.</div>
               </div>
 
-              <div class="w-full flex justify-center items-center">
+              <div
+                class="w-full flex justify-center items-center form-set-item"
+              >
                 <div class="style-km">Km.</div>
 
                 <div class="style-mi">Mi.</div>
@@ -623,7 +651,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Email</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -632,7 +660,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Push Notification</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -641,7 +669,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Team HeartLink</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -656,7 +684,7 @@
           <div class="w-full">
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="w-full">
                     <div>Dark theme</div>
                     <div>Choose the theme you like most</div>
@@ -682,7 +710,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Manage payment account</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -691,7 +719,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Restore purchase</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -709,7 +737,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Community Guidelines</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -718,7 +746,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Safe tips</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -727,7 +755,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Safety center</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -745,7 +773,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Cookie policy</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -754,7 +782,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Privacy policy</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -763,7 +791,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Privacy preferences</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -780,7 +808,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Help & support</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -798,7 +826,7 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Licenses</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -807,7 +835,7 @@
                 <div class="flex justify-center w-full items-center">
                   <div class="br-bottom"></div>
                 </div>
-                <div class="flex justify-between w-full p-2">
+                <div class="flex justify-between w-full">
                   <div class="bh-item-title">Terms of Service</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -819,7 +847,7 @@
         </div>
 
         <div class="w-full">
-          <div class="w-full flex style-form justify-center items-center">
+          <div class="w-full flex form-set-input justify-center items-center">
             LOG OUT
           </div>
         </div>
@@ -855,6 +883,8 @@ export default {
       value1: 4,
 
       value: [18, 40],
+
+      value3: true,
     };
   },
 
@@ -933,13 +963,5 @@ export default {
   width: 100%;
   color: white;
   height: 100%;
-}
-
-.style-form {
-  height: 50px;
-  background-color: #495063;
-  align-items: center;
-  padding: 10px;
-  border-radius: 10px;
 }
 </style>

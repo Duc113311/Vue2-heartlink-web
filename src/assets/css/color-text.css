@@ -18,3 +18,11 @@
   width: 26.5rem;
   border-bottom: 1px solid #626882;
 }
+
+.bh-text-number {
+  color: #afb7cd;
+}
+
+.bh-text-location {
+  color: #51a0ed;
+}
