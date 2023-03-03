@@ -39,6 +39,7 @@
           >
             <div class="w-full h-full border-image-first">
               <div class="image-user"></div>
+              <div class="bg-shadow w-full h-full"></div>
             </div>
           </div>
 

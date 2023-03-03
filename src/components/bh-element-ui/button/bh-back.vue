@@ -1,6 +1,9 @@
 <template>
-  <div class="text-xl w-full h-10 flex items-center text-white">
-    <i class="fas fa-chevron-left" @click="onClickBack()"></i>
+  <div
+    class="text-xl w-full h-10 flex items-center text-white"
+    @click="onClickBack()"
+  >
+    <i class="fas fa-chevron-left"></i>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ export default {
      * Quay lại trang trước
      */
     onClickBack() {
+      debugger;
       this.$emit("onBackComponent", true);
     },
   },

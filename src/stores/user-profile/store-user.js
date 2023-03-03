@@ -14,6 +14,9 @@ const state = {
   listSexuals: [],
   listInterests: [],
   isActiveId: false,
+
+  userProfileDetail: {},
+  urlAvatarUser: "",
 };
 
 const getters = {};
@@ -36,6 +39,7 @@ const actions = {
       });
   },
 
+  // Lấy danh sách user
   async getAllListUserProfile({ commit }, data) {
     debugger;
     const userId = data.userId;
@@ -55,6 +59,21 @@ const actions = {
       .then((response) => {
         debugger;
         commit("setListUserProfiles", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  // Lấy chi tiết thông tin user
+
+  async getDetailInforUser({ commit }, userId) {
+    debugger;
+    await http_request
+      .get(`user/v1/get-detail/${userId}/en`)
+      .then((response) => {
+        debugger;
+        commit("setDetailUserProfile", response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -238,6 +257,41 @@ const mutations = {
   setListUserProfiles(state, data) {
     debugger;
     state.user_profile = data;
+  },
+
+  setDetailUserProfile(state, data) {
+    debugger;
+    state.userProfileDetail = data;
+    state.urlAvatarUser = data.avatars[0];
+
+    console.log(state.userProfileDetail);
+  },
+
+  setUrlNameAvatarUser(state, data) {
+    state.urlAvatarUser = data;
+  },
+
+  setLeftRighAvatar(state, data) {
+    debugger;
+
+    if (data === true) {
+      const idNew = parseInt(state.urlAvatarUser.id) + 1;
+      const findValue = state.userProfileDetail.avatars.find(
+        (x) => parseInt(x.id) === parseInt(idNew)
+      );
+      state.urlAvatarUser = findValue;
+    } else {
+      if (state.urlAvatarUser.id === 0) {
+        // Ko cho next
+        state.urlAvatarUser = data.avatars[0];
+      } else {
+        const idNew = parseInt(state.urlAvatarUser.id) - 1;
+        const findValue = state.userProfileDetail.avatars.find(
+          (x) => parseInt(x.id) === parseInt(idNew)
+        );
+        state.urlAvatarUser = findValue;
+      }
+    }
   },
 };
 

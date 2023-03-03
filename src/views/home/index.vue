@@ -4,13 +4,17 @@
       <Header></Header>
       <div class="body-page-home-new w-full">
         <!-- Home -->
-        <div class="w-full h-full">
-          <div class="body-home w-full relative">
+        <div class="w-full h-full" v-show="!isShowDetail">
+          <div class="body-home w-full relative" v-loading="loading">
             <!-- Body home -->
 
-            <ViewSwipe></ViewSwipe>
+            <ViewSwipe
+              ref="myViewSwipe"
+              @onShowDetailUser="onShowDetailUser"
+              @onSubmit="onSubmit"
+            ></ViewSwipe>
 
-            <ActionDating></ActionDating>
+            <!-- <ActionDating @onClickDecide="decide"></ActionDating> -->
           </div>
 
           <div class="w-full absolute bottom-0 left-0 h-full">
@@ -19,8 +23,8 @@
         </div>
 
         <!-- Detail user -->
-        <div v-show="isDetail" class="w-full body-detail h-full">
-          <DetailProfile></DetailProfile>
+        <div v-show="isShowDetail" class="w-full body-detail h-full">
+          <DetailProfile @onClickNopeDetail="onClickNopeDetail"></DetailProfile>
         </div>
       </div>
     </div>
@@ -40,11 +44,10 @@
 import FormSendSupperLike from "../../components/home/send-supper-like/form-send-supper-like";
 import FormLikeToo from "../../components/home/match-like/form-like-too";
 import DetailProfile from "../../components/home/view/detail-profile";
-import ActionDating from "../../components/home/btn-function/action-dating";
+// import ActionDating from "../../components/home/btn-function/action-dating";
 import ViewSwipe from "../../components/home/swipe-tinder/view-swipe";
 import Footer from "../../components/layout/footer-home/footer";
 import Header from "../../components/layout/header-home/header";
-import source from "@/bing";
 
 import { mapActions } from "vuex";
 export default {
@@ -52,7 +55,7 @@ export default {
     FormSendSupperLike,
     FormLikeToo,
     DetailProfile,
-    ActionDating,
+    // ActionDating,
     ViewSwipe,
     Footer,
     Header,
@@ -68,6 +71,7 @@ export default {
       idImage: "",
       isDetail: false,
       isMatch: false,
+      loading: true,
     };
   },
 
@@ -85,14 +89,20 @@ export default {
     };
     debugger;
     await this.getAllListUserProfile(paramUser);
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   },
   methods: {
-    ...mapActions(["getAllListUserProfile"]),
+    ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
 
-    onClickNopeDetail(value) {
+    onClickNopeDetail() {
       debugger;
-      this.isShowDetail = value;
+      this.isShowDetail = false;
+      this.$refs.myViewSwipe.decide("nope");
     },
+
     nextImageLeft() {
       debugger;
     },
@@ -101,40 +111,11 @@ export default {
       debugger;
     },
 
-    onDetailInfor(value) {
+    async onShowDetailUser(val) {
       debugger;
-      console.log(value);
-      this.idImage = value;
+      console.log(val);
+      await this.getDetailInforUser(val);
       this.isShowDetail = true;
-    },
-    mock(count = 5, append = true) {
-      const list = [];
-      for (let i = 0; i < count; i++) {
-        list.push({ id: source[this.offset] });
-        this.offset++;
-      }
-      if (append) {
-        this.queue = this.queue.concat(list);
-      } else {
-        this.queue.unshift(...list);
-      }
-    },
-    onSubmit({ item }) {
-      if (this.queue.length < 3) {
-        this.mock();
-      }
-      this.history.push(item);
-    },
-    async decide(choice) {
-      if (choice === "rewind") {
-        if (this.history.length) {
-          this.$refs.tinder.rewind([this.history.pop()]);
-        }
-      } else if (choice === "help") {
-        window.open("https://shanlh.github.io/vue-tinder");
-      } else {
-        this.$refs.tinder.decide(choice);
-      }
     },
   },
 };
@@ -273,5 +254,10 @@ export default {
     rgb(255 255 255 / 0%) 29%,
     rgb(255 255 255 / 0%) 99%
   );
+}
+
+.el-loading-spinner {
+  display: flex;
+  justify-content: center;
 }
 </style>

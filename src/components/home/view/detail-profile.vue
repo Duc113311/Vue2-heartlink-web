@@ -13,15 +13,15 @@
             class="flex w-full justify-center absolute top-0 content-center p-0.5 border-solid mt-3"
           >
             <button
-              v-for="data in btUrlImage"
+              v-for="data in this.userParam.avatars"
               :key="data.id"
               class="bt-img p-0.5 rounded-lg mr-0.5"
               @click="onClickNextImage(data)"
             ></button>
-            <!-- <button
-              class="bt-img p-0.5 rounded-lg mr-0.5"
-              @click="onClickNextImage(data)"
-            ></button> -->
+          </div>
+          <div class="w-full flex bg-opacity absolute top-0 opacity-0 h-full">
+            <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
+            <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
           </div>
         </div>
         <div
@@ -39,11 +39,13 @@
       <div class="h-2/4 w-full text-white">
         <div class="w-full p-2">
           <div class="flex bh-margin-title">
-            <div class="title-user">Ngoc Tring<span>, 25</span></div>
+            <div class="title-user">
+              {{ this.userParam.firstName }}<span>, 25</span>
+            </div>
             <img src="@/assets/icon/ic_infor.svg" width="30" alt="" />
           </div>
           <div class="describe-user bh-margin-description">
-            Tell me about yourself
+            {{ this.userParam.about }}
           </div>
           <div class="flex bh-margin-description">
             <img src="@/assets/icon/ic_location.svg" alt="" />
@@ -55,13 +57,13 @@
         <div class="p-2">
           <div class="title title-description">About me</div>
           <div class="text-description">
-            Gets hungry easily Sleeps late and replies late
+            {{ this.userParam.about }}
           </div>
 
           <div class="w-full bh-margin-description">
             <div
               class="text-option cursor-pointer"
-              v-for="item in sexuals"
+              v-for="item in this.userParam.sexuals"
               :key="item"
             >
               {{ item }}
@@ -75,7 +77,11 @@
           <div class="title title-description">Interests</div>
 
           <div class="w-full bh-margin-description">
-            <div class="text-option" v-for="item in interests" :key="item">
+            <div
+              class="text-option"
+              v-for="item in this.userParam.interests"
+              :key="item"
+            >
               {{ item }}
             </div>
           </div>
@@ -123,10 +129,10 @@
     <div
       class="w-full h-24 flex justify-center items-center absolute bottom-16 cursor-pointer"
     >
-      <div @click="onClickNope">
+      <div @click="onClickNope()">
         <img src="@/assets/icon/bt_nope.svg" class="w-20" alt="" srcset="" />
       </div>
-      <div @click="onClickSupperLike">
+      <div @click="onClickSupperLike()">
         <img
           src="@/assets/icon/bt_super_like.svg"
           class="w-20"
@@ -134,7 +140,7 @@
           srcset=""
         />
       </div>
-      <div @click="onClickLike">
+      <div @click="onClickLike()">
         <img src="@/assets/icon/bt_like.svg" alt="" class="w-20" srcset="" />
       </div>
     </div>
@@ -142,6 +148,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 import BhHorizontalLine from "../../bh-element-ui/input/bh-horizontal-line";
 export default {
   components: { BhHorizontalLine },
@@ -149,6 +156,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       sexuals: [
         "noe-smoker",
         "aquarius",
@@ -206,14 +214,38 @@ export default {
         },
       ],
 
-      idImage: require("../../../assets/image-dating/0659_photo-1-163186806531842640671.jpg"),
+      // idImage: require("../../../assets/image-dating/0659_photo-1-163186806531842640671.jpg"),
     };
   },
 
+  computed: {
+    ...mapState(["userProfileDetail"]),
+
+    idImage() {
+      debugger;
+      return this.$store.state.userModule.urlAvatarUser.urlName;
+    },
+    userParam() {
+      debugger;
+      return this.$store.state.userModule.userProfileDetail;
+    },
+  },
+
   methods: {
+    ...mapMutations(["setUrlNameAvatarUser", "setLeftRighAvatar"]),
     onClickNope() {
       debugger;
       this.$emit("onClickNopeDetail", false);
+    },
+
+    nextImageLeft() {
+      debugger;
+      this.setLeftRighAvatar(false);
+    },
+
+    nextImageRight() {
+      debugger;
+      this.setLeftRighAvatar(true);
     },
 
     onClickSupperLike() {
@@ -222,6 +254,12 @@ export default {
 
     onClickLike() {
       debugger;
+    },
+
+    onClickNextImage(val) {
+      debugger;
+      console.log(val);
+      this.setUrlNameAvatarUser(val);
     },
   },
 };

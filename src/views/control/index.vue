@@ -2,8 +2,8 @@
   <div class="w-full h-full">
     <Tinder
       ref="tinder"
-      key-name="userId"
-      :queue.sync="listDataUser"
+      key-name="id"
+      :queue.sync="queue"
       :offset-y="10"
       @submit="onSubmit"
     >
@@ -11,47 +11,12 @@
         <div
           class="pic z-8"
           :style="{
-            'background-image': `url(${scope.data.avatars[0].urlName})`,
+            'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`,
           }"
         />
         <div></div>
         <div class="bg-background-shadow w-full h-full absolute top-0"></div>
-        <div class="w-full flex items-center absolute bottom-0 h-72 p-4">
-          <div class="grid w-full title-boy mb-4">
-            <div class="w-70 text-white">
-              <div class="flex">
-                <h3 class="text-2xl font-semibold mr-2">
-                  {{ scope.data.firstName }}
-                </h3>
-                <img
-                  src="@/assets/icon/ic_infor.svg"
-                  width="30"
-                  @click="onDetailInfor(scope.data.userId)"
-                  class="cursor-pointer"
-                  srcset=""
-                />
-              </div>
-              <span>ádasdasdas</span><br />
-              <div class="flex">
-                <img
-                  class="cursor-pointer"
-                  src="@/assets/icon/ic_location.svg"
-                  alt=""
-                  srcset=""
-                />
-                <span> 2km away</span>
-              </div>
-            </div>
-            <div class="w-30">
-              <img
-                class="cursor-pointer"
-                src="@/assets/icon/bt_like_count.svg"
-                alt=""
-                srcset=""
-              />
-            </div>
-          </div>
-        </div>
+
         <div class="w-full flex absolute top-0 opacity-0 h-2/4">
           <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
           <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
@@ -79,70 +44,56 @@
       />
     </Tinder>
 
-    <div>
-      <div class="btns">
-        <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
-        <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
-        <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
-        <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
-        <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />
-      </div>
+    <div class="btns">
+      <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
+      <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
+      <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
+      <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
+      <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />
     </div>
   </div>
 </template>
 
 <script>
 import Tinder from "vue-tinder";
-import { mapState } from "vuex";
 
+import source from "@/bing";
 export default {
-  name: "view-swipe",
+  name: "control-page",
   components: { Tinder },
   data() {
     return {
       queue: [],
       offset: 0,
       history: [],
-      isShowDetail: false,
-      idImage: "",
     };
   },
-
-  computed: {
-    ...mapState("user_profile"),
-
-    listDataUser() {
-      debugger;
-      return this.$store.state.userModule.user_profile;
-    },
+  created() {
+    this.mock();
   },
-
-  created() {},
   methods: {
-    onClickNopeDetail(value) {
+    mock(count = 5, append = true) {
       debugger;
-      this.isShowDetail = value;
-    },
-    nextImageLeft() {
-      debugger;
-    },
-
-    nextImageRight() {
-      debugger;
-    },
-
-    onDetailInfor(value) {
-      debugger;
-      console.log(value);
-      this.$emit("onShowDetailUser", value);
+      const list = [];
+      for (let i = 0; i < count; i++) {
+        list.push({ id: source[this.offset] });
+        this.offset++;
+      }
+      if (append) {
+        this.queue = this.queue.concat(list);
+      } else {
+        this.queue.unshift(...list);
+      }
     },
     onSubmit({ item }) {
       debugger;
+      if (this.queue.length < 3) {
+        this.mock();
+      }
       this.history.push(item);
     },
     async decide(choice) {
       debugger;
-      console.log(choice);
       if (choice === "rewind") {
         if (this.history.length) {
           this.$refs.tinder.rewind([this.history.pop()]);
@@ -156,7 +107,6 @@ export default {
   },
 };
 </script>
-
 <style lang="css">
 .vue-tinder {
   position: absolute;

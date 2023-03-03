@@ -285,13 +285,13 @@
       <!-- Option chose -->
       <div class="w-full option-setting flex items-center text-white">
         <div class="item-setting">
-          <div class="flex justify-center">
+          <div class="flex justify-center" @click="onClickSettingDetail()">
             <img src="@/assets/icon/bt_settings.svg" width="100" alt="" />
           </div>
           <div class="mt-2 text-base">SETTINGS</div>
         </div>
         <div class="item-setting mt-24">
-          <div class="flex justify-center">
+          <div class="flex justify-center" @click="onEditProfile()">
             <img src="@/assets/icon/bt_edit_profile.svg" width="100" alt="" />
           </div>
           <div class="mt-2 text-base">EDIT PROFILE</div>
@@ -329,6 +329,18 @@ export default {
   methods: {
     handleSlideClick(dataset) {
       console.log(dataset.index, dataset.name);
+    },
+
+    // Show Setting
+    onClickSettingDetail() {
+      debugger;
+      this.$router.push({ path: "/setting-detail" });
+    },
+
+    // Show Edit
+    onEditProfile() {
+      debugger;
+      this.$router.push({ path: "/edit-profile/1213231" });
     },
   },
 };

@@ -5,7 +5,7 @@
       <div class="w-full header-edit flex justify-center items-center">
         <div class="w-full flex justify-center items-center">
           <div class="w-1/4">
-            <BhBack></BhBack>
+            <BhBack @onBackComponent="onBackSetting"></BhBack>
           </div>
           <div class="ml-20 w-3/4 text-xl text-white">Settings</div>
         </div>
@@ -644,32 +644,30 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title form-set-item">
               <div>NOTIFICATIONS</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Email</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
-                  <div class="bh-item-title">Push Notification</div>
-                  <div>
-                    <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
+
+                <div class="flex justify-between w-full form-set-item bd-input">
+                  <div class="flex justify-between w-full">
+                    <div class="bh-item-title">Push Notification</div>
+                    <div>
+                      <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
+                    </div>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Team HeartLink</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -680,46 +678,45 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
-                  <div class="w-full">
-                    <div>Dark theme</div>
-                    <div>Choose the theme you like most</div>
+                <div class="w-full">
+                  <div
+                    class="w-full form-set-item flex justify-between items-center"
+                  >
+                    <div class="bh-item-title">Dark theme</div>
+                    <div>
+                      <el-switch
+                        v-model="value2"
+                        active-color="#FB5D65"
+                        inactive-color="#5F6A86"
+                      >
+                      </el-switch>
+                    </div>
                   </div>
-                  <div>
-                    <el-switch
-                      v-model="value2"
-                      active-color="#FB5D65"
-                      inactive-color="#5F6A86"
-                    >
-                    </el-switch>
-                  </div>
+                  <div class="bh-describe">Choose the theme you like most</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title">
               <div>PAYMENT ACCOUNT</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Manage payment account</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Restore purchase</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -730,31 +727,27 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title">
               <div>COMMUNITY</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Community Guidelines</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Safe tips</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
+
                 <div class="flex justify-between w-full">
                   <div class="bh-item-title">Safety center</div>
                   <div>
@@ -766,32 +759,28 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
             <div class="w-full flex justify-between bh-title p-3">
               <div>PRIVACY</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Cookie policy</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Privacy policy</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Privacy preferences</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -801,14 +790,14 @@
             </div>
           </div>
         </div>
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title">
               <div>CONTACT US</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Help & support</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -819,23 +808,21 @@
           </div>
         </div>
 
-        <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+        <div class="w-full flex items-center mt-6">
+          <div class="w-full form-set-list">
+            <div class="w-full flex justify-between bh-title">
               <div>LEGAL</div>
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full">
+                <div class="flex justify-between w-full form-set-item bd-input">
                   <div class="bh-item-title">Licenses</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full">
+
+                <div class="flex justify-between w-full form-set-item">
                   <div class="bh-item-title">Terms of Service</div>
                   <div>
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
@@ -846,19 +833,26 @@
           </div>
         </div>
 
-        <div class="w-full">
-          <div class="w-full flex form-set-input justify-center items-center">
+        <div class="w-full mt-6">
+          <div
+            class="w-full flex form-set-input justify-center items-center bh-item-title"
+          >
             LOG OUT
           </div>
         </div>
 
-        <div class="w-full flex justify-center items-center p-3">
-          <img
-            src="@/assets/icon/ic_icon_app.svg"
-            width="40"
-            alt=""
-            srcset=""
-          />
+        <div
+          class="w-full flex justify-center items-center form-set-item mt-10"
+        >
+          <div>
+            <img
+              src="@/assets/icon/ic_icon_app.svg"
+              style="width: 100%"
+              alt=""
+              srcset=""
+            />
+            <div class="bh-describe">Version x.y.z</div>
+          </div>
         </div>
       </div>
 
@@ -888,7 +882,13 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    onBackSetting(val) {
+      debugger;
+      console.log(val);
+      this.$router.push({ path: "/setting" });
+    },
+  },
 };
 </script>
 

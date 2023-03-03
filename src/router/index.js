@@ -10,6 +10,15 @@ const routes = [
     name: "login-page",
     component: LoginPage,
   },
+
+  {
+    path: "/control-new",
+    name: "control-page",
+    component: () =>
+      import(
+        /* webpackChunkName: "control-page" */ "../views/control/index.vue"
+      ),
+  },
   // Home
   {
     path: "/dash-board",

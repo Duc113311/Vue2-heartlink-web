@@ -26,6 +26,7 @@ export default {
     decide(choice) {
       debugger;
       console.log(choice);
+      // this.$emit("onClickDecide", choice);
     },
   },
 };

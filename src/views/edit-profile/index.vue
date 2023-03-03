@@ -5,7 +5,7 @@
       <div class="w-full header-edit flex justify-center items-center">
         <div class="w-full flex justify-center items-center">
           <div class="w-1/4">
-            <BhBack></BhBack>
+            <BhBack @onBackComponent="onBackEditProfile"></BhBack>
           </div>
           <div class="ml-20 w-3/4 text-xl text-white">Edit Profile</div>
         </div>
@@ -393,7 +393,12 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    onBackEditProfile(val) {
+      console.log(val);
+      this.$router.push({ path: "/setting" });
+    },
+  },
 };
 </script>
 
