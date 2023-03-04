@@ -1,8 +1,14 @@
 <template>
   <div>
     <div v-show="!isTitle" class="mt-10">
-      <h2 class="text-2xl text-white mb-2">My Photos are</h2>
-      <span class="text-slate-500">Add at least 2 photos to continue</span>
+      <div class="padding-title">My Photos are</div>
+      <span
+        class="padding-describe"
+        v-bind:class="[
+          isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+        ]"
+        >Add at least 2 photos to continue</span
+      >
     </div>
 
     <!-- Image -->
@@ -129,6 +135,16 @@ export default {
     isTitle() {
       debugger;
       return this.isShowTitle ? this.isShowTitle : false;
+    },
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 

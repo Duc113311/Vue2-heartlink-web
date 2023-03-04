@@ -1,9 +1,7 @@
 <template>
   <div class="w-full h-full">
-    <div
-      class="w-full h-full create-profile p-8 top-0 left-0 z-20 grid phone-login"
-    >
-      <div>
+    <div class="w-full h-full create-profile p-8 top-0 left-0 z-20 phone-login">
+      <div class="body-infor overflow-hidden">
         <!-- Nút back -->
         <div class="back" v-if="isScream !== 7">
           <BhBack @onBackComponent="onBackComponent"></BhBack>
@@ -41,7 +39,7 @@
         </div>
         <!--  -->
       </div>
-      <div class="mt-5" v-if="isScream !== 7">
+      <div class="footer-infor pt-3" v-if="isScream !== 7">
         <BhContinue
           :isActives="isActives"
           @onChangeContinue="onChangeContinue"
@@ -115,7 +113,13 @@ export default {
 
 <style lang="css">
 .create-profile {
-  background-color: #382e41;
-  grid-template-rows: 25fr 4fr;
+}
+
+.body-infor {
+  height: 88%;
+}
+
+.footer-infor {
+  height: 12%;
 }
 </style>

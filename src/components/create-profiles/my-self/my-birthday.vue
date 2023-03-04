@@ -1,19 +1,27 @@
 <template>
   <div>
     <div class="mt-10">
-      <h2 class="text-2xl text-white">My birthday is</h2>
+      <div class="padding-title">My birthday is</div>
     </div>
-    <div class="mt-6">
-      <el-input
-        class="birthdate mb-3 text-white"
+    <div>
+      <input
+        class="your-name padding-input mb-3"
         v-model="birthday"
+        v-bind:class="[isDarkTheme ? 'dark-theme-input' : 'light-theme-input']"
         type="date"
         placeholder="dd/mm/yyyy"
         min="1977-01-01"
         max="2030-01-01"
+        @keydown="onChangeInput"
         @blur="onChangeInput"
       />
-      <span class="text-slate-500 mt-3">Your age will be public</span>
+      <span
+        class="padding-describe"
+        v-bind:class="[
+          isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+        ]"
+        >Your age will be public</span
+      >
     </div>
   </div>
 </template>
@@ -33,9 +41,20 @@ export default {
   },
   computed: {
     ...mapState(["user_profile"]),
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   methods: {
     ...mapMutations(["setFirstName"]),
+
     onChangeInput() {
       if (this.birthday !== "") {
         this.setFirstName(this.birthday);

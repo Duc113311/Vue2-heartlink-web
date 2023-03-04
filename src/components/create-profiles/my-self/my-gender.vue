@@ -1,32 +1,17 @@
 <template>
   <div>
-    <div class="mt-10 mb-6">
-      <h2 class="text-2xl text-white">Show me</h2>
+    <div class="mt-10">
+      <h2 class="padding-title">I am a</h2>
     </div>
-    <div class="grid w-full text-white">
+    <div class="grid w-full" v-for="(item, index) in gendersData" :key="index">
       <button
-        class="bt-womans rounded-lg p-6 mb-4"
-        id="bt-womans"
-        value="1"
-        @click="onShowGender(0)"
+        v-bind:class="[isActiveButton ? 'active-border' : isDarkTheme]"
+        class="padding-input-option"
+        :ref="index"
+        :id="index"
+        @click="onShowGender(index)"
       >
-        Woman
-      </button>
-      <button
-        class="bt-mans rounded-lg p-6 mb-4"
-        id="bt-mans"
-        value="2"
-        @click="onShowGender(1)"
-      >
-        Man
-      </button>
-      <button
-        class="bt-everyone rounded-lg p-6"
-        id="bt-everyone"
-        value="3"
-        @click="onShowGender(2)"
-      >
-        Other genders
+        {{ item.name }}
       </button>
     </div>
   </div>
@@ -42,35 +27,60 @@ export default {
   },
   data() {
     return {
-      genders: 3,
+      isActiveButton: false,
+      gendersData: [
+        {
+          id: 0,
+          name: "Woman",
+        },
+        {
+          id: 1,
+          name: "Man",
+        },
+        {
+          id: 2,
+          name: "Other genders",
+        },
+      ],
     };
   },
   computed: {
     ...mapState(["user_profile"]),
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return "light-theme-option";
+      } else {
+        return "dark-theme-option";
+      }
+    },
   },
   methods: {
     ...mapMutations(["setGender"]),
 
     onShowGender(val) {
       console.log(val);
-
+      debugger;
       this.genders = val;
       this.setGender(this.genders);
-      if (this.genders === 0) {
-        document.querySelector(".bt-womans").style.border = "2px solid red";
-        document.querySelector(".bt-mans").style.border = "2px solid white";
-        document.querySelector(".bt-everyone").style.border = "2px solid white";
+
+      const documentParam = document.getElementsByClassName(
+        "padding-input-option"
+      );
+
+      for (let index = 0; index < documentParam.length; index++) {
+        debugger;
+        const element = documentParam[index];
+
+        if (val === index) {
+          element.classList.add("active-border");
+        } else {
+          element.classList.remove("active-border");
+        }
       }
-      if (this.genders === 1) {
-        document.querySelector(".bt-mans").style.border = "2px solid red";
-        document.querySelector(".bt-womans").style.border = "2px solid white";
-        document.querySelector(".bt-everyone").style.border = "2px solid white";
-      }
-      if (this.genders === 2) {
-        document.querySelector(".bt-everyone").style.border = "2px solid red";
-        document.querySelector(".bt-womans").style.border = "2px solid white";
-        document.querySelector(".bt-mans").style.border = "2px solid white";
-      }
+
       this.$emit("onStatusActive", true);
     },
   },
@@ -79,13 +89,10 @@ export default {
     this.genders = this.$store.state.userModule.user_profile.gender;
     if (this.genders === 0) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-womans").style.border = "2px solid red";
     } else if (this.genders === 1) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-mans").style.border = "2px solid red";
     } else if (this.genders === 2) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-everyone").style.border = "2px solid red";
     } else {
       this.$emit("onStatusActive", false);
     }
@@ -99,5 +106,10 @@ export default {
 }
 .rounded-lg {
   border: 2px solid white;
+}
+
+.active-border {
+  border: 1.5px solid #ee646a;
+  color: #ee646a;
 }
 </style>

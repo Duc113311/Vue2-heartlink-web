@@ -83,6 +83,35 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+/* Setup - new */
+.padding-button {
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+.padding-input {
+  width: 100%;
+  padding: 18px;
+  border-radius: 10px;
+  font-size: 20px;
+}
 
+.padding-title {
+  font-size: 28px;
+  font-weight: 500;
+  padding: 10px 0 10px 0;
+}
 
+.padding-describe {
+  font-size: 18px;
+  padding: 10px 0 10px 0;
+  font-weight: 500;
+}
 
+.padding-input-option {
+  width: 100%;
+  padding: 18px;
+  border-radius: 15px;
+  font-size: 20px;
+  margin-bottom: 24px;
+}

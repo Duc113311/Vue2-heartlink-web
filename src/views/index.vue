@@ -1,5 +1,5 @@
 <template>
-  <div class="pae">
+  <div class="page new-count">
     <router-view />
   </div>
 </template>

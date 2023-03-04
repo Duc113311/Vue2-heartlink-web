@@ -1,18 +1,23 @@
 <template>
   <div class="w-full h-full user-profile absolute top-0 p-8 left-0 z-30">
     <BhBack></BhBack>
-    <h2 class="mb-2 mt-10 text-xl font-bold text-white">What's your email?</h2>
+    <div class="padding-title mt-6">What's your email?</div>
 
-    <div class="text-color">
+    <div
+      class="padding-describe"
+      v-bind:class="[
+        isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+      ]"
+    >
       Don't lose access to your account, verify your email
     </div>
 
     <div class="mt-3">
       <input
-        class="your-email w-full text-xl mb-3 p-3 rounded-lg"
+        class="your-name padding-input mb-3"
+        v-bind:class="[isDarkTheme ? 'dark-theme-input' : 'light-theme-input']"
         v-model="txtEmail"
-        type="email"
-        placeholder="Your name"
+        placeholder="Enter email"
         @keyup="onChangeInput"
       />
     </div>
@@ -22,7 +27,7 @@
         @onChangeContinue="onChangeContinue"
       ></BhContinue>
     </div>
-    <div class="flex mt-4 justify-center pt-3 pb-3 text-white text-xl">OR</div>
+    <div class="flex mt-4 justify-center pt-3 pb-3 padding-title">OR</div>
     <div class="flex mt-4 justify-center">
       <button
         class="btn-Sign cursor-pointer text-xl font-semibold bg-white text-black w-80 rounded-lg px-3 py-3 mb-4"
@@ -35,7 +40,12 @@
       </button>
     </div>
 
-    <div class="flex justify-center text-base text-color">
+    <div
+      class="flex justify-center padding-describe"
+      v-bind:class="[
+        isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+      ]"
+    >
       Verify instantly by connecting your Google account
     </div>
 
@@ -67,6 +77,18 @@ export default {
       btEmail: "btContinueId",
       isActives: false,
     };
+  },
+
+  computed: {
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
 
   methods: {

@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <div
-      v-show="isShowIconApp"
-      class="absolute z-20 img-app w-full h-full flex justify-center"
-    >
-      <img class="w-40" src="./assets/icon/ic_icon_app (1).svg" />
-    </div>
-    <div
       class="tracking-wide layout-web w-full h-full absolute flex justify-center items-center"
     >
-      <div class="layout-detail overflow-hidden relative">
+      <div
+        class="layout-detail overflow-hidden relative"
+        v-bind:class="[isDarkTheme ? 'dark-theme-bg' : 'light-theme-bg']"
+      >
+        <div
+          v-show="isShowIconApp"
+          class="absolute z-20 img-app flex w-full h-full justify-center"
+        >
+          <img width="100" src="./assets/icon/ic_icon_app (1).svg" />
+        </div>
         <router-view />
       </div>
     </div>
@@ -24,6 +27,18 @@ export default {
     return {
       isShowIconApp: true,
     };
+  },
+
+  computed: {
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
 
   methods: {},
@@ -44,6 +59,9 @@ export default {
 @import "@/assets/css/txt-common.css";
 @import "@/assets/css/color-text.css";
 @import "@/assets/css/color-bg.css";
+
+@import "@/assets/css/dark-them.css";
+@import "@/assets/css/light-theme.css";
 
 .img-app {
   background: #884971;

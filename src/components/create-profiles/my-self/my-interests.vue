@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="mt-10">
-      <h2 class="text-2xl text-white mb-2">My interests are</h2>
-      <span class="text-slate-500"
+      <div class="padding-title">My interests are</div>
+      <span
+        class="padding-describe"
+        v-bind:class="[
+          isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+        ]"
         >Let everyone know what you're passionate about, by adding it to your
         profile</span
       >
@@ -43,6 +47,16 @@ export default {
     listDataInterests() {
       return this.$store.state.userModule.listInterests;
     },
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
 
   methods: {
@@ -69,8 +83,9 @@ export default {
     },
   },
 
-  created() {
-    this.getListDataInterests({
+  async created() {
+    debugger;
+    await this.getListDataInterests({
       entityName: "interests",
       entityId: "en",
     });

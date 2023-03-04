@@ -1,9 +1,14 @@
 <template>
   <div class="number-code mt-5">
-    <h2 class="mb-4 text-xl font-bold text-white">My code is</h2>
-    <div class="mt-2 text-color">
+    <h2 class="padding-title">My code is</h2>
+    <div
+      class="padding-describe"
+      v-bind:class="[
+        isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+      ]"
+    >
       Please enter Code sent to
-      <span class="text-white">{{ this.renderPhoneNumber }}</span>
+      <span>{{ this.renderPhoneNumber }}</span>
     </div>
     <div class="text-code flex justify-center mt-8 mb-8">
       <input
@@ -15,12 +20,11 @@
         v-model="renderCodeOTP[ind]"
         @keyup="onNextOn(el, ind)"
         :autofocus="ind === 0"
-        :placeholder="ind + 1"
         maxlength="1"
       />
     </div>
     <BhInvalid v-if="renderErrorCode"></BhInvalid>
-    <div class="mt-10 text-color justify-center flex">
+    <div class="mt-10 padding-describe dark-theme-describe justify-center flex">
       <a class="cursor-pointer bt-render" href="#" @click="onPhoneNumber()"
         >Resend code</a
       >
@@ -57,6 +61,16 @@ export default {
 
     renderCodeOTP() {
       return this.valueText;
+    },
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 
@@ -105,7 +119,7 @@ export default {
 .one-code {
   width: 48px;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: #363d4d;
   font-size: 1.5rem;
   font-weight: 700;
   height: 48px;
@@ -114,6 +128,10 @@ export default {
   padding-right: 8px;
   vertical-align: middle;
   margin-right: 5px;
+}
+
+.one-code:focus {
+  background-color: #495063;
 }
 
 .bt-render:hover {

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="mt-10 mb-6">
-      <h2 class="text-2xl text-white">Show me gender</h2>
+    <div class="mt-10">
+      <h2 class="padding-title">Show me gender</h2>
     </div>
-    <div class="grid w-full text-white">
+    <div class="grid w-full">
       <button
-        class="bt-womans rounded-lg p-6 mb-4"
+        class="padding-input-option dark-theme-option p-6 mb-4"
         id="bt-womans"
         value="1"
-        @click="onShowGender(0)"
+        @click="onShowMeGender(0)"
       >
         Woman
       </button>
       <button
-        class="bt-mans rounded-lg p-6 mb-4"
+        class="padding-input-option dark-theme-option p-6 mb-4"
         id="bt-mans"
         value="2"
         @click="onShowMeGender(1)"
@@ -21,7 +21,7 @@
         Man
       </button>
       <button
-        class="bt-everyone rounded-lg p-6"
+        class="padding-input-option dark-theme-option p-6"
         id="bt-everyone"
         value="3"
         @click="onShowMeGender(2)"
@@ -53,23 +53,24 @@ export default {
 
     onShowMeGender(val) {
       console.log(val);
-
+      debugger;
       this.showMeGender = val;
       this.setShowGender(this.showMeGender);
       if (this.showMeGender === 0) {
-        document.querySelector(".bt-womans").style.border = "2px solid red";
-        document.querySelector(".bt-mans").style.border = "2px solid white";
-        document.querySelector(".bt-everyone").style.border = "2px solid white";
+        document.getElementById("bt-womans").style.border = "2px solid #ee646a";
+        document.getElementById("bt-mans").style.border = "2px solid white";
+        document.getElementById("bt-everyone").style.border = "2px solid white";
       }
       if (this.showMeGender === 1) {
-        document.querySelector(".bt-mans").style.border = "2px solid red";
-        document.querySelector(".bt-womans").style.border = "2px solid white";
-        document.querySelector(".bt-everyone").style.border = "2px solid white";
+        document.getElementById("bt-mans").style.border = "2px solid #ee646a";
+        document.getElementById("bt-womans").style.border = "2px solid white";
+        document.getElementById("bt-everyone").style.border = "2px solid white";
       }
       if (this.showMeGender === 2) {
-        document.querySelector(".bt-everyone").style.border = "2px solid red";
-        document.querySelector(".bt-womans").style.border = "2px solid white";
-        document.querySelector(".bt-mans").style.border = "2px solid white";
+        document.getElementById("bt-everyone").style.border =
+          "2px solid #ee646a";
+        document.getElementById("bt-womans").style.border = "2px solid white";
+        document.getElementById("bt-mans").style.border = "2px solid white";
       }
       this.$emit("onStatusActive", true);
     },
@@ -79,13 +80,13 @@ export default {
     this.showMeGender = this.$store.state.userModule.user_profile.showMeGender;
     if (this.showMeGender === 0) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-womans").style.border = "2px solid red";
+      document.getElementById("bt-womans").style.border = "2px solid #ee646a";
     } else if (this.showMeGender === 1) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-mans").style.border = "2px solid red";
+      document.getElementById("bt-mans").style.border = "2px solid #ee646a";
     } else if (this.showMeGender === 2) {
       this.$emit("onStatusActive", true);
-      document.querySelector(".bt-everyone").style.border = "2px solid red";
+      document.getElementById("bt-everyone").style.border = "2px solid #ee646a";
     } else {
       this.$emit("onStatusActive", false);
     }

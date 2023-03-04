@@ -104,18 +104,8 @@ const actions = {
    * @param {*} param1
    */
   async getListDataInterests({ commit }, { entityName, entityId }) {
-    const token = localStorage.getItem("accessToken");
-    const config = {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Basic ${token}`,
-      },
-    };
     await http_request
-      .get(
-        `base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`,
-        config
-      )
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
       .then((response) => {
         commit("setListDataInterests", response.data.data);
       })

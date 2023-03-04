@@ -1,6 +1,6 @@
 <template>
   <div class="phone-number">
-    <h2 class="mb-4 text-xl font-bold text-white">My number is</h2>
+    <h2 class="padding-title">My number is</h2>
     <div class="w-full">
       <div class="w-full">
         <input
@@ -19,14 +19,19 @@
       </div>
     </div>
 
-    <div class="text-color">
+    <div
+      class="padding-describe"
+      v-bind:class="[
+        isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+      ]"
+    >
       <span
         >When you tap "Continue", Heartlink will send a text with verificatrion
         code. Message and data rates maty apply.</span
       >
-      <span>The verifed phone number can be used to log in.</span>
-      <a href="http://" class="decoration-solid"
-        >Learn what happens when your number changes</a
+      <span> The verifed phone number can be used to log in.</span>
+      <a href="http://" class="decoration-solid">
+        Learn what happens when your number changes</a
       >
     </div>
   </div>
@@ -55,7 +60,17 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
 
   methods: {
     //#region Common function

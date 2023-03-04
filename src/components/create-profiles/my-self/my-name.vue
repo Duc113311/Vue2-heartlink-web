@@ -1,16 +1,21 @@
 <template>
   <div>
     <div class="mt-10">
-      <h2 class="text-2xl text-white">My name is</h2>
+      <div class="padding-title">My name is</div>
     </div>
-    <div class="mt-6">
-      <el-input
-        class="your-name mb-3"
+    <div>
+      <input
+        class="your-name padding-input mb-3"
+        v-bind:class="[isDarkTheme ? 'dark-theme-input' : 'light-theme-input']"
         v-model="txtFirstName"
         placeholder="Your name"
-        @blur="onChangeFirstName"
+        @keydown="onChangeFirstName"
       />
-      <span class="text-slate-500 mt-3"
+      <span
+        class="padding-describe"
+        v-bind:class="[
+          isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+        ]"
         >This is how it will appear in HeartLink, and you will not able to
         change it</span
       >
@@ -36,6 +41,16 @@ export default {
 
   computed: {
     ...mapState(["user_profile"]),
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
 
   methods: {
@@ -74,5 +89,10 @@ export default {
   font-size: larger !important;
   padding: 10px;
   color: white;
+}
+
+.your-name:focus {
+  outline: 0;
+  border: non;
 }
 </style>
