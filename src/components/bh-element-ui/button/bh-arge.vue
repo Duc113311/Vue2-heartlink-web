@@ -2,7 +2,8 @@
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
     <el-button
       :loading="isShowLoading"
-      class="text-base text-white w-full rounded-lg p-5 color-bt"
+      v-bind:class="[isActiveContinue ? 'active-button' : isDefaultTheme]"
+      class="btContinueCode cursor-pointer w-full padding-button"
       @click="onClickIAgree()"
       >I agree</el-button
     >
@@ -21,6 +22,16 @@ export default {
   computed: {
     isShowLoading() {
       return this.isLoading;
+    },
+
+    isDefaultTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return "light-theme-button";
+      } else {
+        return "dark-theme-button ";
+      }
     },
   },
 
