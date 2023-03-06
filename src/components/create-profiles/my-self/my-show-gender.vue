@@ -3,30 +3,19 @@
     <div class="mt-10">
       <h2 class="padding-title">Show me gender</h2>
     </div>
-    <div class="grid w-full">
+    <div
+      class="grid w-full"
+      v-for="(item, index) in showGendersData"
+      :key="index"
+    >
       <button
-        class="padding-input-option dark-theme-option p-6 mb-4"
-        id="bt-womans"
-        value="1"
-        @click="onShowMeGender(0)"
+        v-bind:class="[isActiveButton ? 'active-border' : isDarkTheme]"
+        class="padding-input-option"
+        :ref="index"
+        :id="index"
+        @click="onShowMeGender(index)"
       >
-        Woman
-      </button>
-      <button
-        class="padding-input-option dark-theme-option p-6 mb-4"
-        id="bt-mans"
-        value="2"
-        @click="onShowMeGender(1)"
-      >
-        Man
-      </button>
-      <button
-        class="padding-input-option dark-theme-option p-6"
-        id="bt-everyone"
-        value="3"
-        @click="onShowMeGender(2)"
-      >
-        Everyone
+        {{ item.name }}
       </button>
     </div>
   </div>
@@ -43,50 +32,75 @@ export default {
   data() {
     return {
       showMeGender: 3,
+
+      showGendersData: [
+        {
+          id: 0,
+          name: "Woman",
+        },
+        {
+          id: 1,
+          name: "Man",
+        },
+        {
+          id: 2,
+          name: "Everyone",
+        },
+      ],
     };
   },
   computed: {
     ...mapState(["user_profile"]),
+
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return "light-theme-option";
+      } else {
+        return "dark-theme-option";
+      }
+    },
   },
   methods: {
-    ...mapMutations(["setShowGender"]),
-
+    ...mapMutations(["setShowGender", "setShowProfileCreate"]),
     onShowMeGender(val) {
-      console.log(val);
       debugger;
       this.showMeGender = val;
       this.setShowGender(this.showMeGender);
-      if (this.showMeGender === 0) {
-        document.getElementById("bt-womans").style.border = "2px solid #ee646a";
-        document.getElementById("bt-mans").style.border = "2px solid white";
-        document.getElementById("bt-everyone").style.border = "2px solid white";
+      const documentParam = document.getElementsByClassName(
+        "padding-input-option"
+      );
+
+      for (let index = 0; index < documentParam.length; index++) {
+        debugger;
+        const element = documentParam[index];
+
+        if (val === index) {
+          element.classList.add("active-border");
+        } else {
+          element.classList.remove("active-border");
+        }
       }
-      if (this.showMeGender === 1) {
-        document.getElementById("bt-mans").style.border = "2px solid #ee646a";
-        document.getElementById("bt-womans").style.border = "2px solid white";
-        document.getElementById("bt-everyone").style.border = "2px solid white";
-      }
-      if (this.showMeGender === 2) {
-        document.getElementById("bt-everyone").style.border =
-          "2px solid #ee646a";
-        document.getElementById("bt-womans").style.border = "2px solid white";
-        document.getElementById("bt-mans").style.border = "2px solid white";
-      }
+
       this.$emit("onStatusActive", true);
     },
   },
 
   mounted() {
     this.showMeGender = this.$store.state.userModule.user_profile.showMeGender;
+    this.setShowProfileCreate({
+      isShowProfile: true,
+      isNotShowProfile: true,
+    });
+    this.$emit("onShowSkips", false);
+    this.$emit("onShowName", { showCheckbox: false, showName: "" });
     if (this.showMeGender === 0) {
       this.$emit("onStatusActive", true);
-      document.getElementById("bt-womans").style.border = "2px solid #ee646a";
     } else if (this.showMeGender === 1) {
       this.$emit("onStatusActive", true);
-      document.getElementById("bt-mans").style.border = "2px solid #ee646a";
     } else if (this.showMeGender === 2) {
       this.$emit("onStatusActive", true);
-      document.getElementById("bt-everyone").style.border = "2px solid #ee646a";
     } else {
       this.$emit("onStatusActive", false);
     }
@@ -100,5 +114,10 @@ export default {
 }
 .rounded-lg {
   border: 2px solid white;
+}
+
+.active-border {
+  border: 1.5px solid #ee646a;
+  color: #ee646a;
 }
 </style>

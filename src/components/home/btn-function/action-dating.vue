@@ -39,7 +39,7 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 80px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;

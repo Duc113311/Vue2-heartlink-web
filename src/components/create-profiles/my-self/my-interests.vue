@@ -61,21 +61,22 @@ export default {
 
   methods: {
     ...mapActions(["getListDataInterests"]),
-    ...mapMutations(["setInterest"]),
+    ...mapMutations(["setInterest", "setShowProfileCreate"]),
     onSelectInterest(val) {
       // document.querySelector("oftion-interests")
       this.setInterest(val);
       const interestsData = this.$store.state.userModule.user_profile.interests;
-
+      debugger;
       if (this.$store.state.userModule.isActiveId) {
-        document.getElementById(val).style.backgroundColor = "red";
+        debugger;
+        document.getElementById(val).classList.add("bg-active");
         if (interestsData.length < 5) {
           this.$emit("onStatusActive", false);
         } else {
           this.$emit("onStatusActive", true);
         }
       } else {
-        document.getElementById(val).style.backgroundColor = "#382E41";
+        document.getElementById(val).classList.remove("bg-active");
         if (interestsData.length < 5) {
           this.$emit("onStatusActive", false);
         }
@@ -93,7 +94,12 @@ export default {
 
   mounted() {
     const interestsData = this.$store.state.userModule.user_profile.interests;
-
+    this.setShowProfileCreate({
+      isShowProfile: true,
+      isNotShowProfile: true,
+    });
+    this.$emit("onShowSkips", true);
+    this.$emit("onShowName", { showCheckbox: false });
     for (let index = 0; index < interestsData.length; index++) {
       const element = interestsData[index];
       document.getElementById(element).style.backgroundColor = "red";
@@ -108,18 +114,14 @@ export default {
 </script>
 
 <style lang="css">
-.oftion-interests:hover {
-  background-color: #5b566b;
-  color: white;
-  border: 1px solid white;
-}
-
 .oftion-interests {
-  border: 1px solid white;
+  border: 1.5px solid white;
   border-radius: 8px;
+  cursor: pointer;
 }
 .bg-active {
-  background-color: red;
+  border: 1.5px solid #f65a62;
+  color: #f65a62;
 }
 
 .list-interest {

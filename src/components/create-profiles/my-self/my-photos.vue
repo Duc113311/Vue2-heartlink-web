@@ -227,6 +227,7 @@ export default {
   },
   mounted() {
     const image = this.$store.state.userModule.user_profile.avatars;
+    this.$emit("onShowSkips", true);
     for (let index = 0; index < image.length; index++) {
       const element = image[index];
       const img = document.getElementById(element.id);

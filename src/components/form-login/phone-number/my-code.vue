@@ -1,14 +1,16 @@
 <template>
   <div class="number-code mt-5">
     <h2 class="padding-title">My code is</h2>
-    <div
-      class="padding-describe"
-      v-bind:class="[
-        isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
-      ]"
-    >
-      Please enter Code sent to
-      <span>{{ this.renderPhoneNumber }}</span>
+    <div class="flex items-center">
+      <div
+        class="padding-describe"
+        v-bind:class="[
+          isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+        ]"
+      >
+        Please enter Code sent to
+      </div>
+      <span class="ml-3">{{ this.renderPhoneNumber }}</span>
     </div>
     <div class="text-code flex justify-center mt-8 mb-8">
       <input
@@ -79,6 +81,7 @@ export default {
      * Render gửi lại mã OTP
      */
     onPhoneNumber() {
+      debugger;
       this.$emit("onRenderCodeOTP", this.txtPhoneNumber);
     },
 

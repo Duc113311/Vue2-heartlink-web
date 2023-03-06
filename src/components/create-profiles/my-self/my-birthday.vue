@@ -67,6 +67,8 @@ export default {
 
   mounted() {
     this.birthday = this.$store.state.userModule.user_profile.birthday;
+    this.$emit("onShowName", { showCheckbox: false });
+    this.$emit("onShowSkips", false);
     if (this.birthday !== "") {
       this.$emit("onStatusActive", true);
     } else {

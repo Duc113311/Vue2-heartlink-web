@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="myName">
     <div class="mt-10">
       <div class="padding-title">My name is</div>
     </div>
@@ -69,6 +69,8 @@ export default {
   mounted() {
     this.txtFirstName = this.$store.state.userModule.user_profile.firstName;
     debugger;
+    this.$emit("onShowName", { showCheckbox: false });
+    this.$emit("onShowSkips", false);
     console.log(this.txtFirstName);
     if (this.txtFirstName !== "") {
       this.$emit("onStatusActive", true);

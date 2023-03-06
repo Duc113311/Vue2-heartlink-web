@@ -1,69 +1,85 @@
 <template>
-  <div>
-    <div class="gd-location items-center h-full">
-      <div class="flex justify-center">
-        <div class="text-center h-full el-location">
+  <div class="w-full h-full">
+    <div class="items-center h-full">
+      <div
+        v-show="isShowUp"
+        class="flex justify-center items-center w-full h-full"
+      >
+        <div class="text-center w-full el-location">
           <div class="flex justify-center items-center">
             <img
               src="@/assets/icon/art_location.svg"
-              width="180"
-              height="180"
+              width="250"
+              height="250"
               alt=""
               srcset=""
             />
           </div>
-          <div class="mt-10">
-            <h2 class="text-xl text-white">Enable Location</h2>
+          <div class="">
+            <div class="padding-title">Enable Location</div>
           </div>
-          <div class="mt-6 text-base text-slate-500">
-            You will need to enable your location order to use HeartLinks
+          <div class="flex justify-center items-center w-full">
+            <div
+              class="padding-describe w-4/5"
+              v-bind:class="[
+                isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+              ]"
+            >
+              You will need to enable your location order to use HeartLinks
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="">
-        <div class="angle-up">
-          <div
-            class="text-2xl mb-5 text-white flex justify-center items-center"
-          >
-            <i class="fas fa-angle-up" @click="onAngleUp()"></i>
-          </div>
-        </div>
-
-        <BhLocation @onShowAvoid="onShowAvoid"></BhLocation>
-
+      <div class="absolute w-full dow-location show-action-location">
         <div
+          v-show="isShowDow"
+          class="w-full justify-center flex items-center mb-10"
+          @click="onTellMoreUp()"
+        >
+          <i class="fa-solid fa-angle-up text-2xl"></i>
+        </div>
+        <BhLocation @onShowAvoid="onShowAvoid"></BhLocation>
+        <div
+          v-show="isShowUp"
           class="w-full text-base text-white mt-5 angle-down pl-10 pr-10 flex justify-center items-center"
           @click="onTellMore()"
         >
-          Tell me more
+          <span class="padding-describe">Tell me more</span>
           <i class="text-2xl ml-3 fas fa-angle-down" @click="onAngleDown()"></i>
         </div>
       </div>
-      <div v-show="isShowMeet" class="meet-people h-full">
+
+      <div v-show="isShowDow" class="meet-people h-full mt-20">
         <div class="flex items-center h-full">
           <div class="text-center">
             <div class="flex justify-center items-center">
               <img
                 src="@/assets/icon/art_meet_people.svg"
-                width="180"
-                height="180"
+                width="250"
+                height="250"
                 alt=""
                 srcset=""
               />
             </div>
             <div class="mt-10">
-              <h2 class="text-xl text-white">MEET PEOPLE NEARBY</h2>
+              <div class="padding-title">MEET PEOPLE NEARBY</div>
             </div>
-            <div class="mt-6 text-base text-slate-500">
-              You location will be used to show potential matches near you.
+            <div class="w-full flex justify-center items-center">
+              <div
+                class="padding-describe w-4/5"
+                v-bind:class="[
+                  isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
+                ]"
+              >
+                You location will be used to show potential matches near you.
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <AvoidSomeone
-      v-if="isShowAvoid"
+      v-show="isShowAvoid"
       @onHideWellcome="onHideWellcome"
     ></AvoidSomeone>
   </div>
@@ -88,7 +104,22 @@ export default {
       txtFirstName: "",
       isShowMeet: false,
       isShowAvoid: false,
+
+      isShowUp: true,
+      isShowDow: false,
     };
+  },
+
+  computed: {
+    isDarkTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
 
   methods: {
@@ -102,11 +133,26 @@ export default {
     },
 
     onTellMore() {
-      this.isShowMeet = true;
-      document.getElementsByClassName("el-location")[0].style.display = "none";
-      document.getElementsByClassName("angle-up")[0].style.display = "block";
-      document.getElementsByClassName("angle-down")[0].style.display = "none";
-      document.getElementsByClassName("meet-people")[0].style.display = "block";
+      debugger;
+      const actionLocation = document.getElementsByClassName(
+        "show-action-location"
+      );
+
+      actionLocation[0].classList.add("up-location");
+      actionLocation[0].classList.remove("dow-location");
+
+      (this.isShowUp = false), (this.isShowDow = true);
+    },
+
+    onTellMoreUp() {
+      const actionLocation = document.getElementsByClassName(
+        "show-action-location"
+      );
+
+      actionLocation[0].classList.add("dow-location");
+      actionLocation[0].classList.remove("up-location");
+
+      (this.isShowUp = true), (this.isShowDow = false);
     },
 
     onAngleUp() {
@@ -126,5 +172,17 @@ export default {
   display: grid;
   grid-template-rows: 8fr 1fr;
   overflow: hidden;
+}
+
+.dow-location {
+  bottom: 0;
+  left: 0;
+  padding-bottom: 16px;
+}
+
+.up-location {
+  top: 0;
+  right: 0;
+  padding-top: 16px;
 }
 </style>

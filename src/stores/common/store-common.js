@@ -1,15 +1,30 @@
-import { createStore } from "vuex";
+const state = {
+  isShowMyProfile: true,
+  isNotShowProfie: true,
+};
 
-const storeCommons = createStore({
-  state() {
-    return {};
+const getters = {};
+
+const mutations = {
+  /**
+   * Xet giá trị hiển th
+   * @param {*} state
+   * @param {*} data
+   */
+  setShowProfileCreate(state, data) {
+    debugger;
+    state.isNotShowProfie = data.isNotShowProfile;
+    state.isShowMyProfile = data.isShowProfile;
   },
+};
 
-  getters: {},
+const actions = {};
+export default {
+  state,
 
-  mutations: {},
+  getters,
 
-  actions: {},
-});
+  actions,
 
-export default storeCommons;
+  mutations,
+};

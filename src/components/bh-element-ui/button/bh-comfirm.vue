@@ -1,19 +1,20 @@
 <template>
   <div class="w-full pl-10 pr-10 flex justify-center items-center">
-    <el-button
+    <button
       type="danger"
       :loading="isShowLoading"
       @click="onClickComfirm"
-      class="btContinueCode cursor-pointer activeButton text-white w-full color-button"
-      >Comfirm</el-button
+      class="btContinueCode cursor-pointer w-full padding-button active-button"
     >
+      {{ nameButtom }}
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "bh-comfirm",
-  props: ["isLoading", "isActives"],
+  props: ["isLoading", "isActives", "nameTitle"],
   data() {
     return {
       isNumber: 0,
@@ -24,6 +25,10 @@ export default {
     isShowLoading() {
       debugger;
       return this.isLoading;
+    },
+
+    nameButtom() {
+      return this.nameTitle;
     },
   },
 
@@ -55,5 +60,9 @@ export default {
 
 .el-button.is-loading:before {
   background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.active-button {
+  background-color: #fd5d65;
 }
 </style>

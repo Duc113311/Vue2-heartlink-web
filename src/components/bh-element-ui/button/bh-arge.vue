@@ -1,12 +1,13 @@
 <template>
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
-    <el-button
+    <button
       :loading="isShowLoading"
       v-bind:class="[isActiveContinue ? 'active-button' : isDefaultTheme]"
-      class="btContinueCode cursor-pointer w-full padding-button"
+      class="btAgree cursor-pointer w-full padding-button"
       @click="onClickIAgree()"
-      >I agree</el-button
     >
+      I agree
+    </button>
   </div>
 </template>
 
@@ -50,9 +51,11 @@ export default {
 .color-bt:hover {
   background-color: #fd5d65 !important;
 }
-.color-bt {
-  background-color: #3a3f52 !important;
-  color: #ffffff !important;
-  border: none !important;
+.btAgreet {
+  cursor: pointer;
+}
+
+.btAgree:hover {
+  background-color: #fd5d65 !important;
 }
 </style>

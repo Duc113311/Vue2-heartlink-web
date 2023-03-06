@@ -87,6 +87,7 @@ export default {
 
   mounted() {
     this.genders = this.$store.state.userModule.user_profile.gender;
+    this.$emit("onShowName", { showCheckbox: true, showName: "gender" });
     if (this.genders === 0) {
       this.$emit("onStatusActive", true);
     } else if (this.genders === 1) {

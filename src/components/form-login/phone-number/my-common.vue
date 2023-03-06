@@ -18,6 +18,7 @@
           :txtErrorCode="txtErrorCode"
           :valueText="valueText"
           @validateRequireCode="validateRequire"
+          @onRenderCodeOTP="onRenderCodeOTP"
         >
         </MyCode>
       </div>
@@ -99,6 +100,24 @@ export default {
       }
     },
 
+    async onRenderCodeOTP() {
+      this.txtErrorCode = false;
+      const phoneNumber = this.valCodeQR.getNumber();
+      const appVerifier = window.recaptchaVerifier;
+      await this.setuprecaptcha();
+      await signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          this.sentCodeId = confirmationResult.verificationId;
+          debugger;
+          console.log(this.sentCodeId);
+        })
+        .catch((error) => {
+          this.sendCodeError = "You select bad domain";
+          console.log(error, this.sendCodeError);
+          // ...
+        });
+    },
+
     /**
      *
      */
@@ -135,12 +154,11 @@ export default {
         }
       } else if (this.screenNumber === 1) {
         if (this.sentCodeId !== "") {
-          this.$emit("onShowEmailUser", true);
+          // this.$emit("onShowEmailUser", true);
 
           await this.singWithPhone(this.sentCodeId);
         } else {
           this.txtErrorCode = true;
-          this.$emit("onShowEmailUser", true);
         }
       }
 
@@ -163,16 +181,19 @@ export default {
             id: userID,
             providerId: providerId,
           });
-
+          this.$emit("onShowEmailUser", true);
           console.log(userID, providerId);
 
           // Check lần show wellcome
           console.log(userID);
         })
-        .catch(() => {
+        .catch((error) => {
+          debugger;
+          console.log(error);
           this.txtErrorCode = true;
 
           this.valueText = [];
+          document.getElementById("1").focus();
         });
     },
   },

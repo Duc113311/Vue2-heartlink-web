@@ -19,17 +19,17 @@
         <div class="w-full flex items-center absolute bottom-0 h-72 p-4">
           <div class="grid w-full title-boy mb-4">
             <div class="w-70 text-white">
-              <div class="flex">
-                <h3 class="text-2xl font-semibold mr-2">
+              <div class="flex items-center">
+                <div class="padding-title">
                   {{ scope.data.firstName }}
-                </h3>
-                <img
-                  src="@/assets/icon/ic_infor.svg"
-                  width="30"
+                </div>
+                <div class="padding-title">,25</div>
+                <div
+                  class="flex justify-center items-center"
                   @click="onDetailInfor(scope.data.userId)"
-                  class="cursor-pointer"
-                  srcset=""
-                />
+                >
+                  <i class="fa-solid fa-circle-info text-xl"></i>
+                </div>
               </div>
               <span>ádasdasdas</span><br />
               <div class="flex">

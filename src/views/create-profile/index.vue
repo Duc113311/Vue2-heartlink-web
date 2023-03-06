@@ -4,11 +4,18 @@
       <div class="body-infor overflow-hidden">
         <!-- Nút back -->
         <div class="back" v-if="isScream !== 7">
-          <BhBack @onBackComponent="onBackComponent"></BhBack>
+          <BhBack
+            :isShowSkip="isShowSkipParam"
+            @onBackComponent="onBackComponent"
+          ></BhBack>
         </div>
         <!-- My name -->
         <div v-if="isScream === 0">
-          <MyName @onStatusActive="onStatusActive"></MyName>
+          <MyName
+            @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
+            @onStatusActive="onStatusActive"
+          ></MyName>
         </div>
         <!-- Birthday -->
         <div v-if="isScream === 1">
@@ -16,31 +23,49 @@
         </div>
         <!-- Gender -->
         <div v-if="isScream === 2">
-          <MyGender @onStatusActive="onStatusActive"></MyGender>
+          <MyGender
+            @onShowName="onShowProfiles"
+            @onStatusActive="onStatusActive"
+          ></MyGender>
         </div>
         <!-- Sexual -->
         <div v-if="isScream === 3">
-          <MySexual @onStatusActive="onStatusActive"></MySexual>
+          <MySexual
+            @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
+            @onStatusActive="onStatusActive"
+          ></MySexual>
         </div>
         <!-- Interest -->
         <div v-if="isScream === 4">
-          <MyInterests @onStatusActive="onStatusActive"></MyInterests>
+          <MyInterests
+            @onShowSkips="onShowSkips"
+            @onStatusActive="onStatusActive"
+          ></MyInterests>
         </div>
         <div v-if="isScream === 5">
-          <MyShowGender @onStatusActive="onStatusActive"></MyShowGender>
+          <MyShowGender
+            @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
+            @onStatusActive="onStatusActive"
+          ></MyShowGender>
         </div>
         <!-- Photos -->
         <div v-if="isScream === 6">
-          <MyPhotos @onStatusActive="onStatusActive"></MyPhotos>
+          <MyPhotos
+            @onShowSkips="onShowSkips"
+            @onStatusActive="onStatusActive"
+          ></MyPhotos>
         </div>
         <!-- Locations -->
-        <div v-if="isScream === 7">
+        <div class="h-full w-full" v-if="isScream === 7">
           <MyLocation @onStatusActive="onStatusActive"></MyLocation>
         </div>
         <!--  -->
       </div>
       <div class="footer-infor pt-3" v-if="isScream !== 7">
         <BhContinue
+          :statusProfile="isShowProfile"
           :isActives="isActives"
           @onChangeContinue="onChangeContinue"
         ></BhContinue>
@@ -84,12 +109,21 @@ export default {
       isNumber: 0,
       isShowHeader: true,
       isShowAvoid: false,
+      isShowProfile: {},
+      isShowSkipParam: false,
     };
   },
 
   methods: {
     onBackComponent() {},
+    onShowSkips(val) {
+      this.isShowSkipParam = val;
+    },
 
+    onShowProfiles(val) {
+      debugger;
+      this.isShowProfile = val;
+    },
     onStatusActive(value) {
       this.isActives = value;
     },
@@ -112,14 +146,14 @@ export default {
 </script>
 
 <style lang="css">
-.create-profile {
-}
-
 .body-infor {
-  height: 88%;
+  height: 85%;
+  width: 100%;
 }
 
 .footer-infor {
-  height: 12%;
+  width: 100%;
+  overflow: hidden;
+  height: calc(100% - 85%);
 }
 </style>

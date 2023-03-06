@@ -1,13 +1,11 @@
 <template>
   <div class="w-full pl-10 pr-10 flex justify-center items-center">
-    <el-button
-      type="danger"
-      :loading="isLoading"
-      id="btContinueCode"
-      class="text-base btContinueCode cursor-pointer text-white w-full rounded-lg p-6 color-button"
-      @click="onClickContinues"
-      >Allow Location</el-button
+    <button
+      @click="onClickLocations"
+      class="btContinueCode active-button cursor-pointer w-full padding-button"
     >
+      Allow Location
+    </button>
   </div>
 </template>
 
@@ -27,7 +25,17 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    isDefaultTheme() {
+      const theme = localStorage.getItem("user-theme");
+
+      if (theme === "light-theme") {
+        return "light-theme-button";
+      } else {
+        return "dark-theme-button ";
+      }
+    },
+  },
 
   methods: {
     ...mapMutations(["setLocation"]),
@@ -57,7 +65,7 @@ export default {
     /**
      * Sự kiện click để tiếp tục
      */
-    onClickContinues() {
+    onClickLocations() {
       debugger;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -76,6 +84,10 @@ export default {
 .color-button:hover,
 .color-button:active,
 .color-button:focus {
+  background-color: #fd5d65;
+}
+
+.active-button {
   background-color: #fd5d65;
 }
 </style>
