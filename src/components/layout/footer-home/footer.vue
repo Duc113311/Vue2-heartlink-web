@@ -2,40 +2,20 @@
   <div
     class="w-full bottom-0 right-0 footer-body flex justify-center content-center text-center cursor-pointer"
   >
-    <div>
-      <img
-        class="w-9"
-        src="@/assets/icon/ic_home_tab.svg"
-        @click="onClickHome()"
-      />
+    <div @click="onClickHome()">
+      <i class="fa-solid fa-heart icon-color"></i>
     </div>
-    <div>
-      <img
-        class="w-9"
-        src="@/assets/icon/ic_explore_tab.svg"
-        @click="onClickExplore()"
-      />
+    <div @click="onClickExplore()">
+      <i class="fa-solid fa-magnifying-glass icon-color"></i>
     </div>
-    <div>
-      <img
-        class="w-9"
-        src="@/assets/icon/ic_hand.svg"
-        @click="onClickLikeTopic()"
-      />
+    <div @click="onClickLikeTopic()">
+      <i class="fa-solid fa-hand-holding-heart icon-color"></i>
     </div>
-    <div>
-      <img
-        class="w-9"
-        src="@/assets/icon/ic_message_tab.svg"
-        @click="onClickMessage()"
-      />
+    <div @click="onClickMessage()">
+      <i class="fa-solid fa-message icon-color"></i>
     </div>
-    <div>
-      <img
-        class="w-9"
-        src="@/assets/icon/ic_profile_tab.svg"
-        @click="onClickProfile()"
-      />
+    <div @click="onClickProfile()">
+      <i class="fa-solid fa-user icon-color"></i>
     </div>
   </div>
 </template>
@@ -52,13 +32,22 @@ export default {
     return {};
   },
 
+  computed: {
+    isActiveFooter() {
+      debugger;
+
+      return true;
+    },
+  },
+
   methods: {
     onClickHome() {
+      debugger;
+
       this.$router.push({ path: "/home-new" });
     },
 
     onClickExplore() {
-      debugger;
       this.$router.push({ path: "/explore-new" });
     },
 
@@ -76,6 +65,39 @@ export default {
       this.$router.push({ path: "/setting" });
     },
   },
+
+  mounted() {
+    debugger;
+    if (this.$route.name === "home-page") {
+      document
+        .getElementsByClassName("fa-heart")[0]
+        .classList.add("icon-active");
+    }
+    if (this.$route.name === "explore-news") {
+      document
+        .getElementsByClassName("fa-magnifying-glass")[0]
+        .classList.add("icon-active");
+    }
+    if (this.$route.name === "like-topic-news") {
+      document
+        .getElementsByClassName("fa-hand-holding-heart")[0]
+        .classList.add("icon-active");
+    }
+    if (this.$route.name === "message-new") {
+      document
+        .getElementsByClassName("fa-message")[0]
+        .classList.add("icon-active");
+    }
+    if (
+      this.$route.name === "setting-page" ||
+      this.$route.name === "setting-detail" ||
+      this.$route.name === "edit-profile"
+    ) {
+      document
+        .getElementsByClassName("fa-user")[0]
+        .classList.add("icon-active");
+    }
+  },
 };
 </script>
 
@@ -89,5 +111,12 @@ export default {
   margin-top: 10px;
   position: absolute;
   bottom: 0;
+  font-size: 38px;
+}
+.icon-color {
+  color: #5f6a86;
+}
+.icon-active {
+  color: #fd5d65;
 }
 </style>

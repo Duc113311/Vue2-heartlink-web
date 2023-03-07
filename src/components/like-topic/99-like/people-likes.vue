@@ -1,9 +1,53 @@
 <template>
   <div class="w-full h-full relative">
     <div class="w-full option-like flex h-20 items-center p-5">
-      <div class="oftion-interests p-2 mr-3 w-12 h-11">
-        <img src="@/assets/image-dating/ic_filter.svg" width="30" alt="" />
-      </div>
+      <el-popover placement="top" width="160" v-model="visible">
+        <div class="w-full h-full p-10">
+          <div class="w-full h-5/6">
+            <div class="w-full padding-title">Filter</div>
+            <div class="w-full">
+              <div
+                class="w-full flex justify-between items-center padding-describe"
+              >
+                <div>Maximum distance</div>
+                <div>{{ valueLocation }}km +</div>
+              </div>
+              <div class="w-full">
+                <el-slider v-model="valueLocation" :step="10"> </el-slider>
+              </div>
+            </div>
+            <div class="w-full">
+              <div
+                class="w-full flex justify-between items-center padding-describe"
+              >
+                <div>Age range</div>
+                <div>{{ valueAge }}km +</div>
+              </div>
+              <div class="w-full">
+                <el-slider v-model="valueAge" range show-stops :max="10">
+                </el-slider>
+              </div>
+            </div>
+          </div>
+          <div class="h-1/6 text-right m-0">
+            <el-button size="mini" type="text" @click="visible = false"
+              >cancel</el-button
+            >
+            <el-button type="primary" size="mini" @click="visible = false"
+              >confirm</el-button
+            >
+          </div>
+        </div>
+
+        <div
+          class="oftion-interests p-2 mr-3 w-12 h-11"
+          slot="reference"
+          @click="onShowFilterLike()"
+        >
+          <img src="@/assets/image-dating/ic_filter.svg" width="30" alt="" />
+        </div>
+      </el-popover>
+
       <div class="flex justify-center">
         <span v-for="(item, index) in listIntersts" :key="index">
           <button
@@ -16,6 +60,7 @@
         </span>
       </div>
     </div>
+
     <div
       class="w-full flex items-center justify-center p-2 description-no-padding"
     >
@@ -83,6 +128,9 @@ export default {
   data() {
     return {
       listIntersts: ["Reading", "Car", "Dog", "Music", "Art"],
+      visible: false,
+      valueLocation: "",
+      valueAge: [4, 8],
     };
   },
 
@@ -136,5 +184,19 @@ export default {
     rgb(254 254 254 / 0%) 29%,
     rgb(255 255 255 / 0%) 99%
   );
+}
+
+.el-popover {
+  width: 52% !important;
+  height: 68% !important;
+  top: 195px !important;
+  left: 215px !important;
+  background-color: #434a5d;
+  border: none;
+  border-radius: 10px;
+}
+
+.popper__arrow {
+  display: none;
 }
 </style>

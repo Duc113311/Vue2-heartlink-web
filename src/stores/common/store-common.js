@@ -1,6 +1,7 @@
 const state = {
   isShowMyProfile: true,
   isNotShowProfie: true,
+  listScreamShowMes: [],
 };
 
 const getters = {};
@@ -12,9 +13,24 @@ const mutations = {
    * @param {*} data
    */
   setShowProfileCreate(state, data) {
-    debugger;
     state.isNotShowProfie = data.isNotShowProfile;
     state.isShowMyProfile = data.isShowProfile;
+  },
+
+  setActionShowMe(state, data) {
+    debugger;
+
+    const index = state.listScreamShowMes.findIndex(
+      (x) => x.scream === data.scream
+    );
+
+    if (index !== -1) {
+      state.listScreamShowMes = state.listScreamShowMes.map((x) =>
+        x.scream === data.scream ? data : x
+      );
+    } else {
+      state.listScreamShowMes.push(data);
+    }
   },
 };
 

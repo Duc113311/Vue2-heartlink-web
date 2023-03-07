@@ -53,13 +53,11 @@ export default {
 
   methods: {
     onShowLikes(val) {
-      debugger;
       this.isShowComponent = val;
       this.isActiveLike = val;
     },
 
     onShowForYou(val) {
-      debugger;
       this.isShowComponent = val;
       this.isActiveLike = val;
     },

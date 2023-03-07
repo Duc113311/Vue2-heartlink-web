@@ -53,11 +53,11 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setFirstName"]),
+    ...mapMutations(["setBirthday"]),
 
     onChangeInput() {
       if (this.birthday !== "") {
-        this.setFirstName(this.birthday);
+        this.setBirthday(this.birthday);
         this.$emit("onStatusActive", true);
       } else {
         this.$emit("onStatusActive", false);
@@ -66,6 +66,7 @@ export default {
   },
 
   mounted() {
+    debugger;
     this.birthday = this.$store.state.userModule.user_profile.birthday;
     this.$emit("onShowName", { showCheckbox: false });
     this.$emit("onShowSkips", false);

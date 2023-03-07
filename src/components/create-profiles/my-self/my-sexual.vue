@@ -63,18 +63,22 @@ export default {
     return;
   },
 
+  props: ["isScream"],
+
   data() {
     return {
       sexuals: [],
       isChecked: false,
       isNotChecked: false,
       isBorderActive: false,
+      isShowLoading: true,
     };
   },
 
   computed: {
     ...mapState(["user_profile"]),
     listDataSexuals() {
+      debugger;
       return this.$store.state.userModule.listSexuals;
     },
 
@@ -94,13 +98,11 @@ export default {
     ...mapActions(["getListDataSexuals"]),
 
     onClickChosse(val, indexValue) {
-      debugger;
       const listDarks = document.getElementsByClassName("dark-theme-check");
       const checkActive = document.getElementsByClassName("check-active");
       const notCheckActive =
         document.getElementsByClassName("not-check-active");
 
-      debugger;
       this.setSexuals(indexValue);
 
       const lengthSexual =
@@ -138,7 +140,7 @@ export default {
      */
     checkFluency(val) {
       this.setSexuals(val);
-      debugger;
+
       const lengthSexual =
         this.$store.state.userModule.user_profile.sexuals.length;
 
@@ -154,26 +156,61 @@ export default {
     },
   },
 
-  async created() {
-    debugger;
-    await this.getListDataSexuals({
-      entityName: "sexuals",
-      entityId: "en",
-    });
-  },
+  // async created() {
+  //   await this.getListDataSexuals({
+  //     entityName: "sexuals",
+  //     entityId: "en",
+  //   });
+
+  //   // setTimeout(() => {
+  //   //   this.isShowLoading = false;
+  //   // }, 1000);
+  // },
   mounted() {
-    this.setShowProfileCreate({
-      isShowProfile: true,
-      isNotShowProfile: true,
-    });
+    debugger;
+
     this.$emit("onShowSkips", true);
     this.$emit("onShowName", { showCheckbox: true, showName: "orientation" });
+
+    const listDarks = document.getElementsByClassName("dark-theme-check");
+    const checkActive = document.getElementsByClassName("check-active");
+    const notCheckActive = document.getElementsByClassName("not-check-active");
+
+    const screamShow = this.$store.state.commonModule.listScreamShowMes;
+    console.log(screamShow);
+    const dataNew = screamShow.find((x) => x.scream === this.isScream);
+    console.log(dataNew);
+
+    if (dataNew) {
+      if (dataNew.status) {
+        this.setShowProfileCreate({
+          isShowProfile: false,
+          isNotShowProfile: false,
+        });
+      } else {
+        this.setShowProfileCreate({
+          isShowProfile: true,
+          isNotShowProfile: true,
+        });
+      }
+    } else {
+      this.setShowProfileCreate({
+        isShowProfile: true,
+        isNotShowProfile: true,
+      });
+    }
+
     const lengthSexual =
       this.$store.state.userModule.user_profile.sexuals.length;
     const dataSexuals = this.$store.state.userModule.user_profile.sexuals;
     for (let index = 0; index < dataSexuals.length; index++) {
       const element = dataSexuals[index];
-      document.getElementById(element).checked = true;
+      listDarks[element].classList.add("border-active");
+      checkActive["check" + element].classList.add("checkeds");
+      notCheckActive["not-check" + element].classList.add("not-check");
+      listDarks[element].classList.remove("not-border");
+      checkActive["check" + element].classList.remove("not-check");
+      notCheckActive["not-check" + element].classList.remove("checkeds");
     }
     if (lengthSexual < 3) {
       this.$emit("onStatusActive", false);

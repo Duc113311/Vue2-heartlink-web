@@ -8,13 +8,14 @@ import "intl-tel-input/build/css/intlTelInput.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import VueCarousel from "vue-carousel";
+import Vue2TouchEvents from "vue2-touch-events";
 
 import store from "./stores/store-data";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(VueCarousel);
-
+Vue.use(Vue2TouchEvents);
 new Vue({
   router,
   store,

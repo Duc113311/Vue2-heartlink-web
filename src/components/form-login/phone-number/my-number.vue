@@ -115,7 +115,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     var input = document.querySelector("#phone");
     this.valCodeQR = intlTelInput(input, {
       initialCountry: "auto",

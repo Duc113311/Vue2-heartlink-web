@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
   PhoneAuthProvider,
+  GoogleAuthProvider,
   RecaptchaVerifier,
   signInWithCredential,
 } from "firebase/auth";
@@ -31,7 +32,12 @@ const fireStoreCore = getFirestore(app);
 const auth = getAuth(app);
 const analytics = getAnalytics();
 const messaging = getMessaging(app);
+const provider = new GoogleAuthProvider();
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
+// provider.setCustomParameters({
+//   login_hint: "nguyenvanducdev@gmail.com",
+// });
 auth.languageCode = "it";
 
 export {
@@ -42,8 +48,10 @@ export {
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
   PhoneAuthProvider,
+  GoogleAuthProvider,
   RecaptchaVerifier,
   signInWithCredential,
+  provider,
   auth,
   analytics,
   messaging,

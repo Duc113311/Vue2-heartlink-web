@@ -98,13 +98,12 @@ export default {
       this.isResultValidate = validate.validateEmail(this.txtEmail);
       if (this.isResultValidate) {
         // Xét giá trị email
-        debugger;
+
         this.isActives = true;
       }
     },
 
     onChangeContinue(value) {
-      debugger;
       this.setEmailForUser(this.txtEmail);
       this.$emit("onShowWelcome", value);
     },

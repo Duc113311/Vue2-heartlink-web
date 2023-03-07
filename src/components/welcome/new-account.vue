@@ -133,7 +133,6 @@ export default {
 
   methods: {
     onCloseDialog() {
-      debugger;
       this.isShowQuitSing = true;
     },
 
@@ -146,7 +145,6 @@ export default {
     },
 
     onAgreeContinue() {
-      debugger;
       this.$router.push({
         path: "create-user",
       });

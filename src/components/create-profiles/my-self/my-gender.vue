@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapActions, mapState } from "vuex";
 
 export default {
   name: "my-gender",
@@ -44,6 +44,7 @@ export default {
       ],
     };
   },
+  props: ["isScream"],
   computed: {
     ...mapState(["user_profile"]),
 
@@ -58,11 +59,13 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setGender"]),
+    ...mapActions(["getListDataInterests", "getListDataSexuals"]),
+
+    ...mapMutations(["setGender", "setShowProfileCreate"]),
 
     onShowGender(val) {
       console.log(val);
-      debugger;
+
       this.genders = val;
       this.setGender(this.genders);
 
@@ -71,7 +74,6 @@ export default {
       );
 
       for (let index = 0; index < documentParam.length; index++) {
-        debugger;
         const element = documentParam[index];
 
         if (val === index) {
@@ -85,9 +87,46 @@ export default {
     },
   },
 
+  async created() {
+    await this.getListDataSexuals({
+      entityName: "sexuals",
+      entityId: "en",
+    });
+
+    await this.getListDataInterests({
+      entityName: "interests",
+      entityId: "en",
+    });
+  },
+
   mounted() {
+    debugger;
     this.genders = this.$store.state.userModule.user_profile.gender;
+    const screamShow = this.$store.state.commonModule.listScreamShowMes;
+    console.log(screamShow);
+
+    const dataNew = screamShow.find((x) => x.scream === this.isScream);
+    console.log(dataNew);
+
+    if (dataNew) {
+      if (dataNew.status) {
+        this.setShowProfileCreate({
+          isShowProfile: false,
+          isNotShowProfile: false,
+        });
+      } else {
+        this.setShowProfileCreate({
+          isShowProfile: true,
+          isNotShowProfile: true,
+        });
+      }
+    }
     this.$emit("onShowName", { showCheckbox: true, showName: "gender" });
+    this.$emit("onShowSkips", false);
+    const documentParam = document.getElementsByClassName(
+      "padding-input-option"
+    );
+    documentParam[this.genders].classList.add("active-border");
     if (this.genders === 0) {
       this.$emit("onStatusActive", true);
     } else if (this.genders === 1) {

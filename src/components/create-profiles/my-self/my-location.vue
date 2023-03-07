@@ -124,7 +124,6 @@ export default {
 
   methods: {
     onShowAvoid(value) {
-      debugger;
       this.isShowAvoid = value;
     },
     async onHideWellcome(val) {
@@ -133,7 +132,6 @@ export default {
     },
 
     onTellMore() {
-      debugger;
       const actionLocation = document.getElementsByClassName(
         "show-action-location"
       );

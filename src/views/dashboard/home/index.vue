@@ -39,13 +39,10 @@ export default {
       showMeGender: 2,
       location: 80,
     };
-    debugger;
     await this.getAllListUserProfile(paramUser);
   },
 
-  mounted() {
-    debugger;
-  },
+  mounted() {},
 };
 </script>
 

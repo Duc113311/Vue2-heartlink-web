@@ -87,7 +87,7 @@ export default {
       showMeGender: 2,
       location: 80,
     };
-    debugger;
+
     await this.getAllListUserProfile(paramUser);
 
     setTimeout(() => {
@@ -98,21 +98,15 @@ export default {
     ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
 
     onClickNopeDetail() {
-      debugger;
       this.isShowDetail = false;
       this.$refs.myViewSwipe.decide("nope");
     },
 
-    nextImageLeft() {
-      debugger;
-    },
+    nextImageLeft() {},
 
-    nextImageRight() {
-      debugger;
-    },
+    nextImageRight() {},
 
     async onShowDetailUser(val) {
-      debugger;
       console.log(val);
       await this.getDetailInforUser(val);
       this.isShowDetail = true;
@@ -245,15 +239,6 @@ export default {
 
 .grid-anthem {
   grid-template-columns: 3fr 1fr;
-}
-
-.bg-background-shadow {
-  background: linear-gradient(
-    0deg,
-    rgb(4 7 7 / 92%) 9%,
-    rgb(255 255 255 / 0%) 29%,
-    rgb(255 255 255 / 0%) 99%
-  );
 }
 
 .el-loading-spinner {

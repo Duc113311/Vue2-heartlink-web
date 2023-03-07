@@ -75,13 +75,11 @@ export default {
 
     ...mapMutations(["setTokenAccount"]),
     validateRequire(value) {
-      debugger;
       this.isStatusRequire = value.statusActive;
       this.codeOTP = value.codeOTP;
     },
 
     setuprecaptcha() {
-      debugger;
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
@@ -108,7 +106,7 @@ export default {
       await signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then((confirmationResult) => {
           this.sentCodeId = confirmationResult.verificationId;
-          debugger;
+
           console.log(this.sentCodeId);
         })
         .catch((error) => {
@@ -122,7 +120,6 @@ export default {
      *
      */
     async onChangeContinue(value) {
-      debugger;
       console.log(value);
       this.isLoadings = true;
       this.isStatusRequire = true;
@@ -142,7 +139,7 @@ export default {
             await signInWithPhoneNumber(auth, phoneNumber, appVerifier)
               .then((confirmationResult) => {
                 this.sentCodeId = confirmationResult.verificationId;
-                debugger;
+
                 console.log(this.sentCodeId);
               })
               .catch((error) => {
@@ -170,13 +167,12 @@ export default {
     },
 
     singWithPhone(sentCodeId) {
-      debugger;
       const credential = PhoneAuthProvider.credential(sentCodeId, this.codeOTP);
       signInWithCredential(auth, credential)
         .then(async (result) => {
           const userID = result.user.uid;
           const providerId = result.providerId;
-          debugger;
+
           await this.postTokenByUserID({
             id: userID,
             providerId: providerId,
@@ -188,7 +184,6 @@ export default {
           console.log(userID);
         })
         .catch((error) => {
-          debugger;
           console.log(error);
           this.txtErrorCode = true;
 
@@ -199,7 +194,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     var input = document.querySelector("#phone");
     this.valCodeQR = intlTelInput(input, {
       initialCountry: "auto",

@@ -45,6 +45,12 @@
 </template>
 
 <script>
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  auth,
+  provider,
+} from "../../../configs/firebase";
 import NewAccount from "../../welcome/new-account";
 import MyEmail from "../../form-login/email/my-email";
 import MyCommon from "../../form-login/phone-number/my-common";
@@ -74,10 +80,41 @@ export default {
       this.isShowPhoneNumber = true;
     },
 
-    onLoginGoogle() {},
+    async onLoginGoogle() {
+      debugger;
+      await signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          debugger;
+          console.log(token);
+          console.log(user);
+
+          // IdP data available using getAdditionalUserInfo(result)
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+
+          console.log(errorCode);
+          console.log(errorMessage);
+          console.log(email);
+          console.log(credential);
+
+          // ...
+        });
+    },
 
     onShowEmailUser(value) {
-      debugger;
       this.isShowEmail = value;
     },
 

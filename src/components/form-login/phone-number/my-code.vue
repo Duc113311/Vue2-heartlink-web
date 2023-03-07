@@ -81,7 +81,6 @@ export default {
      * Render gửi lại mã OTP
      */
     onPhoneNumber() {
-      debugger;
       this.$emit("onRenderCodeOTP", this.txtPhoneNumber);
     },
 
@@ -90,7 +89,6 @@ export default {
     },
 
     onNextOn(key, on) {
-      debugger;
       console.log(key, on);
       const indexData = document.getElementById(key);
       const valueData = indexData.value;

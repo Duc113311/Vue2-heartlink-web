@@ -7,6 +7,7 @@
           <BhBack
             :isShowSkip="isShowSkipParam"
             @onBackComponent="onBackComponent"
+            @onClickSkip="onClickSkip"
           ></BhBack>
         </div>
         <!-- My name -->
@@ -19,13 +20,19 @@
         </div>
         <!-- Birthday -->
         <div v-if="isScream === 1">
-          <MyBirthday @onStatusActive="onStatusActive"></MyBirthday>
+          <MyBirthday
+            @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
+            @onStatusActive="onStatusActive"
+          ></MyBirthday>
         </div>
         <!-- Gender -->
         <div v-if="isScream === 2">
           <MyGender
+            @onShowSkips="onShowSkips"
             @onShowName="onShowProfiles"
             @onStatusActive="onStatusActive"
+            :isScream="isScream"
           ></MyGender>
         </div>
         <!-- Sexual -->
@@ -34,12 +41,14 @@
             @onShowSkips="onShowSkips"
             @onShowName="onShowProfiles"
             @onStatusActive="onStatusActive"
+            :isScream="isScream"
           ></MySexual>
         </div>
         <!-- Interest -->
         <div v-if="isScream === 4">
           <MyInterests
             @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
             @onStatusActive="onStatusActive"
           ></MyInterests>
         </div>
@@ -54,6 +63,7 @@
         <div v-if="isScream === 6">
           <MyPhotos
             @onShowSkips="onShowSkips"
+            @onShowName="onShowProfiles"
             @onStatusActive="onStatusActive"
           ></MyPhotos>
         </div>
@@ -68,6 +78,8 @@
           :statusProfile="isShowProfile"
           :isActives="isActives"
           @onChangeContinue="onChangeContinue"
+          @onActionShowMe="onActionShowMe"
+          :isScreamInterest="isScream"
         ></BhContinue>
       </div>
     </div>
@@ -87,6 +99,7 @@ import MyName from "../../components/create-profiles/my-self/my-name";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
 
 import TokenApps from "../../middleware/application-storage.js";
+import { mapMutations } from "vuex";
 export default {
   components: {
     MyShowGender,
@@ -115,13 +128,19 @@ export default {
   },
 
   methods: {
-    onBackComponent() {},
+    ...mapMutations(["setSkipProfiles", "setActionShowMe"]),
+    onBackComponent() {
+      if (this.isScream === 0) {
+        this.$router.push({ path: "/" });
+      } else {
+        this.isScream = this.isScream - 1;
+      }
+    },
     onShowSkips(val) {
       this.isShowSkipParam = val;
     },
 
     onShowProfiles(val) {
-      debugger;
       this.isShowProfile = val;
     },
     onStatusActive(value) {
@@ -129,8 +148,8 @@ export default {
     },
 
     onChangeContinue(val) {
-      debugger;
       console.log(val);
+      debugger;
       if (this.isScream === 7) {
         this.isShowAvoid = true;
 
@@ -140,6 +159,18 @@ export default {
       } else {
         this.isScream = this.isScream + 1;
       }
+    },
+
+    onClickSkip() {
+      debugger;
+      this.setSkipProfiles(this.isScream);
+      this.isScream = this.isScream + 1;
+    },
+
+    onActionShowMe(val) {
+      debugger;
+      console.log(val);
+      this.setActionShowMe({ scream: this.isScream, status: val });
     },
   },
 };

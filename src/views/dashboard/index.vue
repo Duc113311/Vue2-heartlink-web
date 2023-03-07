@@ -29,7 +29,6 @@ export default {
 
   methods: {
     onHideHeader(val) {
-      debugger;
       this.isHideHeader = val;
     },
   },

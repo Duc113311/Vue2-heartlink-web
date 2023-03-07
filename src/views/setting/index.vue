@@ -333,13 +333,11 @@ export default {
 
     // Show Setting
     onClickSettingDetail() {
-      debugger;
       this.$router.push({ path: "/setting-detail" });
     },
 
     // Show Edit
     onEditProfile() {
-      debugger;
       this.$router.push({ path: "/edit-profile/1213231" });
     },
   },

@@ -129,9 +129,7 @@ export default {
   methods: {
     onClickNextImage() {},
 
-    onClickSendMessage() {
-      debugger;
-    },
+    onClickSendMessage() {},
 
     onChangeComfirm(val) {
       this.isHideComfirm = val;

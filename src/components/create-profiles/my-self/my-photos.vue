@@ -133,7 +133,6 @@ export default {
 
   computed: {
     isTitle() {
-      debugger;
       return this.isShowTitle ? this.isShowTitle : false;
     },
 
@@ -154,7 +153,7 @@ export default {
     async toggleUpload(event, data) {
       this.loading = true;
       const image = event.target.files[0];
-      debugger;
+
       console.log(data);
       const idUrl = data.id;
       // const reader = new FileReader();
@@ -188,7 +187,7 @@ export default {
           const img = document.getElementById(idUrl);
           const avatar = document.getElementById("avatar" + idUrl);
           const close = document.getElementById("close" + idUrl);
-          debugger;
+
           let bg = "url('" + url + "')";
 
           img.style.backgroundImage = bg;
@@ -243,6 +242,7 @@ export default {
       avatar.style.display = "block";
       close.style.display = "block";
     }
+
     if (document.querySelector(".btContinue")) {
       if (image.length < 1) {
         this.$emit("onStatusActive", false);

@@ -9,21 +9,42 @@
     >
       <template slot-scope="scope">
         <div
+          v-show="isActiveImag"
           class="pic z-8"
           :style="{
             'background-image': `url(${scope.data.avatars[0].urlName})`,
           }"
         />
-        <div></div>
+        <div
+          v-show="!isActiveImag"
+          class="pic z-8 ss"
+          :style="{
+            'background-image': `url(${idImage}
+            )`,
+          }"
+        />
+        <div
+          class="flex w-full justify-center absolute top-0 content-center p-0.5 border-solid mt-3"
+        >
+          <button
+            v-for="data in scope.data.avatars"
+            :key="data.id"
+            class="bt-img p-0.5 rounded-lg mr-0.5"
+            @click="onClickNextImage(data)"
+          ></button>
+        </div>
         <div class="bg-background-shadow w-full h-full absolute top-0"></div>
-        <div class="w-full flex items-center absolute bottom-0 h-72 p-4">
+        <div class="w-full flex items-center absolute bottom-0 h-80 p-4">
           <div class="grid w-full title-boy mb-4">
-            <div class="w-70 text-white">
-              <div class="flex items-center">
-                <div class="padding-title">
-                  {{ scope.data.firstName }}
+            <div class="w-70">
+              <div class="flex items-center font-title">
+                <div
+                  :title="scope.data.firstName"
+                  class="text-ellipsis w-52 whitespace-nowrap overflow-hidden"
+                >
+                  {{ scope.data.firstName }},
                 </div>
-                <div class="padding-title">,25</div>
+                <div class="mr-3">25</div>
                 <div
                   class="flex justify-center items-center"
                   @click="onDetailInfor(scope.data.userId)"
@@ -31,15 +52,10 @@
                   <i class="fa-solid fa-circle-info text-xl"></i>
                 </div>
               </div>
-              <span>ádasdasdas</span><br />
+              <span class="font-describe">Tell me about yourself</span><br />
               <div class="flex">
-                <img
-                  class="cursor-pointer"
-                  src="@/assets/icon/ic_location.svg"
-                  alt=""
-                  srcset=""
-                />
-                <span> 2km away</span>
+                <div class="mr-2"><i class="fa-solid fa-location-dot"></i></div>
+                <span class="font-describe"> 2 km away</span>
               </div>
             </div>
             <div class="w-30">
@@ -52,9 +68,15 @@
             </div>
           </div>
         </div>
-        <div class="w-full flex absolute top-0 opacity-0 h-2/4">
-          <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
-          <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
+        <div class="w-full flex absolute top-0 opacity-0 h-4/6 nextBg">
+          <div
+            class="w-2/4 bg-slate-500"
+            @click="nextImageLeft(scope.data.avatars, scope.data.userId)"
+          ></div>
+          <div
+            class="w-2/4 bg-orange-200"
+            @click="nextImageRight(scope.data.avatars, scope.data.userId)"
+          ></div>
         </div>
       </template>
       <img
@@ -93,7 +115,7 @@
 
 <script>
 import Tinder from "vue-tinder";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "view-swipe",
@@ -104,7 +126,7 @@ export default {
       offset: 0,
       history: [],
       isShowDetail: false,
-      idImage: "",
+      isActiveImag: true,
     };
   },
 
@@ -112,36 +134,71 @@ export default {
     ...mapState("user_profile"),
 
     listDataUser() {
-      debugger;
       return this.$store.state.userModule.user_profile;
+    },
+
+    isShowUrl(val) {
+      return val;
+    },
+
+    idImage() {
+      debugger;
+      return this.$store.state.userModule.urlAvatarUser.urlName;
     },
   },
 
   created() {},
   methods: {
+    ...mapMutations(["setUrlNameAvatarUser", "setLeftRightAvatar"]),
     onClickNopeDetail(value) {
-      debugger;
       this.isShowDetail = value;
     },
-    nextImageLeft() {
+    nextImageLeft(value, userId) {
       debugger;
+      console.log(value);
+      const idImage = this.$store.state.userModule.urlAvatarUser.id;
+
+      if (idImage) {
+        this.isActiveImag = false;
+
+        this.setLeftRightAvatar({
+          idImage: idImage,
+          statusNext: false,
+          userId: userId,
+        });
+      }
     },
 
-    nextImageRight() {
+    nextImageRight(value, userId) {
+      console.log(value);
       debugger;
+      this.isActiveImag = false;
+
+      const idImage = this.$store.state.userModule.urlAvatarUser.id;
+
+      if (!idImage) {
+        this.setLeftRightAvatar({
+          idImage: value[0].id,
+          statusNext: true,
+          userId: userId,
+        });
+      } else {
+        this.setLeftRightAvatar({
+          idImage: idImage,
+          statusNext: true,
+          userId: userId,
+        });
+      }
     },
 
     onDetailInfor(value) {
-      debugger;
       console.log(value);
       this.$emit("onShowDetailUser", value);
     },
     onSubmit({ item }) {
-      debugger;
       this.history.push(item);
     },
     async decide(choice) {
-      debugger;
       console.log(choice);
       if (choice === "rewind") {
         if (this.history.length) {
@@ -283,9 +340,9 @@ export default {
 .bg-background-shadow {
   background: linear-gradient(
     0deg,
-    rgb(4 7 7 / 92%) 9%,
-    rgb(255 255 255 / 0%) 29%,
-    rgb(255 255 255 / 0%) 99%
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 9%,
+    rgba(255, 255, 255, 0) 41%
   );
 }
 
@@ -295,7 +352,7 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 80px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -28,7 +28,6 @@ const actions = {
    * @param {*} data
    */
   async postInforUserProfile({ commit }, data) {
-    debugger;
     await http_request
       .post(`user/v1/create-one/${data.userId}`, data)
       .then((response) => {
@@ -41,7 +40,6 @@ const actions = {
 
   // Lấy danh sách user
   async getAllListUserProfile({ commit }, data) {
-    debugger;
     const userId = data.userId;
     const latitude = data.latitude;
     const longitude = data.longitude;
@@ -57,7 +55,6 @@ const actions = {
         `home/v1/profile?userId=${userId}&latitude=${latitude}&longitude=${longitude}&page=${page}&pageNumber=${pageNumber}&startAge=${startAge}&endAge=${endAge}&showMeGender=${showMeGender}&location=${location}`
       )
       .then((response) => {
-        debugger;
         commit("setListUserProfiles", response.data.data);
       })
       .catch((error) => {
@@ -68,11 +65,9 @@ const actions = {
   // Lấy chi tiết thông tin user
 
   async getDetailInforUser({ commit }, userId) {
-    debugger;
     await http_request
       .get(`user/v1/get-detail/${userId}/en`)
       .then((response) => {
-        debugger;
         commit("setDetailUserProfile", response.data.data);
       })
       .catch((error) => {
@@ -86,8 +81,6 @@ const actions = {
    * @param {*} param1
    */
   async getListDataSexuals({ commit }, { entityName, entityId }) {
-    debugger;
-
     await http_request
       .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
       .then((response) => {
@@ -122,7 +115,6 @@ const mutations = {
    * @param {*} firstName
    */
   setFirstName(state, firstName) {
-    debugger;
     state.user_profile.firstName = firstName;
   },
 
@@ -159,7 +151,6 @@ const mutations = {
    * @param {*} sexual
    */
   setSexuals(state, sexuals) {
-    debugger;
     const index = state.user_profile.sexuals.indexOf(sexuals);
     if (index > -1) {
       // only splice array when item is found
@@ -203,7 +194,7 @@ const mutations = {
    */
   setPhotos(state, photos) {
     const idUrl = photos.id;
-    debugger;
+
     const index = state.user_profile.avatars.findIndex((x) => x.id === idUrl);
     if (index !== -1) {
       // only splice array when item is found
@@ -245,12 +236,10 @@ const mutations = {
   },
 
   setListUserProfiles(state, data) {
-    debugger;
     state.user_profile = data;
   },
 
   setDetailUserProfile(state, data) {
-    debugger;
     state.userProfileDetail = data;
     state.urlAvatarUser = data.avatars[0];
 
@@ -262,9 +251,8 @@ const mutations = {
   },
 
   setLeftRighAvatar(state, data) {
-    debugger;
-
     if (data === true) {
+      debugger;
       const idNew = parseInt(state.urlAvatarUser.id) + 1;
       const findValue = state.userProfileDetail.avatars.find(
         (x) => parseInt(x.id) === parseInt(idNew)
@@ -281,6 +269,51 @@ const mutations = {
         );
         state.urlAvatarUser = findValue;
       }
+    }
+  },
+
+  setLeftRightAvatar(state, data) {
+    debugger;
+    if (data.statusNext === true) {
+      debugger;
+      const idNew = parseInt(data.idImage) + 1;
+      const findUser = state.user_profile.find(
+        (x) => x.userId.toString() === data.userId.toString()
+      );
+
+      const findValueImage = findUser.avatars.find(
+        (x) => parseInt(x.id) === parseInt(idNew)
+      );
+      state.urlAvatarUser = findValueImage;
+    } else {
+      if (data.idImage === 0) {
+        // Ko cho next
+        state.urlAvatarUser = data.avatars[0];
+      } else {
+        const idNew = parseInt(data.idImage) - 1;
+        const findUser = state.user_profile.find(
+          (x) => x.userId.toString() === data.userId.toString()
+        );
+
+        const findValueImage = findUser.avatars.find(
+          (x) => parseInt(x.id) === parseInt(idNew)
+        );
+        state.urlAvatarUser = findValueImage;
+      }
+    }
+  },
+
+  setSkipProfiles(state, data) {
+    debugger;
+    if (data === 3) {
+      state.user_profile.sexuals = [];
+    }
+    if (data === 4) {
+      state.user_profile.interests = [];
+    }
+
+    if (data === 4) {
+      state.user_profile.avatars = [];
     }
   },
 };

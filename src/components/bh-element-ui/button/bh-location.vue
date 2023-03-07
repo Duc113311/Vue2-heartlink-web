@@ -50,7 +50,6 @@ export default {
       if (position.coords) {
         this.setLocation(position.coords);
       }
-      debugger;
 
       const userId = TokenApps.getAccessToken("userId");
       const providerId = TokenApps.getProviderId("providerId");
@@ -66,7 +65,6 @@ export default {
      * Sự kiện click để tiếp tục
      */
     onClickLocations() {
-      debugger;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
       }

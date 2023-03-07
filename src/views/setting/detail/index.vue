@@ -884,7 +884,6 @@ export default {
 
   methods: {
     onBackSetting(val) {
-      debugger;
       console.log(val);
       this.$router.push({ path: "/setting" });
     },

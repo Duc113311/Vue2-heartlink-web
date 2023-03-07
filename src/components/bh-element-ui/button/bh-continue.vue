@@ -26,14 +26,17 @@
         <div class="ml-3 text-lg">Show my {{ showName }} on my profile</div>
       </div>
       <button
-        :loading="isShowLoading"
+        v-loading="isShowLoading"
         @click="onClickContinues"
         v-bind:class="[isActiveContinue ? 'active-button' : isDefaultTheme]"
-        class="btContinueCode cursor-pointer w-full padding-button"
+        class="btContinueCode cursor-pointer w-full padding-button overflow-hidden"
         :disabled="!isActiveContinue"
         ref="continue"
       >
         Continue
+        <span v-show="isScreamInterestShow"
+          >({{ isShowNumberInterests }}/5)</span
+        >
       </button>
     </div>
   </div>
@@ -44,7 +47,7 @@ import { mapMutations } from "vuex";
 
 export default {
   name: "bt-continue",
-  props: ["isLoading", "isActives", "statusProfile"],
+  props: ["isLoading", "isActives", "statusProfile", "isScreamInterest"],
   data() {
     return {
       isNumber: 0,
@@ -52,6 +55,9 @@ export default {
   },
 
   computed: {
+    isScreamInterestShow() {
+      return this.isScreamInterest === 4;
+    },
     isDefaultTheme() {
       const theme = localStorage.getItem("user-theme");
 
@@ -62,32 +68,35 @@ export default {
       }
     },
 
+    isShowNumberInterests() {
+      return this.$store.state.userModule.user_profile?.interests.length
+        ? this.$store.state.userModule.user_profile?.interests.length
+        : 0;
+    },
+
     isShowMy() {
-      debugger;
       return this.$store.state.commonModule.isShowMyProfile;
     },
 
     isNotShowMy() {
-      debugger;
       return this.$store.state.commonModule.isNotShowProfie;
     },
 
     isShowLoading() {
-      debugger;
       return this.isLoading;
     },
     isActiveContinue() {
-      debugger;
       return this.isActives;
     },
 
     isShowProfile() {
-      debugger;
-      return this.statusProfile.showCheckbox;
+      return this.statusProfile?.showCheckbox
+        ? this.statusProfile.showCheckbox
+        : "";
     },
 
     showName() {
-      return this.statusProfile.showName;
+      return this.statusProfile?.showName ? this.statusProfile.showName : "";
     },
   },
 
@@ -97,34 +106,29 @@ export default {
      * Sự kiện click để tiếp tục
      */
     onClickContinues() {
-      debugger;
       this.$emit("onChangeContinue", true);
     },
 
     onClickChosse(val) {
       console.log(val);
-
+      debugger;
       if (val === true) {
-        debugger;
-
         this.setShowProfileCreate({
           isShowProfile: true,
           isNotShowProfile: true,
         });
+        this.$emit("onActionShowMe", false);
       } else {
-        debugger;
-
         this.setShowProfileCreate({
           isShowProfile: false,
           isNotShowProfile: false,
         });
+        this.$emit("onActionShowMe", true);
       }
     },
   },
 
-  mounted() {
-    debugger;
-  },
+  mounted() {},
 };
 </script>
 
@@ -149,5 +153,21 @@ export default {
 
 .showed {
   display: block;
+}
+
+.el-loading-mask {
+  background-color: rgb(255 255 255 / 86%);
+}
+
+.el-loading-spinner {
+  margin-top: -15px !important;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.el-loading-spinner .circular {
+  width: 30px !important;
+  height: 30px !important;
 }
 </style>

@@ -127,11 +127,19 @@
   padding: 5px 0 5px 0;
 }
 
-
 .padding-check-option {
   width: 100%;
   padding: 18px;
   border-radius: 15px;
   font-size: 20px;
   margin-bottom: 2px;
+}
+
+.font-title {
+  font-size: 28px;
+  font-weight: 600;
+}
+.font-describe {
+  font-size: 18px;
+  font-weight: 500;
 }

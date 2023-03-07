@@ -9,7 +9,7 @@
       >
         <div
           v-show="isShowIconApp"
-          class="absolute z-20 img-app flex w-full h-full justify-center"
+          class="absolute z-40 img-app flex w-full h-full justify-center"
         >
           <img width="100" src="./assets/icon/ic_icon_app (1).svg" />
         </div>
@@ -47,8 +47,6 @@ export default {
     setTimeout(() => {
       this.isShowIconApp = false;
     }, 1000);
-
-    debugger;
   },
 
   mounted() {},

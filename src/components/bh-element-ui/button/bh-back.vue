@@ -1,10 +1,13 @@
 <template>
   <div
-    class="text-xl w-full h-10 flex items-center justify-between"
-    @click="onClickBack()"
+    class="text-xl w-full h-10 flex items-center justify-between cursor-pointer"
   >
-    <i class="fas fa-chevron-left size-icon"></i>
-    <div class="font-skip" v-show="isShowSkipParam">Skip</div>
+    <div @click="onClickBack()">
+      <i class="fas fa-chevron-left size-icon"></i>
+    </div>
+    <div class="font-skip" v-show="isShowSkipParam" @click="onClickSkip()">
+      Skip
+    </div>
   </div>
 </template>
 
@@ -19,7 +22,6 @@ export default {
 
   computed: {
     isShowSkipParam() {
-      debugger;
       return this.isShowSkip;
     },
   },
@@ -29,8 +31,12 @@ export default {
      * Quay lại trang trước
      */
     onClickBack() {
-      debugger;
       this.$emit("onBackComponent", true);
+    },
+
+    onClickSkip() {
+      debugger;
+      this.$emit("onClickSkip", true);
     },
   },
 };

@@ -1,276 +1,83 @@
 <template>
-  <div class="w-full h-full">
-    <Tinder
-      ref="tinder"
-      key-name="id"
-      :queue.sync="queue"
-      :offset-y="10"
-      @submit="onSubmit"
+  <div class="swipe-container w-full h-full">
+    <div
+      v-for="item in items"
+      :key="item.id"
+      class="swipe-card w-11 h-11 p-10 bg-slate-300 mb-3"
+      ref="cards"
     >
-      <template slot-scope="scope">
-        <div
-          class="pic z-8"
-          :style="{
-            'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`,
-          }"
-        />
-        <div></div>
-        <div class="bg-background-shadow w-full h-full absolute top-0"></div>
-
-        <div class="w-full flex absolute top-0 opacity-0 h-2/4">
-          <div class="w-2/4 bg-slate-500" @click="nextImageLeft()"></div>
-          <div class="w-2/4 bg-orange-200" @click="nextImageRight()"></div>
-        </div>
-      </template>
-      <img
-        class="like-pointer"
-        slot="like"
-        src="@/assets/image-tinder/like-txt.png"
-      />
-      <img
-        class="nope-pointer"
-        slot="nope"
-        src="@/assets/image-tinder/nope-txt.png"
-      />
-      <img
-        class="super-pointer"
-        slot="super"
-        src="@/assets/image-tinder/super-txt.png"
-      />
-      <img
-        class="rewind-pointer"
-        slot="rewind"
-        src="@/assets/image-tinder/rewind-txt.png"
-      />
-    </Tinder>
-
-    <div class="btns">
-      <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
-      <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
-      <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
-      <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
-      <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />
+      <!-- Your card content here -->
+      <div>
+        {{ item.name }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Tinder from "vue-tinder";
-
-import source from "@/bing";
 export default {
   name: "control-page",
-  components: { Tinder },
   data() {
     return {
-      queue: [],
-      offset: 0,
-      history: [],
+      items: [
+        { id: 1, name: "John" },
+        { id: 2, name: "Jane" },
+        { id: 3, name: "Bob" },
+      ],
+      startX: 0,
+      startY: 0,
+      deltaX: 0,
+      deltaY: 0,
+      threshold: 100, // The minimum distance required for a swipe
     };
   },
-  created() {
-    this.mock();
+  mounted() {
+    debugger;
+    this.$refs.cards.forEach((card) => {
+      card.addEventListener("touchstart", this.onTouchStart);
+      card.addEventListener("touchmove", this.onTouchMove);
+      card.addEventListener("touchend", this.onTouchEnd);
+    });
+  },
+  beforeUnmount() {
+    this.$refs.cards.forEach((card) => {
+      card.removeEventListener("touchstart", this.onTouchStart);
+      card.removeEventListener("touchmove", this.onTouchMove);
+      card.removeEventListener("touchend", this.onTouchEnd);
+    });
   },
   methods: {
-    mock(count = 5, append = true) {
+    onTouchStart(e) {
       debugger;
-      const list = [];
-      for (let i = 0; i < count; i++) {
-        list.push({ id: source[this.offset] });
-        this.offset++;
-      }
-      if (append) {
-        this.queue = this.queue.concat(list);
-      } else {
-        this.queue.unshift(...list);
-      }
+      this.startX = e.touches[0].pageX;
+      this.startY = e.touches[0].pageY;
     },
-    onSubmit({ item }) {
+    onTouchMove(e) {
       debugger;
-      if (this.queue.length < 3) {
-        this.mock();
-      }
-      this.history.push(item);
+      this.deltaX = e.touches[0].pageX - this.startX;
+      this.deltaY = e.touches[0].pageY - this.startY;
+      e.target.style.transform = `translateX(${this.deltaX}px)`;
     },
-    async decide(choice) {
+    onTouchEnd(e) {
       debugger;
-      if (choice === "rewind") {
-        if (this.history.length) {
-          this.$refs.tinder.rewind([this.history.pop()]);
+      if (Math.abs(this.deltaX) >= this.threshold) {
+        if (this.deltaX > 0) {
+          // Swipe right
+          console.log("Swipe right");
+        } else {
+          // Swipe left
+          console.log("Swipe left");
         }
-      } else if (choice === "help") {
-        window.open("https://shanlh.github.io/vue-tinder");
       } else {
-        this.$refs.tinder.decide(choice);
+        // Reset card position
+        e.target.style.transform = "";
       }
+      // Reset delta values
+      this.deltaX = 0;
+      this.deltaY = 0;
     },
   },
 };
 </script>
-<style lang="css">
-.vue-tinder {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  top: 0;
-  margin: auto;
-  width: calc(100% - 20px);
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
 
-.nope-pointer,
-.like-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  width: 64px;
-  height: 64px;
-}
-
-.nope-pointer {
-  right: 10px;
-}
-
-.like-pointer {
-  left: 10px;
-}
-
-.super-pointer {
-  position: absolute;
-  z-index: 1;
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 112px;
-  height: 78px;
-}
-
-.rewind-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  right: 10px;
-  width: 112px;
-  height: 78px;
-}
-
-.pic {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
-.home-page {
-  background-color: #382e41;
-}
-.home-page::-webkit-scrollbar {
-  display: none;
-}
-
-.body-page {
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.title-boy {
-  grid-template-columns: 5fr 1fr;
-}
-
-.bt-img {
-  background-color: white;
-  width: 70px;
-}
-
-.bt-option {
-  grid-template-columns: auto auto auto auto auto;
-  gap: 35px;
-}
-
-.title-page {
-  background-color: #181c274f;
-  background-image: linear-gradient(to top, #1e23334a, #230f1f7d);
-  background-attachment: scroll;
-  height: 24%;
-}
-
-.close-infor {
-  position: absolute;
-  top: -25px;
-  right: 13px;
-}
-.like-count {
-  position: absolute;
-  top: 80px;
-  right: 9px;
-}
-
-.title-body {
-  border-bottom: 1px solid #373e50;
-}
-
-.bt-about {
-  border: 1px solid white;
-}
-
-.grid-temlp {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.grid-anthem {
-  grid-template-columns: 3fr 1fr;
-}
-
-.tinder-card {
-  width: 100% !important;
-  background: none !important;
-}
-
-.bg-background-shadow {
-  background: linear-gradient(
-    0deg,
-    rgb(4 7 7 / 92%) 9%,
-    rgb(255 255 255 / 0%) 29%,
-    rgb(255 255 255 / 0%) 99%
-  );
-}
-
-.btns {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 425px !important;
-  max-width: 355px;
-  z-index: 9;
-}
-
-.btns img {
-  margin-right: 12px;
-  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btns img:nth-child(2n + 1) {
-  width: 70px !important;
-}
-
-.btns img:nth-child(2n) {
-  width: 80px !important;
-}
-
-.btns img:nth-last-child(1) {
-  margin-right: 0;
-}
-</style>
+<style></style>

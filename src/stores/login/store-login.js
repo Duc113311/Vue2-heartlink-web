@@ -9,7 +9,6 @@ const getters = {};
 
 const actions = {
   async postTokenByUserID({ commit }, { id, providerId }) {
-    debugger;
     await http_request
       .post("login/v1/create-token/" + id)
       .then((response) => {
@@ -33,7 +32,6 @@ const mutations = {
    * @param {*} token: userId, accessToken, refreshToken
    */
   setTokenAccount(state, token) {
-    debugger;
     state.tokenAccount = token;
   },
 
@@ -43,7 +41,6 @@ const mutations = {
    * @param {*} email
    */
   setEmailForUser(state, email) {
-    debugger;
     state.email = email;
   },
 };

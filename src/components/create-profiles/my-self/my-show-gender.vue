@@ -65,7 +65,6 @@ export default {
   methods: {
     ...mapMutations(["setShowGender", "setShowProfileCreate"]),
     onShowMeGender(val) {
-      debugger;
       this.showMeGender = val;
       this.setShowGender(this.showMeGender);
       const documentParam = document.getElementsByClassName(
@@ -73,7 +72,6 @@ export default {
       );
 
       for (let index = 0; index < documentParam.length; index++) {
-        debugger;
         const element = documentParam[index];
 
         if (val === index) {
@@ -95,6 +93,10 @@ export default {
     });
     this.$emit("onShowSkips", false);
     this.$emit("onShowName", { showCheckbox: false, showName: "" });
+    const documentParam = document.getElementsByClassName(
+      "padding-input-option"
+    );
+    documentParam[this.showMeGender].classList.add("active-border");
     if (this.showMeGender === 0) {
       this.$emit("onStatusActive", true);
     } else if (this.showMeGender === 1) {

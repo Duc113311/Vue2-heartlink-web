@@ -66,9 +66,8 @@ export default {
       // document.querySelector("oftion-interests")
       this.setInterest(val);
       const interestsData = this.$store.state.userModule.user_profile.interests;
-      debugger;
+
       if (this.$store.state.userModule.isActiveId) {
-        debugger;
         document.getElementById(val).classList.add("bg-active");
         if (interestsData.length < 5) {
           this.$emit("onStatusActive", false);
@@ -84,14 +83,6 @@ export default {
     },
   },
 
-  async created() {
-    debugger;
-    await this.getListDataInterests({
-      entityName: "interests",
-      entityId: "en",
-    });
-  },
-
   mounted() {
     const interestsData = this.$store.state.userModule.user_profile.interests;
     this.setShowProfileCreate({
@@ -102,7 +93,7 @@ export default {
     this.$emit("onShowName", { showCheckbox: false });
     for (let index = 0; index < interestsData.length; index++) {
       const element = interestsData[index];
-      document.getElementById(element).style.backgroundColor = "red";
+      document.getElementById(element).classList.add("bg-active");
     }
     if (interestsData.length < 5) {
       this.$emit("onStatusActive", false);

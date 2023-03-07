@@ -23,7 +23,6 @@ export default {
 
   computed: {
     isShowLoading() {
-      debugger;
       return this.isLoading;
     },
 

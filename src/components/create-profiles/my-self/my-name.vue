@@ -56,7 +56,6 @@ export default {
   methods: {
     ...mapMutations(["setFirstName"]),
     onChangeFirstName() {
-      debugger;
       if (this.txtFirstName !== "") {
         this.setFirstName(this.txtFirstName);
         this.$emit("onStatusActive", true);
@@ -68,7 +67,7 @@ export default {
 
   mounted() {
     this.txtFirstName = this.$store.state.userModule.user_profile.firstName;
-    debugger;
+
     this.$emit("onShowName", { showCheckbox: false });
     this.$emit("onShowSkips", false);
     console.log(this.txtFirstName);

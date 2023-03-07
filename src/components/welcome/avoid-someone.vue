@@ -98,7 +98,6 @@ export default {
     },
 
     onChangeContinue(val) {
-      debugger;
       console.log(val);
     },
   },

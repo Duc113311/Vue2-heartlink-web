@@ -222,11 +222,9 @@ export default {
     ...mapState(["userProfileDetail"]),
 
     idImage() {
-      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
     userParam() {
-      debugger;
       return this.$store.state.userModule.userProfileDetail;
     },
   },
@@ -234,30 +232,22 @@ export default {
   methods: {
     ...mapMutations(["setUrlNameAvatarUser", "setLeftRighAvatar"]),
     onClickNope() {
-      debugger;
       this.$emit("onClickNopeDetail", false);
     },
 
     nextImageLeft() {
-      debugger;
       this.setLeftRighAvatar(false);
     },
 
     nextImageRight() {
-      debugger;
       this.setLeftRighAvatar(true);
     },
 
-    onClickSupperLike() {
-      debugger;
-    },
+    onClickSupperLike() {},
 
-    onClickLike() {
-      debugger;
-    },
+    onClickLike() {},
 
     onClickNextImage(val) {
-      debugger;
       console.log(val);
       this.setUrlNameAvatarUser(val);
     },
