@@ -32,6 +32,10 @@ const mutations = {
       state.listScreamShowMes.push(data);
     }
   },
+
+  // setActiveInterestLike(state,data){
+
+  // }
 };
 
 const actions = {};

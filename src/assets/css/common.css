@@ -143,3 +143,20 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+.el-slider__bar {
+  height: 3px !important;
+  background-color: #fd5d65 !important;
+}
+
+.el-slider__button {
+  width: 22px !important;
+  height: 22px !important;
+  border: 5px solid #fd5d65 !important;
+  background-color: #fd5d65 !important;
+}
+
+.el-slider__runway {
+  height: 3px !important;
+  background-color: #7a505d !important;
+}
