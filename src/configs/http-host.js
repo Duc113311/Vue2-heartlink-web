@@ -4,6 +4,8 @@ export const http_request = axios.create({
   baseURL: `https://us-central1-heartlink-dating-project.cloudfunctions.net/app/`,
   headers: {
     Accept: "application/json",
-    Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJBc0NrMmZUU2t4Wk9uR09vNEZOcHRxQmRBbzkyIiwiaWF0IjoxNjc3OTA4Njg3LCJleHAiOjE2ODA1MDA2ODd9.eF5CpZ7I50TqXHaMZbMQL6uKAK3hLRvr6ZSZSaekc7c`,
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwN2wzb2NKNVVVUnVsU1JqUWx1VlpPMkU1UWVqTiIsImlhdCI6MTY3ODM0ODA1NywiZXhwIjoxNjgwOTQwMDU3fQ.rArUxofjCjI2s2uQUA2uoDLOnEDbQh4iE2FkRlWtt1I`,
   },
+  withCredentials: false,
 });
