@@ -20,10 +20,10 @@
                   />
                 </div>
                 <div class="block text-center justify-center mt-3 text-white">
-                  <h2 class="text-2xl">Warm Welcome</h2>
-                  <h2 class="text-xl mt-2">
+                  <div class="padding-title">Warm Welcome</div>
+                  <div class="padding-text-option">
                     We hope you have a sweet time here
-                  </h2>
+                  </div>
                 </div>
               </div>
               <!-- Body -->
@@ -81,15 +81,12 @@ export default {
 
 <style lang="css">
 .image-background {
-  background-image: url(@/assets/image-dating/background.webp);
+  background-image: url(@/assets/image-dating/bg_LoginApp.png);
   z-index: 99;
   padding-right: 0px !important;
   padding-left: 0px !important;
   background-size: cover;
   position: relative;
-}
-.back-color {
-  background-color: rgba(0, 0, 0, 0.607);
 }
 
 .recapcha {

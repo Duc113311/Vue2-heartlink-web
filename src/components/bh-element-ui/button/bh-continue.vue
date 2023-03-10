@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full pl-10 pr-10 flex justify-center items-center pb-10 h-full">
+  <div class="w-full flex justify-center pd-button items-center pb-8 h-full">
     <div class="w-full">
       <div
         v-show="isShowProfile"
@@ -23,7 +23,9 @@
             </div>
           </div>
         </div>
-        <div class="ml-3 text-lg">Show my {{ showName }} on my profile</div>
+        <div class="ml-3 text-show-my">
+          Show my {{ showName }} on my profile
+        </div>
       </div>
       <button
         v-loading="isShowLoading"
@@ -111,7 +113,6 @@ export default {
 
     onClickChosse(val) {
       console.log(val);
-      debugger;
       if (val === true) {
         this.setShowProfileCreate({
           isShowProfile: true,

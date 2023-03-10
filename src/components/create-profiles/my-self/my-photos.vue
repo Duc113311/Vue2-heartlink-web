@@ -226,7 +226,7 @@ export default {
   },
   mounted() {
     const image = this.$store.state.userModule.user_profile.avatars;
-    this.$emit("onShowSkips", true);
+    this.$emit("onShowSkips", false);
     for (let index = 0; index < image.length; index++) {
       const element = image[index];
       const img = document.getElementById(element.id);
@@ -243,12 +243,10 @@ export default {
       close.style.display = "block";
     }
 
-    if (document.querySelector(".btContinue")) {
-      if (image.length < 1) {
-        this.$emit("onStatusActive", false);
-      } else {
-        this.$emit("onStatusActive", true);
-      }
+    if (image.length < 2) {
+      this.$emit("onStatusActive", false);
+    } else {
+      this.$emit("onStatusActive", true);
     }
   },
 };

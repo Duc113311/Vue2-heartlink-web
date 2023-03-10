@@ -96,7 +96,9 @@ export default {
     const documentParam = document.getElementsByClassName(
       "padding-input-option"
     );
-    documentParam[this.showMeGender].classList.add("active-border");
+    if (this.showMeGender < 3) {
+      documentParam[this.showMeGender].classList.add("active-border");
+    }
     if (this.showMeGender === 0) {
       this.$emit("onStatusActive", true);
     } else if (this.showMeGender === 1) {

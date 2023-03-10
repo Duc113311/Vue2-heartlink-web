@@ -1,0 +1,116 @@
+@media only screen and (min-width: 321px) {
+  /* Styles */
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 320px) {
+  /* Styles */
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .layout-web {
+    background: #b5e3ae;
+  }
+  .layout-detail {
+    width: 100%;
+    height: 100%;
+  }
+  .phone-login,
+  .email-login,
+  .welcome,
+  .create-profile {
+    padding: 18px;
+  }
+  .padding-describe {
+    font-size: 15px;
+    padding: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .pd-button {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .padding-button {
+    font-size: 20px;
+  }
+
+  .size-icon {
+    font-size: 24px;
+  }
+
+  .text-show-my {
+    font-size: 16px;
+  }
+
+  .footer-body {
+    gap: 44px;
+    font-size: 32px;
+  }
+
+  .btns {
+    min-width: 300px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 66px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 72px !important;
+  }
+
+  .item-option {
+    font-size: 16px;
+  }
+
+  .text-description {
+    font-size: 18px;
+  }
+}
+
+/* Ipad */
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .layout-web {
+    background: #9fd2e3;
+  }
+  .layout-detail {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .layout-web {
+    background: #fd5d65;
+  }
+
+  .layout-detail {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .example {
+    background: rgb(49, 7, 14);
+  }
+  .layout-detail {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width: 1824px) {
+  /* Styles */
+  .layout-web {
+    background: #156a1a;
+  }
+  .layout-detail {
+    width: 40%;
+    height: 90%;
+  }
+}

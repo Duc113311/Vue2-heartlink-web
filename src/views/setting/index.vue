@@ -305,6 +305,10 @@
       </div>
     </div>
 
+    <!-- <div class="absolute top-0 left-0 form-pack">
+      <FormPackages></FormPackages>
+    </div> -->
+
     <div class="w-full">
       <Footer></Footer>
     </div>
@@ -312,11 +316,17 @@
 </template>
 
 <script>
+// import FormPackages from "../../assets/packages/form-packages";
 import { Carousel, Slide } from "vue-carousel";
 
 import Footer from "../../components/layout/footer-home/footer";
 export default {
-  components: { Footer, Carousel, Slide },
+  components: {
+    // FormPackages,
+    Footer,
+    Carousel,
+    Slide,
+  },
   name: "setting-page",
 
   data() {

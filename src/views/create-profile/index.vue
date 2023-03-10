@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <div class="w-full h-full create-profile p-8 top-0 left-0 z-20 phone-login">
+    <div class="w-full h-full create-profile top-0 left-0 z-20 phone-login">
       <div class="body-infor overflow-hidden">
         <!-- Nút back -->
         <div class="back" v-if="isScream !== 7">
@@ -149,7 +149,7 @@ export default {
 
     onChangeContinue(val) {
       console.log(val);
-      debugger;
+
       if (this.isScream === 7) {
         this.isShowAvoid = true;
 
@@ -162,13 +162,11 @@ export default {
     },
 
     onClickSkip() {
-      debugger;
       this.setSkipProfiles(this.isScream);
       this.isScream = this.isScream + 1;
     },
 
     onActionShowMe(val) {
-      debugger;
       console.log(val);
       this.setActionShowMe({ scream: this.isScream, status: val });
     },

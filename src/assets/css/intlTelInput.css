@@ -57,8 +57,6 @@
   padding: 0;
   margin: 0 0 0 -1px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
-  border: 1px solid #ccc;
   white-space: nowrap;
   max-height: 200px;
   overflow-y: scroll;
@@ -71,9 +69,10 @@
 }
 @media (min-width: 300px) {
   .iti__country-list {
-    width: 420px;
+    width: 420px !important;
   }
 }
+
 
 .iti__flag-box {
   display: inline-block;
@@ -163,7 +162,6 @@
 }
 .iti-mobile .iti__country-list {
   max-height: 100%;
-  width: 100%;
 }
 .iti-mobile .iti__country {
   padding: 10px 10px;

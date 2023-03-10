@@ -3,7 +3,7 @@
     <button
       type="danger"
       :loading="isShowLoading"
-      @click="onClickComfirm"
+      @click="onClickComfirm()"
       class="btContinueCode cursor-pointer w-full padding-button active-button"
     >
       {{ nameButtom }}

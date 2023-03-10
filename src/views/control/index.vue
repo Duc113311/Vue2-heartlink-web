@@ -32,7 +32,6 @@ export default {
     };
   },
   mounted() {
-    debugger;
     this.$refs.cards.forEach((card) => {
       card.addEventListener("touchstart", this.onTouchStart);
       card.addEventListener("touchmove", this.onTouchMove);
@@ -48,18 +47,15 @@ export default {
   },
   methods: {
     onTouchStart(e) {
-      debugger;
       this.startX = e.touches[0].pageX;
       this.startY = e.touches[0].pageY;
     },
     onTouchMove(e) {
-      debugger;
       this.deltaX = e.touches[0].pageX - this.startX;
       this.deltaY = e.touches[0].pageY - this.startY;
       e.target.style.transform = `translateX(${this.deltaX}px)`;
     },
     onTouchEnd(e) {
-      debugger;
       if (Math.abs(this.deltaX) >= this.threshold) {
         if (this.deltaX > 0) {
           // Swipe right

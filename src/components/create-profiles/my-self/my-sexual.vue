@@ -78,7 +78,6 @@ export default {
   computed: {
     ...mapState(["user_profile"]),
     listDataSexuals() {
-      debugger;
       return this.$store.state.userModule.listSexuals;
     },
 
@@ -167,8 +166,6 @@ export default {
   //   // }, 1000);
   // },
   mounted() {
-    debugger;
-
     this.$emit("onShowSkips", true);
     this.$emit("onShowName", { showCheckbox: true, showName: "orientation" });
 

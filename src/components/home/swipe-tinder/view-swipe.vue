@@ -46,7 +46,7 @@
                 </div>
                 <div class="mr-3">25</div>
                 <div
-                  class="flex justify-center items-center"
+                  class="flex justify-center items-center cursor-pointer"
                   @click="onDetailInfor(scope.data.userId)"
                 >
                   <i class="fa-solid fa-circle-info text-xl"></i>
@@ -79,26 +79,11 @@
           ></div>
         </div>
       </template>
-      <img
-        class="like-pointer"
-        slot="like"
-        src="@/assets/image-tinder/like-txt.png"
-      />
-      <img
-        class="nope-pointer"
-        slot="nope"
-        src="@/assets/image-tinder/nope-txt.png"
-      />
-      <img
-        class="super-pointer"
-        slot="super"
-        src="@/assets/image-tinder/super-txt.png"
-      />
-      <img
-        class="rewind-pointer"
-        slot="rewind"
-        src="@/assets/image-tinder/rewind-txt.png"
-      />
+
+      <div class="like-pointer" slot="like">LIKE</div>
+      <div class="nope-pointer" slot="nope">NOPE</div>
+      <div class="super-pointer" slot="super">SUPER</div>
+      <div class="rewind-pointer" slot="rewind">REWIND</div>
     </Tinder>
 
     <div>
@@ -142,7 +127,6 @@ export default {
     },
 
     idImage() {
-      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
   },
@@ -154,7 +138,6 @@ export default {
       this.isShowDetail = value;
     },
     nextImageLeft(value, userId) {
-      debugger;
       console.log(value);
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
 
@@ -171,7 +154,7 @@ export default {
 
     nextImageRight(value, userId) {
       console.log(value);
-      debugger;
+
       this.isActiveImag = false;
 
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
@@ -334,7 +317,7 @@ export default {
 
 .tinder-card {
   width: 100% !important;
-  background: none !important;
+  background-color: #382e41 !important ;
 }
 
 .bg-background-shadow {
@@ -356,13 +339,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 425px !important;
   max-width: 355px;
   z-index: 9;
 }
 
 .btns img {
-  margin-right: 12px;
+  margin-right: 0px;
   box-shadow: 0 4px 9px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   cursor: pointer;
@@ -370,7 +352,7 @@ export default {
 }
 
 .btns img:nth-child(2n + 1) {
-  width: 70px !important;
+  width: 68px !important;
 }
 
 .btns img:nth-child(2n) {

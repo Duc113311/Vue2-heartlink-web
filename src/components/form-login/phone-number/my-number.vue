@@ -151,6 +151,11 @@ export default {
   display: none !important;
 }
 
+.iti__country-list {
+  width: 418px !important;
+  border: none !important;
+  background-color: #4e576b !important;
+}
 #phone {
   padding-left: 58px;
   padding-right: 58px;

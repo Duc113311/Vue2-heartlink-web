@@ -252,7 +252,6 @@ const mutations = {
 
   setLeftRighAvatar(state, data) {
     if (data === true) {
-      debugger;
       const idNew = parseInt(state.urlAvatarUser.id) + 1;
       const findValue = state.userProfileDetail.avatars.find(
         (x) => parseInt(x.id) === parseInt(idNew)
@@ -273,9 +272,7 @@ const mutations = {
   },
 
   setLeftRightAvatar(state, data) {
-    debugger;
     if (data.statusNext === true) {
-      debugger;
       const idNew = parseInt(data.idImage) + 1;
       const findUser = state.user_profile.find(
         (x) => x.userId.toString() === data.userId.toString()
@@ -304,7 +301,6 @@ const mutations = {
   },
 
   setSkipProfiles(state, data) {
-    debugger;
     if (data === 3) {
       state.user_profile.sexuals = [];
     }

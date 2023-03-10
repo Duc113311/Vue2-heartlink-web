@@ -35,7 +35,6 @@ export default {
     },
 
     onClickSkip() {
-      debugger;
       this.$emit("onClickSkip", true);
     },
   },

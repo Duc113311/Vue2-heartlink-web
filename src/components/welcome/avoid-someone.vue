@@ -48,7 +48,10 @@
           content="The skill are improving"
           placement="top"
         >
-          <BhComfirm :nameTitle="nameTitle"></BhComfirm>
+          <BhComfirm
+            :nameTitle="nameTitle"
+            @onChangeComfirm="onChangeComfirm"
+          ></BhComfirm>
         </el-tooltip>
       </div>
     </div>
@@ -56,6 +59,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 import BhComfirm from "../bh-element-ui/button/bh-comfirm";
 export default {
   components: {
@@ -81,12 +86,30 @@ export default {
     },
   },
 
+  async created() {
+    const paramUser = {
+      userId: "CoSfrEMLItUG2lvJWWfZGqPm3VU2",
+      latitude: 21.0058814,
+      longitude: 105.7948012,
+      page: 6,
+      pageNumber: 20,
+      startAge: 18,
+      endAge: 55,
+      showMeGender: 2,
+      location: 80,
+    };
+
+    await this.getAllListUserProfile(paramUser);
+  },
+
   mounted() {},
 
   methods: {
+    ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
     onCloseDialog() {
-      this.$emit("onHideWellcome", false);
       this.$router.push({ path: "/home-new" });
+
+      this.$emit("onHideWellcome", false);
     },
 
     onShowDialogQuit(value) {
@@ -97,8 +120,9 @@ export default {
       this.isShowQuitSing = false;
     },
 
-    onChangeContinue(val) {
+    onChangeComfirm(val) {
       console.log(val);
+      this.$router.push({ path: "/home-new" });
     },
   },
 };

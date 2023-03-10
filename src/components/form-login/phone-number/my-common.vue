@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full user-profile p-8 top-0 left-0 absolute z-20 grid phone-login"
+    class="w-full h-full user-profile top-0 left-0 absolute z-20 grid phone-login"
   >
     <div>
       <!-- Số điện thoại -->

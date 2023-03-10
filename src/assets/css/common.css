@@ -69,6 +69,20 @@
   color: #bf7883;
 }
 
+.item-option {
+  font-size: 19px;
+  border: 1.5px solid #ffffff;
+  border-radius: 10px;
+  color: #ffffff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: inline-block;
+  width: max-content;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
 .hr-bg {
   background-color: #414858;
   height: 1.5px;
@@ -159,4 +173,41 @@
 .el-slider__runway {
   height: 3px !important;
   background-color: #7a505d !important;
+}
+
+.form-pack {
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  background: none;
+  padding: 28px;
+}
+
+.size-package {
+  background-color: #202020;
+  border-radius: 16px;
+  height: 46rem;
+  padding: 21px;
+  margin-top: 4rem;
+}
+
+.not-check {
+  display: none;
+}
+
+.checked {
+  display: block;
+}
+
+.fa-circle-check {
+  color: #fd5d65;
+}
+
+.fa-circle {
+  color: #b8bbca;
+}
+
+.bg-checked {
+  background-color: white;
+  border-radius: 20px;
 }

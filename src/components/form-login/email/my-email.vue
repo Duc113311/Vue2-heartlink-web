@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-full user-profile absolute top-0 p-8 left-0 z-30">
+  <div
+    class="w-full h-full user-profile email-login absolute top-0 left-0 z-30"
+  >
     <BhBack></BhBack>
     <div class="padding-title mt-6">What's your email?</div>
 
@@ -27,7 +29,7 @@
         @onChangeContinue="onChangeContinue"
       ></BhContinue>
     </div>
-    <div class="flex mt-4 justify-center pt-3 pb-3 padding-title">OR</div>
+    <div class="flex justify-center padding-title">OR</div>
     <div class="flex mt-4 justify-center">
       <button
         class="btn-Sign cursor-pointer text-xl font-semibold bg-white text-black w-80 rounded-lg px-3 py-3 mb-4"
@@ -49,9 +51,22 @@
       Verify instantly by connecting your Google account
     </div>
 
-    <div class="text-base flex text-white mt-4">
-      <input type="radio" name="" id="" class="mr-7 w-7 bg-radio-input" />
-      <span>I want to receive news, updates and offers from Heartlink</span>
+    <div class="text-base flex items-center w-full mt-4">
+      <div class="flex justify-center items-center">
+        <div class="check-active not-check" @click="onClickChosse(true)">
+          <div class="bg-white flex justify-center bg-checked">
+            <i class="fa-solid fa-circle-check w-8 h-8"></i>
+          </div>
+        </div>
+        <div class="not-check-active checked" @click="onClickChosse(false)">
+          <div class="flex justify-center">
+            <i class="fa-regular fa-circle w-8 h-8"></i>
+          </div>
+        </div>
+      </div>
+      <span class="ml-4"
+        >I want to receive news, updates and offers from Heartlink</span
+      >
     </div>
   </div>
 </template>
@@ -100,6 +115,24 @@ export default {
         // Xét giá trị email
 
         this.isActives = true;
+      }
+    },
+
+    onClickChosse(val) {
+      const checkActive = document.getElementsByClassName("check-active");
+      const notCheckActive =
+        document.getElementsByClassName("not-check-active");
+
+      if (val) {
+        checkActive[0].classList.remove("checked");
+        notCheckActive[0].classList.remove("not-check");
+        checkActive[0].classList.add("not-check");
+        notCheckActive[0].classList.add("checked");
+      } else {
+        checkActive[0].classList.add("checked");
+        notCheckActive[0].classList.add("not-check");
+        checkActive[0].classList.remove("not-check");
+        notCheckActive[0].classList.remove("checked");
       }
     },
 

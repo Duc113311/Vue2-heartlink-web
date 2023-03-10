@@ -2,9 +2,9 @@
   <div class="w-full h-full relative">
     <div class="detail-page w-full h-full relative">
       <div class="bg-image-detail h-2/4">
-        <div class="avatar w-full h-full relative rounded-lg">
+        <div class="avatar w-full h-full relative">
           <div
-            class="avatar-url z-8 rounded-lg"
+            class="avatar-url z-8"
             :style="{
               'background-image': `url(${idImage})`,
             }"
@@ -26,7 +26,7 @@
         </div>
         <div
           class="icon-close-infor cursor-pointer absolute right-4"
-          @click="onClickNope"
+          @click="onClickHideProfile()"
         >
           <img
             src="@/assets/icon/bt_close_infor.svg"
@@ -62,7 +62,7 @@
 
           <div class="w-full bh-margin-description">
             <div
-              class="text-option cursor-pointer"
+              class="item-option cursor-pointer"
               v-for="item in this.userParam.sexuals"
               :key="item"
             >
@@ -78,7 +78,7 @@
 
           <div class="w-full bh-margin-description">
             <div
-              class="text-option"
+              class="item-option"
               v-for="item in this.userParam.interests"
               :key="item"
             >
@@ -251,6 +251,10 @@ export default {
       console.log(val);
       this.setUrlNameAvatarUser(val);
     },
+
+    onClickHideProfile() {
+      this.$emit("onHideProfile", false);
+    },
   },
 };
 </script>
@@ -268,6 +272,7 @@ export default {
   background-repeat: repeat;
   background-position: 0px -39px;
   background-size: cover;
+  border-radius: 10px;
 }
 
 .detail-page::-webkit-scrollbar {

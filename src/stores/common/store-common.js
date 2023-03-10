@@ -18,8 +18,6 @@ const mutations = {
   },
 
   setActionShowMe(state, data) {
-    debugger;
-
     const index = state.listScreamShowMes.findIndex(
       (x) => x.scream === data.scream
     );

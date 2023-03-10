@@ -24,7 +24,10 @@
 
         <!-- Detail user -->
         <div v-show="isShowDetail" class="w-full body-detail h-full">
-          <DetailProfile @onClickNopeDetail="onClickNopeDetail"></DetailProfile>
+          <DetailProfile
+            @onClickNopeDetail="onClickNopeDetail"
+            @onHideProfile="onHideProfile"
+          ></DetailProfile>
         </div>
       </div>
     </div>
@@ -89,13 +92,16 @@ export default {
     };
 
     await this.getAllListUserProfile(paramUser);
-
     setTimeout(() => {
       this.loading = false;
     }, 1000);
   },
   methods: {
     ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
+
+    onHideProfile(val) {
+      this.isShowDetail = val;
+    },
 
     onClickNopeDetail() {
       this.isShowDetail = false;

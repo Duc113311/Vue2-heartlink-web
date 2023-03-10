@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full user-profile absolute top-0 left-0 z-40 p-8">
+  <div class="w-full h-full user-profile absolute top-0 left-0 z-40 welcome">
     <div class="text-2xl w-full h-10 flex items-center">
       <i class="fas fa-times"></i>
     </div>

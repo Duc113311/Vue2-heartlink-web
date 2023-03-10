@@ -26,3 +26,14 @@
 .bh-text-location {
   color: #51a0ed;
 }
+
+
+
+.bg-button-active{
+  background-color: #FD5D65;
+}
+
+
+.bg-button-clear{
+  background-color: #5F6A86;
+}

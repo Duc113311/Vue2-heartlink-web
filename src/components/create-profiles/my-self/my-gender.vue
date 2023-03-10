@@ -100,7 +100,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     this.genders = this.$store.state.userModule.user_profile.gender;
     const screamShow = this.$store.state.commonModule.listScreamShowMes;
     console.log(screamShow);

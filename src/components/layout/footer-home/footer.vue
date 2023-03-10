@@ -34,16 +34,12 @@ export default {
 
   computed: {
     isActiveFooter() {
-      debugger;
-
       return true;
     },
   },
 
   methods: {
     onClickHome() {
-      debugger;
-
       this.$router.push({ path: "/home-new" });
     },
 
@@ -67,7 +63,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     if (this.$route.name === "home-page") {
       document
         .getElementsByClassName("fa-heart")[0]
@@ -105,13 +100,11 @@ export default {
 .footer-body {
   height: calc(100% - 90%);
   justify-content: center;
-  gap: 60px;
   align-items: center;
   border-top: 1px solid #373e50;
   margin-top: 10px;
   position: absolute;
   bottom: 0;
-  font-size: 38px;
 }
 .icon-color {
   color: #5f6a86;
