@@ -90,7 +90,7 @@
           </div>
         </div>
       </div>
-      <BhArge @onAgreeContinue="onAgreeContinue"></BhArge>
+      <BhArge></BhArge>
     </div>
 
     <QuitWelcome
@@ -142,12 +142,6 @@ export default {
 
     onCancelQuit() {
       this.isShowQuitSing = false;
-    },
-
-    onAgreeContinue() {
-      this.$router.push({
-        path: "create-user",
-      });
     },
   },
 };

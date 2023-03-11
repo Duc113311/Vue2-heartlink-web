@@ -154,6 +154,7 @@ export default {
           // this.$emit("onShowEmailUser", true);
 
           await this.singWithPhone(this.sentCodeId);
+          this.$emit("onShowEmailUser", true);
         } else {
           this.txtErrorCode = true;
         }
@@ -177,7 +178,6 @@ export default {
             id: userID,
             providerId: providerId,
           });
-          this.$emit("onShowEmailUser", true);
           console.log(userID, providerId);
 
           // Check lần show wellcome

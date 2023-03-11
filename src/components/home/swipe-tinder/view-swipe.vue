@@ -89,7 +89,7 @@
     <div>
       <div class="btns">
         <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
-        <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
+        <img src="@/assets/icon/bt_nope.svg" @click="sdecide('nope')" />
         <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
         <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
         <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />

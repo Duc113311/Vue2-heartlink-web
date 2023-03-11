@@ -54,6 +54,9 @@ import {
 import NewAccount from "../../welcome/new-account";
 import MyEmail from "../../form-login/email/my-email";
 import MyCommon from "../../form-login/phone-number/my-common";
+
+import { mapActions } from "vuex";
+
 export default {
   components: {
     NewAccount,
@@ -71,6 +74,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(["postTokenByUserID"]),
+
     /**
      * Login by phone number
      * CreateBy: nvDuc
@@ -82,15 +87,20 @@ export default {
 
     async onLoginGoogle() {
       await signInWithPopup(auth, provider)
-        .then((result) => {
+        .then(async (result) => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           // The signed-in user info.
-          const user = result.user;
-
+          const userID = result.user.uid;
+          const providerId = result.providerId;
           console.log(token);
-          console.log(user);
+          this.isShowWellcome = true;
+
+          await this.postTokenByUserID({
+            id: userID,
+            providerId: providerId,
+          });
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...
