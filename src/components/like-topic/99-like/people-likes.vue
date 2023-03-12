@@ -2,20 +2,16 @@
   <div class="w-full h-full relative">
     <div class="w-full option-like flex h-20 items-center p-5">
       <div
-        class="oftion-interests p-2 mr-3 w-12 h-11"
+        class="oftion-interests p-2 mr-3 w-10 h-10"
         slot="reference"
         @click="onShowFilterLike()"
       >
-        <img src="@/assets/image-dating/ic_filter.svg" width="30" alt="" />
+        <img src="@/assets/image-dating/ic_filter.svg" width="40" alt="" />
       </div>
 
-      <div class="flex justify-center">
+      <div class="flex items-center w-80">
         <span v-for="(item, index) in listIntersts" :key="index">
-          <button
-            :id="index"
-            class="oftion-interests mr-3 mb-3 p-2 text-white"
-            size="large"
-          >
+          <button :id="index" class="oftion-interests mr-3 p-2" size="large">
             {{ item }}
           </button>
         </span>
@@ -23,16 +19,16 @@
     </div>
 
     <div
-      class="w-full flex items-center justify-center p-2 description-no-padding"
+      class="w-full flex items-center justify-center pr-4 pl-4 description-no-padding"
     >
       <span>Upgrade to Gold to see people who are interested in you</span>
     </div>
-    <div class="w-full h-full p-3 board">
-      <div class="grid items-center list-likes h-full">
+    <!-- <div class="w-full p-3 board">
+      <div class="items-center list-likes h-full">
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
             <div class="name">Kiều Kiều , <span>18</span></div>
-            <div class="flex items-center">
+            <div class="flex padding-describe">
               <BhActivateLike></BhActivateLike>
               Recently active
             </div>
@@ -45,7 +41,7 @@
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
             <div class="name">Thu Anh , <span>22</span></div>
-            <div class="flex items-center">
+            <div class="flex padding-describe">
               <BhActivateLike></BhActivateLike>
               Recently active
             </div>
@@ -58,7 +54,20 @@
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
             <div class="name">Trang Hà , <span>25</span></div>
-            <div class="flex items-center">
+            <div class="flex padding-describe">
+              <BhActivateLike></BhActivateLike>
+              Recently active
+            </div>
+          </div>
+          <div class="bg-shadow w-full h-full"></div>
+          <div
+            class="bg-background-shadow absolute bottom-0 w-full h-full"
+          ></div>
+        </div>
+        <div class="item-user m-3 relative overflow-hidden">
+          <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
+            <div class="name">Trang Hà , <span>25</span></div>
+            <div class="flex padding-describe">
               <BhActivateLike></BhActivateLike>
               Recently active
             </div>
@@ -69,7 +78,7 @@
           ></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="absolute w-full bottom-0 z-10 mb-14">
       <BhSeeLike></BhSeeLike>
     </div>
@@ -85,19 +94,19 @@
 
 <script>
 import FilterOption from "../filter/filter-option";
-import BhActivateLike from "../../bh-element-ui/button/bh-activateLike";
+// import BhActivateLike from "../../bh-element-ui/button/bh-activateLike";
 import BhSeeLike from "../../bh-element-ui/button/bh-seeLike";
 export default {
   components: {
     FilterOption,
-    BhActivateLike,
+    // BhActivateLike,
     BhSeeLike,
   },
   name: "people-likes",
 
   data() {
     return {
-      listIntersts: ["Reading", "Car", "Dog", "Music", "Art"],
+      listIntersts: ["Reading", "Car", "Dog", "Reading"],
       visible: false,
       valueMaximum: 50,
       valueAge: [25, 45],
@@ -188,9 +197,6 @@ export default {
   gap: 10px;
 }
 
-.board {
-  height: 86%;
-}
 .item-user {
   width: 90%;
   height: 93%;

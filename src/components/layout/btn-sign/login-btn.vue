@@ -74,7 +74,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["postTokenByUserID"]),
+    ...mapActions(["postTokenByUserID", "checkExistUserId"]),
 
     /**
      * Login by phone number
@@ -95,15 +95,20 @@ export default {
           const userID = result.user.uid;
           const providerId = result.providerId;
           console.log(token);
-          this.isShowWellcome = true;
 
           await this.postTokenByUserID({
             id: userID,
             providerId: providerId,
           });
 
-          // IdP data available using getAdditionalUserInfo(result)
-          // ...
+          await this.checkExistUserId(userID);
+
+          const userIds = this.$store.state.loginModule.isExistUserId;
+          if (userIds) {
+            this.$router.push({ path: "/home-new" });
+          } else {
+            this.isShowWellcome = true;
+          }
         })
         .catch((error) => {
           // Handle Errors here.

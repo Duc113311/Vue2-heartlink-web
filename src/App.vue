@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "app-view",
 
@@ -41,12 +42,25 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    ...mapActions(["checkExistUserId"]),
+  },
 
-  created() {
+  async created() {
     setTimeout(() => {
       this.isShowIconApp = false;
     }, 500);
+
+    const userId = localStorage.getItem("userId");
+    await this.checkExistUserId(userId);
+
+    const isExist = this.$store.state.loginModule.isExistUserId;
+
+    if (isExist) {
+      this.$router.push({ path: "/home-new" });
+    } else {
+      this.$router.push({ path: "/" });
+    }
   },
 
   mounted() {},

@@ -3,6 +3,7 @@ import { http_request } from "../../configs/http-host";
 const state = {
   user: [],
   tokenAccount: {},
+  isExistUserId: false,
 };
 
 const getters = {};
@@ -23,9 +24,23 @@ const actions = {
         console.log(error);
       });
   },
+
+  async checkExistUserId({ commit }, userId) {
+    await http_request
+      .get(`login/v1/check-exist?userId=${userId}`)
+      .then((response) => {
+        commit("setExistUserId", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 
 const mutations = {
+  setExistUserId(state, data) {
+    state.isExistUserId = data;
+  },
   /**
    * Set giá trị cho tokenAccount
    * @param {*} state

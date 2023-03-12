@@ -389,7 +389,6 @@ export default {
 .option-setting {
   height: calc(100% - 80%);
   justify-content: center;
-  gap: 60px;
   align-items: center;
   text-align: center;
 }

@@ -66,7 +66,9 @@ export default {
     ...mapMutations(["setShowGender", "setShowProfileCreate"]),
     onShowMeGender(val) {
       this.showMeGender = val;
-      this.setShowGender(this.showMeGender);
+      this.setShowGender(parseInt(this.showMeGender));
+
+      localStorage.setItem("showMeGender", val);
       const documentParam = document.getElementsByClassName(
         "padding-input-option"
       );

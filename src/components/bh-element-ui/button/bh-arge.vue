@@ -41,7 +41,6 @@ export default {
      * Click show dialog
      */
     onClickIAgree() {
-      debugger;
       this.$router.push({
         path: "create-user",
       });

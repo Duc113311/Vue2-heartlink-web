@@ -116,10 +116,10 @@ export default {
   },
 
   computed: {
-    ...mapState("user_profile"),
+    ...mapState("userProfileList"),
 
     listDataUser() {
-      return this.$store.state.userModule.user_profile;
+      return this.$store.state.userModule.userProfileList;
     },
 
     isShowUrl(val) {

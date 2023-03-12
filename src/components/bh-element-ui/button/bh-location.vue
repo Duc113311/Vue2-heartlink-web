@@ -54,10 +54,12 @@ export default {
       const userId = TokenApps.getAccessToken("userId");
       const providerId = TokenApps.getProviderId("providerId");
       const dataUser = this.$store.state.userModule.user_profile;
+      dataUser.birthday = new Date(dataUser.birthday.toString()).getTime();
+
       dataUser.providerId = providerId;
       dataUser.userId = userId;
+      await this.postInforUserProfile(dataUser);
 
-      console.log(dataUser);
       // await this.postInforUserProfile(dataUser);
       this.$emit("onShowAvoid", true);
     },

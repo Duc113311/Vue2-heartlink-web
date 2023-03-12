@@ -149,10 +149,8 @@ export default {
 
     onChangeContinue(val) {
       console.log(val);
-
       if (this.isScream === 7) {
         this.isShowAvoid = true;
-
         const userId = TokenApps.getAccessToken("userId");
         const dataUser = this.$store.state.userModule.user_profile;
         dataUser.userId = userId;

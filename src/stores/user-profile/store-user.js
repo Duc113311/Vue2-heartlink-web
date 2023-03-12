@@ -17,6 +17,7 @@ const state = {
 
   userProfileDetail: {},
   urlAvatarUser: "",
+  userProfileList: [],
 };
 
 const getters = {};
@@ -109,6 +110,9 @@ const actions = {
 };
 
 const mutations = {
+  setUserProfiles(state, data) {
+    state.user_profile = data;
+  },
   /**
    * Xét giá trị firstName
    * @param {*} state
@@ -236,7 +240,7 @@ const mutations = {
   },
 
   setListUserProfiles(state, data) {
-    state.user_profile = data;
+    state.userProfileList = data;
   },
 
   setDetailUserProfile(state, data) {

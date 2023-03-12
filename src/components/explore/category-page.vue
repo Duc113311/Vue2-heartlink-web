@@ -1,10 +1,8 @@
 <template>
   <div class="w-full border-collapse body-explore overflow-y-auto">
     <!-- Verified -->
-    <div class="w-full h-44 relative cursor-pointer">
-      <div class="title-verified text-2xl absolute p-12 text-white">
-        Verified photo
-      </div>
+    <div class="w-full h-verified relative cursor-pointer">
+      <div class="title-verified text-2xl absolute p-12">Verified photo</div>
       <img src="@/assets/image-dating/explore_verified_photo (1).png" alt="" />
     </div>
     <div class="w-full text-description-no-padding pt-2 pb-4">
@@ -12,9 +10,9 @@
     </div>
 
     <div class="w-full option-find">
-      <div class="w-full grid gap-2 grid-explore mb-2">
+      <div class="w-full grid gap-4 grid-explore mb-2">
         <div class="relative cursor-pointer">
-          <div class="w-full absolute p-2 top-40 text-center">
+          <div class="w-full absolute p-2 top-dash-explore text-center">
             <div class="countdown"></div>
             <div class="title-date title-option">Blind Date</div>
             <div class="text-describe mt-5">
@@ -23,46 +21,46 @@
             </div>
           </div>
           <img
-            class="image-explore w-full rounded-lg"
+            class="image-explore w-full"
             src="@/assets/image-dating/explore_blind_date (1).png"
             alt=""
             srcset=""
           />
         </div>
         <div class="relative cursor-pointer">
-          <div class="w-full absolute p-2 top-40 text-center">
+          <div class="w-full absolute p-2 top-dash-explore text-center">
             <div class="countdown"></div>
             <div class="title-date title-option">Let's be Friend</div>
             <div class="text-describe mt-5">Find your best friend here</div>
           </div>
           <img
-            class="image-explore w-full rounded-lg"
+            class="image-explore w-full"
             src="@/assets/image-dating/explore_let_be_friend (1).png"
             alt=""
             srcset=""
           />
         </div>
         <div class="relative cursor-pointer">
-          <div class="w-full absolute p-2 top-40 text-center">
+          <div class="w-full absolute p-2 top-dash-explore text-center">
             <div class="countdown"></div>
             <div class="title-date title-option">Looking for love</div>
             <div class="text-describe mt-5">Find your love here</div>
           </div>
           <img
-            class="image-explore w-full rounded-lg"
+            class="image-explore w-full"
             src="@/assets/image-dating/explore_looking_for_love (1).png"
             alt=""
             srcset=""
           />
         </div>
         <div class="relative cursor-pointer">
-          <div class="w-full absolute p-2 top-40 text-center">
+          <div class="w-full absolute p-2 top-dash-explore text-center">
             <div class="countdown"></div>
             <div class="title-date title-option">Coffee Date</div>
             <div class="text-describe mt-5">Find your coffee here</div>
           </div>
           <img
-            class="image-explore w-full rounded-lg"
+            class="image-explore w-full"
             src="@/assets/image-dating/explore_coffee_date (1).png"
             alt=""
             srcset=""

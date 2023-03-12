@@ -41,14 +41,6 @@
             </div>
             <div class="mt-3">Ngoc Trinh</div>
           </div>
-          <div class="item-avatar items-center text-center mr-6">
-            <div class="image-detail-avatar relative">
-              <div class="absolute bottom-0 right-0.5">
-                <BhActivateLike></BhActivateLike>
-              </div>
-            </div>
-            <div class="mt-3">Ngoc Trinh</div>
-          </div>
         </div>
       </div>
     </div>

@@ -88,14 +88,14 @@ export default {
 
   async created() {
     const paramUser = {
-      userId: "CoSfrEMLItUG2lvJWWfZGqPm3VU2",
-      latitude: 21.0058814,
-      longitude: 105.7948012,
-      page: 6,
+      userId: localStorage.userId,
+      latitude: localStorage.latitude,
+      longitude: localStorage.longitude,
+      page: 1,
       pageNumber: 20,
       startAge: 18,
       endAge: 55,
-      showMeGender: 2,
+      showMeGender: localStorage.showMeGender,
       location: 80,
     };
 

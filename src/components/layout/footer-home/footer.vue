@@ -104,6 +104,7 @@ export default {
   border-top: 1px solid #373e50;
   margin-top: 10px;
   position: absolute;
+  background-color: #382e41;
   bottom: 0;
 }
 .icon-color {

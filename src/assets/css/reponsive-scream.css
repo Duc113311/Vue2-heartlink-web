@@ -66,6 +66,22 @@
   .text-description {
     font-size: 18px;
   }
+
+  .h-verified {
+    height: 9rem;
+  }
+
+  .top-dash-explore {
+    top: 5rem;
+  }
+
+  .board {
+    height: 82%;
+  }
+
+  .option-setting {
+    gap: 30px;
+  }
 }
 
 /* Ipad */
@@ -110,7 +126,80 @@
     background: #156a1a;
   }
   .layout-detail {
-    width: 40%;
+    width: 20%;
     height: 90%;
+  }
+
+  .phone-login,
+  .email-login,
+  .welcome,
+  .create-profile {
+    padding: 18px;
+  }
+  .padding-describe {
+    font-size: 15px;
+    padding: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .pd-button {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+
+  .padding-button {
+    font-size: 20px;
+  }
+
+  .size-icon {
+    font-size: 24px;
+  }
+
+  .text-show-my {
+    font-size: 16px;
+  }
+
+  .footer-body {
+    gap: 50px;
+    font-size: 44px;
+  }
+
+  .btns {
+    min-width: 300px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 85px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 100px !important;
+  }
+
+  .item-option {
+    font-size: 16px;
+  }
+
+  .text-description {
+    font-size: 18px;
+  }
+
+  .h-verified {
+    height: 11rem;
+  }
+
+  .top-dash-explore {
+    top: 10rem;
+  }
+
+  .board {
+    height: 82%;
+  }
+
+  .option-setting {
+    gap: 30px;
+  }
+
+  .size-hight {
+    width: 60px;
   }
 }
