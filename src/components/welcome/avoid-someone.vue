@@ -105,7 +105,7 @@ export default {
   mounted() {},
 
   methods: {
-    ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
+    ...mapActions(["getAllListUserProfile"]),
     onCloseDialog() {
       this.$router.push({ path: "/home-new" });
 

@@ -19,12 +19,12 @@
     </div>
 
     <div
-      class="w-full flex items-center justify-center pr-4 pl-4 description-no-padding"
+      class="w-full flex items-center h-12 justify-center pr-4 pl-4 description-no-padding"
     >
       <span>Upgrade to Gold to see people who are interested in you</span>
     </div>
-    <!-- <div class="w-full p-3 board">
-      <div class="items-center list-likes h-full">
+    <div class="w-full p-3 h-likes">
+      <div class="items-center list-likes grid h-full">
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
             <div class="name">Kiều Kiều , <span>18</span></div>
@@ -78,7 +78,7 @@
           ></div>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="absolute w-full bottom-0 z-10 mb-14">
       <BhSeeLike></BhSeeLike>
     </div>
@@ -194,12 +194,10 @@ export default {
 
 .list-likes {
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
 }
 
 .item-user {
   width: 90%;
-  height: 93%;
   border-radius: 10px;
   background-image: url("../../../assets/image-dating/uikoria.jpg");
   background-position: center;

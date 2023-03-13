@@ -215,8 +215,6 @@ export default {
 .image-detail-avatar {
   background-image: url("@/assets/image-dating/0659_photo-1-163186806531842640671.jpg");
   background-position: center;
-  width: 80px;
-  height: 80px;
   background-size: cover;
   border-radius: 53px;
 }

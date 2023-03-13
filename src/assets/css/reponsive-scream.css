@@ -4,6 +4,13 @@
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 320px) {
   /* Styles */
+  .layout-web {
+    background: #fd5d65;
+  }
+  .layout-detail {
+    width: 90%;
+    height: 100%;
+  }
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -44,7 +51,7 @@
   }
 
   .footer-body {
-    gap: 44px;
+    gap: 39px;
     font-size: 32px;
   }
 
@@ -82,8 +89,69 @@
   .option-setting {
     gap: 30px;
   }
-}
 
+  .h-likes {
+    height: calc(100% - 8rem);
+  }
+  .item-user {
+    height: 16rem;
+  }
+
+  .image-detail-avatar {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .layout-web {
+    background: #b5e3ae;
+  }
+  .layout-detail {
+    width: 34rem;
+    height: 90%;
+  }
+
+  .footer-body {
+    gap: 50px;
+    font-size: 44px;
+  }
+
+  .btns {
+    min-width: 450px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 85px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 100px !important;
+  }
+
+  .size-hight {
+    width: 66px;
+  }
+
+  .top-dash-explore {
+    top: 10rem;
+  }
+
+  .h-likes {
+    height: calc(100% - 8rem);
+  }
+
+  .item-user {
+    height: 20rem;
+  }
+
+  .image-detail-avatar {
+    width: 76px;
+    height: 76px;
+  }
+
+  .option-setting {
+    gap: 60px;
+  }
+}
 /* Ipad */
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -91,8 +159,49 @@
     background: #9fd2e3;
   }
   .layout-detail {
-    width: 100%;
-    height: 100%;
+    width: 34rem;
+    height: 90%;
+  }
+
+  .footer-body {
+    gap: 50px;
+    font-size: 44px;
+  }
+
+  .btns {
+    min-width: 450px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 85px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 100px !important;
+  }
+
+  .size-hight {
+    width: 66px;
+  }
+
+  .top-dash-explore {
+    top: 10rem;
+  }
+
+  .h-likes {
+    height: calc(100% - 8rem);
+  }
+
+  .item-user {
+    height: 20rem;
+  }
+
+  .image-detail-avatar {
+    width: 76px;
+    height: 76px;
+  }
+
+  .option-setting {
+    gap: 60px;
   }
 }
 
@@ -103,19 +212,101 @@
   }
 
   .layout-detail {
-    width: 100%;
-    height: 100%;
+    width: 34rem;
+    height: 90%;
+  }
+
+  .footer-body {
+    gap: 50px;
+    font-size: 44px;
+  }
+
+  .btns {
+    min-width: 450px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 85px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 100px !important;
+  }
+
+  .size-hight {
+    width: 66px;
+  }
+
+  .top-dash-explore {
+    top: 10rem;
+  }
+
+  .h-likes {
+    height: calc(100% - 8rem);
+  }
+
+  .item-user {
+    height: 20rem;
+  }
+
+  .image-detail-avatar {
+    width: 76px;
+    height: 76px;
+  }
+
+  .option-setting {
+    gap: 60px;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .example {
-    background: rgb(49, 7, 14);
+  .layout-web {
+    background: blue;
   }
   .layout-detail {
-    width: 90%;
+    width: 34rem;
     height: 90%;
+  }
+
+  .footer-body {
+    gap: 50px;
+    font-size: 44px;
+  }
+
+  .btns {
+    min-width: 450px !important;
+  }
+  .btns img:nth-child(2n + 1) {
+    width: 85px !important;
+  }
+
+  .btns img:nth-child(2n) {
+    width: 100px !important;
+  }
+
+  .size-hight {
+    width: 66px;
+  }
+
+  .top-dash-explore {
+    top: 10rem;
+  }
+
+  .h-likes {
+    height: calc(100% - 8rem);
+  }
+
+  .item-user {
+    height: 20rem;
+  }
+
+  .image-detail-avatar {
+    width: 76px;
+    height: 76px;
+  }
+
+  .option-setting {
+    gap: 60px;
   }
 }
 
@@ -126,7 +317,7 @@
     background: #156a1a;
   }
   .layout-detail {
-    width: 20%;
+    width: 34rem;
     height: 90%;
   }
 
@@ -165,7 +356,7 @@
   }
 
   .btns {
-    min-width: 300px !important;
+    min-width: 450px !important;
   }
   .btns img:nth-child(2n + 1) {
     width: 85px !important;
@@ -201,5 +392,10 @@
 
   .size-hight {
     width: 60px;
+  }
+
+  .image-detail-avatar {
+    width: 60px;
+    height: 60px;
   }
 }

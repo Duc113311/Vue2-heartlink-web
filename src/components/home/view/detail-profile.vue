@@ -28,19 +28,15 @@
           class="icon-close-infor cursor-pointer absolute right-4"
           @click="onClickHideProfile()"
         >
-          <img
-            src="@/assets/icon/bt_close_infor.svg"
-            class="w-16"
-            alt=""
-            srcset=""
-          />
+          <img src="@/assets/icon/bt_close_infor.svg" class="w-16" />
         </div>
       </div>
-      <div class="h-2/4 w-full text-white">
+      <div class="h-2/4 w-full">
         <div class="w-full p-2">
           <div class="flex bh-margin-title">
             <div class="title-user">
-              {{ this.userParam.firstName }}<span>, 25</span>
+              {{ this.userParam.firstName
+              }}<span>, {{ this.userParam.age }}</span>
             </div>
             <img src="@/assets/icon/ic_infor.svg" width="30" alt="" />
           </div>
@@ -49,7 +45,7 @@
           </div>
           <div class="flex bh-margin-description">
             <img src="@/assets/icon/ic_location.svg" alt="" />
-            <span>2 km away</span>
+            <span>{{ this.userParam.location }} km away</span>
           </div>
         </div>
         <BhHorizontalLine></BhHorizontalLine>
@@ -118,7 +114,7 @@
       </div>
     </div>
     <div class="absolute bt-like-count right-4">
-      <div class="number-like absolute">17</div>
+      <div class="number-like absolute">{{ this.userParam.complete }}</div>
       <img
         src="@/assets/icon/bt_like_count.svg"
         class="w-20"

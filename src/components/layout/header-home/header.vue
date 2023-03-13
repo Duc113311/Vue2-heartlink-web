@@ -24,5 +24,6 @@ export default {
 <style lang="css">
 .header-page {
   height: 12%;
+  border-bottom: 1px solid #343b4b;
 }
 </style>

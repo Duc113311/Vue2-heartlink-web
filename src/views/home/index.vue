@@ -81,14 +81,14 @@ export default {
   async created() {
     const paramUser = {
       userId: localStorage.userId,
-      latitude: localStorage.userId,
-      longitude: localStorage.userId,
+      latitude: localStorage.latitude,
+      longitude: localStorage.longitude,
       page: 1,
-      pageNumber: 20,
+      pageNumber: 100,
       startAge: 18,
       endAge: 55,
       showMeGender: localStorage.showMeGender,
-      location: 80,
+      location: 100,
     };
     await this.getAllListUserProfile(paramUser);
     setTimeout(() => {
@@ -113,7 +113,12 @@ export default {
 
     async onShowDetailUser(val) {
       console.log(val);
-      await this.getDetailInforUser(val);
+      const dataValue = {
+        userId: val,
+        latitude: localStorage.latitude,
+        longitude: localStorage.longitude,
+      };
+      await this.getDetailInforUser(dataValue);
       this.isShowDetail = true;
     },
   },
@@ -143,43 +148,6 @@ export default {
   overflow: hidden;
 }
 
-.nope-pointer,
-.like-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  width: 64px;
-  height: 64px;
-}
-
-.nope-pointer {
-  right: 10px;
-}
-
-.like-pointer {
-  left: 10px;
-}
-
-.super-pointer {
-  position: absolute;
-  z-index: 1;
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 112px;
-  height: 78px;
-}
-
-.rewind-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  right: 10px;
-  width: 112px;
-  height: 78px;
-}
-
 .pic {
   width: 100%;
   height: 100%;
@@ -200,11 +168,6 @@ export default {
 }
 .title-boy {
   grid-template-columns: 5fr 1fr;
-}
-
-.bt-img {
-  background-color: white;
-  width: 70px;
 }
 
 .bt-option {

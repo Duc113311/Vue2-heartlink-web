@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- body -->
-    <div class="w-full body-likes">
+    <div v-show="paramLikeForYous !== 0" class="w-full body-likes">
       <div class="w-full h-full" v-if="isShowComponent">
         <PeopleLikes></PeopleLikes>
       </div>
@@ -28,16 +28,23 @@
       </div>
     </div>
 
+    <div class="w-full h-full" v-show="paramLikeForYous === 0">
+      <NoOneLike></NoOneLike>
+    </div>
+
     <Footer></Footer>
   </div>
 </template>
 
 <script>
+import NoOneLike from "../../components/like-topic/default/no-one-like";
 import LikeForYou from "../../components/like-topic/for-you/like-for-you";
 import PeopleLikes from "../../components/like-topic/99-like/people-likes";
 import Footer from "../../components/layout/footer-home/footer";
+import { mapActions } from "vuex";
 export default {
   components: {
+    NoOneLike,
     LikeForYou,
     PeopleLikes,
     Footer,
@@ -51,7 +58,10 @@ export default {
     };
   },
 
+  computed: {},
+
   methods: {
+    ...mapActions(["getListDataLikedForYou"]),
     onShowLikes(val) {
       this.isShowComponent = val;
       this.isActiveLike = val;
@@ -61,7 +71,18 @@ export default {
       this.isShowComponent = val;
       this.isActiveLike = val;
     },
+
+    paramLikeForYous() {
+      return this.$store.state.likeTopicModule.listLikeForYous.length;
+    },
   },
+
+  async created() {
+    const userId = localStorage.userId;
+    await this.getListDataLikedForYou(userId);
+  },
+
+  mounted() {},
 };
 </script>
 

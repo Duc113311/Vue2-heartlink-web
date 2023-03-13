@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="w-full flex items-center h-14 justify-center p-2 description-no-padding"
+      class="w-full flex items-center h-14 justify-center p-4 mt-3 description-no-padding"
     >
       <span>Upgrade to Gold to see people who are interested in you</span>
     </div>
@@ -15,7 +15,7 @@
             alt=""
           />
         </div>
-        <div class="w-full items-center text-white">
+        <div class="w-full items-center text-describe">
           No one likes you yet. Done't worry, make sure you complete your
           profile to other find you faster
         </div>

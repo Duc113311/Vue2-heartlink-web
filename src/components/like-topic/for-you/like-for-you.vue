@@ -1,9 +1,9 @@
 <template>
   <div class="w-full h-full relative">
     <div class="w-full p-5">Recently Active</div>
-    <div class="w-full h-full p-3 board">
-      <div class="grid items-center list-likes h-full">
-        <!-- <div class="item-user m-3 relative overflow-hidden">
+    <div class="w-full p-3 h-likes">
+      <div class="items-center list-likes grid h-full">
+        <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
             <div class="name">Kiều Kiều , <span>18</span></div>
             <div class="flex padding-describe">
@@ -41,13 +41,28 @@
           <div
             class="bg-background-shadow absolute bottom-0 w-full h-full"
           ></div>
-        </div> -->
+        </div>
+        <div class="item-user m-3 relative overflow-hidden">
+          <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
+            <div class="name">Trang Hà , <span>25</span></div>
+            <div class="flex padding-describe">
+              <BhActivateLike></BhActivateLike>Recently active
+            </div>
+          </div>
+          <div class="bg-shadow w-full h-full"></div>
+          <div
+            class="bg-background-shadow absolute bottom-0 w-full h-full"
+          ></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BhActivateLike from "@/components/bh-element-ui/button/bh-activateLike.vue";
+
+BhActivateLike;
 export default {
   name: "like-for-you",
 
@@ -62,7 +77,6 @@ export default {
 <style lang="css">
 .item-user {
   width: 90%;
-  height: 93%;
   border-radius: 10px;
   background-image: url("../../../assets/image-dating/uikoria.jpg");
   background-position: center;

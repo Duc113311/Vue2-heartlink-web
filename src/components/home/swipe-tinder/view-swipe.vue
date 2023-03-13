@@ -29,7 +29,9 @@
           <button
             v-for="data in scope.data.avatars"
             :key="data.id"
-            class="bt-img p-0.5 rounded-lg mr-0.5"
+            :id="data.id"
+            :class="data.id === 0 ? 'active-image' : 'no-active'"
+            class="bt-img imageAvatar p-0.5 rounded-lg mr-0.5 no-active"
             @click="onClickNextImage(data)"
           ></button>
         </div>
@@ -44,27 +46,32 @@
                 >
                   {{ scope.data.firstName }},
                 </div>
-                <div class="mr-3">25</div>
+                <div class="mr-3">{{ scope.data.age }}</div>
                 <div
                   class="flex justify-center items-center cursor-pointer"
-                  @click="onDetailInfor(scope.data.userId)"
+                  @click="onDetailInfor(scope.data?.userId)"
                 >
                   <i class="fa-solid fa-circle-info text-xl"></i>
                 </div>
               </div>
-              <span class="font-describe">Tell me about yourself</span><br />
+              <span class="font-describe">{{ scope.data?.about }}</span
+              ><br />
               <div class="flex">
-                <div class="mr-2"><i class="fa-solid fa-location-dot"></i></div>
-                <span class="font-describe"> 2 km away</span>
+                <div class="mr-2">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <span class="font-describe">
+                  {{ scope.data?.locations }} km away</span
+                >
               </div>
             </div>
-            <div class="w-30">
+            <div class="w-20 absolute bottom-24 right-0">
               <img
                 class="cursor-pointer"
                 src="@/assets/icon/bt_like_count.svg"
-                alt=""
-                srcset=""
+                width="70"
               />
+              <span class="h-complete">{{ scope.data.complete }}</span>
             </div>
           </div>
         </div>
@@ -80,16 +87,25 @@
         </div>
       </template>
 
-      <div class="like-pointer" slot="like">LIKE</div>
-      <div class="nope-pointer" slot="nope">NOPE</div>
-      <div class="super-pointer" slot="super">SUPER</div>
-      <div class="rewind-pointer" slot="rewind">REWIND</div>
+      <div class="like-pointer icon-tinder" slot="like">LIKE</div>
+      <div class="nope-pointer icon-tinder" slot="nope">NOPE</div>
+      <div class="super-pointers icon-tinder" slot="super">SUPER</div>
     </Tinder>
+
+    <div
+      v-show="listDataUser.length === 0"
+      class="w-full h-full flex justify-center items-center"
+    >
+      <div class="text-center">
+        <img src="@/assets/icon/art_meet_people.svg" width="150" />
+        <div class="padding-describe">No one user</div>
+      </div>
+    </div>
 
     <div>
       <div class="btns">
         <img src="@/assets/icon/bt_back.svg" @click="decide('rewind')" />
-        <img src="@/assets/icon/bt_nope.svg" @click="sdecide('nope')" />
+        <img src="@/assets/icon/bt_nope.svg" @click="decide('nope')" />
         <img src="@/assets/icon/bt_super_like.svg" @click="decide('super')" />
         <img src="@/assets/icon/bt_like.svg" @click="decide('like')" />
         <img src="@/assets/icon/bt_boost.svg" @click="decide('help')" />
@@ -119,6 +135,7 @@ export default {
     ...mapState("userProfileList"),
 
     listDataUser() {
+      debugger;
       return this.$store.state.userModule.userProfileList;
     },
 
@@ -127,6 +144,7 @@ export default {
     },
 
     idImage() {
+      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
   },
@@ -139,9 +157,14 @@ export default {
     },
     nextImageLeft(value, userId) {
       console.log(value);
+      debugger;
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
 
       if (idImage) {
+        document.getElementById(idImage).classList.remove("active-image");
+        document
+          .getElementById(parseInt(idImage - 1))
+          .classList.add("active-image");
         this.isActiveImag = false;
 
         this.setLeftRightAvatar({
@@ -154,23 +177,32 @@ export default {
 
     nextImageRight(value, userId) {
       console.log(value);
-
+      debugger;
       this.isActiveImag = false;
 
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
-
+      debugger;
       if (!idImage) {
+        document.getElementById(0).classList.remove("active-image");
+        document.getElementById(1).classList.add("active-image");
         this.setLeftRightAvatar({
           idImage: value[0].id,
           statusNext: true,
           userId: userId,
         });
       } else {
-        this.setLeftRightAvatar({
-          idImage: idImage,
-          statusNext: true,
-          userId: userId,
-        });
+        if (document.getElementById(parseInt(idImage + 1)) !== null) {
+          document.getElementById(idImage).classList.remove("active-image");
+
+          document
+            .getElementById(parseInt(idImage + 1))
+            .classList.add("active-image");
+          this.setLeftRightAvatar({
+            idImage: idImage,
+            statusNext: true,
+            userId: userId,
+          });
+        }
       }
     },
 
@@ -179,6 +211,9 @@ export default {
       this.$emit("onShowDetailUser", value);
     },
     onSubmit({ item }) {
+      this.setUrlNameAvatarUser("");
+      this.isActiveImag = true;
+
       this.history.push(item);
     },
     async decide(choice) {
@@ -188,11 +223,18 @@ export default {
           this.$refs.tinder.rewind([this.history.pop()]);
         }
       } else if (choice === "help") {
-        window.open("https://shanlh.github.io/vue-tinder");
+        console.log("tính năng đang phát triển");
       } else {
         this.$refs.tinder.decide(choice);
       }
     },
+  },
+
+  mounted() {
+    debugger;
+    // const documentImage = document.getElementsByClassName("imageAvatar");
+    // documentImage[0].classList.add("active-image");
+    // documentImage[0].classList.remove("no-active");
   },
 };
 </script>
@@ -211,33 +253,38 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
-
-.nope-pointer,
-.like-pointer {
+.icon-tinder {
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
   position: absolute;
-  z-index: 1;
-  top: 20px;
-  width: 64px;
-  height: 64px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.like-pointer {
+  top: 87px;
+  right: 15rem;
+  color: #fd5d65;
+  border: 4px solid #fd5d65;
+  transform: rotate(-45deg);
 }
 
 .nope-pointer {
-  right: 10px;
+  top: 76px;
+  left: 15rem;
+  transform: rotate(45deg);
+  color: #f92f2b;
+  border: 4px solid #f92f2b;
 }
 
-.like-pointer {
-  left: 10px;
-}
-
-.super-pointer {
-  position: absolute;
-  z-index: 1;
+.super-pointers {
   bottom: 80px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 112px;
-  height: 78px;
+  left: 7rem;
+  right: 7rem;
+  color: #01de9b;
+  border: 4px solid #01de9b;
 }
 
 .rewind-pointer {
@@ -245,8 +292,6 @@ export default {
   z-index: 1;
   top: 20px;
   right: 10px;
-  width: 112px;
-  height: 78px;
 }
 
 .pic {
@@ -272,7 +317,6 @@ export default {
 }
 
 .bt-img {
-  background-color: white;
   width: 70px;
 }
 
@@ -351,15 +395,22 @@ export default {
   -webkit-tap-highlight-color: transparent;
 }
 
-.btns img:nth-child(2n + 1) {
-  width: 68px !important;
-}
-
-.btns img:nth-child(2n) {
-  width: 80px !important;
-}
-
 .btns img:nth-last-child(1) {
   margin-right: 0;
+}
+
+.active-image {
+  background-color: white !important;
+}
+
+.no-active {
+  background-color: #ffffff8f;
+}
+
+.h-complete {
+  position: absolute;
+  bottom: 0px;
+  padding: 21px;
+  font-size: 26px;
 }
 </style>

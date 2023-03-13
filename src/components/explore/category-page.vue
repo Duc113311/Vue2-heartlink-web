@@ -92,11 +92,6 @@ export default {
   grid-template-columns: 5fr 1fr;
 }
 
-.bt-img {
-  background-color: white;
-  width: 70px;
-}
-
 .bt-option {
   grid-template-columns: auto auto auto auto auto;
   gap: 35px;
