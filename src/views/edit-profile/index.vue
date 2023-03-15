@@ -387,6 +387,9 @@ export default {
       nameJob: "",
       valDefaultAbout: "",
       isShowCompleteAbout: false,
+      completeLifeStyle: false,
+      isShowCompleteJobTitle: false,
+      isShowComplete: false,
       isShowCompleteLifeStyle: false,
     };
   },
