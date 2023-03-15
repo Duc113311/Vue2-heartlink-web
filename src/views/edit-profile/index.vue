@@ -51,14 +51,15 @@
           <div class="w-full">
             <div class="w-full flex justify-between p-3 bh-title">
               <div>ABOUT ME</div>
-              <div>+22%</div>
+              <div v-show="!isShowCompleteAbout">+22%</div>
             </div>
             <div>
               <el-input
                 type="textarea"
                 :rows="2"
                 placeholder="About me - maximise 500 words"
-                v-model="textarea"
+                v-model="valueAbout"
+                @input="onChangeAbout()"
               >
               </el-input>
             </div>
@@ -371,6 +372,7 @@
 import Footer from "../../components/layout/footer-home/footer";
 import MyPhotos from "../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
+import { mapActions } from "vuex";
 export default {
   components: {
     Footer,
@@ -382,8 +384,10 @@ export default {
   data() {
     return {
       value2: true,
-      textarea: "",
       nameJob: "",
+      valDefaultAbout: "",
+      isShowCompleteAbout: false,
+      isShowCompleteLifeStyle: false,
     };
   },
 
@@ -391,14 +395,59 @@ export default {
     listDataInterests() {
       return [];
     },
+
+    // valueAbout() {
+    //   const about = this.$store.state.userModule.userProfileDetail?.about;
+    //   debugger;
+    //   if (about !== "") {
+    //     return about;
+    //   } else {
+    //     return this.valDefaultAbout;
+    //   }
+    // },
+
+    valueAbout: {
+      // getter
+      get() {
+        debugger;
+
+        const about = this.$store.state.userModule.userProfileDetail?.about;
+
+        return about ? about : this.valDefaultAbout;
+      },
+      // setter
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.valDefaultAbout = newValue;
+      },
+    },
   },
 
   methods: {
+    ...mapActions(["getDetailInforUser"]),
     onBackEditProfile(val) {
       console.log(val);
       this.$router.push({ path: "/setting" });
     },
+
+    onChangeAbout() {
+      debugger;
+      this.isShowCompleteAbout = true;
+    },
   },
+
+  async created() {
+    const userId = localStorage.userId;
+    const dataValue = {
+      userId: userId,
+      latitude: localStorage.latitude,
+      longitude: localStorage.longitude,
+    };
+    await this.getDetailInforUser(dataValue);
+  },
+
+  mounted() {},
 };
 </script>
 
@@ -408,14 +457,15 @@ export default {
 }
 
 .header-edit {
-  height: 10%;
+  height: 8%;
 }
 
 .form-edit {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
   overflow-y: scroll; /* Add the ability to scroll */
-  height: 79%;
+  height: 84%;
+  padding: 10px;
 }
 
 .form-edit::-webkit-scrollbar {

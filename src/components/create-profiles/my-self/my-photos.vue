@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <div v-show="!isTitle" class="mt-10">
       <div class="padding-title">My Photos are</div>
       <span
@@ -12,9 +12,13 @@
     </div>
 
     <!-- Image -->
-    <div>
+    <div class="">
       <div class="mt-4 grid grid-cols-3 gap-4">
-        <div v-for="fileList in fileListValue" :key="fileList.id">
+        <div
+          class="h-image-detail"
+          v-for="fileList in fileListValue"
+          :key="fileList.id"
+        >
           <div class="dash-bor relative">
             <div class="wrapper">
               <div class="file-upload">
@@ -225,28 +229,50 @@ export default {
     },
   },
   mounted() {
-    const image = this.$store.state.userModule.user_profile.avatars;
-    this.$emit("onShowSkips", false);
-    for (let index = 0; index < image.length; index++) {
-      const element = image[index];
-      const img = document.getElementById(element.id);
-      const avatar = document.getElementById("avatar" + element.id);
-      const close = document.getElementById("close" + element.id);
-      // img.setAttribute("src", url);
-      setTimeout(() => {
-        this.loading = false;
-      }, 1000);
-      let bg = "url('" + element.url + "')";
+    debugger;
 
-      img.style.backgroundImage = bg;
-      avatar.style.display = "block";
-      close.style.display = "block";
-    }
+    if (this.$route.name !== "edit-profile") {
+      const image = this.$store.state.userModule.user_profile.avatars;
+      this.$emit("onShowSkips", false);
+      for (let index = 0; index < image.length; index++) {
+        const element = image[index];
+        const img = document.getElementById(element.id);
+        const avatar = document.getElementById("avatar" + element.id);
+        const close = document.getElementById("close" + element.id);
+        // img.setAttribute("src", url);
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
+        let bg = "url('" + element.url + "')";
 
-    if (image.length < 2) {
-      this.$emit("onStatusActive", false);
+        img.style.backgroundImage = bg;
+        avatar.style.display = "block";
+        close.style.display = "block";
+      }
+
+      if (image.length < 2) {
+        this.$emit("onStatusActive", false);
+      } else {
+        this.$emit("onStatusActive", true);
+      }
     } else {
-      this.$emit("onStatusActive", true);
+      debugger;
+      const image = this.$store.state.userModule.userProfileDetail?.avatars;
+      for (let index = 0; index < image.length; index++) {
+        const element = image[index];
+        const img = document.getElementById(element.id);
+        const avatar = document.getElementById("avatar" + element.id);
+        const close = document.getElementById("close" + element.id);
+        // img.setAttribute("src", url);
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
+        let bg = "url('" + element.url + "')";
+
+        img.style.backgroundImage = bg;
+        avatar.style.display = "block";
+        close.style.display = "block";
+      }
     }
   },
 };
@@ -298,7 +324,7 @@ export default {
   justify-content: center;
 }
 .wrapper .file-upload {
-  height: 165px;
+  height: 190px;
   width: 200px;
   border-radius: 10px;
   position: relative;
@@ -323,7 +349,7 @@ input[type="file"] {
 }
 
 .img-avatar {
-  height: 175px;
+  height: 100%;
   width: 100%;
   border-radius: 10px;
   position: absolute;
