@@ -8,10 +8,10 @@
         <div
           class="w-full justify-between flex items-center pl-5 pr-5 h-title-close"
         >
-          <div>
+          <div @click="onChangeCancel()">
             <i class="fa-solid fa-xmark size-icon-default"></i>
           </div>
-          <div>
+          <div @click="onChangeSaveLife()">
             <i class="fa-solid fa-check size-icon-default"></i>
           </div>
         </div>
@@ -21,15 +21,14 @@
           >
             <!-- Title -->
             <div class="w-full">
-              <div class="padding-title">Thông tin cơ bản</div>
+              <div class="padding-title">Basic information</div>
               <div
                 class="padding-describe"
                 v-bind:class="[
                   isDarkTheme ? 'dark-theme-describe' : 'dark-theme-describe',
                 ]"
               >
-                Thêm nhiều thông tin hơn để mọi người thấy hình ảnh tuyệt vời
-                của bạn
+                Add more info so people can see your amazing pictures
               </div>
             </div>
             <!-- Cung hoàng đạo -->
@@ -58,6 +57,7 @@
                 <button
                   v-for="(item, index) in listEducationParams"
                   :key="index"
+                  :id="index"
                   class="oftion-interests mr-3 mb-3 p-3 text-white education"
                   @click="onChoseEducation(index)"
                 >
@@ -76,6 +76,7 @@
                 <button
                   v-for="(item, index) in listPersonalityParams"
                   :key="index"
+                  :id="index"
                   class="oftion-interests mr-3 mb-3 p-3 text-white personality"
                   @click="onChosePersonality(index)"
                 >
@@ -94,6 +95,7 @@
                 <button
                   v-for="(item, index) in listChildrenParams"
                   :key="index"
+                  :id="index"
                   class="oftion-interests mr-3 mb-3 p-3 text-white children"
                   @click="onChoseChildren(index)"
                 >
@@ -110,6 +112,7 @@
                 <button
                   v-for="(item, index) in listSmokeParams"
                   :key="index"
+                  :id="index"
                   class="oftion-interests mr-3 mb-3 p-3 text-white smoke"
                   @click="onChoseSmoke(index)"
                 >
@@ -126,8 +129,9 @@
                 <button
                   v-for="(item, index) in listFavoritePetParams"
                   :key="index"
-                  class="oftion-interests mr-3 mb-3 p-3 text-white favorite"
-                  @click="onChoseFavorite(index)"
+                  :id="index"
+                  class="oftion-interests mr-3 mb-3 p-3 text-white pets"
+                  @click="onChoseFavoritePets(index)"
                 >
                   {{ item }}
                 </button>
@@ -141,6 +145,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "form-life-style",
 
@@ -186,11 +191,12 @@ export default {
       return this.$store.state.userModule.listSmokes;
     },
     listFavoritePetParams() {
-      return this.$store.state.userModule.listFavoritePet;
+      return this.$store.state.userModule.listPets;
     },
   },
 
   methods: {
+    ...mapMutations(["setLifeStyle"]),
     onChoseZodiac(val) {
       // const keyZodiacParam = this.$store.state.userModule.keyZodiac;
 
@@ -205,6 +211,10 @@ export default {
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
         if (val === element.id) {
+          const data = {
+            nameZodiac: element.innerText,
+          };
+          this.setLifeStyle(data);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -212,15 +222,80 @@ export default {
       }
     },
 
-    onChoseEducation() {},
+    onChoseEducation(val) {
+      debugger;
+      const documentZodiacs = document.getElementsByClassName("education");
+      for (let index = 0; index < documentZodiacs.length; index++) {
+        const element = documentZodiacs[index];
+        if (val === element.id) {
+          const data = {
+            nameZodiac: element.innerText,
+          };
+          this.setLifeStyle(data);
+          element.classList.add("bg-active");
+        } else {
+          element.classList.remove("bg-active");
+        }
+      }
+    },
 
-    onChosePersonality() {},
+    onChosePersonality(val) {
+      const documentZodiacs = document.getElementsByClassName("personality");
+      for (let index = 0; index < documentZodiacs.length; index++) {
+        const element = documentZodiacs[index];
+        if (val === element.id) {
+          const data = {
+            nameZodiac: element.innerText,
+          };
+          this.setLifeStyle(data);
+          element.classList.add("bg-active");
+        } else {
+          element.classList.remove("bg-active");
+        }
+      }
+    },
 
-    onChoseSmoke() {},
+    onChoseSmoke(val) {
+      const documentZodiacs = document.getElementsByClassName("smoke");
+      for (let index = 0; index < documentZodiacs.length; index++) {
+        const element = documentZodiacs[index];
+        if (val === element.id) {
+          const data = {
+            nameZodiac: element.innerText,
+          };
+          this.setLifeStyle(data);
+          element.classList.add("bg-active");
+        } else {
+          element.classList.remove("bg-active");
+        }
+      }
+    },
 
-    onChoseFavorite() {},
+    onChoseFavoritePets(val) {
+      const documentZodiacs = document.getElementsByClassName("pets");
+      for (let index = 0; index < documentZodiacs.length; index++) {
+        const element = documentZodiacs[index];
+        if (val === element.id) {
+          const data = {
+            nameZodiac: element.innerText,
+          };
+          this.setLifeStyle(data);
+          element.classList.add("bg-active");
+        } else {
+          element.classList.remove("bg-active");
+        }
+      }
+    },
 
     onChoseChildren() {},
+
+    onChangeCancel() {
+      this.$emit("onClickCancelLife", false);
+    },
+
+    onChangeSaveLife() {
+      this.$emit("onClickSaveLife", false);
+    },
   },
 };
 </script>

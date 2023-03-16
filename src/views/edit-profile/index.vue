@@ -99,7 +99,7 @@
                 >
                   Virgo
                 </div>
-                <div class="cursor-pointer">
+                <div class="cursor-pointer" @click="onShowFormLife">
                   <i
                     class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
                   ></i>
@@ -175,7 +175,7 @@
         </div>
 
         <!-- Job title -->
-        <div class="w-full flex items-center">
+        <!-- <div class="w-full flex items-center">
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
               <div>JOB TITLE</div>
@@ -185,16 +185,20 @@
               <el-input placeholder="Job title" v-model="nameJob"></el-input>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- Company -->
         <div class="w-full flex items-center">
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
               <div>JOB TITLE</div>
-              <div>+3%</div>
+              <div v-show="!completeJobTitle">+3%</div>
             </div>
             <div class="w-full">
-              <el-input placeholder="Add company" v-model="nameJob"></el-input>
+              <el-input
+                placeholder="Add job title"
+                v-model="nameJobTitle"
+                @input="onChangeJobTitle()"
+              ></el-input>
             </div>
           </div>
         </div>
@@ -203,12 +207,13 @@
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
               <div>SCHOOL</div>
-              <div>+3%</div>
+              <div v-show="!completeSchool">+3%</div>
             </div>
             <div class="w-full">
               <el-input
                 placeholder="Add university"
-                v-model="nameJob"
+                v-model="nameSchool"
+                @input="onChangeSchool()"
               ></el-input>
             </div>
           </div>
@@ -218,10 +223,14 @@
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
               <div>LIVING IN</div>
-              <div>+3%</div>
+              <div v-show="!completeLiving">+3%</div>
             </div>
             <div class="w-full">
-              <el-input placeholder="Add city" v-model="nameJob"></el-input>
+              <el-input
+                placeholder="Add city"
+                v-model="nameLiving"
+                @input="onChangeLiving()"
+              ></el-input>
             </div>
           </div>
         </div>
@@ -365,8 +374,14 @@
         <Footer></Footer>
       </div>
     </div>
-    <div class="w-full h-full absolute top-0 left-0 z-30">
-      <FormLifeStyle></FormLifeStyle>
+    <div
+      v-show="isShowLifeStyle"
+      class="w-full h-full absolute top-0 left-0 z-30"
+    >
+      <FormLifeStyle
+        @onClickCancelLife="onClickCancelLife"
+        @onClickSaveLife="onClickSaveLife"
+      ></FormLifeStyle>
     </div>
   </div>
 </template>
@@ -398,16 +413,14 @@ export default {
       isShowCompleteLifeStyle: false,
       dialogTableVisible: false,
 
-      listDatas: [
-        "Virod",
-        "Red",
-        "Dog",
-        "age",
-        "Height School",
-        "Height School",
-        "reading",
-        "Listing",
-      ],
+      isShowLifeStyle: false,
+      completeJobTitle: false,
+      completeSchool: false,
+      completeLiving: false,
+
+      nameJobTitle: "",
+      nameSchool: "",
+      nameLiving: "",
     };
   },
 
@@ -445,7 +458,15 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getDetailInforUser"]),
+    ...mapActions([
+      "getDetailInforUser",
+      "getDataSmokes",
+      "getDataPets",
+      "getDataZodiacs",
+      "getDataEducations",
+      "getDataPreferences",
+      "getDataPersonalitys",
+    ]),
     onBackEditProfile(val) {
       console.log(val);
       this.$router.push({ path: "/setting" });
@@ -455,6 +476,24 @@ export default {
       debugger;
       this.isShowCompleteAbout = true;
     },
+
+    onClickCancelLife(val) {
+      debugger;
+      this.isShowLifeStyle = val;
+    },
+    onClickSaveLife(val) {
+      this.isShowLifeStyle = val;
+    },
+
+    onShowFormLife() {
+      this.isShowLifeStyle = true;
+    },
+
+    onChangeJobTitle() {},
+
+    onChangeSchool() {},
+
+    onChangeLiving() {},
   },
 
   async created() {
@@ -465,6 +504,35 @@ export default {
       longitude: localStorage.longitude,
     };
     await this.getDetailInforUser(dataValue);
+
+    await this.getDataZodiacs({
+      entityName: "zodiacs",
+      entityId: "en",
+    });
+    await this.getDataSmokes({
+      entityName: "smokes",
+      entityId: "en",
+    });
+
+    await this.getDataPets({
+      entityName: "pets",
+      entityId: "en",
+    });
+
+    await this.getDataPersonalitys({
+      entityName: "personalitys",
+      entityId: "en",
+    });
+
+    await this.getDataEducations({
+      entityName: "educations",
+      entityId: "en",
+    });
+
+    await this.getDataPreferences({
+      entityName: "dietary_preferences",
+      entityId: "en",
+    });
   },
 
   mounted() {},

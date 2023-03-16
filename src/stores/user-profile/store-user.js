@@ -19,25 +19,18 @@ const state = {
   urlAvatarUser: "",
   userProfileList: [],
 
-  listZodiacs: {
-    straight: "Straight",
-    queer: "Queer",
-    pansexual: "Pansexual",
-    lesbian: "Lesbian",
-    demisexual: "Demisexual",
-    questioning: "Questioning",
-    asexual: "Asexual",
-    gay: "Gay",
-    bisexual: "Bisexual",
-  },
+  listZodiacs: {},
 
-  listEducations: ["Bachelors", "High School"],
-  listPersonalitys: ["ENFJ", "ENFP"],
-  listChildrens: [],
-  listSmokes: [],
-  listFavoritePet: [],
+  listEducations: {},
+  listPersonalitys: {},
+  listDietaryPreferences: {},
+  listPets: {},
+  listSmokes: {},
+  listFavoritePet: {},
 
   keyZodiac: "",
+
+  lifeStyle: {},
 };
 
 const getters = {};
@@ -193,6 +186,17 @@ const actions = {
       .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
       .then((response) => {
         commit("setDataSmokes", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getFavoritePet({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setListFavoritePet", response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -415,8 +419,38 @@ const mutations = {
 
   // life
 
-  setChoseZodiac(state, data) {
-    state.keyZodiac = data;
+  setDataZodiacs(state, data) {
+    state.listZodiacs = data;
+  },
+
+  setDataEducations(state, data) {
+    state.listEducations = data;
+  },
+
+  setDataPreferences(state, data) {
+    state.listDietaryPreferences = data;
+  },
+
+  setDataPersonalitys(state, data) {
+    state.listPersonalitys = data;
+  },
+
+  setDataPets(state, data) {
+    state.listPets = data;
+  },
+
+  setDataSmokes(state, data) {
+    state.listSmokes = data;
+  },
+
+  setListFavoritePet(state, data) {
+    state.listFavoritePet = data;
+  },
+
+  setLifeStyle(state, data) {
+    debugger;
+    // Object.assign(lifeStyle, { data })
+    state.lifeStyle = { ...state.lifeStyle, ...data };
   },
 };
 
