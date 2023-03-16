@@ -85,7 +85,7 @@
 
         <!-- life style -->
         <div class="w-full flex justify-center items-center">
-          <div class="w-full">
+          <div class="w-full relative">
             <div class="w-full flex justify-between p-3 bh-title">
               <div class="">LIFE STYLE</div>
               <div class="">+22%</div>
@@ -365,10 +365,14 @@
         <Footer></Footer>
       </div>
     </div>
+    <div class="w-full h-full absolute top-0 left-0 z-30">
+      <FormLifeStyle></FormLifeStyle>
+    </div>
   </div>
 </template>
 
 <script>
+import FormLifeStyle from "../../components/profile/edit-profile/form-life-style";
 import Footer from "../../components/layout/footer-home/footer";
 import MyPhotos from "../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
@@ -378,6 +382,7 @@ export default {
     Footer,
     MyPhotos,
     BhBack,
+    FormLifeStyle,
   },
   name: "edit-profile",
 
@@ -391,6 +396,18 @@ export default {
       isShowCompleteJobTitle: false,
       isShowComplete: false,
       isShowCompleteLifeStyle: false,
+      dialogTableVisible: false,
+
+      listDatas: [
+        "Virod",
+        "Red",
+        "Dog",
+        "age",
+        "Height School",
+        "Height School",
+        "reading",
+        "Listing",
+      ],
     };
   },
 
@@ -475,17 +492,6 @@ export default {
   display: none;
 }
 
-.oftion-interests:hover {
-  background-color: #5b566b;
-  color: white;
-  border: 1px solid white;
-}
-
-.oftion-interests {
-  border: 1px solid white;
-  border-radius: 8px;
-}
-
 .style-switch {
   display: flex;
   justify-content: space-between;
@@ -561,5 +567,15 @@ export default {
   border-radius: 4px;
   background-color: #8fada5;
   color: #ffffff;
+}
+
+.h-data-life::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.h-data-life {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>

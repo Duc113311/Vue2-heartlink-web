@@ -18,6 +18,26 @@ const state = {
   userProfileDetail: {},
   urlAvatarUser: "",
   userProfileList: [],
+
+  listZodiacs: {
+    straight: "Straight",
+    queer: "Queer",
+    pansexual: "Pansexual",
+    lesbian: "Lesbian",
+    demisexual: "Demisexual",
+    questioning: "Questioning",
+    asexual: "Asexual",
+    gay: "Gay",
+    bisexual: "Bisexual",
+  },
+
+  listEducations: ["Bachelors", "High School"],
+  listPersonalitys: ["ENFJ", "ENFP"],
+  listChildrens: [],
+  listSmokes: [],
+  listFavoritePet: [],
+
+  keyZodiac: "",
 };
 
 const getters = {};
@@ -105,6 +125,74 @@ const actions = {
       .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
       .then((response) => {
         commit("setListDataInterests", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  // Life style
+
+  async getDataZodiacs({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataZodiacs", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getDataEducations({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataEducations", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getDataPreferences({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataPreferences", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getDataPersonalitys({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataPersonalitys", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getDataPets({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataPets", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  async getDataSmokes({ commit }, { entityName, entityId }) {
+    await http_request
+      .get(`base/v1/get-detail?entityName=${entityName}&entityId=${entityId}`)
+      .then((response) => {
+        commit("setDataSmokes", response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -323,6 +411,12 @@ const mutations = {
     if (data === 4) {
       state.user_profile.avatars = [];
     }
+  },
+
+  // life
+
+  setChoseZodiac(state, data) {
+    state.keyZodiac = data;
   },
 };
 

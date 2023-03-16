@@ -203,6 +203,28 @@
   .option-setting {
     gap: 60px;
   }
+
+  .w-form-life {
+    width: 30rem;
+    height: 80%;
+    background-color: #434a5d;
+  }
+
+  .h-title-close {
+    height: 10%;
+  }
+
+  .h-form-data {
+    height: calc(100% - 10%);
+  }
+
+  .h-title-data {
+    height: 10%;
+  }
+
+  .h-data-life {
+    height: calc(100% - 17%);
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
