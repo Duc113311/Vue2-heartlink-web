@@ -233,6 +233,7 @@ export default {
 
     if (this.$route.name !== "edit-profile") {
       const image = this.$store.state.userModule.user_profile.avatars;
+      debugger;
       this.$emit("onShowSkips", false);
       for (let index = 0; index < image.length; index++) {
         const element = image[index];
@@ -257,7 +258,7 @@ export default {
       }
     } else {
       debugger;
-      const image = this.$store.state.userModule.userProfileDetail?.avatars;
+      const image = this.$store.state.userModule.user_profile?.avatars;
       for (let index = 0; index < image.length; index++) {
         const element = image[index];
         const img = document.getElementById(element.id);

@@ -51,7 +51,7 @@
           <div class="w-full">
             <div class="w-full flex justify-between p-3 bh-title">
               <div>ABOUT ME</div>
-              <div v-show="!isShowCompleteAbout">+22%</div>
+              <div v-show="!completeAbout">+22%</div>
             </div>
             <div>
               <el-input
@@ -97,7 +97,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  Virgo
+                  {{ zodiacParam }}
                 </div>
                 <div class="cursor-pointer" @click="onShowFormLife">
                   <i
@@ -110,7 +110,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  Dog
+                  {{ petsParam }}
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -123,7 +123,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  High school
+                  {{ educationParam }}
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -136,7 +136,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  No Smoking
+                  {{ smokeParam }}
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -149,7 +149,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  ENFJ
+                  {{ personalityParam }}
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -196,7 +196,7 @@
             <div class="w-full">
               <el-input
                 placeholder="Add job title"
-                v-model="nameJobTitle"
+                v-model="valueJobTitle"
                 @input="onChangeJobTitle()"
               ></el-input>
             </div>
@@ -212,7 +212,7 @@
             <div class="w-full">
               <el-input
                 placeholder="Add university"
-                v-model="nameSchool"
+                v-model="valueSchool"
                 @input="onChangeSchool()"
               ></el-input>
             </div>
@@ -228,7 +228,7 @@
             <div class="w-full">
               <el-input
                 placeholder="Add city"
-                v-model="nameLiving"
+                v-model="valueLiving"
                 @input="onChangeLiving()"
               ></el-input>
             </div>
@@ -309,18 +309,22 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full p-2">
+                <div
+                  class="flex justify-between w-full bd-input pb-3 pt-3"
+                  @click="onChangeGender(1)"
+                >
                   <div class="bh-item-title">Men</div>
-                  <div>
+                  <div v-show="parseInt(showGender) === 1">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
-                <div class="flex justify-center w-full items-center">
-                  <div class="br-bottom"></div>
-                </div>
-                <div class="flex justify-between w-full p-2">
+
+                <div
+                  class="flex justify-between w-full pb-3 pt-3"
+                  @click="onChangeGender(0)"
+                >
                   <div class="bh-item-title">Women</div>
-                  <div>
+                  <div v-show="parseInt(showGender) === 0">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -343,7 +347,7 @@
                   <div class="bh-item-title">Don't show my age</div>
                   <div>
                     <el-switch
-                      v-model="value2"
+                      v-model="valueAge"
                       active-color="#FB5D65"
                       inactive-color="#5F6A86"
                     >
@@ -357,7 +361,7 @@
                   <div class="bh-item-title">Don't show my distance</div>
                   <div>
                     <el-switch
-                      v-model="value2"
+                      v-model="valueDistance"
                       active-color="#FB5D65"
                       inactive-color="#5F6A86"
                     >
@@ -391,7 +395,7 @@ import FormLifeStyle from "../../components/profile/edit-profile/form-life-style
 import Footer from "../../components/layout/footer-home/footer";
 import MyPhotos from "../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Footer,
@@ -403,17 +407,17 @@ export default {
 
   data() {
     return {
+      valueAge: false,
+      valueDistance: false,
       value2: true,
       nameJob: "",
       valDefaultAbout: "",
-      isShowCompleteAbout: false,
+      completeAbout: false,
       completeLifeStyle: false,
-      isShowCompleteJobTitle: false,
-      isShowComplete: false,
-      isShowCompleteLifeStyle: false,
       dialogTableVisible: false,
 
       isShowLifeStyle: false,
+
       completeJobTitle: false,
       completeSchool: false,
       completeLiving: false,
@@ -421,6 +425,12 @@ export default {
       nameJobTitle: "",
       nameSchool: "",
       nameLiving: "",
+      nameZodiac: "Trống",
+      nameSmoke: "Trống",
+      namePets: "Trống",
+      namePersonality: "Trống",
+      nameEducation: "Trống",
+      genderSetting: 0,
     };
   },
 
@@ -429,22 +439,27 @@ export default {
       return [];
     },
 
-    // valueAbout() {
-    //   const about = this.$store.state.userModule.userProfileDetail?.about;
-    //   debugger;
-    //   if (about !== "") {
-    //     return about;
-    //   } else {
-    //     return this.valDefaultAbout;
-    //   }
-    // },
+    showGender: {
+      get() {
+        debugger;
+
+        const gender = this.$store.state.userModule.user_profile?.gender;
+
+        return gender ? gender : this.genderSetting;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.genderSetting = newValue;
+      },
+    },
 
     valueAbout: {
       // getter
       get() {
         debugger;
 
-        const about = this.$store.state.userModule.userProfileDetail?.about;
+        const about = this.$store.state.userModule.user_profile?.about;
 
         return about ? about : this.valDefaultAbout;
       },
@@ -455,9 +470,136 @@ export default {
         this.valDefaultAbout = newValue;
       },
     },
+
+    valueJobTitle: {
+      get() {
+        debugger;
+
+        const about = this.$store.state.userModule.user_profile?.jobTitle;
+
+        return about ? about : this.nameJobTitle;
+      },
+      // setter
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameJobTitle = newValue;
+      },
+    },
+
+    valueSchool: {
+      get() {
+        debugger;
+
+        const about = this.$store.state.userModule.user_profile?.university;
+
+        return about ? about : this.nameSchool;
+      },
+      // setter
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameSchool = newValue;
+      },
+    },
+
+    valueLiving: {
+      get() {
+        debugger;
+
+        const about = this.$store.state.userModule.user_profile?.living;
+
+        return about ? about : this.nameLiving;
+      },
+      // setter
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameLiving = newValue;
+      },
+    },
+
+    zodiacParam: {
+      get() {
+        debugger;
+
+        const zodiacData = this.$store.state.userModule.user_profile?.zodiac;
+
+        return zodiacData ? zodiacData : this.nameZodiac;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameZodiac = newValue;
+      },
+    },
+
+    petsParam: {
+      get() {
+        debugger;
+
+        const petsFreeData =
+          this.$store.state.userModule.user_profile?.petsFree;
+
+        return petsFreeData ? petsFreeData : this.namePets;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.namePets = newValue;
+      },
+    },
+
+    educationParam: {
+      get() {
+        debugger;
+
+        const educationData =
+          this.$store.state.userModule.user_profile?.education;
+
+        return educationData ? educationData : this.nameEducation;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameEducation = newValue;
+      },
+    },
+
+    personalityParam: {
+      get() {
+        debugger;
+
+        const personalityData =
+          this.$store.state.userModule.user_profile?.typePersonality;
+
+        return personalityData ? personalityData : this.namePersonality;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.namePersonality = newValue;
+      },
+    },
+
+    smokeParam: {
+      get() {
+        debugger;
+
+        const smokeData = this.$store.state.userModule.user_profile?.smoke;
+
+        return smokeData ? smokeData : this.nameSmoke;
+      },
+      set(newValue) {
+        debugger;
+        // Note: we are using destructuring assignment syntax here.
+        this.nameSmoke = newValue;
+      },
+    },
   },
 
   methods: {
+    ...mapMutations(["setShowGenderSetting"]),
     ...mapActions([
       "getDetailInforUser",
       "getDataSmokes",
@@ -467,14 +609,31 @@ export default {
       "getDataPreferences",
       "getDataPersonalitys",
     ]),
+
+    onChangeGender(val) {
+      debugger;
+      this.setShowGenderSetting(val);
+
+      this.showGender = val;
+    },
+
     onBackEditProfile(val) {
       console.log(val);
+      debugger;
+      const profile = this.$store.state.userModule.user_profile;
+      // profile.about=this.valueAbout
+
+      console.log(profile);
       this.$router.push({ path: "/setting" });
     },
 
     onChangeAbout() {
       debugger;
-      this.isShowCompleteAbout = true;
+      if (this.valueAbout === "") {
+        this.completeAbout = false;
+      } else {
+        this.completeAbout = true;
+      }
     },
 
     onClickCancelLife(val) {
@@ -482,6 +641,13 @@ export default {
       this.isShowLifeStyle = val;
     },
     onClickSaveLife(val) {
+      const lifeData = this.$store.state.userModule.lifeStyle;
+      this.zodiacParam = lifeData.nameZodiac;
+      this.petsParam = lifeData.namePets;
+      this.educationParam = lifeData.nameEducation;
+      this.personalityParam = lifeData.namePersonality;
+      this.smokeParam = lifeData.nameSmoke;
+
       this.isShowLifeStyle = val;
     },
 
@@ -489,11 +655,30 @@ export default {
       this.isShowLifeStyle = true;
     },
 
-    onChangeJobTitle() {},
+    onChangeJobTitle() {
+      debugger;
+      if (this.valueJobTitle === "") {
+        this.completeJobTitle = false;
+      } else {
+        this.completeJobTitle = true;
+      }
+    },
 
-    onChangeSchool() {},
+    onChangeSchool() {
+      if (this.valueSchool === "") {
+        this.completeSchool = false;
+      } else {
+        this.completeSchool = true;
+      }
+    },
 
-    onChangeLiving() {},
+    onChangeLiving() {
+      if (this.valueLiving === "") {
+        this.completeLiving = false;
+      } else {
+        this.completeLiving = true;
+      }
+    },
   },
 
   async created() {

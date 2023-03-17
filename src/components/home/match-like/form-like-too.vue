@@ -99,6 +99,7 @@ export default {
       isShowConfirm: true,
       nameComfirm: "Comfirm",
       isHideComfirm: false,
+      txtValueMes: "",
     };
   },
 

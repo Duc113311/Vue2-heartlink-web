@@ -15,7 +15,9 @@ const state = {
   listInterests: [],
   isActiveId: false,
 
-  userProfileDetail: {},
+  userProfileDetail: {
+    gender: 0,
+  },
   urlAvatarUser: "",
   userProfileList: [],
 
@@ -341,6 +343,7 @@ const mutations = {
   setDetailUserProfile(state, data) {
     debugger;
     state.userProfileDetail = data;
+    state.user_profile = data;
     state.urlAvatarUser = data.avatars[0];
 
     console.log(state.userProfileDetail);
@@ -451,6 +454,11 @@ const mutations = {
     debugger;
     // Object.assign(lifeStyle, { data })
     state.lifeStyle = { ...state.lifeStyle, ...data };
+  },
+
+  setShowGenderSetting(state, data) {
+    debugger;
+    state.user_profile.gender = data;
   },
 };
 

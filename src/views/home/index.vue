@@ -11,7 +11,6 @@
             <ViewSwipe
               ref="myViewSwipe"
               @onShowDetailUser="onShowDetailUser"
-              @onSubmit="onSubmit"
             ></ViewSwipe>
 
             <!-- <ActionDating @onClickDecide="decide"></ActionDating> -->

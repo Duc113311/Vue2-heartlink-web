@@ -48,6 +48,24 @@
                 </button>
               </div>
             </div>
+
+            <!-- Pest -->
+            <div class="w-full">
+              <div class="w-full flex items-center">
+                <div class="padding-describe">What is your favorite pet?</div>
+              </div>
+              <div>
+                <button
+                  v-for="(item, index) in listFavoritePetParams"
+                  :key="index"
+                  :id="index"
+                  class="oftion-interests mr-3 mb-3 p-3 text-white pets"
+                  @click="onChoseFavoritePets(index)"
+                >
+                  {{ item }}
+                </button>
+              </div>
+            </div>
             <!-- Trình độ học vấn -->
             <div class="w-full">
               <div class="w-full flex items-center">
@@ -60,6 +78,23 @@
                   :id="index"
                   class="oftion-interests mr-3 mb-3 p-3 text-white education"
                   @click="onChoseEducation(index)"
+                >
+                  {{ item }}
+                </button>
+              </div>
+            </div>
+            <!-- Phong cách  -->
+            <div class="w-full">
+              <div class="w-full flex items-center">
+                <div class="padding-describe">Do you smoke?</div>
+              </div>
+              <div class="">
+                <button
+                  v-for="(item, index) in listSmokeParams"
+                  :key="index"
+                  :id="index"
+                  class="oftion-interests mr-3 mb-3 p-3 text-white smoke"
+                  @click="onChoseSmoke(index)"
                 >
                   {{ item }}
                 </button>
@@ -87,56 +122,22 @@
             <!-- Tính cách -->
             <div class="w-full">
               <div class="w-full flex items-center">
-                <div class="padding-describe">
-                  Do you want to have children?
-                </div>
+                <div class="padding-describe">Your personality type?</div>
               </div>
               <div class="">
                 <button
-                  v-for="(item, index) in listChildrenParams"
+                  v-for="(item, index) in listDietaryPreferenceParam"
                   :key="index"
                   :id="index"
-                  class="oftion-interests mr-3 mb-3 p-3 text-white children"
+                  class="oftion-interests mr-3 mb-3 p-3 text-white dietary-preferences"
                   @click="onChoseChildren(index)"
                 >
                   {{ item }}
                 </button>
               </div>
             </div>
-            <!-- Phong cách  -->
-            <div class="w-full">
-              <div class="w-full flex items-center">
-                <div class="padding-describe">Do you smoke?</div>
-              </div>
-              <div class="">
-                <button
-                  v-for="(item, index) in listSmokeParams"
-                  :key="index"
-                  :id="index"
-                  class="oftion-interests mr-3 mb-3 p-3 text-white smoke"
-                  @click="onChoseSmoke(index)"
-                >
-                  {{ item }}
-                </button>
-              </div>
-            </div>
+
             <!-- Thích điều j -->
-            <div class="w-full">
-              <div class="w-full flex items-center">
-                <div class="padding-describe">What is your favorite pet?</div>
-              </div>
-              <div>
-                <button
-                  v-for="(item, index) in listFavoritePetParams"
-                  :key="index"
-                  :id="index"
-                  class="oftion-interests mr-3 mb-3 p-3 text-white pets"
-                  @click="onChoseFavoritePets(index)"
-                >
-                  {{ item }}
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -184,8 +185,8 @@ export default {
     listPersonalityParams() {
       return this.$store.state.userModule.listPersonalitys;
     },
-    listChildrenParams() {
-      return this.$store.state.userModule.listChildrens;
+    listDietaryPreferenceParam() {
+      return this.$store.state.userModule.listDietaryPreferences;
     },
     listSmokeParams() {
       return this.$store.state.userModule.listSmokes;
@@ -198,20 +199,13 @@ export default {
   methods: {
     ...mapMutations(["setLifeStyle"]),
     onChoseZodiac(val) {
-      // const keyZodiacParam = this.$store.state.userModule.keyZodiac;
-
-      // if (keyZodiacParam !== "") {
-
-      // } else {
-      //   document.getElementById(val).classList.remove("bg-active");
-
-      // }
       debugger;
       const documentZodiacs = document.getElementsByClassName("zodiac");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
         if (val === element.id) {
           const data = {
+            keyZodiac: index,
             nameZodiac: element.innerText,
           };
           this.setLifeStyle(data);
@@ -229,7 +223,8 @@ export default {
         const element = documentZodiacs[index];
         if (val === element.id) {
           const data = {
-            nameZodiac: element.innerText,
+            keyEducation: index,
+            nameEducation: element.innerText,
           };
           this.setLifeStyle(data);
           element.classList.add("bg-active");
@@ -245,7 +240,8 @@ export default {
         const element = documentZodiacs[index];
         if (val === element.id) {
           const data = {
-            nameZodiac: element.innerText,
+            keyPersonality: index,
+            namePersonality: element.innerText,
           };
           this.setLifeStyle(data);
           element.classList.add("bg-active");
@@ -261,7 +257,8 @@ export default {
         const element = documentZodiacs[index];
         if (val === element.id) {
           const data = {
-            nameZodiac: element.innerText,
+            keySmoke: index,
+            nameSmoke: element.innerText,
           };
           this.setLifeStyle(data);
           element.classList.add("bg-active");
@@ -277,7 +274,8 @@ export default {
         const element = documentZodiacs[index];
         if (val === element.id) {
           const data = {
-            nameZodiac: element.innerText,
+            keyPets: index,
+            namePets: element.innerText,
           };
           this.setLifeStyle(data);
           element.classList.add("bg-active");
@@ -287,9 +285,49 @@ export default {
       }
     },
 
-    onChoseChildren() {},
+    onChoseChildren(val) {
+      const documentZodiacs = document.getElementsByClassName(
+        "dietary-preferences"
+      );
+      for (let index = 0; index < documentZodiacs.length; index++) {
+        const element = documentZodiacs[index];
+        if (val === element.id) {
+          const data = {
+            keyPreferences: index,
+            namePreferences: element.innerText,
+          };
+          this.setLifeStyle(data);
+          element.classList.add("bg-active");
+        } else {
+          element.classList.remove("bg-active");
+        }
+      }
+    },
 
     onChangeCancel() {
+      const objectLifeStyle = this.$store.state.userModule.lifeStyle;
+      const documentZodiacs = document.getElementsByClassName("zodiac");
+      const documentEducation = document.getElementsByClassName("education");
+      const documentPersonality =
+        document.getElementsByClassName("personality");
+      const documentSmoke = document.getElementsByClassName("smoke");
+      const documentPets = document.getElementsByClassName("pets");
+      const documentPreferences = document.getElementsByClassName(
+        "dietary-preferences"
+      );
+      documentZodiacs[objectLifeStyle.keyZodiac].classList.remove("bg-active");
+      documentEducation[objectLifeStyle.keyEducation].classList.remove(
+        "bg-active"
+      );
+      documentPersonality[objectLifeStyle.keyPersonality].classList.remove(
+        "bg-active"
+      );
+      documentSmoke[objectLifeStyle.keySmoke].classList.remove("bg-active");
+      documentPets[objectLifeStyle.keyPets].classList.remove("bg-active");
+      documentPreferences[objectLifeStyle.keyPreferences].classList.remove(
+        "bg-active"
+      );
+
       this.$emit("onClickCancelLife", false);
     },
 
