@@ -110,7 +110,12 @@
     width: 34rem;
     height: 90%;
   }
-
+  .phone-login,
+  .email-login,
+  .welcome,
+  .create-profile {
+    padding: 18px;
+  }
   .footer-body {
     gap: 50px;
     font-size: 44px;
@@ -162,7 +167,12 @@
     width: 34rem;
     height: 90%;
   }
-
+  .phone-login,
+  .email-login,
+  .welcome,
+  .create-profile {
+    padding: 18px;
+  }
   .footer-body {
     gap: 50px;
     font-size: 44px;

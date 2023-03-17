@@ -131,7 +131,7 @@ export default {
     ...mapMutations(["setSkipProfiles", "setActionShowMe"]),
     onBackComponent() {
       if (this.isScream === 0) {
-        this.$router.push({ path: "/" });
+        this.$router.replace({ name: "login-page" }).catch(() => {});
       } else {
         this.isScream = this.isScream - 1;
       }

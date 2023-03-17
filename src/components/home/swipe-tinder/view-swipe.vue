@@ -135,7 +135,6 @@ export default {
     ...mapState("userProfileList"),
 
     listDataUser() {
-      debugger;
       return this.$store.state.userModule.userProfileList;
     },
 
@@ -144,7 +143,6 @@ export default {
     },
 
     idImage() {
-      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
   },
@@ -157,7 +155,7 @@ export default {
     },
     nextImageLeft(value, userId) {
       console.log(value);
-      debugger;
+
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
 
       if (idImage) {
@@ -177,11 +175,11 @@ export default {
 
     nextImageRight(value, userId) {
       console.log(value);
-      debugger;
+
       this.isActiveImag = false;
 
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
-      debugger;
+
       if (!idImage) {
         document.getElementById(0).classList.remove("active-image");
         document.getElementById(1).classList.add("active-image");
@@ -231,7 +229,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     // const documentImage = document.getElementsByClassName("imageAvatar");
     // documentImage[0].classList.add("active-image");
     // documentImage[0].classList.remove("no-active");

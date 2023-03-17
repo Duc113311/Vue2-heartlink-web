@@ -59,7 +59,7 @@ export default {
     if (isExist) {
       this.$router.push({ path: "/home-new" });
     } else {
-      this.$router.push({ path: "/" });
+      this.$router.push({ name: "login-page" }).catch(() => {});
     }
   },
 

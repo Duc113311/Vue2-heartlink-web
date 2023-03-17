@@ -14,7 +14,6 @@ const mutations = {
 
 const actions = {
   async getListDataLikedForYou({ commit }, userId) {
-    debugger;
     await http_request
       .get(`like-topic/v1/likes-account?userId=${userId}`)
       .then((response) => {

@@ -35,7 +35,7 @@ const routes = [
     children: [
       // Trang Home
       {
-        path: "/",
+        path: "",
         name: "home-news",
         component: () =>
           import(

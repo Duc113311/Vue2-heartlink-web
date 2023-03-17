@@ -199,7 +199,6 @@ export default {
   methods: {
     ...mapMutations(["setLifeStyle"]),
     onChoseZodiac(val) {
-      debugger;
       const documentZodiacs = document.getElementsByClassName("zodiac");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
@@ -217,7 +216,6 @@ export default {
     },
 
     onChoseEducation(val) {
-      debugger;
       const documentZodiacs = document.getElementsByClassName("education");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];

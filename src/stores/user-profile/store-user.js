@@ -81,7 +81,6 @@ const actions = {
   // Lấy chi tiết thông tin user
 
   async getDetailInforUser({ commit }, data) {
-    debugger;
     await http_request
       .get(
         `user/v1/get-detail/${data.userId}/en?latitude=${data.latitude}&longitude=${data.longitude}`
@@ -341,7 +340,6 @@ const mutations = {
   },
 
   setDetailUserProfile(state, data) {
-    debugger;
     state.userProfileDetail = data;
     state.user_profile = data;
     state.urlAvatarUser = data.avatars[0];
@@ -350,12 +348,10 @@ const mutations = {
   },
 
   setUrlNameAvatarUser(state, data) {
-    debugger;
     state.urlAvatarUser = data;
   },
 
   setLeftRighAvatar(state, data) {
-    debugger;
     if (data === true) {
       const idNew = parseInt(state.urlAvatarUser.id) + 1;
       const findValue = state.userProfileDetail.avatars.find(
@@ -377,7 +373,6 @@ const mutations = {
   },
 
   setLeftRightAvatar(state, data) {
-    debugger;
     if (data.statusNext === true) {
       const idNew = parseInt(data.idImage) + 1;
       const findUser = state.userProfileList.find(
@@ -451,13 +446,11 @@ const mutations = {
   },
 
   setLifeStyle(state, data) {
-    debugger;
     // Object.assign(lifeStyle, { data })
     state.lifeStyle = { ...state.lifeStyle, ...data };
   },
 
   setShowGenderSetting(state, data) {
-    debugger;
     state.user_profile.gender = data;
   },
 };

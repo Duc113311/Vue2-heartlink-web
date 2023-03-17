@@ -441,14 +441,11 @@ export default {
 
     showGender: {
       get() {
-        debugger;
-
         const gender = this.$store.state.userModule.user_profile?.gender;
 
         return gender ? gender : this.genderSetting;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.genderSetting = newValue;
       },
@@ -457,15 +454,12 @@ export default {
     valueAbout: {
       // getter
       get() {
-        debugger;
-
         const about = this.$store.state.userModule.user_profile?.about;
 
         return about ? about : this.valDefaultAbout;
       },
       // setter
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.valDefaultAbout = newValue;
       },
@@ -473,15 +467,12 @@ export default {
 
     valueJobTitle: {
       get() {
-        debugger;
-
         const about = this.$store.state.userModule.user_profile?.jobTitle;
 
         return about ? about : this.nameJobTitle;
       },
       // setter
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameJobTitle = newValue;
       },
@@ -489,15 +480,12 @@ export default {
 
     valueSchool: {
       get() {
-        debugger;
-
         const about = this.$store.state.userModule.user_profile?.university;
 
         return about ? about : this.nameSchool;
       },
       // setter
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameSchool = newValue;
       },
@@ -505,15 +493,12 @@ export default {
 
     valueLiving: {
       get() {
-        debugger;
-
         const about = this.$store.state.userModule.user_profile?.living;
 
         return about ? about : this.nameLiving;
       },
       // setter
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameLiving = newValue;
       },
@@ -521,14 +506,11 @@ export default {
 
     zodiacParam: {
       get() {
-        debugger;
-
         const zodiacData = this.$store.state.userModule.user_profile?.zodiac;
 
         return zodiacData ? zodiacData : this.nameZodiac;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameZodiac = newValue;
       },
@@ -536,15 +518,12 @@ export default {
 
     petsParam: {
       get() {
-        debugger;
-
         const petsFreeData =
           this.$store.state.userModule.user_profile?.petsFree;
 
         return petsFreeData ? petsFreeData : this.namePets;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.namePets = newValue;
       },
@@ -552,15 +531,12 @@ export default {
 
     educationParam: {
       get() {
-        debugger;
-
         const educationData =
           this.$store.state.userModule.user_profile?.education;
 
         return educationData ? educationData : this.nameEducation;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameEducation = newValue;
       },
@@ -568,15 +544,12 @@ export default {
 
     personalityParam: {
       get() {
-        debugger;
-
         const personalityData =
           this.$store.state.userModule.user_profile?.typePersonality;
 
         return personalityData ? personalityData : this.namePersonality;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.namePersonality = newValue;
       },
@@ -584,14 +557,11 @@ export default {
 
     smokeParam: {
       get() {
-        debugger;
-
         const smokeData = this.$store.state.userModule.user_profile?.smoke;
 
         return smokeData ? smokeData : this.nameSmoke;
       },
       set(newValue) {
-        debugger;
         // Note: we are using destructuring assignment syntax here.
         this.nameSmoke = newValue;
       },
@@ -611,7 +581,6 @@ export default {
     ]),
 
     onChangeGender(val) {
-      debugger;
       this.setShowGenderSetting(val);
 
       this.showGender = val;
@@ -619,7 +588,7 @@ export default {
 
     onBackEditProfile(val) {
       console.log(val);
-      debugger;
+
       const profile = this.$store.state.userModule.user_profile;
       // profile.about=this.valueAbout
 
@@ -628,7 +597,6 @@ export default {
     },
 
     onChangeAbout() {
-      debugger;
       if (this.valueAbout === "") {
         this.completeAbout = false;
       } else {
@@ -637,7 +605,6 @@ export default {
     },
 
     onClickCancelLife(val) {
-      debugger;
       this.isShowLifeStyle = val;
     },
     onClickSaveLife(val) {
@@ -656,7 +623,6 @@ export default {
     },
 
     onChangeJobTitle() {
-      debugger;
       if (this.valueJobTitle === "") {
         this.completeJobTitle = false;
       } else {
