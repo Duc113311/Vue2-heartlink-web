@@ -304,6 +304,7 @@ export default {
 
     onChangeCancel() {
       const objectLifeStyle = this.$store.state.userModule.lifeStyle;
+      debugger;
       const documentZodiacs = document.getElementsByClassName("zodiac");
       const documentEducation = document.getElementsByClassName("education");
       const documentPersonality =
@@ -313,18 +314,33 @@ export default {
       const documentPreferences = document.getElementsByClassName(
         "dietary-preferences"
       );
-      documentZodiacs[objectLifeStyle.keyZodiac].classList.remove("bg-active");
-      documentEducation[objectLifeStyle.keyEducation].classList.remove(
-        "bg-active"
-      );
-      documentPersonality[objectLifeStyle.keyPersonality].classList.remove(
-        "bg-active"
-      );
-      documentSmoke[objectLifeStyle.keySmoke].classList.remove("bg-active");
-      documentPets[objectLifeStyle.keyPets].classList.remove("bg-active");
-      documentPreferences[objectLifeStyle.keyPreferences].classList.remove(
-        "bg-active"
-      );
+      if (objectLifeStyle.keyZodiac !== undefined) {
+        documentZodiacs[objectLifeStyle.keyZodiac].classList.remove(
+          "bg-active"
+        );
+      }
+
+      if (objectLifeStyle.keyEducation !== undefined) {
+        documentEducation[objectLifeStyle.keyEducation].classList.remove(
+          "bg-active"
+        );
+      }
+      if (objectLifeStyle.keyPersonality !== undefined) {
+        documentPersonality[objectLifeStyle.keyPersonality].classList.remove(
+          "bg-active"
+        );
+      }
+      if (objectLifeStyle.keySmoke !== undefined) {
+        documentSmoke[objectLifeStyle.keySmoke].classList.remove("bg-active");
+      }
+      if (objectLifeStyle.keyPets !== undefined) {
+        documentPets[objectLifeStyle.keyPets].classList.remove("bg-active");
+      }
+      if (objectLifeStyle.keyPreferences !== undefined) {
+        documentPreferences[objectLifeStyle.keyPreferences].classList.remove(
+          "bg-active"
+        );
+      }
 
       this.$emit("onClickCancelLife", false);
     },

@@ -22,6 +22,9 @@
           Add video, pic or logo toget 4% closer to completing your profile and
           you may even get more likes
         </div>
+        <div class="w-full mb-4">
+          <BhMedia></BhMedia>
+        </div>
 
         <!-- Smart photo -->
         <div class="w-full flex justify-center items-center">
@@ -162,7 +165,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  Carnivore
+                  {{ preferenceParam }}
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -395,12 +398,15 @@ import FormLifeStyle from "../../components/profile/edit-profile/form-life-style
 import Footer from "../../components/layout/footer-home/footer";
 import MyPhotos from "../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
+import BhMedia from "../../components/bh-element-ui/button/bh-media.vue";
+
 import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Footer,
     MyPhotos,
     BhBack,
+    BhMedia,
     FormLifeStyle,
   },
   name: "edit-profile",
@@ -430,6 +436,7 @@ export default {
       namePets: "Trống",
       namePersonality: "Trống",
       nameEducation: "Trống",
+      namePreferences: "Trống",
       genderSetting: 0,
 
       loading: true,
@@ -578,6 +585,19 @@ export default {
       set(newValue) {
         // Note: we are using destructuring assignment syntax here.
         this.nameSmoke = newValue;
+      },
+    },
+
+    preferenceParam: {
+      get() {
+        const personalityData =
+          this.$store.state.userModule.user_profile?.dietaryPreferences;
+
+        return personalityData ? personalityData : this.namePreferences;
+      },
+      set(newValue) {
+        // Note: we are using destructuring assignment syntax here.
+        this.namePreferences = newValue;
       },
     },
   },
