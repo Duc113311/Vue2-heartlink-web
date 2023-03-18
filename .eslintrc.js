@@ -19,6 +19,10 @@ module.exports = {
       {
         endOfLine: "auto",
       },
+      // { useTabs: true },
+      // {
+      //   "usePrettierrc": false
+      // }
     ],
   },
   globals: {

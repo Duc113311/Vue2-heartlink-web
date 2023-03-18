@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="form-edit overflow-scroll w-full">
+      <div class="form-edit overflow-scroll w-full" v-loading="loading">
         <div class="w-full">
           <MyPhotos :isShowTitle="true"></MyPhotos>
         </div>
@@ -431,6 +431,10 @@ export default {
       namePersonality: "Trống",
       nameEducation: "Trống",
       genderSetting: 0,
+
+      loading: true,
+
+      // showGender: 0,
     };
   },
 
@@ -441,15 +445,25 @@ export default {
 
     showGender: {
       get() {
-        const gender = this.$store.state.userModule.user_profile?.gender;
-
-        return gender ? gender : this.genderSetting;
+        return this.$store.state.userModule.user_profile?.gender;
       },
+
       set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.genderSetting = newValue;
+        this.setShowGenderSetting(newValue);
       },
     },
+
+    // showGender: {
+    //   get() {
+    //     const gender = this.$store.state.userModule.user_profile?.gender;
+
+    //     return gender ? gender : this.genderSetting;
+    //   },
+    //   set(newValue) {
+    //     // Note: we are using destructuring assignment syntax here.
+    //     this.genderSetting = newValue;
+    //   },
+    // },
 
     valueAbout: {
       // getter
@@ -588,12 +602,16 @@ export default {
 
     onBackEditProfile(val) {
       console.log(val);
+      this.loading = true;
 
       const profile = this.$store.state.userModule.user_profile;
       // profile.about=this.valueAbout
 
       console.log(profile);
-      this.$router.push({ path: "/setting" });
+      setTimeout(() => {
+        this.loading = false;
+        this.$router.push({ path: "/setting" });
+      }, 1000);
     },
 
     onChangeAbout() {
@@ -684,6 +702,10 @@ export default {
       entityName: "dietary_preferences",
       entityId: "en",
     });
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   },
 
   mounted() {},
@@ -704,7 +726,6 @@ export default {
   scrollbar-width: none;
   overflow-y: scroll; /* Add the ability to scroll */
   height: 84%;
-  padding: 10px;
 }
 
 .form-edit::-webkit-scrollbar {
@@ -796,5 +817,15 @@ export default {
 .h-data-life {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.el-loading-spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.el-loading-mask {
+  height: 100%;
+  position: sticky;
 }
 </style>
