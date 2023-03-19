@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="form-edit overflow-scroll w-full" v-loading="loading">
+      <div class="form-edit overflow-scroll w-full">
         <div class="w-full">
           <MyPhotos :isShowTitle="true"></MyPhotos>
         </div>
@@ -70,19 +70,30 @@
         </div>
 
         <!-- Interests -->
-
-        <div class="w-full flex justify-center items-center">
+        <div class="w-full flex items-center">
           <div class="w-full">
-            <span v-for="(item, index) in listDataInterests" :key="index">
-              <button
-                @click="onSelectInterest(index)"
-                :id="index"
-                class="oftion-interests mr-3 mb-3 p-3 text-white"
-                size="large"
-              >
-                {{ item }}
-              </button>
-            </span>
+            <div class="w-full flex justify-between bh-title p-3">
+              <div>INTEREST</div>
+              <div>+3%</div>
+            </div>
+            <div class="w-full flex style-form">
+              <div class="flex justify-between w-full">
+                <div class="bh-item-title">
+                  <!-- <div class="w-full p-2">
+                    <span
+                      class="border-interest w-full"
+                      v-for="(item, index) in listDataInterests"
+                      :key="index"
+                      :id="index"
+                      >{{ item }}</span
+                    >
+                  </div> -->
+                </div>
+                <div class="mr-5">
+                  <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -178,17 +189,7 @@
         </div>
 
         <!-- Job title -->
-        <!-- <div class="w-full flex items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
-              <div>JOB TITLE</div>
-              <div>+3%</div>
-            </div>
-            <div class="w-full">
-              <el-input placeholder="Job title" v-model="nameJob"></el-input>
-            </div>
-          </div>
-        </div> -->
+
         <!-- Company -->
         <div class="w-full flex items-center">
           <div class="w-full">
@@ -317,7 +318,7 @@
                   @click="onChangeGender(1)"
                 >
                   <div class="bh-item-title">Men</div>
-                  <div v-show="parseInt(showGender) === 1">
+                  <div v-if="parseInt(showGender) === 1">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -327,7 +328,7 @@
                   @click="onChangeGender(0)"
                 >
                   <div class="bh-item-title">Women</div>
-                  <div v-show="parseInt(showGender) === 0">
+                  <div v-if="parseInt(showGender) === 0">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -441,22 +442,27 @@ export default {
 
       loading: true,
 
-      // showGender: 0,
+      isGenderData: 0,
     };
   },
 
   computed: {
     listDataInterests() {
-      return [];
+      const interestsData =
+        this.$store.state.userModule.user_profile?.interests;
+
+      return interestsData ? interestsData : [];
     },
 
     showGender: {
       get() {
-        return this.$store.state.userModule.user_profile?.gender;
+        const isGender = this.$store.state.userModule.user_profile?.gender;
+        return isGender ? isGender : this.isGenderData;
       },
 
       set(newValue) {
-        this.setShowGenderSetting(newValue);
+        debugger;
+        this.isGenderData = newValue;
       },
     },
 
