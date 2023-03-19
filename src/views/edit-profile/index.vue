@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="form-edit overflow-scroll w-full">
+      <div class="form-edit overflow-scroll w-full" v-loading="loading">
         <div class="w-full">
           <MyPhotos :isShowTitle="true"></MyPhotos>
         </div>
@@ -69,7 +69,6 @@
           </div>
         </div>
 
-        <!-- Interests -->
         <div class="w-full flex items-center">
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
@@ -78,24 +77,33 @@
             </div>
             <div class="w-full flex style-form">
               <div class="flex justify-between w-full">
-                <div class="bh-item-title">
-                  <!-- <div class="w-full p-2">
-                    <span
-                      class="border-interest w-full"
-                      v-for="(item, index) in listDataInterests"
-                      :key="index"
-                      :id="index"
-                      >{{ item }}</span
-                    >
-                  </div> -->
+                <div class="bh-item-title style-inter-setting relative">
+                  <div class="w-full flex justify-center items-center">
+                    <div class="w-full text-ellipsis whitespace-nowrap">
+                      <span
+                        :id="index"
+                        class="mr-3 mb-3 text-white border-interest"
+                        v-for="(item, index) in listDataInterests"
+                        :key="index"
+                      >
+                        {{ item }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="bg-interest absolute h-full w-full"></div>
                 </div>
-                <div class="mr-5">
+                <div
+                  class="mr-5 flex items-center"
+                  @click="onShowPopupInterest()"
+                >
                   <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Interests -->
 
         <!-- life style -->
         <div class="w-full flex justify-center items-center">
@@ -176,7 +184,7 @@
                 <div
                   class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
                 >
-                  {{ preferenceParam }}
+                  Carnivore
                 </div>
                 <div class="cursor-pointer">
                   <i
@@ -189,7 +197,17 @@
         </div>
 
         <!-- Job title -->
-
+        <!-- <div class="w-full flex items-center">
+          <div class="w-full">
+            <div class="w-full flex justify-between bh-title p-3">
+              <div>JOB TITLE</div>
+              <div>+3%</div>
+            </div>
+            <div class="w-full">
+              <el-input placeholder="Job title" v-model="nameJob"></el-input>
+            </div>
+          </div>
+        </div> -->
         <!-- Company -->
         <div class="w-full flex items-center">
           <div class="w-full">
@@ -318,7 +336,7 @@
                   @click="onChangeGender(1)"
                 >
                   <div class="bh-item-title">Men</div>
-                  <div v-if="parseInt(showGender) === 1">
+                  <div v-show="parseInt(showGender) === 1">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -328,7 +346,7 @@
                   @click="onChangeGender(0)"
                 >
                   <div class="bh-item-title">Women</div>
-                  <div v-if="parseInt(showGender) === 0">
+                  <div v-show="parseInt(showGender) === 0">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -391,11 +409,23 @@
         @onClickSaveLife="onClickSaveLife"
       ></FormLifeStyle>
     </div>
+
+    <div
+      v-show="isShowInterest"
+      class="w-full h-full absolute top-0 left-0 z-30"
+    >
+      <FormInterests
+        @onClickHideInterest="onClickHideInterest"
+        @onClickSaveInterest="onClickSaveInterest"
+      ></FormInterests>
+    </div>
   </div>
 </template>
 
 <script>
 import FormLifeStyle from "../../components/profile/edit-profile/form-life-style";
+import FormInterests from "../../components/profile/edit-profile/form-interests.vue";
+
 import Footer from "../../components/layout/footer-home/footer";
 import MyPhotos from "../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
@@ -409,6 +439,7 @@ export default {
     BhBack,
     BhMedia,
     FormLifeStyle,
+    FormInterests,
   },
   name: "edit-profile",
 
@@ -442,27 +473,25 @@ export default {
 
       loading: true,
 
-      isGenderData: 0,
+      isShowInterest: false,
+
+      // showGender: 0,
     };
   },
 
   computed: {
     listDataInterests() {
-      const interestsData =
-        this.$store.state.userModule.user_profile?.interests;
-
-      return interestsData ? interestsData : [];
+      const interestData = this.$store.state.userModule.user_profile?.interests;
+      return interestData ? interestData : [];
     },
 
     showGender: {
       get() {
-        const isGender = this.$store.state.userModule.user_profile?.gender;
-        return isGender ? isGender : this.isGenderData;
+        return this.$store.state.userModule.user_profile?.gender;
       },
 
       set(newValue) {
-        debugger;
-        this.isGenderData = newValue;
+        this.setShowGenderSetting(newValue);
       },
     },
 
@@ -599,11 +628,11 @@ export default {
         const personalityData =
           this.$store.state.userModule.user_profile?.dietaryPreferences;
 
-        return personalityData ? personalityData : this.namePreferences;
+        return personalityData ? personalityData : this.namePersonality;
       },
       set(newValue) {
         // Note: we are using destructuring assignment syntax here.
-        this.namePreferences = newValue;
+        this.namePersonality = newValue;
       },
     },
   },
@@ -625,6 +654,14 @@ export default {
 
       this.showGender = val;
     },
+
+    onShowPopupInterest() {
+      this.isShowInterest = true;
+    },
+
+    onClickSaveInterest() {},
+
+    onClickHideInterest() {},
 
     onBackEditProfile(val) {
       console.log(val);
@@ -850,8 +887,20 @@ export default {
   justify-content: center;
 }
 
-.el-loading-mask {
-  height: 100%;
-  position: sticky;
+.style-inter-setting {
+  width: 28rem;
+  overflow: hidden;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.bg-interest {
+  background: rgb(73, 80, 99);
+  background: linear-gradient(
+    270deg,
+    rgba(73, 80, 99, 1) 7%,
+    rgba(240, 233, 233, 0) 22%
+  );
 }
 </style>

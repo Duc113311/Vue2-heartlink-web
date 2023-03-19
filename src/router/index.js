@@ -136,6 +136,15 @@ const routes = [
         /* webpackChunkName: "setting-detail" */ "../views/setting/detail/index.vue"
       ),
   },
+
+  {
+    path: "/chat",
+    name: "chat-page",
+    component: () =>
+      import(
+        /* webpackChunkName: "setting-detail" */ "../views/chat-page/index.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({

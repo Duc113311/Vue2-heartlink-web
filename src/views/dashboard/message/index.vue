@@ -59,7 +59,7 @@
             </div>
           </div>
         </div>
-        <div class="w-4/5 ml-8 h-full bg-mess">
+        <div class="w-4/5 ml-8 h-full bg-mess" @click="onClickShowChat()">
           <div class="w-full text-white">
             Trang <span class="ic_like ml-3">LIKES YOU</span>
           </div>
@@ -160,6 +160,13 @@ export default {
 
   data() {
     return {};
+  },
+
+  methods: {
+    onClickShowChat() {
+      debugger;
+      this.$router.push({ path: "/chat" });
+    },
   },
 };
 </script>

@@ -187,7 +187,13 @@
                 <div class="flex justify-between w-full">
                   <div class="bh-item-title title-item">Location</div>
                   <div class="mr-5 flex items-center">
-                    <div class="mr-3 bh-text-location">My Current Location</div>
+                    <div
+                      class="mr-3 bh-text-location"
+                      @click="onClickLocation()"
+                    >
+                      {{ addressLocation }}
+                    </div>
+
                     <i class="fa-solid fa-chevron-right bh-chevron-right"></i>
                   </div>
                 </div>
@@ -209,9 +215,10 @@
 
               <div class="mr-3">
                 <el-switch
-                  v-model="value2"
+                  v-model="valueGlobal"
                   active-color="#FB5D65"
                   inactive-color="#5F6A86"
+                  @el-switch="onChangeGlobal"
                 >
                 </el-switch>
               </div>
@@ -222,7 +229,7 @@
           </div>
         </div>
 
-        <div class="w-full form-set-list">
+        <div v-show="valueGlobal" class="w-full form-set-list">
           <div class="w-full bh-title title-item form-set-item">
             PREFERRED LANGUAGES
           </div>
@@ -253,11 +260,14 @@
               <div class="bh-title title-item form-set-item">
                 MAXIMUM DISTANCE
               </div>
-              <div class="bh-describe">{{ value1 }}km</div>
+              <div class="bh-describe">{{ valueLocation }}km</div>
             </div>
 
             <div>
-              <el-slider v-model="value3"></el-slider>
+              <el-slider
+                v-model="valueLocation"
+                @change="onChangeLocations"
+              ></el-slider>
             </div>
             <div class="flex justify-between w-full mt-2">
               <div class="bh-item-title title-item">
@@ -279,15 +289,16 @@
           <div class="form-set-list">
             <div class="w-full flex justify-between">
               <div class="bh-title title-item form-set-item">AGE RANGE</div>
-              <div class="bh-describe">{{ value }}</div>
+              <div class="bh-describe">{{ valueAge }}</div>
             </div>
 
             <div class="w-full">
               <el-slider
-                v-model="value"
+                v-model="valueAge"
                 range
                 :show-input-controls="true"
                 :max="50"
+                @change="onChangeAgeRange()"
               >
               </el-slider>
             </div>
@@ -876,10 +887,26 @@ export default {
     return {
       value1: 4,
 
-      value: [18, 40],
+      valueAge: [18, 40],
 
       value3: true,
+
+      valueGlobal: false,
+      valueLocation: 8,
     };
+  },
+
+  computed: {
+    addressLocation() {
+      const lat = localStorage.latitude;
+      const long = localStorage.longitude;
+
+      if (lat !== "" && long !== "") {
+        return " Hà Nội ";
+      } else {
+        return "My Current Location";
+      }
+    },
   },
 
   methods: {
@@ -887,6 +914,27 @@ export default {
       console.log(val);
       this.$router.push({ path: "/setting" });
     },
+
+    onChangeGlobal() {},
+
+    onChangeAgeRange(val) {
+      debugger;
+      this.valueAge = val;
+
+      localStorage.setItem("startAge", this.valueAge[0]);
+      localStorage.setItem("endAge", this.valueAge[1]);
+    },
+    onChangeLocations(val) {
+      debugger;
+      this.valueLocation = val;
+
+      localStorage.setItem("locations", val);
+    },
+
+    /**
+     * Xử lý vị trí user
+     */
+    onClickLocation() {},
   },
 };
 </script>
