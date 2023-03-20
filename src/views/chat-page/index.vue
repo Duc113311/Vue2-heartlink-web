@@ -1,138 +1,203 @@
 <template>
-  <div class="w-full h-full relative bg-theme p-5">
+  <div class="w-full h-full relative bg-theme">
     <div class="chat w-full h-full">
-      <div class="header-chat">
-        <!-- <BhBack></BhBack>
-        <div class="info">
-          <img :src="userInfo.avatar" alt="img-nguoi-chat" />
-          <p>{{ userInfo.name }}</p>
-          <img class="confirm" :src="userInfo.confirm" alt="1" />
-        </div>
-        <div class="utilities">
-          <img src="../../assets/icon/ic_video_call.svg" alt="icon-camera" />
-          <img src="../../assets/icon/ic_safety (1).svg" alt="icon-report" />
-        </div> -->
-      </div>
+      <div class="header-chat bd-input p-5 mt-5">
+        <div class="w-full justify-between flex items-center">
+          <div class="h-left w-full flex items-center">
+            <div><BhBack></BhBack></div>
 
-      <div class="content-chat" ref="chatContainer">
-        <!-- <div v-for="(message, index) in messages" :key="index">
-          <div
-            class="content-me"
-            v-if="
-              message.sender === 'user1' &&
-              (message.content !== '' || message.url)
-            "
-          >
-            <div class="time">{{ message.timestamp }}</div>
-            <div v-if="message.url">
-              <div
-                v-for="(i, index) in message.url"
-                :key="index"
-                class="img_message_me"
-              >
-                <img :src="i" alt="" />
-              </div>
-            </div>
-            <div v-if="message.content !== ''">
-              <div v-if="message.content !== '👋'" class="message-me">
-                {{ message.content }}
-              </div>
-              <div v-else class="message-wave">
-                {{ message.content }}
+            <div class="image-detail-avatar ml-6 mr-6"></div>
+
+            <div class="flex items-center">
+              <div class="name-user font-describe">Trinh</div>
+              <div class="ic-verify">
+                <img src="@/assets/icon/ic_verified_enable.svg" />
               </div>
             </div>
           </div>
-          <div
-            v-if="
-              message.sender === 'user3' &&
-              (message.content !== '' || message.url)
-            "
-            class="content-your"
-          >
-            <div class="time">{{ message.timestamp }}</div>
-            <div style="display: flex">
-              <img class="avatar_your" :src="userInfo.avatar" alt="" />
-              <div style="display: colump">
-                <div v-if="message.url">
-                  <div
-                    v-for="(i, index) in message.url"
-                    :key="index"
-                    class="img_message_you"
-                  >
-                    <img :src="i" alt="" />
-                  </div>
+          <div class="h-right flex items-center w-full justify-end">
+            <img
+              src="@/assets/icon/ic_video_call.svg"
+              width="30"
+              alt="icon-camera"
+            />
+            <img
+              class="ml-6"
+              width="30"
+              src="@/assets/icon/ic_safety (1).svg"
+              alt="icon-report"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="content-chat overflow-hidden relative" ref="chatContainer">
+        <div class="h-full overflow-scroll height-scroll pb-10">
+          <div v-for="(message, index) in messages" :key="index">
+            <div
+              class="w-full"
+              v-if="
+                message.sender === 'user1' &&
+                (message.content !== '' || message.url)
+              "
+            >
+              <div class="time">{{ message.timestamp }}</div>
+              <div class="w-full" v-if="message.url">
+                <div class="img_message_me flex justify-end pr-6">
+                  <img :src="message.url" alt="" />
                 </div>
-                <div v-if="message.content !== ''">
-                  <div v-if="message.content !== '👋'" class="message_your">
-                    {{ message.content }}
+              </div>
+              <div class="flex justify-end pr-6" v-if="message.content !== ''">
+                <span
+                  v-if="message.content !== '👋'"
+                  class="message-me w-72 flex"
+                >
+                  {{ message.content }}
+                </span>
+                <span v-else class="message-wave">
+                  {{ message.content }}
+                </span>
+              </div>
+            </div>
+            <div
+              v-if="
+                message.sender === 'user3' &&
+                (message.content !== '' || message.url)
+              "
+              class=""
+            >
+              <div class="time">{{ message.timestamp }}</div>
+              <div class="flex w-full items-center">
+                <div class="w-1/6 flex justify-center items-center">
+                  <div class="image-avatar ml-4 mr-4"></div>
+                </div>
+                <div class="w-5/6">
+                  <div v-if="message.url">
+                    <div class="img_message_you mb-4">
+                      <img :src="message.url" alt="" />
+                    </div>
                   </div>
-                  <div v-else class="message-wave">
-                    {{ message.content }}
+                  <div class="w-10/12" v-if="message.content !== ''">
+                    <span v-if="message.content !== '👋'" class="message_your">
+                      {{ message.content }}
+                    </span>
+                    <span v-else class="message-wave">
+                      {{ message.content }}
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
+        <div class="w-full bg-slate-400 absolute bottom-0 h-28 left-0"></div>
       </div>
 
-      <div class="footer-chat">
-        <!-- <div class="gif-upload">
-          <label for="gif-upload">GIF</label>
-          <input
-            type="file"
-            id="gif-upload"
-            multiple
-            name="gif-upload"
-            ref="fileInput"
-            @change="previewImages($event)"
-          />
+      <div class="footer-chat bd-input-top pt-2">
+        <div class="w-full flex justify-center items-center">
+          <div class="camera-page w-1/6 flex justify-center items-center">
+            <div class="p-2 bg-slate-500 rounded-full cursor-pointer">
+              <label for="file-image">
+                <i class="fa-solid fa-image size-icon"></i
+              ></label>
+              <input
+                type="file"
+                id="file-image"
+                multiple
+                ref="fileInput"
+                class="hidden"
+                @change="previewImages($event)"
+              />
+            </div>
+          </div>
+          <div class="w-5/6 flex justify-center items-center relative">
+            <div class="w-full">
+              <input
+                type="textarea"
+                class="textarea-input w-full"
+                placeholder="Say something nice"
+                v-model="valueMessage"
+              />
+            </div>
+            <div v-if="previewVisible" class="preview-modal">
+              <picker
+                class="picker"
+                :native="true"
+                :title="My_Emoji_Picker"
+                :emoji="point_up"
+                :emojiSize="21"
+                :perLine="8"
+                @select="handleEmojiSelect"
+              />
+            </div>
+            <div class="absolute right-4 cursor-pointer">
+              <i class="fa-regular fa-face-smile size-icon"></i>
+            </div>
+          </div>
+          <div
+            class="icon-hello w-1/6 flex justify-center items-center cursor-pointer"
+          >
+            <span class="size-icon-hello"> 👋 </span>
+          </div>
         </div>
-        <div class="chat-input">
-          <input
-            ref="input"
-            type="text"
-            placeholder="Nhập tin nhắn..."
-            v-model="newMessage"
-            @keyup.enter="sendMessage()"
-          />
-         
-        </div>
-        <p class="send-btn" @click="hand()">👋</p> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BhBack from "../../components/bh-element-ui/button/bh-back";
 // import BhBack from "../../components/bh-element-ui/button/bh-back";
-// import { Picker } from "emoji-mart-vue";
+import { Picker } from "emoji-mart-vue";
 
 export default {
   name: "chat-page",
   components: {
+    BhBack,
     // BhBack,
-    // Picker,
+    Picker,
   },
   data() {
     return {
+      valueMessage: "",
       userInfo: {
         name: "girl friend",
         avatar: require("@/assets/image-dating/0659_photo-1-163186806531842640671.jpg"),
         confirm: require("@/assets/icon/ic_verified_enable.svg"),
       },
+      previewVisible: false,
 
       messages: [
         {
           sender: "user1",
-          content: "Hello",
-          timestamp: "",
+          content:
+            "Hello how are you today, What are about , how many people are the",
+          timestamp: "Wed 27 Jul 09:45",
+          url: "https://firebasestorage.googleapis.com/v0/b/heartlink-dating-project.appspot.com/o/dating%2F0001-658x1024-1.jpg?alt=media&token=8dd66dbe-cdd4-4908-8943-f0f21a30eea2",
+        },
+        {
+          sender: "user3",
+          content:
+            "Hello dasda sda asadas dasd asdasd asdeqwrw4 4ryfg 5tyu56 6erhergv43t fgsdgwert34vt",
+          timestamp: "Thurs 28 Jul 19:45",
+          url: "https://firebasestorage.googleapis.com/v0/b/heartlink-dating-project.appspot.com/o/dating%2F0001-658x1024-1.jpg?alt=media&token=8dd66dbe-cdd4-4908-8943-f0f21a30eea2",
+        },
+        {
+          sender: "user1",
+          content: "Helloasd asd asdas dasdasd asdas",
+          timestamp: "Thurs 28 Jul 19:45",
+          url: "",
+        },
+        {
+          sender: "user1",
+          content: "Helloasd asdas dasd asd asdasda",
+          timestamp: "Thurs 28 Jul 19:45",
           url: "",
         },
         {
           sender: "user3",
-          content: "Hello",
-          timestamp: "",
+          content: "Hello grtbyhrtb u46 hfghfg g",
+          timestamp: "Thurs 28 Jul 19:45",
           url: "",
         },
       ],
@@ -159,11 +224,36 @@ export default {
 }
 
 .content-chat {
-  height: 80%;
+  height: 82%;
 }
 
 .footer-chat {
-  height: calc(100% - 90%);
+  height: calc(100% - 94%);
+}
+
+.image-detail-avatar {
+  background-image: url("@/assets/image-dating/0659_photo-1-163186806531842640671.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: 53px;
+}
+
+.image-avatar {
+  background-image: url("@/assets/image-dating/0659_photo-1-163186806531842640671.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: 53px;
+  width: 50px;
+  height: 50px;
+}
+.img_message_me img {
+  width: 150px;
+  border-radius: 12px 12px 4px 12px;
+}
+
+.img_message_you img {
+  width: 150px;
+  border-radius: 12px 12px 12px 4px;
 }
 .header {
   display: flex;
@@ -212,9 +302,6 @@ export default {
   color: #757a8d;
   text-align: center;
 }
-.img_message_me img {
-  width: 100%;
-}
 
 .message-me {
   background-color: #fd5d65;
@@ -244,23 +331,9 @@ export default {
   border-radius: 50%;
 }
 
-.img_message_you {
-  width: 70%;
-  margin-top: 20px;
-  padding: 10px;
-  margin-right: auto;
-  display: inline-block;
-}
-
-.img_message_you img {
-  width: 100%;
-}
-
 .message_your {
-  width: 100%;
   background-color: white;
   border-radius: 0px 20px 20px 20px;
-  margin-top: 20px;
   padding: 10px;
   margin-right: auto;
   word-wrap: break-word;
@@ -271,5 +344,40 @@ export default {
   margin-top: 20px;
   text-align: right;
   font-size: 60px;
+}
+
+.el-textarea__inner {
+  background-color: #495063 !important;
+  border: 1px solid #495063 !important;
+  border-radius: 10px !important;
+  padding: 13px !important;
+  font-size: 15px !important;
+  height: 50px !important;
+  color: #ffffff !important;
+}
+
+.textarea-input {
+  background-color: #495063;
+  border: 1px solid #495063;
+  padding: 12px;
+  border-radius: 30px;
+}
+
+.preview-modal {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 5rem;
+  cursor: pointer;
+}
+.emoji-mart-preview {
+  display: none;
+}
+
+.emoji-mart-scroll::-webkit-scrollbar {
+  display: none;
+}
+.emoji-mart-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>

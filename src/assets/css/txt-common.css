@@ -35,3 +35,9 @@
 .bd-input {
   border-bottom: 1px solid #5e6580;
 }
+.bd-input-top {
+  border-top: 1px solid #5e6580;
+}
+.size-icon-hello {
+  font-size: 40px;
+}
