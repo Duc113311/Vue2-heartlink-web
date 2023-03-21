@@ -153,7 +153,7 @@ export default {
                 this.imageUrl.push(src);
             }
         },
-        async upload_img() {
+         {
             const file = this.link_url;
             for (let i = 0; i < file.length; i++) {
                 const storageRef = firebase.storage().ref();

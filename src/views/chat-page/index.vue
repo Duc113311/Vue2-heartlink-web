@@ -4,7 +4,7 @@
       <div class="header-chat bd-input p-5 mt-5">
         <div class="w-full justify-between flex items-center">
           <div class="h-left w-full flex items-center">
-            <div><BhBack></BhBack></div>
+            <div><BhBack @onBackComponent="onBackComponent"></BhBack></div>
 
             <div class="image-detail-avatar ml-6 mr-6"></div>
 
@@ -31,8 +31,11 @@
         </div>
       </div>
 
-      <div class="content-chat overflow-hidden relative" ref="chatContainer">
-        <div class="h-full overflow-scroll height-scroll pb-10">
+      <div class="content-chat overflow-hidden relative">
+        <div
+          class="h-full overflow-scroll height-scroll pb-10"
+          ref="chatContainer"
+        >
           <div v-for="(message, index) in messages" :key="index">
             <div
               class="w-full"
@@ -90,7 +93,25 @@
             </div>
           </div>
         </div>
-        <div class="w-full bg-slate-400 absolute bottom-0 h-28 left-0"></div>
+        <div
+          v-show="urlImageChose.length !== 0"
+          class="w-full bg-image-chose absolute bottom-0 h-28 left-0"
+        >
+          <div class="w-full flex items-center h-full pl-2">
+            <div
+              class="image-chose relative"
+              v-for="(item, index) in urlImageChose"
+              :key="index"
+              :style="{
+                'background-image': `url(${item})`,
+              }"
+            >
+              <div class="absolute ic-remove-img">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="footer-chat bd-input-top pt-2">
@@ -135,6 +156,7 @@
             </div>
           </div>
           <div
+            @click="onSendMessage"
             class="icon-hello w-1/6 flex justify-center items-center cursor-pointer"
           >
             <span class="size-icon-hello"> 👋 </span>
@@ -149,6 +171,9 @@
 import BhBack from "../../components/bh-element-ui/button/bh-back";
 // import BhBack from "../../components/bh-element-ui/button/bh-back";
 import { Picker } from "emoji-mart-vue";
+
+import { refData, setData, database } from "../../configs/firebase.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "chat-page",
@@ -201,16 +226,74 @@ export default {
           url: "",
         },
       ],
+
+      urlImageChose: [],
+      urlImageUpdated: [],
     };
   },
 
+  computed: {},
+
   methods: {
-    previewImages() {
+    async previewImages() {
       debugger;
+      const imageFiles = event.target.files;
+      for (let index = 0; index < imageFiles.length; index++) {
+        const element = imageFiles[index];
+        const imageConvert = URL.createObjectURL(element);
+        this.urlImageChose.push(imageConvert);
+        await this.onUpdateLoadImage(element);
+      }
+    },
+
+    scrollToBottom() {
+      debugger;
+      this.$refs.chatContainer.scrollTop =
+        this.$refs.chatContainer.scrollHeight;
+    },
+
+    onBackComponent() {
+      this.$router.go(-1);
+    },
+
+    async onUpdateLoadImage(val) {
+      debugger;
+      const storage = getStorage();
+      const storageRef = ref(storage, "dating/" + val.name);
+      await uploadBytes(storageRef, val).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+        console.log(snapshot);
+      });
+
+      await getDownloadURL(storageRef, val).then((url) => {
+        const dataImage = {
+          url: url,
+        };
+        debugger;
+        this.urlImageUpdated.push(url);
+        console.log(dataImage);
+      });
+    },
+
+    onSendMessage() {
+      const userId1 = "use03";
+      const userId2 = "use04";
+      debugger;
+      const images = this.urlImageUpdated;
+      setData(refData(database, "messages/" + `${userId1}_${userId2}`), {
+        username: "sadsas",
+        content: this.valueMessage,
+        profile_picture: images,
+      });
     },
   },
-
-  created() {},
+  mounted() {
+    debugger;
+    this.scrollToBottom();
+  },
+  created() {
+    debugger;
+  },
 };
 </script>
 
@@ -379,5 +462,37 @@ export default {
 .emoji-mart-scroll {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.image-chose {
+  width: 82px;
+  height: 92px;
+  background-repeat: repeat;
+  background-position: 0;
+  background-size: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.bg-image-chose {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.7588822578235659) 0%,
+    rgba(255, 255, 255, 0.6682306997499114) 100%,
+    rgba(255, 255, 255, 0.7050578952173336) 100%
+  );
+}
+
+.ic-remove-img {
+  background-color: red;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 17px;
+
+  top: -5px;
+  right: -5px;
 }
 </style>

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   name: "app-view",
 
@@ -44,13 +44,23 @@ export default {
 
   methods: {
     ...mapActions(["checkExistUserId"]),
+    ...mapMutations(["setLocation"]),
+    async showPosition(position) {
+      if (position.coords) {
+        debugger;
+        localStorage.setItem("latitude", position.coords.latitude);
+        localStorage.setItem("longitude", position.coords.longitude);
+      }
+    },
   },
 
   async created() {
     setTimeout(() => {
       this.isShowIconApp = false;
     }, 500);
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    }
     const userId = localStorage.getItem("userId");
     await this.checkExistUserId(userId);
 

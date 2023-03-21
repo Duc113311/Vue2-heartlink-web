@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["postTokenByUserID"]),
+    ...mapActions(["postTokenByUserID", "checkExistUserId"]),
 
     ...mapMutations(["setTokenAccount"]),
     validateRequire(value) {
@@ -154,7 +154,6 @@ export default {
           // this.$emit("onShowEmailUser", true);
 
           await this.singWithPhone(this.sentCodeId);
-          this.$emit("onShowEmailUser", true);
         } else {
           this.txtErrorCode = true;
         }
@@ -179,6 +178,15 @@ export default {
             providerId: providerId,
           });
           console.log(userID, providerId);
+
+          await this.checkExistUserId(userID);
+          const isExist = this.$store.state.loginModule.isExistUserId;
+          debugger;
+          if (isExist) {
+            this.$router.push({ path: "/home-new" }).catch(() => {});
+          } else {
+            this.$emit("onShowEmailUser", true);
+          }
 
           // Check lần show wellcome
           console.log(userID);
