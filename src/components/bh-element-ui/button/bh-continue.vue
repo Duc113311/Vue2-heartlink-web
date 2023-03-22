@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex justify-center pd-button items-center pb-8 h-full">
-    <div class="w-full">
+    <div class="w-button">
       <div
         v-show="isShowProfile"
         class="flex items-center w-full justify-center p-3"
@@ -88,7 +88,7 @@ export default {
       return this.isLoading;
     },
     isActiveContinue() {
-      return this.isActives;
+      return this.isActives ? this.isActives : false;
     },
 
     isShowProfile() {

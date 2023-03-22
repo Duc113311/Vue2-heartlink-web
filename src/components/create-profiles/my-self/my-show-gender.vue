@@ -9,7 +9,7 @@
       :key="index"
     >
       <button
-        v-bind:class="[isActiveButton ? 'active-border' : isDarkTheme]"
+        v-bind:class="isDarkTheme"
         class="padding-input-option"
         :ref="index"
         :id="index"

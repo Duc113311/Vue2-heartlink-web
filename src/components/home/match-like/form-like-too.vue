@@ -63,13 +63,16 @@
       </div>
 
       <div
-        v-show="!isHideComfirm"
+        v-show="isHideComfirm"
         class="w-full h-80 absolute bottom-0 left-0 p-3"
       >
         <div class="w-full h-full form-sending p-5">
           <div class="w-full h-24 flex justify-center items-centerD">
             <div class="avatar-send">
-              <div class="image-user"></div>
+              <div
+                class="image-user"
+                :style="`background-image: url('${urlImage}')`"
+              ></div>
             </div>
           </div>
 
@@ -80,7 +83,10 @@
           </div>
 
           <div class="w-full flex justify-center p-2">
-            <BhComfirm @onChangeComfirm="onChangeComfirm"></BhComfirm>
+            <BhComfirm
+              @onChangeComfirm="onChangeComfirm"
+              :nameTitle="nameTitle"
+            ></BhComfirm>
           </div>
         </div>
       </div>
@@ -100,12 +106,17 @@ export default {
       nameComfirm: "Comfirm",
       isHideComfirm: false,
       txtValueMes: "",
+      nameTitle: "Confirm",
+
+      avatarDefault: require("@/assets/image-dating/default.png"),
     };
   },
 
   computed: {
     urlImage() {
-      return "https://firebasestorage.googleapis.com/v0/b/heartlink-dating-project.appspot.com/o/dating%2F1%20(1).jpg?alt=media&token=7b4d7d74-8bf4-4d11-98e6-d36bcee3f57f";
+      return this.$store.state.homeModule.likeForUser?.avatar
+        ? this.$store.state.homeModule.likeForUser?.avatar
+        : this.avatarDefault;
     },
 
     btUrlImage() {
@@ -130,10 +141,12 @@ export default {
   methods: {
     onClickNextImage() {},
 
-    onClickSendMessage() {},
+    onClickSendMessage() {
+      this.isHideComfirm = true;
+    },
 
-    onChangeComfirm(val) {
-      this.isHideComfirm = val;
+    onChangeComfirm() {
+      this.$emit("onHideLikeYou", true);
     },
   },
 };

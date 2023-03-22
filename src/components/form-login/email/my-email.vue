@@ -110,6 +110,7 @@ export default {
     ...mapMutations(["setEmailForUser"]),
 
     onChangeInput() {
+      debugger;
       this.isResultValidate = validate.validateEmail(this.txtEmail);
       if (this.isResultValidate) {
         // Xét giá trị email

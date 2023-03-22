@@ -116,6 +116,7 @@ export default {
 
   mounted() {
     var input = document.querySelector("#phone");
+
     this.valCodeQR = intlTelInput(input, {
       initialCountry: "auto",
       geoIpLookup: function (callback) {
@@ -127,6 +128,8 @@ export default {
         });
       },
     });
+
+    input.focus();
   },
 };
 </script>

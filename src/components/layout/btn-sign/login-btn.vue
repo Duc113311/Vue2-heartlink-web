@@ -36,11 +36,14 @@
     </div>
 
     <MyCommon
-      v-if="isShowPhoneNumber"
+      v-show="isShowPhoneNumber"
       @onShowEmailUser="onShowEmailUser"
     ></MyCommon>
     <MyEmail v-if="isShowEmail" @onShowWelcome="onShowWelcome"></MyEmail>
-    <NewAccount v-if="isShowWellcome"></NewAccount>
+    <NewAccount
+      v-show="isShowWellcome"
+      @onShowDialogQuit="onShowDialogQuit"
+    ></NewAccount>
   </div>
 </template>
 
@@ -75,7 +78,9 @@ export default {
 
   methods: {
     ...mapActions(["postTokenByUserID", "checkExistUserId"]),
-
+    onShowDialogQuit(val) {
+      this.isShowWellcome = val;
+    },
     /**
      * Login by phone number
      * CreateBy: nvDuc

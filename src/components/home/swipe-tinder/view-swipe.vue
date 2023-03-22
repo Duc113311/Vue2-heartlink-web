@@ -1,6 +1,7 @@
 <template>
   <div class="w-full h-full">
     <Tinder
+      class="uis"
       ref="tinder"
       key-name="userId"
       :queue.sync="listDataUser"
@@ -116,7 +117,7 @@
 
 <script>
 import Tinder from "vue-tinder";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "view-swipe",
@@ -128,6 +129,7 @@ export default {
       history: [],
       isShowDetail: false,
       isActiveImag: true,
+      nameTinder: "",
     };
   },
 
@@ -135,7 +137,10 @@ export default {
     ...mapState("userProfileList"),
 
     listDataUser() {
-      return this.$store.state.userModule.userProfileList;
+      debugger;
+      return this.$store.state.userModule.userProfileList
+        ? this.$store.state.userModule.userProfileList
+        : [];
     },
 
     isShowUrl(val) {
@@ -150,6 +155,9 @@ export default {
   created() {},
   methods: {
     ...mapMutations(["setUrlNameAvatarUser", "setLeftRightAvatar"]),
+
+    ...mapActions(["patchNopeUserId", "patchComeBackUserId", "postLikeUserId"]),
+
     onClickNopeDetail(value) {
       this.isShowDetail = value;
     },
@@ -204,17 +212,46 @@ export default {
       }
     },
 
+    onNopeUser(val) {
+      console.log(val);
+    },
+
     onDetailInfor(value) {
       console.log(value);
       this.$emit("onShowDetailUser", value);
     },
-    onSubmit({ item }) {
+    async onSubmit({ item }) {
+      debugger;
       this.setUrlNameAvatarUser("");
       this.isActiveImag = true;
 
+      if (this.nameTinder.toString() === "nope") {
+        console.log("Nope");
+        const data = {
+          userId: localStorage.userId,
+          objectCustomer: {
+            userIdCustomer: item.userId,
+          },
+        };
+        await this.patchNopeUserId(data);
+      }
+      if (this.nameTinder.toString() === "super") {
+        console.log("Supper");
+      }
+      if (this.nameTinder.toString() === "like") {
+        console.log("like");
+        const data = {
+          userId: localStorage.userId,
+          objectCustomer: {
+            userIdCustomer: item.userId,
+          },
+        };
+        await this.postLikeUserId(data);
+      }
       this.history.push(item);
     },
     async decide(choice) {
+      debugger;
       console.log(choice);
       if (choice === "rewind") {
         if (this.history.length) {
@@ -223,6 +260,8 @@ export default {
       } else if (choice === "help") {
         console.log("tính năng đang phát triển");
       } else {
+        this.nameTinder = choice;
+
         this.$refs.tinder.decide(choice);
       }
     },

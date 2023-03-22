@@ -95,11 +95,6 @@ export default {
   margin-bottom: 15px;
 }
 
-.img-app {
-  background: #884971;
-  opacity: 1;
-}
-
 *:focus {
   outline: none;
 }

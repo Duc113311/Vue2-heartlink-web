@@ -9,12 +9,20 @@
       >
         <div
           v-show="isShowIconApp"
-          class="absolute z-40 img-app flex w-full h-full justify-center"
+          class="absolute z-40 img-app items-center flex w-full h-full justify-center"
         >
-          <img width="100" src="./assets/icon/ic_icon_app (1).svg" />
+          <div class="ic_apps">
+            <span style="--i: 0"></span>
+            <span style="--i: 1"></span>
+            <span style="--i: 2"></span>
+            <span style="--i: 3"></span>
+          </div>
         </div>
         <router-view />
       </div>
+      <!-- <div class="h-full w-full">
+        <router-view />
+      </div> -->
     </div>
   </div>
 </template>
@@ -57,7 +65,7 @@ export default {
   async created() {
     setTimeout(() => {
       this.isShowIconApp = false;
-    }, 500);
+    }, 1000);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     }
@@ -85,8 +93,15 @@ export default {
 @import "@/assets/css/dark-them.css";
 @import "@/assets/css/light-theme.css";
 @import "@/assets/css/reponsive-scream.css";
+
+@import "@/assets/css/bh-animations.css";
 .img-app {
-  background: #884971;
+  background: linear-gradient(
+    4deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(167, 96, 20, 1) 100%,
+    rgba(255, 255, 255, 0.7050578952173336) 100%
+  );
   opacity: 1;
 }
 

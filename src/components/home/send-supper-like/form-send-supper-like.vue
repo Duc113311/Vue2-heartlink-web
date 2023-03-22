@@ -3,7 +3,8 @@
     <div
       class="border-page-supper-like w-full h-full flex justify-center items-center"
     >
-      <div class="body-send">
+      <div class="v-modal-bg absolute z-10"></div>
+      <div class="body-send z-20">
         <!-- Image -->
         <div v-show="isShowSee" class="w-full h-full">
           <div class="image-match flex justify-center items-center relative">
@@ -27,13 +28,15 @@
           </div>
 
           <div class="flex justify-center items-center mb-2">
-            <BhSendSuperLike></BhSendSuperLike>
+            <BhSendSuperLike
+              @onSendSuperLike="onSendSuperLike"
+            ></BhSendSuperLike>
           </div>
           <div class="flex justify-center items-center">
             <BhNothank :nameTitle="nameNothank"></BhNothank>
           </div>
         </div>
-        <div class="w-full h-full">
+        <div v-show="!isShowSee" class="w-full h-full">
           <div
             class="image-who-see image-match flex justify-center items-center"
           >
@@ -77,7 +80,7 @@ export default {
 
   data() {
     return {
-      isShowSee: false,
+      isShowSee: true,
       nameLater: "MAYBE LATER",
       nameNothank: "Nothank",
     };
@@ -93,7 +96,7 @@ export default {
   border: 1px solid #1e344f;
   background-color: #434a5d;
   border-radius: 10px;
-  width: 100%;
+  width: 90%;
 }
 
 .image-match {

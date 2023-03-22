@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const http_request = axios.create({
-  baseURL: `https://us-central1-heartlink-dating-project.cloudfunctions.net/app/`,
+  baseURL: `http://localhost:5000/heartlink-dating-project/us-central1/app/`,
   headers: {
     Accept: "application/json",
     "Access-Control-Allow-Origin": "*",

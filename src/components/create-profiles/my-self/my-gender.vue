@@ -125,13 +125,16 @@ export default {
     const documentParam = document.getElementsByClassName(
       "padding-input-option"
     );
-    documentParam[this.genders].classList.add("active-border");
-    if (this.genders === 0) {
-      this.$emit("onStatusActive", true);
-    } else if (this.genders === 1) {
-      this.$emit("onStatusActive", true);
-    } else if (this.genders === 2) {
-      this.$emit("onStatusActive", true);
+    debugger;
+    if (this.genders !== 3) {
+      documentParam[this.genders].classList.add("active-border");
+      if (this.genders === 0) {
+        this.$emit("onStatusActive", true);
+      } else if (this.genders === 1) {
+        this.$emit("onStatusActive", true);
+      } else if (this.genders === 2) {
+        this.$emit("onStatusActive", true);
+      }
     } else {
       this.$emit("onStatusActive", false);
     }

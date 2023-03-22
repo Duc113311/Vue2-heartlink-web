@@ -1,21 +1,7 @@
-@media only screen and (min-width: 321px) {
-  /* Styles */
-}
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width: 320px) {
-  /* Styles */
-  .layout-web {
-    background: #fd5d65;
-  }
-  .layout-detail {
-    width: 90%;
-    height: 100%;
-  }
-}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .layout-web {
-    background: #b5e3ae;
+    background: #57310b;
   }
   .layout-detail {
     width: 100%;
@@ -57,13 +43,14 @@
 
   .btns {
     min-width: 300px !important;
+    max-width: 334px;
   }
   .btns img:nth-child(2n + 1) {
-    width: 66px !important;
+    width: 83px !important;
   }
 
   .btns img:nth-child(2n) {
-    width: 72px !important;
+    width: 76px !important;
   }
 
   .item-option {
@@ -101,14 +88,20 @@
     width: 60px;
     height: 60px;
   }
+
+  /* Css Detail user */
+  .icon-close-infor {
+    top: 22rem;
+  }
 }
-@media only screen and (min-width: 768px) {
+
+@media only screen and (min-width: 600px) {
   .layout-web {
     background: #b5e3ae;
   }
   .layout-detail {
     width: 34rem;
-    height: 90%;
+    height: 100%;
   }
   .phone-login,
   .email-login,
@@ -293,7 +286,7 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .layout-web {
-    background: blue;
+    background: rgb(131, 131, 212);
   }
   .layout-detail {
     width: 34rem;
@@ -340,94 +333,13 @@
   .option-setting {
     gap: 60px;
   }
-}
+  /* Css Login */
 
-/* Large screens ----------- */
-@media only screen and (min-width: 1824px) {
-  /* Styles */
-  .layout-web {
-    background: #156a1a;
+  .w-button {
+    width: 76%;
   }
-  .layout-detail {
-    width: 34rem;
-    height: 90%;
-  }
-
-  .phone-login,
-  .email-login,
-  .welcome,
-  .create-profile {
-    padding: 18px;
-  }
-  .padding-describe {
-    font-size: 15px;
-    padding: 0;
-    letter-spacing: 0.5px;
-  }
-
-  .pd-button {
-    padding-left: 70px;
-    padding-right: 70px;
-  }
-
-  .padding-button {
-    font-size: 20px;
-  }
-
-  .size-icon {
-    font-size: 24px;
-  }
-
-  .text-show-my {
-    font-size: 16px;
-  }
-
-  .footer-body {
-    gap: 50px;
-    font-size: 44px;
-  }
-
-  .btns {
-    min-width: 450px !important;
-  }
-  .btns img:nth-child(2n + 1) {
-    width: 85px !important;
-  }
-
-  .btns img:nth-child(2n) {
-    width: 100px !important;
-  }
-
-  .item-option {
-    font-size: 16px;
-  }
-
-  .text-description {
-    font-size: 18px;
-  }
-
-  .h-verified {
-    height: 11rem;
-  }
-
-  .top-dash-explore {
-    top: 10rem;
-  }
-
-  .board {
-    height: 82%;
-  }
-
-  .option-setting {
-    gap: 30px;
-  }
-
-  .size-hight {
-    width: 60px;
-  }
-
-  .image-detail-avatar {
-    width: 60px;
-    height: 60px;
+  /* Css detail user */
+  .icon-close-infor {
+    top: 31.5rem;
   }
 }

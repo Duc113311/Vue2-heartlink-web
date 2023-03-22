@@ -218,6 +218,10 @@ const mutations = {
     state.user_profile.firstName = firstName;
   },
 
+  setEmailForUser(state, email) {
+    state.user_profile.email = email;
+  },
+
   /**
    * Xét giá trị birthday
    * @param {*} state
@@ -310,6 +314,7 @@ const mutations = {
    * @param {*} location
    */
   setLocation(state, location) {
+    debugger;
     state.user_profile.latitude = location.latitude;
     state.user_profile.longitude = location.longitude;
 
@@ -353,12 +358,16 @@ const mutations = {
 
   setLeftRighAvatar(state, data) {
     if (data === true) {
+      debugger;
       const idNew = parseInt(state.urlAvatarUser.id) + 1;
-      const findValue = state.userProfileDetail.avatars.find(
-        (x) => parseInt(x.id) === parseInt(idNew)
-      );
-      state.urlAvatarUser = findValue;
+      if (idNew < state.userProfileDetail.avatars.length) {
+        const findValue = state.userProfileDetail.avatars.find(
+          (x) => parseInt(x.id) === parseInt(idNew)
+        );
+        state.urlAvatarUser = findValue;
+      }
     } else {
+      debugger;
       if (state.urlAvatarUser.id === 0) {
         // Ko cho next
         state.urlAvatarUser = data.avatars[0];

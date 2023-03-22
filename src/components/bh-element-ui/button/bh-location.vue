@@ -51,6 +51,7 @@ export default {
         this.setLocation(position.coords);
       }
 
+      debugger;
       const userId = TokenApps.getAccessToken("userId");
       const providerId = TokenApps.getProviderId("providerId");
       const dataUser = this.$store.state.userModule.user_profile;
@@ -68,6 +69,7 @@ export default {
      */
     onClickLocations() {
       if (navigator.geolocation) {
+        debugger;
         navigator.geolocation.getCurrentPosition(this.showPosition);
       }
     },

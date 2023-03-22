@@ -1,6 +1,6 @@
 <template>
   <div class="home-page w-full h-full relative p-2">
-    <div class="w-full h-full">
+    <div class="w-full h-full z-10">
       <Header></Header>
       <div class="body-page-home-new w-full">
         <!-- Home -->
@@ -32,11 +32,17 @@
     </div>
 
     <!-- Hiển thị form chat khi cả 2 user match -->
-    <div v-show="isMatch" class="w-full h-full match-like">
-      <FormLikeToo></FormLikeToo>
+    <div
+      v-if="!isShowMatchs"
+      class="w-full h-full match-like z-20 absolute top-0 left-0"
+    >
+      <FormLikeToo @onHideLikeYou="onHideLikeYou"></FormLikeToo>
     </div>
 
-    <div v-show="isMatch" class="w-full h-full send-supper-like">
+    <div
+      v-show="isSendSuccess"
+      class="w-full h-full send-supper-like absolute top-0 left-0 z-20"
+    >
       <FormSendSupperLike></FormSendSupperLike>
     </div>
   </div>
@@ -72,9 +78,22 @@ export default {
       isShowDetail: false,
       idImage: "",
       isDetail: false,
-      isMatch: false,
       loading: true,
+      isSendSuccess: false,
+      isMatch: false,
     };
+  },
+
+  computed: {
+    isShowMatchs: {
+      get() {
+        const isMatch = this.$store.state.homeModule.likeForUser?.isShowMatch;
+        return isMatch ? isMatch : this.isMatch;
+      },
+      set(newValue) {
+        this.isMatch = newValue;
+      },
+    },
   },
 
   async created() {
@@ -97,6 +116,12 @@ export default {
   methods: {
     ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
 
+    onHideLikeYou(val) {
+      debugger;
+      this.isShowMatchs = val;
+      this.isSendSuccess = true;
+    },
+
     onHideProfile(val) {
       this.isShowDetail = val;
     },
@@ -117,6 +142,7 @@ export default {
         latitude: localStorage.latitude,
         longitude: localStorage.longitude,
       };
+
       await this.getDetailInforUser(dataValue);
       this.isShowDetail = true;
     },

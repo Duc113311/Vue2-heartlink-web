@@ -1,11 +1,6 @@
 <template>
   <div>
-    <el-dialog
-      class="dialog-singup rounded-lg"
-      :show-close="false"
-      v-model="showFormQuit"
-      align-center
-    >
+    <el-dialog class="dialog-singup rounded-lg" align-center>
       <div class="text-white">
         <h2 class="text-xl mb-4">Quit the sign-up process</h2>
         <span class="text-xl text-slate-400">
@@ -13,23 +8,21 @@
           now.
         </span>
       </div>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button
-            class="mr-3 color-cancel text-lg"
-            link
-            @click="onCancelWelcome"
-            >CANCEL</el-button
-          >
-          <el-button
-            type="danger"
-            class="text-lg"
-            link
-            @click="onConfimWelcome(false)"
-            >OK</el-button
-          >
-        </span>
-      </template>
+      <span slot="footer" class="dialog-footer">
+        <el-button
+          class="mr-3 color-cancel text-lg"
+          link
+          @click="onCancelWelcome"
+          >CANCEL</el-button
+        >
+        <el-button
+          type="danger"
+          class="text-lg"
+          link
+          @click="onConfimWelcome(false)"
+          >OK</el-button
+        >
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -48,6 +41,7 @@ export default {
 
   computed: {
     showFormQuit() {
+      debugger;
       return this.isShowQuitSing;
     },
   },

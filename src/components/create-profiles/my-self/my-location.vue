@@ -154,13 +154,20 @@ export default {
     },
 
     onAngleUp() {
+      debugger;
       this.isShowMeet = false;
-      document.getElementsByClassName("meet-people")[0].style.display = "block";
+      if (document.getElementsByClassName("meet-people")[0]) {
+        document.getElementsByClassName("meet-people")[0].style.display =
+          "block";
+      }
     },
   },
 
   mounted() {
-    document.getElementsByClassName("angle-up")[0].style.display = "none";
+    debugger;
+    if (document.getElementsByClassName("angle-up")[0]) {
+      document.getElementsByClassName("angle-up")[0].style.display = "none";
+    }
   },
 };
 </script>

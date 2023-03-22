@@ -15,7 +15,9 @@
             <button
               v-for="data in this.userParam.avatars"
               :key="data.id"
-              class="bt-img p-0.5 rounded-lg mr-0.5"
+              :id="`detail${data.id}`"
+              :class="data.id === 0 ? 'active-image' : 'no-active'"
+              class="bt-img imageAvatar p-0.5 rounded-lg mr-0.5 no-active"
               @click="onClickNextImage(data)"
             ></button>
           </div>
@@ -100,14 +102,14 @@
               SHARE NGOC TRINH'S PROFILE
             </div>
           </div>
-          <div class="flex justify-center title-description-no-padding">
+          <div class="flex justify-center mt-2 title-description-no-padding">
             SEE WHAT A FRIEND THINKS
           </div>
         </div>
         <BhHorizontalLine></BhHorizontalLine>
         <!-- Report -->
         <div class="flex h-12 w-full justify-center items-center">
-          <div>REPORT NGOC TRINH</div>
+          <div class="text-description-no-padding">REPORT NGOC TRINH</div>
         </div>
         <BhHorizontalLine></BhHorizontalLine>
         <div class="h-2/4"></div>
@@ -152,25 +154,6 @@ export default {
 
   data() {
     return {
-      loading: true,
-      sexuals: [
-        "noe-smoker",
-        "aquarius",
-        "pet-free",
-        "gay",
-        "questioning",
-        "asexual",
-      ],
-
-      interests: [
-        "Art Galleries",
-        "Astrology",
-        "Band",
-        "Board Games",
-        "Body Step",
-        "Boxing",
-      ],
-
       btUrlImage: [
         {
           id: 1,
@@ -218,6 +201,7 @@ export default {
     ...mapState(["userProfileDetail"]),
 
     idImage() {
+      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
     userParam() {
@@ -232,11 +216,38 @@ export default {
     },
 
     nextImageLeft() {
-      this.setLeftRighAvatar(false);
+      const idImage = this.$store.state.userModule.urlAvatarUser.id;
+      debugger;
+      console.log(idImage);
+      if (
+        document.getElementById("detail" + `${parseInt(idImage) - 1}`) !== null
+      ) {
+        document
+          .getElementById("detail" + `${parseInt(idImage)}`)
+          .classList.remove("active-image");
+        document
+          .getElementById("detail" + `${parseInt(idImage) - 1}`)
+          .classList.add("active-image");
+        this.setLeftRighAvatar(false);
+      }
     },
 
     nextImageRight() {
-      this.setLeftRighAvatar(true);
+      debugger;
+      const idImage = this.$store.state.userModule.urlAvatarUser.id;
+      debugger;
+      console.log(idImage);
+      if (
+        document.getElementById("detail" + `${parseInt(idImage) + 1}`) !== null
+      ) {
+        document
+          .getElementById("detail" + `${parseInt(idImage)}`)
+          .classList.remove("active-image");
+        document
+          .getElementById("detail" + `${parseInt(idImage) + 1}`)
+          .classList.add("active-image");
+        this.setLeftRighAvatar(true);
+      }
     },
 
     onClickSupperLike() {},
@@ -279,10 +290,6 @@ export default {
   border-top: 2px solid #353b4b;
 }
 
-.icon-close-infor {
-  top: 24rem;
-}
-
 .bt-like-count {
   top: 60%;
 }
@@ -290,5 +297,13 @@ export default {
 .number-like {
   padding: 10px 19px;
   font-size: 32px;
+}
+
+.active-image {
+  background-color: white !important;
+}
+
+.no-active {
+  background-color: #ffffff8f;
 }
 </style>

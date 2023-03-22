@@ -1,13 +1,13 @@
 <template>
-  <div class="flex justify-center w-full pl-10 pr-10 items-center">
-    <button
-      :loading="isShowLoading"
-      v-bind:class="[isActiveContinue ? 'active-button' : isDefaultTheme]"
-      class="btAgree cursor-pointer w-full padding-button"
-      @click="onClickIAgree()"
-    >
-      I agree
-    </button>
+  <div class="flex justify-center w-full items-center">
+    <div class="w-button">
+      <button
+        class="btAgree cursor-pointer w-full padding-button active-button"
+        @click="onClickIAgree()"
+      >
+        I agree
+      </button>
+    </div>
   </div>
 </template>
 
@@ -15,16 +15,11 @@
 export default {
   name: "bt-agree",
 
-  props: ["isLoading"],
   data() {
     return {};
   },
 
   computed: {
-    isShowLoading() {
-      return this.isLoading;
-    },
-
     isDefaultTheme() {
       const theme = localStorage.getItem("user-theme");
 
