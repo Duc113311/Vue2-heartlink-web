@@ -36,7 +36,7 @@ export default {
      * Sự kiện click để tiếp tục
      */
     onClickComfirm() {
-      this.$emit("onChangeComfirm", true);
+      this.$emit("onChangeComfirm", false);
     },
   },
 };

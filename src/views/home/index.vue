@@ -33,17 +33,19 @@
 
     <!-- Hiển thị form chat khi cả 2 user match -->
     <div
-      v-if="!isShowMatchs"
+      v-show="isShowMatchs"
       class="w-full h-full match-like z-20 absolute top-0 left-0"
     >
       <FormLikeToo @onHideLikeYou="onHideLikeYou"></FormLikeToo>
     </div>
 
     <div
-      v-show="isSendSuccess"
+      v-if="isSendSuccess"
       class="w-full h-full send-supper-like absolute top-0 left-0 z-20"
     >
-      <FormSendSupperLike></FormSendSupperLike>
+      <FormSendSupperLike
+        @onHidePopupSendSuperLike="onHidePopupSendSuperLike"
+      ></FormSendSupperLike>
     </div>
   </div>
 </template>
@@ -57,7 +59,7 @@ import ViewSwipe from "../../components/home/swipe-tinder/view-swipe";
 import Footer from "../../components/layout/footer-home/footer";
 import Header from "../../components/layout/header-home/header";
 
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
     FormSendSupperLike,
@@ -85,14 +87,9 @@ export default {
   },
 
   computed: {
-    isShowMatchs: {
-      get() {
-        const isMatch = this.$store.state.homeModule.likeForUser?.isShowMatch;
-        return isMatch ? isMatch : this.isMatch;
-      },
-      set(newValue) {
-        this.isMatch = newValue;
-      },
+    isShowMatchs() {
+      debugger;
+      return this.$store.state.homeModule.statusMatch;
     },
   },
 
@@ -116,9 +113,10 @@ export default {
   methods: {
     ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
 
+    ...mapMutations(["setStatusLikeUser"]),
     onHideLikeYou(val) {
       debugger;
-      this.isShowMatchs = val;
+      this.setStatusLikeUser(val);
       this.isSendSuccess = true;
     },
 
@@ -146,6 +144,23 @@ export default {
       await this.getDetailInforUser(dataValue);
       this.isShowDetail = true;
     },
+
+    onHidePopupSendSuperLike(val) {
+      debugger;
+      this.isSendSuccess = val;
+    },
+  },
+
+  beforeUpdate() {
+    debugger;
+  },
+
+  beforeMount() {
+    debugger;
+  },
+
+  mounted() {
+    debugger;
   },
 };
 </script>

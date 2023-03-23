@@ -267,7 +267,15 @@ export default {
     },
   },
 
+  beforeUpdate() {
+    debugger;
+  },
+
+  beforeMount() {
+    debugger;
+  },
   mounted() {
+    debugger;
     // const documentImage = document.getElementsByClassName("imageAvatar");
     // documentImage[0].classList.add("active-image");
     // documentImage[0].classList.remove("no-active");
@@ -290,7 +298,7 @@ export default {
   overflow: hidden;
 }
 .icon-tinder {
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 600;
   border-radius: 10px;
   text-align: center;
@@ -300,10 +308,10 @@ export default {
 }
 
 .like-pointer {
-  top: 87px;
-  right: 15rem;
-  color: #fd5d65;
-  border: 4px solid #fd5d65;
+  top: 6rem;
+  right: 19rem;
+  color: #f6a800;
+  border: 7px solid #f6a800;
   transform: rotate(-45deg);
 }
 
@@ -311,16 +319,16 @@ export default {
   top: 76px;
   left: 15rem;
   transform: rotate(45deg);
-  color: #f92f2b;
-  border: 4px solid #f92f2b;
+  color: #39685a;
+  border: 7px solid #39685a;
 }
 
 .super-pointers {
   bottom: 80px;
   left: 7rem;
   right: 7rem;
-  color: #01de9b;
-  border: 4px solid #01de9b;
+  color: #00ba83;
+  border: 7px solid #00ba83;
 }
 
 .rewind-pointer {

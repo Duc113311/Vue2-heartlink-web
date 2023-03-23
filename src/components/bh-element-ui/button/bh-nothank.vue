@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
     <button
-      class="text-white w-full p-5 color-bt-cancel flex justify-center items-center"
+      class="text-white w-80 p-5 color-bt-cancel flex justify-center items-center"
       @click="onClickNoThanks()"
     >
       {{ renderName }}
@@ -26,7 +26,9 @@ export default {
   },
 
   methods: {
-    onClickNoThanks() {},
+    onClickNoThanks() {
+      this.$emit("onHideMayBeLater", false);
+    },
   },
 };
 </script>

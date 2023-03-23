@@ -2,7 +2,7 @@
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
     <button
       :loading="isShowLoading"
-      class="text-base text-white w-full rounded-lg p-5 color-bt"
+      class="text-base text-white w-80 rounded-lg p-5 color-bt"
       @click="onClickSendSuperLike()"
     >
       SEND SUPER LIKE

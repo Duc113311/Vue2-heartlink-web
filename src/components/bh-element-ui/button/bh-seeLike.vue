@@ -1,11 +1,11 @@
 <template>
-  <div class="pl-10 pr-10 flex justify-center items-center">
-    <el-button
-      type="success"
-      @click="onClickSeeLikes"
-      class="btContinueCode cursor-pointer text-white w-80 color-button"
-      >SEE WHO LIKES YOU</el-button
+  <div class="flex justify-center w-full pl-10 pr-10 items-center">
+    <button
+      class="text-base text-white w-80 rounded-lg p-5 color-button"
+      @click="onClickSeeLikes()"
     >
+      SEE WHO LIKES YOU
+    </button>
   </div>
 </template>
 
@@ -32,15 +32,15 @@ export default {
 </script>
 
 <style lang="css">
-.color-button {
-  border: 1px solid #f6a800 !important;
-  border-radius: 10px !important;
-  padding: 14px 20px !important;
-  background-color: #f6a800;
-  cursor: pointer;
+.color-button:hover {
+  background-color: #30e6af !important;
 }
-
-.el-button.is-loading:before {
-  background-color: rgba(0, 0, 0, 0) !important;
+.color-button {
+  height: 60px;
+  font-size: 22px !important;
+  background-color: #f6a800 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px;
 }
 </style>

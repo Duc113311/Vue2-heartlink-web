@@ -307,11 +307,11 @@ export default {
 }
 
 .content-chat {
-  height: 82%;
+  height: 80.5%;
 }
 
 .footer-chat {
-  height: calc(100% - 94%);
+  height: calc(100% - 92.5%);
 }
 
 .image-detail-avatar {

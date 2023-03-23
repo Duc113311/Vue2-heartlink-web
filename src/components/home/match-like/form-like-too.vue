@@ -145,8 +145,8 @@ export default {
       this.isHideComfirm = true;
     },
 
-    onChangeComfirm() {
-      this.$emit("onHideLikeYou", true);
+    onChangeComfirm(val) {
+      this.$emit("onHideLikeYou", val);
     },
   },
 };

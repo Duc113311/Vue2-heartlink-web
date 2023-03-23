@@ -4,6 +4,7 @@ const state = {
   nopeUser: {},
   backUser: {},
   likeForUser: {},
+  statusMatch: false,
 };
 
 const getters = {};
@@ -34,6 +35,14 @@ const mutations = {
    */
   setLikeUserId(state, data) {
     state.likeForUser = data;
+
+    if (data.isShowMatch) {
+      state.statusMatch = data.isShowMatch;
+    }
+  },
+
+  setStatusLikeUser(state, data) {
+    state.statusMatch = data;
   },
 };
 

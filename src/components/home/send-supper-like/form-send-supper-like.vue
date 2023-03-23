@@ -42,7 +42,6 @@
           >
             <div class="w-full h-full border-image-first">
               <div class="image-user"></div>
-              <div class="bg-shadow w-full h-full"></div>
             </div>
           </div>
 
@@ -54,12 +53,15 @@
           <div class="title-match flex justify-center items-center mb-4">
             <img src="@/assets/icon/ic_super_like (1).svg" alt="" />
           </div>
-
-          <div class="w-full">
+          <div class="flex justify-center items-center mb-2">
             <BhSeeLike></BhSeeLike>
           </div>
-
-          <BhNothank :nameTitle="nameLater"></BhNothank>
+          <div class="flex justify-center items-center">
+            <BhNothank
+              @onHideMayBeLater="onHideMayBeLater"
+              :nameTitle="nameLater"
+            ></BhNothank>
+          </div>
         </div>
       </div>
     </div>
@@ -86,7 +88,16 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    onSendSuperLike() {
+      this.isShowSee = false;
+    },
+
+    onHideMayBeLater(val) {
+      debugger;
+      this.$emit("onHidePopupSendSuperLike", val);
+    },
+  },
 };
 </script>
 
