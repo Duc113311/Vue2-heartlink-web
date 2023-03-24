@@ -49,15 +49,6 @@ const mutations = {
   setTokenAccount(state, token) {
     state.tokenAccount = token;
   },
-
-  /**
-   * Set giá trị cho email
-   * @param {*} state
-   * @param {*} email
-   */
-  setEmailForUser(state, email) {
-    state.email = email;
-  },
 };
 
 export default {
