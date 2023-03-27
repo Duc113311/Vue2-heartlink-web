@@ -1,99 +1,14 @@
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 360px) {
   .layout-web {
-    background: #57310b;
+    background: #801aba;
   }
   .layout-detail {
     width: 100%;
     height: 100%;
   }
-  .phone-login,
-  .email-login,
-  .welcome,
-  .create-profile {
-    padding: 18px;
-  }
-  .padding-describe {
-    font-size: 15px;
-    padding: 0;
-    letter-spacing: 0.5px;
-  }
-
-  .pd-button {
-    padding-left: 70px;
-    padding-right: 70px;
-  }
-
-  .padding-button {
-    font-size: 20px;
-  }
-
-  .size-icon {
-    font-size: 24px;
-  }
-
-  .text-show-my {
-    font-size: 16px;
-  }
-
-  .footer-body {
-    gap: 39px;
-    font-size: 32px;
-  }
-
-  .btns {
-    min-width: 300px !important;
-    max-width: 334px;
-  }
-  .btns img:nth-child(2n + 1) {
-    width: 83px !important;
-  }
-
-  .btns img:nth-child(2n) {
-    width: 76px !important;
-  }
-
-  .item-option {
-    font-size: 16px;
-  }
-
-  .text-description {
-    font-size: 18px;
-  }
-
-  .h-verified {
-    height: 9rem;
-  }
-
-  .top-dash-explore {
-    top: 5rem;
-  }
-
-  .board {
-    height: 82%;
-  }
-
-  .option-setting {
-    gap: 30px;
-  }
-
-  .h-likes {
-    height: calc(100% - 8rem);
-  }
-  .item-user {
-    height: 16rem;
-  }
-
-  .image-detail-avatar {
-    width: 60px;
-    height: 60px;
-  }
-
-  /* Css Detail user */
-  .icon-close-infor {
-    top: 22rem;
-  }
 }
+
+/* Extra small devices (phones, 600px and down) */
 
 @media only screen and (min-width: 600px) {
   .layout-web {
@@ -101,7 +16,7 @@
   }
   .layout-detail {
     width: 34rem;
-    height: 100%;
+    height: 90%;
   }
   .phone-login,
   .email-login,
@@ -149,6 +64,9 @@
   .option-setting {
     gap: 60px;
   }
+  .w-button {
+    width: 76%;
+  }
 }
 /* Ipad */
 /* Medium devices (landscape tablets, 768px and up) */
@@ -164,7 +82,7 @@
   .email-login,
   .welcome,
   .create-profile {
-    padding: 18px;
+    padding: 26px;
   }
   .footer-body {
     gap: 50px;
@@ -228,6 +146,9 @@
   .h-data-life {
     height: calc(100% - 17%);
   }
+  .w-button {
+    width: 76%;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -280,6 +201,10 @@
 
   .option-setting {
     gap: 60px;
+  }
+
+  .w-button {
+    width: 76%;
   }
 }
 

@@ -155,7 +155,7 @@ export default {
 }
 
 .iti__country-list {
-  width: 418px !important;
+  width: 472px !important;
   border: none !important;
   background-color: #4e576b !important;
 }

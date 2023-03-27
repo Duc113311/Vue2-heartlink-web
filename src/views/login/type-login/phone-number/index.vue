@@ -1,8 +1,7 @@
 <template>
-  <div
-    class="w-full h-full user-profile top-0 left-0 absolute z-20 grid phone-login"
-  >
+  <div class="w-full h-full user-profile top-0 left-0 absolute z-20 grid">
     <div>
+      <BhBack @onBackComponent="onBackComponent"></BhBack>
       <!-- Số điện thoại -->
       <MyNumber
         v-if="screenNumber === 0"
@@ -10,8 +9,6 @@
       ></MyNumber>
       <!-- Nhập mã OTP -->
       <div v-else>
-        <BhBack @onBackComponent="onBackComponent"></BhBack>
-
         <MyCode
           :txtPhoneNumber="txtPhoneNumber"
           :sentCodeId="sentCodeId"
@@ -33,11 +30,11 @@
 </template>
 
 <script>
-import MyCode from "./my-code";
-import BhBack from "../../bh-element-ui/button/bh-back";
-import BhContinue from "../../bh-element-ui/button/bh-continue";
+import MyCode from "@/components/form-login/phone-number/my-code.vue";
+import BhBack from "@/components/bh-element-ui/button/bh-back.vue";
+import BhContinue from "@/components/bh-element-ui/button/bh-continue.vue";
 import intlTelInput from "intl-tel-input";
-import MyNumber from "./my-number";
+import MyNumber from "@/components/form-login/phone-number/my-number";
 import { mapActions, mapMutations } from "vuex";
 
 import {
@@ -46,9 +43,9 @@ import {
   RecaptchaVerifier,
   PhoneAuthProvider,
   signInWithCredential,
-} from "../../../configs/firebase.js";
+} from "../../../../configs/firebase.js";
 export default {
-  name: "my-common",
+  name: "phone-number",
   components: {
     MyCode,
     BhBack,
@@ -71,7 +68,11 @@ export default {
   },
 
   methods: {
-    ...mapActions(["postTokenByUserID", "checkExistUserId"]),
+    ...mapActions([
+      "postTokenByUserID",
+      "checkExistUserId",
+      "loginAppByAuthId",
+    ]),
 
     ...mapMutations(["setTokenAccount"]),
     validateRequire(value) {
@@ -93,13 +94,20 @@ export default {
     },
 
     onBackComponent(value) {
+      debugger;
       if (value) {
-        this.screenNumber = 0;
+        if (this.screenNumber === 0) {
+          this.$router.push({ path: "/" });
+        } else {
+          this.screenNumber = this.screenNumber - 1;
+        }
       }
     },
 
     async onRenderCodeOTP() {
       this.txtErrorCode = false;
+      this.valueText = [];
+      document.getElementById("1").focus();
       const phoneNumber = this.valCodeQR.getNumber();
       const appVerifier = window.recaptchaVerifier;
       await this.setuprecaptcha();
@@ -121,6 +129,7 @@ export default {
      */
     async onChangeContinue(value) {
       console.log(value);
+      debugger;
       this.isLoadings = true;
       this.isStatusRequire = true;
       this.isHide = true;
@@ -163,7 +172,7 @@ export default {
         this.isStatusRequire = false;
         this.isLoadings = false;
         this.screenNumber = this.screenNumber + 1;
-      }, 4000);
+      }, 2000);
     },
 
     singWithPhone(sentCodeId) {
@@ -179,23 +188,21 @@ export default {
           });
           console.log(userID, providerId);
 
-          await this.checkExistUserId(userID);
-          const isExist = this.$store.state.loginModule.isExistUserId;
+          await this.loginAppByAuthId({
+            oAuth2Id: userID,
+          });
+          const tokenIdParam = this.$store.state.mongoModule.tokenId;
           debugger;
-          if (isExist) {
-            this.$router.push({ path: "/home-new" }).catch(() => {});
+          if (tokenIdParam) {
+            this.$router.push({ path: "/home" });
           } else {
-            this.$emit("onShowEmailUser", true);
+            this.$router.push({ path: "/email" });
           }
-
-          // Check lần show wellcome
-          console.log(userID);
         })
         .catch((error) => {
           console.log(error);
           this.txtErrorCode = true;
 
-          this.valueText = [];
           document.getElementById("1").focus();
         });
     },
@@ -217,6 +224,7 @@ export default {
 }
 .user-profile {
   background-color: #232937;
+  grid-template-rows: 8fr 1fr;
 }
 
 .show-form {

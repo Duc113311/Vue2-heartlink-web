@@ -20,9 +20,6 @@
         </div>
         <router-view />
       </div>
-      <!-- <div class="h-full w-full">
-        <router-view />
-      </div> -->
     </div>
   </div>
 </template>

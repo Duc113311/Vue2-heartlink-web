@@ -11,7 +11,7 @@
 
     <div class="w-full option-find">
       <div class="w-full grid gap-4 grid-explore mb-2">
-        <div class="relative cursor-pointer">
+        <div class="relative cursor-pointer" @click="onClickBlindDate()">
           <div class="w-full absolute p-2 top-dash-explore text-center">
             <div class="countdown"></div>
             <div class="title-date title-option">Blind Date</div>
@@ -79,7 +79,13 @@ export default {
     return {};
   },
 
-  methods: {},
+  methods: {
+    onClickBlindDate() {
+      debugger;
+
+      this.$router.push("/explore-new/blind-date");
+    },
+  },
 };
 </script>
 

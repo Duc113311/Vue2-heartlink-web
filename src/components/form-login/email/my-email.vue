@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="w-full h-full user-profile email-login absolute top-0 left-0 z-30"
-  >
-    <BhBack></BhBack>
+  <div class="w-full h-full user-profile z-30">
     <div class="padding-title mt-6">What's your email?</div>
 
     <div
@@ -32,7 +29,7 @@
     <div class="flex justify-center padding-title">OR</div>
     <div class="flex mt-4 justify-center">
       <button
-        class="btn-Sign cursor-pointer text-xl font-semibold bg-white text-black w-80 rounded-lg px-3 py-3 mb-4"
+        class="btn-Sign cursor-pointer text-xl font-semibold bg-white text-black w-button rounded-lg px-3 py-3 mb-4"
         @click="onLoginGoogle()"
       >
         <span class="flex justify-center">
@@ -72,14 +69,12 @@
 </template>
 
 <script>
-import BhBack from "../../bh-element-ui/button/bh-back";
 import BhContinue from "../../bh-element-ui/button/bh-continue";
 import validate from "@/middleware/validate";
 import { mapMutations } from "vuex";
 
 export default {
   components: {
-    BhBack,
     BhContinue,
   },
   name: "dialog-your-email",
@@ -138,6 +133,8 @@ export default {
     },
 
     onChangeContinue(value) {
+      debugger;
+      console.log(value);
       this.setEmailForUser(this.txtEmail);
       this.$emit("onShowWelcome", value);
     },

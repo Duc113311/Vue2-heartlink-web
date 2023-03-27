@@ -140,6 +140,10 @@ export default {
     onShowWelcome(value) {
       this.isShowWellcome = value;
     },
+
+    onLoginFacebook() {
+      this.$router.push({ path: "/login" });
+    },
   },
 };
 </script>
