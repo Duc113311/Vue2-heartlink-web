@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full user-profile top-0 left-0 absolute z-20 grid">
+  <div class="w-full h-full user-profile z-20 grid">
     <div>
       <BhBack @onBackComponent="onBackComponent"></BhBack>
       <!-- Số điện thoại -->
@@ -73,6 +73,8 @@ export default {
       "checkExistUserId",
       "loginAppByAuthId",
     ]),
+
+    ...mapMutations(["setOAuth2Id"]),
 
     ...mapMutations(["setTokenAccount"]),
     validateRequire(value) {
@@ -180,13 +182,10 @@ export default {
       signInWithCredential(auth, credential)
         .then(async (result) => {
           const userID = result.user.uid;
-          const providerId = result.providerId;
 
-          await this.postTokenByUserID({
-            id: userID,
-            providerId: providerId,
+          await this.setOAuth2Id({
+            oAuth2Id: userID,
           });
-          console.log(userID, providerId);
 
           await this.loginAppByAuthId({
             oAuth2Id: userID,

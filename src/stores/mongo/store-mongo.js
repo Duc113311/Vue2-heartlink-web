@@ -60,10 +60,6 @@ const mutations = {
     debugger;
     state.listDataCard = data;
   },
-
-  setListLifeStyle(state, data) {
-    state.listLifeStyle = data;
-  },
 };
 
 const actions = {
@@ -146,18 +142,6 @@ const actions = {
       .then((response) => {
         debugger;
         commit("setListDataCards_Mongo", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
-
-  async getListLifeStyleForRegister({ commit }) {
-    await http_mongo
-      .get(`api/v1/guest/pre_selections`)
-      .then((response) => {
-        debugger;
-        commit("setListLifeStyle", response.data.data);
       })
       .catch((error) => {
         console.log(error);

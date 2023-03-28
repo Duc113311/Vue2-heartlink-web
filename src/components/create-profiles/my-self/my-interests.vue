@@ -15,12 +15,12 @@
       <div class="w-full h-full">
         <span v-for="(item, index) in listDataInterests" :key="index">
           <button
-            @click="onSelectInterest(index)"
-            :id="index"
+            @click="onSelectInterest(item.code)"
+            :id="item.code"
             class="oftion-interests mr-3 mb-3 p-3 text-white"
             size="large"
           >
-            {{ item }}
+            {{ item.value }}
           </button>
         </span>
       </div>
@@ -45,7 +45,7 @@ export default {
   computed: {
     ...mapState(["interests", "listInterests"]),
     listDataInterests() {
-      return this.$store.state.userModule.listInterests;
+      return this.$store.state.commonModule.listLifeStyle.interests;
     },
 
     isDarkTheme() {

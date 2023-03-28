@@ -12,10 +12,10 @@
         v-bind:class="isDarkTheme"
         class="padding-input-option"
         :ref="index"
-        :id="index"
-        @click="onShowMeGender(index)"
+        :id="item.code"
+        @click="onShowMeGender(item.code)"
       >
-        {{ item.name }}
+        {{ item.value }}
       </button>
     </div>
   </div>
@@ -32,26 +32,13 @@ export default {
   data() {
     return {
       showMeGender: 3,
-
-      showGendersData: [
-        {
-          id: 0,
-          name: "Woman",
-        },
-        {
-          id: 1,
-          name: "Man",
-        },
-        {
-          id: 2,
-          name: "Everyone",
-        },
-      ],
     };
   },
   computed: {
     ...mapState(["user_profile"]),
-
+    showGendersData() {
+      return this.$store.state.commonModule.listLifeStyle?.showMeGenders;
+    },
     isDarkTheme() {
       const theme = localStorage.getItem("user-theme");
 
@@ -66,7 +53,7 @@ export default {
     ...mapMutations(["setShowGender", "setShowProfileCreate"]),
     onShowMeGender(val) {
       this.showMeGender = val;
-      this.setShowGender(parseInt(this.showMeGender));
+      this.setShowGender(this.showMeGender);
 
       localStorage.setItem("showMeGender", val);
       const documentParam = document.getElementsByClassName(
@@ -76,7 +63,7 @@ export default {
       for (let index = 0; index < documentParam.length; index++) {
         const element = documentParam[index];
 
-        if (val === index) {
+        if (val === element.id) {
           element.classList.add("active-border");
         } else {
           element.classList.remove("active-border");
@@ -88,6 +75,7 @@ export default {
   },
 
   mounted() {
+    debugger;
     this.showMeGender = this.$store.state.userModule.user_profile.showMeGender;
     this.setShowProfileCreate({
       isShowProfile: true,
@@ -98,17 +86,16 @@ export default {
     const documentParam = document.getElementsByClassName(
       "padding-input-option"
     );
-    if (this.showMeGender < 3) {
-      documentParam[this.showMeGender].classList.add("active-border");
-    }
-    if (this.showMeGender === 0) {
-      this.$emit("onStatusActive", true);
-    } else if (this.showMeGender === 1) {
-      this.$emit("onStatusActive", true);
-    } else if (this.showMeGender === 2) {
-      this.$emit("onStatusActive", true);
-    } else {
-      this.$emit("onStatusActive", false);
+
+    const showMeGenderList =
+      this.$store.state.commonModule.listLifeStyle?.showMeGenders;
+    for (let index = 0; index < showMeGenderList.length; index++) {
+      const element = showMeGenderList[index];
+
+      if (element.code === this.showMeGender) {
+        documentParam[this.showMeGender].classList.add("active-border");
+        this.$emit("onStatusActive", true);
+      }
     }
   },
 };

@@ -34,16 +34,6 @@
         </span>
       </button>
     </div>
-
-    <MyCommon
-      v-show="isShowPhoneNumber"
-      @onShowEmailUser="onShowEmailUser"
-    ></MyCommon>
-    <MyEmail v-if="isShowEmail" @onShowWelcome="onShowWelcome"></MyEmail>
-    <NewAccount
-      v-show="isShowWellcome"
-      @onShowDialogQuit="onShowDialogQuit"
-    ></NewAccount>
   </div>
 </template>
 
@@ -54,18 +44,11 @@ import {
   auth,
   provider,
 } from "../../../configs/firebase";
-import NewAccount from "../../welcome/new-account";
-import MyEmail from "../../form-login/email/my-email";
-import MyCommon from "../../form-login/phone-number/my-common";
 
 import { mapActions } from "vuex";
 
 export default {
-  components: {
-    NewAccount,
-    MyEmail,
-    MyCommon,
-  },
+  components: {},
   name: "login-btn",
 
   data() {
@@ -87,7 +70,7 @@ export default {
      */
 
     onClickPhoneNumber() {
-      this.isShowPhoneNumber = true;
+      this.$router.push({ path: "/login" });
     },
 
     async onLoginGoogle() {
@@ -142,7 +125,7 @@ export default {
     },
 
     onLoginFacebook() {
-      this.$router.push({ path: "/login" });
+      // this.$router.push({ path: "/login" });
     },
   },
 };

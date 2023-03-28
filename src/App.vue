@@ -66,13 +66,10 @@ export default {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     }
-    const userId = localStorage.getItem("userId");
-    await this.checkExistUserId(userId);
+    const tokenId = localStorage.getItem("tokenId");
 
-    const isExist = this.$store.state.loginModule.isExistUserId;
-
-    if (isExist) {
-      this.$router.push({ path: "/home-new" });
+    if (tokenId) {
+      this.$router.push({ path: "/home" });
     } else {
       this.$router.push({ name: "login-page" }).catch(() => {});
     }

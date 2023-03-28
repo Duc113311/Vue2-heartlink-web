@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import TokenApps from "@/middleware/application-storage";
 import { mapMutations, mapActions } from "vuex";
 
 export default {
@@ -48,20 +47,12 @@ export default {
 
     async showPosition(position) {
       if (position.coords) {
+        debugger;
         this.setLocation(position.coords);
       }
 
       debugger;
-      const userId = TokenApps.getAccessToken("userId");
-      const providerId = TokenApps.getProviderId("providerId");
-      const dataUser = this.$store.state.userModule.user_profile;
-      dataUser.birthday = new Date(dataUser.birthday.toString()).getTime();
 
-      dataUser.providerId = providerId;
-      dataUser.userId = userId;
-      await this.postInforUserProfile(dataUser);
-
-      // await this.postInforUserProfile(dataUser);
       this.$emit("onShowAvoid", true);
     },
     /**

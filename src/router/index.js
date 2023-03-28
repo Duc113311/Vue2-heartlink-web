@@ -28,7 +28,7 @@ const routes = [
 
     children: [
       {
-        path: "/email",
+        path: "/",
         name: "phone-number",
         component: () =>
           import(
@@ -36,7 +36,7 @@ const routes = [
           ),
       },
       {
-        path: "/",
+        path: "/email",
         name: "email-page",
         component: () =>
           import(

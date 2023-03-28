@@ -87,27 +87,26 @@ export default {
   },
 
   async created() {
-    const paramUser = {
-      userId: localStorage.userId,
-      latitude: localStorage.latitude,
-      longitude: localStorage.longitude,
-      page: 1,
-      pageNumber: 20,
-      startAge: 18,
-      endAge: 55,
-      showMeGender: localStorage.showMeGender,
-      location: 80,
-    };
+    const userProfile = this.$store.state.userModule.user_profile;
 
-    await this.getAllListUserProfile(paramUser);
+    await this.registerUserByAuthId(userProfile);
+
+    await this.loginAppByAuthId({
+      oAuth2Id: userProfile.oAuth2Id,
+    });
   },
 
   mounted() {},
 
   methods: {
-    ...mapActions(["getAllListUserProfile"]),
+    ...mapActions([
+      "getAllListUserProfile",
+      "registerUserByAuthId",
+      "loginAppByAuthId",
+      "getListCardForUser",
+    ]),
     onCloseDialog() {
-      this.$router.push({ path: "/home-new" });
+      this.$router.push({ path: "/home" });
 
       this.$emit("onHideWellcome", false);
     },
@@ -120,9 +119,10 @@ export default {
       this.isShowQuitSing = false;
     },
 
-    onChangeComfirm(val) {
+    async onChangeComfirm(val) {
       console.log(val);
-      this.$router.push({ path: "/home-new" });
+      await this.getListCardForUser();
+      this.$router.push({ path: "/home" });
     },
   },
 };

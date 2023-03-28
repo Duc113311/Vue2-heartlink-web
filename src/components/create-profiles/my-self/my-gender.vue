@@ -8,10 +8,10 @@
         v-bind:class="[isActiveButton ? 'active-border' : isDarkTheme]"
         class="padding-input-option"
         :ref="index"
-        :id="index"
-        @click="onShowGender(index)"
+        :id="item.code"
+        @click="onShowGender(item.code)"
       >
-        {{ item.name }}
+        {{ item.value }}
       </button>
     </div>
   </div>
@@ -28,26 +28,18 @@ export default {
   data() {
     return {
       isActiveButton: false,
-      gendersData: [
-        {
-          id: 0,
-          name: "Woman",
-        },
-        {
-          id: 1,
-          name: "Man",
-        },
-        {
-          id: 2,
-          name: "Other genders",
-        },
-      ],
     };
   },
   props: ["isScream"],
   computed: {
     ...mapState(["user_profile"]),
 
+    /**
+     * Lấy gender từ state để show datad
+     */
+    gendersData() {
+      return this.$store.state.commonModule.listLifeStyle?.genders;
+    },
     isDarkTheme() {
       const theme = localStorage.getItem("user-theme");
 
@@ -66,6 +58,7 @@ export default {
     onShowGender(val) {
       console.log(val);
 
+      debugger;
       this.genders = val;
       this.setGender(this.genders);
 
@@ -76,7 +69,7 @@ export default {
       for (let index = 0; index < documentParam.length; index++) {
         const element = documentParam[index];
 
-        if (val === index) {
+        if (val === element.id) {
           element.classList.add("active-border");
         } else {
           element.classList.remove("active-border");
@@ -126,17 +119,14 @@ export default {
       "padding-input-option"
     );
     debugger;
-    if (this.genders !== 3) {
-      documentParam[this.genders].classList.add("active-border");
-      if (this.genders === 0) {
-        this.$emit("onStatusActive", true);
-      } else if (this.genders === 1) {
-        this.$emit("onStatusActive", true);
-      } else if (this.genders === 2) {
+    const genderList = this.$store.state.commonModule.listLifeStyle?.genders;
+    for (let index = 0; index < genderList.length; index++) {
+      const element = genderList[index];
+
+      if (element.code === this.genders) {
+        documentParam[this.genders].classList.add("active-border");
         this.$emit("onStatusActive", true);
       }
-    } else {
-      this.$emit("onStatusActive", false);
     }
   },
 };

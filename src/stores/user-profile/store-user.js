@@ -209,13 +209,17 @@ const mutations = {
   setUserProfiles(state, data) {
     state.user_profile = data;
   },
+
+  setOAuth2Id(state, oAuth2Id) {
+    state.user_profile.oAuth2Id = oAuth2Id;
+  },
   /**
    * Xét giá trị firstName
    * @param {*} state
    * @param {*} firstName
    */
   setFirstName(state, firstName) {
-    state.user_profile.firstName = firstName;
+    state.user_profile.fullname = firstName;
   },
 
   setEmailForUser(state, email) {
@@ -228,7 +232,7 @@ const mutations = {
    * @param {*} birthday
    */
   setBirthday(state, birthday) {
-    state.user_profile.birthday = birthday;
+    state.user_profile.dob = birthday;
   },
 
   /**
@@ -247,6 +251,14 @@ const mutations = {
    */
   setShowGender(state, showGender) {
     state.user_profile.showMeGender = showGender;
+  },
+
+  setShowStatusGender(state, value) {
+    state.user_profile.showGender = value;
+  },
+
+  setShowStatusSexual(state, value) {
+    state.user_profile.showSexual = value;
   },
 
   /**

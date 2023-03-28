@@ -99,7 +99,7 @@ import MyName from "../../components/create-profiles/my-self/my-name";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
 
 import TokenApps from "../../middleware/application-storage.js";
-import { mapMutations } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
     MyShowGender,
@@ -128,7 +128,14 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setSkipProfiles", "setActionShowMe"]),
+    ...mapMutations([
+      "setSkipProfiles",
+      "setActionShowMe",
+      "setShowStatusGender",
+      "setShowStatusSexual",
+    ]),
+
+    ...mapActions(["getListLifeStyleForRegister"]),
     onBackComponent() {
       if (this.isScream === 0) {
         this.$router.replace({ name: "login-page" }).catch(() => {});
@@ -166,8 +173,21 @@ export default {
 
     onActionShowMe(val) {
       console.log(val);
+      debugger;
+
+      if (this.isScream === 2) {
+        this.setShowStatusGender(val);
+      }
+      if (this.isScream === 3) {
+        this.setShowStatusSexual(val);
+      }
       this.setActionShowMe({ scream: this.isScream, status: val });
     },
+  },
+
+  async created() {
+    debugger;
+    await this.getListLifeStyleForRegister();
   },
 };
 </script>
