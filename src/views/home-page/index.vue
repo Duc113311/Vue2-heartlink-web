@@ -4,8 +4,8 @@
       <Header></Header>
       <div class="body-page-home-new w-full">
         <!-- Home -->
-        <div class="w-full h-full" v-show="!isShowDetail">
-          <div class="body-home w-full relative" v-loading="loading">
+        <div class="w-full h-full" v-if="!isShowDetail">
+          <div class="body-home w-full relative">
             <!-- Body home -->
 
             <ViewSwipe
@@ -22,7 +22,7 @@
         </div>
 
         <!-- Detail user -->
-        <div v-show="isShowDetail" class="w-full body-detail h-full">
+        <div v-if="isShowDetail" class="w-full body-detail h-full">
           <DetailProfile
             @onClickNopeDetail="onClickNopeDetail"
             @onHideProfile="onHideProfile"
@@ -93,24 +93,13 @@ export default {
   },
 
   async created() {
-    const paramUser = {
-      userId: localStorage.userId,
-      latitude: localStorage.latitude,
-      longitude: localStorage.longitude,
-      page: 1,
-      pageNumber: 100,
-      startAge: 18,
-      endAge: 55,
-      showMeGender: localStorage.showMeGender,
-      location: 100,
-    };
-    await this.getAllListUserProfile(paramUser);
+    await this.getListCardForUser();
     setTimeout(() => {
       this.loading = false;
     }, 1000);
   },
   methods: {
-    ...mapActions(["getAllListUserProfile", "getDetailInforUser"]),
+    ...mapActions(["getListCardForUser", "getDetailInforUser"]),
 
     ...mapMutations(["setStatusLikeUser"]),
     onHideLikeYou(val) {
@@ -133,14 +122,13 @@ export default {
 
     async onShowDetailUser(val) {
       console.log(val);
-      const dataValue = {
-        userId: val,
-        latitude: localStorage.latitude,
-        longitude: localStorage.longitude,
-      };
-
-      await this.getDetailInforUser(dataValue);
-      this.isShowDetail = true;
+      // const dataValue = {
+      //   userId: val,
+      //   latitude: localStorage.latitude,
+      //   longitude: localStorage.longitude,
+      // };
+      // await this.getDetailInforUser(dataValue);
+      this.isShowDetail = val;
     },
 
     onHidePopupSendSuperLike(val) {

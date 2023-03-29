@@ -98,7 +98,6 @@ import MyBirthday from "../../components/create-profiles/my-self/my-birthday";
 import MyName from "../../components/create-profiles/my-self/my-name";
 import BhBack from "../../components/bh-element-ui/button/bh-back";
 
-import TokenApps from "../../middleware/application-storage.js";
 import { mapActions, mapMutations } from "vuex";
 export default {
   components: {
@@ -121,7 +120,6 @@ export default {
       isActives: false,
       isNumber: 0,
       isShowHeader: true,
-      isShowAvoid: false,
       isShowProfile: {},
       isShowSkipParam: false,
     };
@@ -156,14 +154,8 @@ export default {
 
     onChangeContinue(val) {
       console.log(val);
-      if (this.isScream === 7) {
-        this.isShowAvoid = true;
-        const userId = TokenApps.getAccessToken("userId");
-        const dataUser = this.$store.state.userModule.user_profile;
-        dataUser.userId = userId;
-      } else {
-        this.isScream = this.isScream + 1;
-      }
+
+      this.isScream = this.isScream + 1;
     },
 
     onClickSkip() {

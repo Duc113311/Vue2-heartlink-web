@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   name: "my-birthday",
@@ -40,8 +40,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user_profile"]),
-
     isDarkTheme() {
       const theme = localStorage.getItem("user-theme");
 
@@ -66,10 +64,10 @@ export default {
   },
 
   mounted() {
-    this.birthday = this.$store.state.userModule.user_profile.birthday;
+    this.birthday = this.$store.state.userModule.user_profile.dob;
     this.$emit("onShowName", { showCheckbox: false });
     this.$emit("onShowSkips", false);
-    if (this.birthday !== "") {
+    if (this.birthday) {
       this.$emit("onStatusActive", true);
     } else {
       this.$emit("onStatusActive", false);

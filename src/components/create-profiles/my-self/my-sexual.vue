@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "my-sexual",
@@ -72,7 +72,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["user_profile"]),
     listDataSexuals() {
       return this.$store.state.commonModule.listLifeStyle.sexuals;
     },
@@ -100,7 +99,8 @@ export default {
 
       this.setSexuals(indexValue);
 
-      const sexualsData = this.$store.state.userModule.user_profile.sexuals;
+      const sexualsData =
+        this.$store.state.userModule.user_profile.orientationSexuals;
       const lengthSexual = sexualsData.length;
 
       const findIndex = sexualsData.findIndex((x) => x === indexValue);
@@ -138,7 +138,7 @@ export default {
       this.setSexuals(val);
 
       const lengthSexual =
-        this.$store.state.userModule.user_profile.sexuals.length;
+        this.$store.state.userModule.user_profile.orientationSexuals.length;
 
       if (this.$store.state.userModule.isCheckBox) {
         document.getElementById(val).checked = false;
@@ -195,8 +195,9 @@ export default {
     }
 
     const lengthSexual =
-      this.$store.state.userModule.user_profile.sexuals.length;
-    const dataSexuals = this.$store.state.userModule.user_profile.sexuals;
+      this.$store.state.userModule.user_profile.orientationSexuals.length;
+    const dataSexuals =
+      this.$store.state.userModule.user_profile.orientationSexuals;
     for (let index = 0; index < dataSexuals.length; index++) {
       const element = dataSexuals[index];
       listDarks[element].classList.add("border-active");

@@ -71,7 +71,6 @@ export default {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     }
     const oAuth2Id = localStorage.getItem("oAuth2Id");
-    debugger;
     // Nếu tồn tại oAuth2Id in localStorage
     if (oAuth2Id) {
       await this.loginAppByAuthId({

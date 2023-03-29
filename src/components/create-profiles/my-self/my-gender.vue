@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions, mapState } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "my-gender",
@@ -32,8 +32,6 @@ export default {
   },
   props: ["isScream"],
   computed: {
-    ...mapState(["user_profile"]),
-
     /**
      * Lấy gender từ state để show datad
      */
@@ -119,13 +117,17 @@ export default {
     );
 
     const genderList = this.$store.state.commonModule.listLifeStyle?.genders;
-    for (let index = 0; index < genderList.length; index++) {
-      const element = genderList[index];
+    if (this.genders) {
+      for (let index = 0; index < genderList.length; index++) {
+        const element = genderList[index];
 
-      if (element.code === this.genders) {
-        documentParam[this.genders].classList.add("active-border");
-        this.$emit("onStatusActive", true);
+        if (element.code === this.genders) {
+          documentParam[this.genders].classList.add("active-border");
+          this.$emit("onStatusActive", true);
+        }
       }
+    } else {
+      this.$emit("onStatusActive", false);
     }
   },
 };

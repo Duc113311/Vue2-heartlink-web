@@ -22,7 +22,7 @@
           </div>
           <img
             class="image-explore w-full"
-            src="@/assets/image-dating/explore_blind_date (1).png"
+            src="@/assets/image-dating/explore_blind_date.png"
             alt=""
             srcset=""
           />
@@ -81,7 +81,9 @@ export default {
 
   methods: {
     onClickBlindDate() {
-      this.$router.push("/explore-new/blind-date");
+      this.$router.push({
+        path: "/blind-date",
+      });
     },
   },
 };

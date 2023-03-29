@@ -87,8 +87,7 @@ export default {
   },
 
   async created() {
-    const userProfile = this.$store.state.userModule.user_profile.oAuth2Id;
-
+    const userProfile = this.$store.state.userModule.user_profile;
     await this.registerUserByAuthId(userProfile);
 
     await this.loginAppByAuthId({

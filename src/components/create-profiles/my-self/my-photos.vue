@@ -205,8 +205,7 @@ export default {
         });
 
       // Check
-      const imageNumber =
-        this.$store.state.userModule.user_profile.avatars.length;
+      const imageNumber = this.$store.state.userModule.avatarChecked.length;
       if (imageNumber < 2) {
         this.$emit("onStatusActive", false);
       } else {
@@ -229,8 +228,7 @@ export default {
   },
   mounted() {
     if (this.$route.name !== "edit-profile") {
-      const image = this.$store.state.userModule.user_profile.avatars;
-
+      const image = this.$store.state.userModule.avatarChecked;
       this.$emit("onShowSkips", false);
       for (let index = 0; index < image.length; index++) {
         const element = image[index];
@@ -254,7 +252,7 @@ export default {
         this.$emit("onStatusActive", true);
       }
     } else {
-      const image = this.$store.state.userModule.user_profile?.avatars;
+      const image = this.$store.state.userModule.avatarChecked;
       for (let index = 0; index < image.length; index++) {
         const element = image[index];
         const img = document.getElementById(element.id);
@@ -264,7 +262,7 @@ export default {
         setTimeout(() => {
           this.loading = false;
         }, 1000);
-        let bg = "url('" + element.url + "')";
+        let bg = "url('" + element + "')";
 
         img.style.backgroundImage = bg;
         avatar.style.display = "block";

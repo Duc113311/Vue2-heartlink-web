@@ -13,10 +13,10 @@
             class="flex w-full justify-center absolute top-0 content-center p-0.5 border-solid mt-3"
           >
             <button
-              v-for="data in this.userParam.avatars"
-              :key="data.id"
-              :id="`detail${data.id}`"
-              :class="data.id === 0 ? 'active-image' : 'no-active'"
+              v-for="(data, index) in this.userParam?.profiles?.avatars"
+              :key="data"
+              :id="`detail_${index}`"
+              :class="index === 0 ? 'active-image' : 'no-active'"
               class="bt-img imageAvatar p-0.5 rounded-lg mr-0.5 no-active"
               @click="onClickNextImage(data)"
             ></button>
@@ -37,8 +37,8 @@
         <div class="w-full p-2">
           <div class="flex bh-margin-title">
             <div class="title-user">
-              {{ this.userParam.firstName
-              }}<span>, {{ this.userParam.age }}</span>
+              {{ this.userParam.fullname
+              }}<span>, {{ bindingAge(this.userParam.dob) }}</span>
             </div>
             <img src="@/assets/icon/ic_infor.svg" width="30" alt="" />
           </div>
@@ -47,7 +47,7 @@
           </div>
           <div class="flex bh-margin-description">
             <img src="@/assets/icon/ic_location.svg" alt="" />
-            <span>{{ this.userParam.location }} km away</span>
+            <span>{{ bindingDistance(this.userParam?.location) }} km away</span>
           </div>
         </div>
         <BhHorizontalLine></BhHorizontalLine>
@@ -61,7 +61,7 @@
           <div class="w-full bh-margin-description">
             <div
               class="item-option cursor-pointer"
-              v-for="item in this.userParam.sexuals"
+              v-for="item in this.userParam.profiles.orientationSexuals"
               :key="item"
             >
               {{ item }}
@@ -77,7 +77,7 @@
           <div class="w-full bh-margin-description">
             <div
               class="item-option"
-              v-for="item in this.userParam.interests"
+              v-for="item in this.userParam.profiles.interests"
               :key="item"
             >
               {{ item }}
@@ -116,7 +116,7 @@
       </div>
     </div>
     <div class="absolute bt-like-count right-4">
-      <div class="number-like absolute">{{ this.userParam.complete }}</div>
+      <div class="number-like absolute">{{ this.userParam.coins }}</div>
       <img
         src="@/assets/icon/bt_like_count.svg"
         class="w-20"
@@ -146,7 +146,8 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
+import functionValidate from "../../../middleware/validate.js";
 import BhHorizontalLine from "../../bh-element-ui/input/bh-horizontal-line";
 export default {
   components: { BhHorizontalLine },
@@ -192,18 +193,18 @@ export default {
           urlName: "ssd",
         },
       ],
-
-      // idImage: require("../../../assets/image-dating/0659_photo-1-163186806531842640671.jpg"),
     };
   },
 
   computed: {
-    ...mapState(["userProfileDetail"]),
-
     idImage() {
-      return this.$store.state.userModule.urlAvatarUser.urlName;
+      debugger;
+      const urlImage =
+        this.$store.state.userModule.userProfileDetail?.profiles?.avatars[0];
+      return urlImage;
     },
     userParam() {
+      debugger;
       return this.$store.state.userModule.userProfileDetail;
     },
   },
@@ -212,6 +213,32 @@ export default {
     ...mapMutations(["setUrlNameAvatarUser", "setLeftRighAvatar"]),
     onClickNope() {
       this.$emit("onClickNopeDetail", false);
+    },
+
+    bindingDistance(val) {
+      const latAdmin = localStorage.latitude;
+      const longAdmin = localStorage.longitude;
+      const latUser = val.lat;
+
+      const longUser = val.long;
+
+      const dataDistance = functionValidate.convertDistance(
+        latAdmin,
+        longAdmin,
+        latUser,
+        longUser,
+        "K"
+      );
+      if (parseInt(dataDistance.toFixed(0)) === 0) {
+        return 1;
+      } else {
+        return parseInt(dataDistance.toFixed(0));
+      }
+    },
+
+    bindingAge(val) {
+      const dataAge = functionValidate.calculatAge(val);
+      return dataAge;
     },
 
     nextImageLeft() {

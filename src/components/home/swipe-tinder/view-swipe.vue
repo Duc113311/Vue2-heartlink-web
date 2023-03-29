@@ -3,7 +3,7 @@
     <Tinder
       class="uis"
       ref="tinder"
-      key-name="userId"
+      key-name="oAuth2Id"
       :queue.sync="listDataUser"
       :offset-y="10"
       @submit="onSubmit"
@@ -13,7 +13,7 @@
           v-show="isActiveImag"
           class="pic z-8"
           :style="{
-            'background-image': `url(${scope.data.avatars[0].urlName})`,
+            'background-image': `url(${scope.data.profiles.avatars[0]})`,
           }"
         />
         <div
@@ -28,10 +28,10 @@
           class="flex w-full justify-center absolute top-0 content-center p-0.5 border-solid mt-3"
         >
           <button
-            v-for="data in scope.data.avatars"
-            :key="data.id"
-            :id="data.id"
-            :class="data.id === 0 ? 'active-image' : 'no-active'"
+            v-for="(data, index) in scope.data.profiles.avatars"
+            :key="data"
+            :id="`avatar_${index}`"
+            :class="index === 0 ? 'active-image' : 'no-active'"
             class="bt-img imageAvatar p-0.5 rounded-lg mr-0.5 no-active"
             @click="onClickNextImage(data)"
           ></button>
@@ -42,27 +42,29 @@
             <div class="w-70">
               <div class="flex items-center font-title">
                 <div
-                  :title="scope.data.firstName"
-                  class="text-ellipsis w-52 whitespace-nowrap overflow-hidden"
+                  :title="scope.data.fullname"
+                  class="text-ellipsis w-64 whitespace-nowrap overflow-hidden"
                 >
-                  {{ scope.data.firstName }},
+                  {{ scope.data.fullname }},
                 </div>
-                <div class="mr-3">{{ scope.data.age }}</div>
+                <div class="mr-3">{{ bindingAge(scope.data?.dob) }}</div>
                 <div
                   class="flex justify-center items-center cursor-pointer"
-                  @click="onDetailInfor(scope.data?.userId)"
+                  @click="onClickShowDetailUser(scope.data)"
                 >
                   <i class="fa-solid fa-circle-info text-xl"></i>
                 </div>
               </div>
-              <span class="font-describe">{{ scope.data?.about }}</span
+              <span class="font-describe">{{
+                scope.data?.about ? scope.data?.about : "Tell me about"
+              }}</span
               ><br />
               <div class="flex">
                 <div class="mr-2">
                   <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <span class="font-describe">
-                  {{ scope.data?.locations }} km away</span
+                  {{ bindingDistance(scope.data?.location) }} km away</span
                 >
               </div>
             </div>
@@ -72,18 +74,22 @@
                 src="@/assets/icon/bt_like_count.svg"
                 width="70"
               />
-              <span class="h-complete">{{ scope.data.complete }}</span>
+              <span class="h-complete">{{ scope.data.coins }}</span>
             </div>
           </div>
         </div>
         <div class="w-full flex absolute top-0 opacity-0 h-4/6 nextBg">
           <div
             class="w-2/4 bg-slate-500"
-            @click="nextImageLeft(scope.data.avatars, scope.data.userId)"
+            @click="
+              nextImageLeft(scope.data.profiles.avatars, scope.data.oAuth2Id)
+            "
           ></div>
           <div
             class="w-2/4 bg-orange-200"
-            @click="nextImageRight(scope.data.avatars, scope.data.userId)"
+            @click="
+              nextImageRight(scope.data.profiles.avatars, scope.data.oAuth2Id)
+            "
           ></div>
         </div>
       </template>
@@ -117,7 +123,8 @@
 
 <script>
 import Tinder from "vue-tinder";
-import { mapState, mapActions, mapMutations } from "vuex";
+import functionValidate from "../../../middleware/validate.js";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   name: "view-swipe",
@@ -134,11 +141,9 @@ export default {
   },
 
   computed: {
-    ...mapState("userProfileList"),
-
     listDataUser() {
-      return this.$store.state.userModule.userProfileList
-        ? this.$store.state.userModule.userProfileList
+      return this.$store.state.mongoModule.listDataCard
+        ? this.$store.state.mongoModule.listDataCard
         : [];
     },
 
@@ -153,59 +158,97 @@ export default {
 
   created() {},
   methods: {
-    ...mapMutations(["setUrlNameAvatarUser", "setLeftRightAvatar"]),
+    ...mapMutations([
+      "setUrlNameAvatarUser",
+      "setLeftRightAvatar",
+      "setDetailUserProfile",
+    ]),
 
     ...mapActions(["patchNopeUserId", "patchComeBackUserId", "postLikeUserId"]),
+
+    bindingAge(val) {
+      const dataAge = functionValidate.calculatAge(val);
+      return dataAge;
+    },
+
+    bindingDistance(val) {
+      const latAdmin = localStorage.latitude;
+      const longAdmin = localStorage.longitude;
+      const latUser = val.lat;
+
+      const longUser = val.long;
+
+      const dataDistance = functionValidate.convertDistance(
+        latAdmin,
+        longAdmin,
+        latUser,
+        longUser,
+        "K"
+      );
+      if (parseInt(dataDistance.toFixed(0)) === 0) {
+        return 1;
+      } else {
+        return parseInt(dataDistance.toFixed(0));
+      }
+    },
 
     onClickNopeDetail(value) {
       this.isShowDetail = value;
     },
-    nextImageLeft(value, userId) {
+    nextImageLeft(value, oAuth2Id) {
       console.log(value);
 
-      const idImage = this.$store.state.userModule.urlAvatarUser.id;
-
-      if (idImage) {
-        document.getElementById(idImage).classList.remove("active-image");
+      const idImage = this.$store.state.userModule.urlAvatarUser;
+      if (idImage.idUrl !== 0) {
         document
-          .getElementById(parseInt(idImage - 1))
+          .getElementById(`avatar_` + idImage.idUrl)
+          .classList.remove("active-image");
+        document
+          .getElementById(`avatar_` + parseInt(idImage.idUrl - 1))
           .classList.add("active-image");
         this.isActiveImag = false;
 
         this.setLeftRightAvatar({
-          idImage: idImage,
+          listImages: value,
+          idImage: idImage.urlName,
           statusNext: false,
-          userId: userId,
+          userId: oAuth2Id,
         });
       }
     },
 
-    nextImageRight(value, userId) {
+    nextImageRight(value, oAuth2Id) {
       console.log(value);
-
       this.isActiveImag = false;
 
-      const idImage = this.$store.state.userModule.urlAvatarUser.id;
+      const idImage = this.$store.state.userModule.urlAvatarUser;
 
       if (!idImage) {
-        document.getElementById(0).classList.remove("active-image");
-        document.getElementById(1).classList.add("active-image");
+        document.getElementById(`avatar_0`).classList.remove("active-image");
+        document.getElementById(`avatar_1`).classList.add("active-image");
         this.setLeftRightAvatar({
-          idImage: value[0].id,
+          listImages: value,
+          idImage: value[0],
           statusNext: true,
-          userId: userId,
+          userId: oAuth2Id,
         });
       } else {
-        if (document.getElementById(parseInt(idImage + 1)) !== null) {
-          document.getElementById(idImage).classList.remove("active-image");
+        if (
+          document.getElementById(`avatar_` + parseInt(idImage.idUrl + 1)) !==
+          null
+        ) {
+          document
+            .getElementById(`avatar_` + idImage.idUrl)
+            .classList.remove("active-image");
 
           document
-            .getElementById(parseInt(idImage + 1))
+            .getElementById(`avatar_` + parseInt(idImage.idUrl + 1))
             .classList.add("active-image");
           this.setLeftRightAvatar({
-            idImage: idImage,
+            listImages: value,
+            idImage: idImage.urlName,
             statusNext: true,
-            userId: userId,
+            userId: oAuth2Id,
           });
         }
       }
@@ -215,14 +258,15 @@ export default {
       console.log(val);
     },
 
-    onDetailInfor(value) {
+    onClickShowDetailUser(value) {
       console.log(value);
-      this.$emit("onShowDetailUser", value);
+      this.setDetailUserProfile(value);
+      this.$emit("onShowDetailUser", true);
     },
     async onSubmit({ item }) {
       this.setUrlNameAvatarUser("");
       this.isActiveImag = true;
-
+      debugger;
       if (this.nameTinder.toString() === "nope") {
         console.log("Nope");
         const data = {
@@ -262,15 +306,6 @@ export default {
         this.$refs.tinder.decide(choice);
       }
     },
-  },
-
-  beforeUpdate() {},
-
-  beforeMount() {},
-  mounted() {
-    // const documentImage = document.getElementsByClassName("imageAvatar");
-    // documentImage[0].classList.add("active-image");
-    // documentImage[0].classList.remove("no-active");
   },
 };
 </script>

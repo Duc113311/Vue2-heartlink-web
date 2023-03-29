@@ -79,13 +79,14 @@
       </div>
     </div>
     <AvoidSomeone
-      v-show="isShowAvoid"
+      v-if="isShowAvoid"
       @onHideWellcome="onHideWellcome"
     ></AvoidSomeone>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import BhLocation from "../../bh-element-ui/button/bh-location";
 import AvoidSomeone from "../../welcome/avoid-someone";
 export default {
@@ -123,6 +124,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["setAddressLocation"]),
     onShowAvoid(value) {
       this.isShowAvoid = value;
     },
@@ -160,12 +162,37 @@ export default {
           "block";
       }
     },
+
+    /**
+     * Get address location
+     * @param {*} latitude
+     * @param {*} longitude
+     */
+    getAddressFromLatLng(latitude, longitude) {
+      const apiKey = "AIzaSyDFbBi1PfGyE6mHCcjuLzuZk93LkPCX6Mg";
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.results.length > 0) {
+            this.address = data.results[0].formatted_address;
+            this.setAddressLocation(this.address);
+          } else {
+            this.address = "No address found";
+          }
+        })
+        .catch((error) => console.log(error));
+    },
   },
 
-  mounted() {
+  async mounted() {
+    const latitude = localStorage.latitude;
+    const longitude = localStorage.longitude;
+
     if (document.getElementsByClassName("angle-up")[0]) {
       document.getElementsByClassName("angle-up")[0].style.display = "none";
     }
+    await this.getAddressFromLatLng(latitude, longitude);
   },
 };
 </script>

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   name: "my-show-gender",
@@ -35,7 +35,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user_profile"]),
     showGendersData() {
       return this.$store.state.commonModule.listLifeStyle?.showMeGenders;
     },
@@ -75,7 +74,7 @@ export default {
   },
 
   mounted() {
-    this.showMeGender = this.$store.state.userModule.user_profile.showMeGender;
+    this.showMeGender = this.$store.state.userModule.user_profile.genderShowMe;
     this.setShowProfileCreate({
       isShowProfile: true,
       isNotShowProfile: true,
@@ -88,13 +87,17 @@ export default {
 
     const showMeGenderList =
       this.$store.state.commonModule.listLifeStyle?.showMeGenders;
-    for (let index = 0; index < showMeGenderList.length; index++) {
-      const element = showMeGenderList[index];
+    if (this.showMeGender) {
+      for (let index = 0; index < showMeGenderList.length; index++) {
+        const element = showMeGenderList[index];
 
-      if (element.code === this.showMeGender) {
-        documentParam[this.showMeGender].classList.add("active-border");
-        this.$emit("onStatusActive", true);
+        if (element.code === this.showMeGender) {
+          documentParam[this.showMeGender].classList.add("active-border");
+          this.$emit("onStatusActive", true);
+        }
       }
+    } else {
+      this.$emit("onStatusActive", false);
     }
   },
 };

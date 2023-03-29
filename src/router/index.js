@@ -18,6 +18,8 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login-page" */ "../views/login/index.vue"),
   },
+
+  // Login Phone number
   {
     path: "/login",
     name: "type-login",

@@ -40,11 +40,11 @@ export default {
 
   methods: {
     onClickHome() {
-      this.$router.push({ path: "/home-new" });
+      this.$router.push({ path: "/home" });
     },
 
     onClickExplore() {
-      this.$router.push({ path: "/explore-new" });
+      this.$router.push({ path: "/explore" });
     },
 
     onClickLikeTopic() {
@@ -63,12 +63,13 @@ export default {
   },
 
   mounted() {
+    debugger;
     if (this.$route.name === "home-page") {
       document
         .getElementsByClassName("fa-heart")[0]
         .classList.add("icon-active");
     }
-    if (this.$route.name === "explore-news") {
+    if (this.$route.name === "category-page") {
       document
         .getElementsByClassName("fa-magnifying-glass")[0]
         .classList.add("icon-active");

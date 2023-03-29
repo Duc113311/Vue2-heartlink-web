@@ -2,7 +2,7 @@
   <div class="flex justify-center w-full items-center">
     <div class="w-button">
       <button
-        class="btAgree cursor-pointer w-full padding-button active-button"
+        class="btAgree cursor-pointer w-full padding-button"
         @click="onClickIAgree()"
       >
         I agree
@@ -48,8 +48,9 @@ export default {
 .color-bt:hover {
   background-color: #fd5d65 !important;
 }
-.btAgreet {
+.btAgree {
   cursor: pointer;
+  background-color: #fd5d65 !important;
 }
 
 .btAgree:hover {

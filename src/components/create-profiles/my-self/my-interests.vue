@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "my-interests",
@@ -43,7 +43,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["interests", "listInterests"]),
     listDataInterests() {
       return this.$store.state.commonModule.listLifeStyle.interests;
     },

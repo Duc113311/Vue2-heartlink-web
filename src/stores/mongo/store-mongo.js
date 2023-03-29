@@ -27,10 +27,7 @@ const mutations = {
    */
   setProfileUserLogin_Mongo(state, data) {
     state.tokenId = data?.token;
-    state.userProfile = data?.user;
-
     localStorage.setItem("tokenId", state.tokenId);
-    localStorage.setItem("oAuth2Id", state.userProfile.oAuth2Id);
   },
 
   /**
@@ -87,7 +84,6 @@ const actions = {
     await http_mongo
       .post(`api/v1/login`, data)
       .then((response) => {
-        debugger;
         commit("setProfileUserLogin_Mongo", response.data.data);
       })
       .catch((error) => {
@@ -132,9 +128,11 @@ const actions = {
    * @param {*} param0
    * @param {*} data
    */
-  async getListCardForUser({ commit }, data) {
+  async getListCardForUser({ commit }) {
     await http_mongo
-      .get(`api/v1/cards`, data)
+      .get(`api/v1/cards`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("tokenId")}` },
+      })
       .then((response) => {
         commit("setListDataCards_Mongo", response.data.data);
       })

@@ -2,13 +2,12 @@ import { http_request } from "../../configs/http-host";
 
 const state = {
   user_profile: {
-    firstName: "",
-    birthday: "",
-    sexuals: [],
+    orientationSexuals: [],
     interests: [],
     avatars: [],
-    showMeGender: 3,
-    gender: 3,
+    showGender: false,
+    showSexual: false,
+    university: "",
   },
   isCheckBox: false,
   listSexuals: [],
@@ -33,6 +32,8 @@ const state = {
   keyZodiac: "",
 
   lifeStyle: {},
+
+  avatarChecked: [],
 };
 
 const getters = {};
@@ -212,6 +213,7 @@ const mutations = {
 
   setOAuth2Id(state, oAuth2Id) {
     state.user_profile.oAuth2Id = oAuth2Id;
+    localStorage.setItem("oAuth2Id", oAuth2Id);
   },
   /**
    * Xét giá trị firstName
@@ -250,7 +252,7 @@ const mutations = {
    * @param {*} gender
    */
   setShowGender(state, showGender) {
-    state.user_profile.showMeGender = showGender;
+    state.user_profile.genderShowMe = showGender;
   },
 
   setShowStatusGender(state, value) {
@@ -261,21 +263,25 @@ const mutations = {
     state.user_profile.showSexual = value;
   },
 
+  setAddressLocation(state, data) {
+    state.user_profile.address = data;
+  },
+
   /**
    * Xét giá trị sexuals
    * @param {*} state
    * @param {*} sexual
    */
   setSexuals(state, sexuals) {
-    const index = state.user_profile.sexuals.indexOf(sexuals);
+    const index = state.user_profile.orientationSexuals.indexOf(sexuals);
     if (index > -1) {
       // only splice array when item is found
-      state.user_profile.sexuals.splice(index, 1);
+      state.user_profile.orientationSexuals.splice(index, 1);
       state.isCheckBox = false;
       // 2nd parameter means remove one item only
     } else {
-      if (state.user_profile.sexuals.length < 3) {
-        state.user_profile.sexuals.push(sexuals);
+      if (state.user_profile.orientationSexuals.length < 3) {
+        state.user_profile.orientationSexuals.push(sexuals);
       } else {
         state.isCheckBox = true;
       }
@@ -310,13 +316,13 @@ const mutations = {
    */
   setPhotos(state, photos) {
     const idUrl = photos.id;
-
-    const index = state.user_profile.avatars.findIndex((x) => x.id === idUrl);
+    const index = state.avatarChecked.findIndex((x) => x.id === idUrl);
     if (index !== -1) {
       // only splice array when item is found
-      state.user_profile.avatars.splice(index, 1); // 2nd parameter means remove one item only
+      state.avatarChecked.splice(index, 1); // 2nd parameter means remove one item only
     } else {
-      state.user_profile.avatars.push(photos);
+      state.avatarChecked.push(photos);
+      state.user_profile.avatars.push(photos.url);
     }
   },
 
@@ -326,8 +332,10 @@ const mutations = {
    * @param {*} location
    */
   setLocation(state, location) {
-    state.user_profile.latitude = location.latitude;
-    state.user_profile.longitude = location.longitude;
+    state.user_profile.location = {
+      lat: location.latitude,
+      long: location.longitude,
+    };
 
     localStorage.setItem("latitude", location.latitude);
     localStorage.setItem("longitude", location.longitude);
@@ -357,10 +365,6 @@ const mutations = {
 
   setDetailUserProfile(state, data) {
     state.userProfileDetail = data;
-    state.user_profile = data;
-    state.urlAvatarUser = data.avatars[0];
-
-    console.log(state.userProfileDetail);
   },
 
   setUrlNameAvatarUser(state, data) {
@@ -391,31 +395,30 @@ const mutations = {
   },
 
   setLeftRightAvatar(state, data) {
-    if (data.statusNext === true) {
-      const idNew = parseInt(data.idImage) + 1;
-      const findUser = state.userProfileList.find(
-        (x) => x.userId.toString() === data.userId.toString()
-      );
-      console.log(findUser);
+    const index = data.listImages.findIndex((x) => x === data.idImage);
+    if (index !== -1) {
+      if (data.statusNext === true) {
+        const indexNew = parseInt(index) + 1;
 
-      const findValueImage = findUser.avatars.find(
-        (x) => parseInt(x.id) === parseInt(idNew)
-      );
-      state.urlAvatarUser = findValueImage;
-    } else {
-      if (data.idImage === 0) {
-        // Ko cho next
-        state.urlAvatarUser = data.avatars[0];
+        state.urlAvatarUser = {
+          idUrl: indexNew,
+          urlName: data.listImages[indexNew],
+        };
       } else {
-        const idNew = parseInt(data.idImage) - 1;
-        const findUser = state.userProfileList.find(
-          (x) => x.userId.toString() === data.userId.toString()
-        );
+        if (data.idImage === 0) {
+          // Ko cho next
+          state.urlAvatarUser = {
+            idUrl: data.idImage,
+            urlName: data.listImages[0],
+          };
+        } else {
+          const indexNew = parseInt(index) - 1;
 
-        const findValueImage = findUser.avatars.find(
-          (x) => parseInt(x.id) === parseInt(idNew)
-        );
-        state.urlAvatarUser = findValueImage;
+          state.urlAvatarUser = {
+            idUrl: indexNew,
+            urlName: data.listImages[indexNew],
+          };
+        }
       }
     }
   },

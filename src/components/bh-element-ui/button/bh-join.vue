@@ -1,11 +1,12 @@
 <template>
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
-    <el-button
-      type="danger"
-      class="text-white w-full p-5 color-bt"
-      @click="onClickJoinNow()"
-      >Join now</el-button
+    <button
+      @click="onClickContinues"
+      class="btContinueCode cursor-pointer w-full padding-button active-button overflow-hidden"
+      ref="joinNow"
     >
+      Join now
+    </button>
   </div>
 </template>
 
@@ -27,6 +28,6 @@ export default {
   background-color: #fd5d65;
   height: 60px;
   border-radius: 12px !important;
-  font-size: 16px !important;
+  font-size: 22px !important;
 }
 </style>

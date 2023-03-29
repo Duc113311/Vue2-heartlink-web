@@ -37,7 +37,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setLocation"]),
+    ...mapMutations(["setLocation", "setAddressLocation"]),
     ...mapActions(["postInforUserProfile"]),
 
     async onHideWellcome(val) {
@@ -48,10 +48,11 @@ export default {
     async showPosition(position) {
       if (position.coords) {
         this.setLocation(position.coords);
-      }
 
-      this.$emit("onShowAvoid", true);
+        await this.$emit("onShowAvoid", true);
+      }
     },
+
     /**
      * Sự kiện click để tiếp tục
      */

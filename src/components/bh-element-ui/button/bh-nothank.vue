@@ -1,10 +1,10 @@
 <template>
   <div class="flex justify-center w-full pl-10 pr-10 items-center">
     <button
-      class="text-white w-80 p-5 color-bt-cancel flex justify-center items-center"
+      class="color-bt-cancel p-5 cursor-pointer w-full padding-button overflow-hidden"
       @click="onClickNoThanks()"
     >
-      {{ renderName }}
+      NO THANKS
     </button>
   </div>
 </template>
