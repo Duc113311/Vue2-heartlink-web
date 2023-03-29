@@ -8,7 +8,9 @@
         <div class="w-5/6 flex justify-center">Blind Date</div>
       </div>
 
-      <div class="content-bg"></div>
+      <div class="content-bg flex justify-center items-center">
+        <OptionPage v-if="show === 'so1'" @update="show = $event"></OptionPage>
+      </div>
 
       <div class="footer-bg">
         <div class="footer">
@@ -64,10 +66,12 @@
 </template>
 
 <script>
+import OptionPage from "../../explore/blind-date/fliter-option/option-page";
 import BhBack from "../../bh-element-ui/button/bh-back";
 export default {
   components: {
     BhBack,
+    OptionPage,
   },
 
   name: "blind-option",
