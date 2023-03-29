@@ -58,7 +58,6 @@ export default {
     onShowGender(val) {
       console.log(val);
 
-      debugger;
       this.genders = val;
       this.setGender(this.genders);
 
@@ -118,7 +117,7 @@ export default {
     const documentParam = document.getElementsByClassName(
       "padding-input-option"
     );
-    debugger;
+
     const genderList = this.$store.state.commonModule.listLifeStyle?.genders;
     for (let index = 0; index < genderList.length; index++) {
       const element = genderList[index];

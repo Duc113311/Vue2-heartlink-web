@@ -56,7 +56,6 @@ const actions = {
     await http_request
       .patch(`home/v1/nope/${data.userId}`, data.objectCustomer)
       .then((response) => {
-        debugger;
         commit("setNopeUserId", response.data.data);
       })
       .catch((error) => {
@@ -86,11 +85,9 @@ const actions = {
    * @param {*} param1
    */
   async postLikeUserId({ commit }, data) {
-    debugger;
     await http_request
       .post(`home/v1/likes/${data.userId}`, data.objectCustomer)
       .then((response) => {
-        debugger;
         commit("setLikeUserId", response.data.data);
       })
       .catch((error) => {

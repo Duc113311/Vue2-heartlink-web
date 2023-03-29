@@ -54,7 +54,6 @@ const actions = {
     await http_mongo
       .get(`api/v1/guest/pre_selections`)
       .then((response) => {
-        debugger;
         commit("setListLifeStyle", response.data.data);
       })
       .catch((error) => {

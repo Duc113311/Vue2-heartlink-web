@@ -201,7 +201,6 @@ export default {
     ...mapState(["userProfileDetail"]),
 
     idImage() {
-      debugger;
       return this.$store.state.userModule.urlAvatarUser.urlName;
     },
     userParam() {
@@ -217,7 +216,7 @@ export default {
 
     nextImageLeft() {
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
-      debugger;
+
       console.log(idImage);
       if (
         document.getElementById("detail" + `${parseInt(idImage) - 1}`) !== null
@@ -233,9 +232,8 @@ export default {
     },
 
     nextImageRight() {
-      debugger;
       const idImage = this.$store.state.userModule.urlAvatarUser.id;
-      debugger;
+
       console.log(idImage);
       if (
         document.getElementById("detail" + `${parseInt(idImage) + 1}`) !== null

@@ -31,11 +31,14 @@ export default {
 
   data() {
     return {
-      isShowIconApp: true,
+      isShowIconApp: true, // icon Loading
     };
   },
 
   computed: {
+    /**
+     * Đổi theme
+     */
     isDarkTheme() {
       const theme = localStorage.getItem("user-theme");
 
@@ -48,11 +51,10 @@ export default {
   },
 
   methods: {
-    ...mapActions(["checkExistUserId"]),
+    ...mapActions(["loginAppByAuthId"]),
     ...mapMutations(["setLocation"]),
     async showPosition(position) {
       if (position.coords) {
-        debugger;
         localStorage.setItem("latitude", position.coords.latitude);
         localStorage.setItem("longitude", position.coords.longitude);
       }
@@ -60,17 +62,32 @@ export default {
   },
 
   async created() {
+    // Set time out show loading
     setTimeout(() => {
       this.isShowIconApp = false;
     }, 1000);
+    // Lấy location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     }
-    const tokenId = localStorage.getItem("tokenId");
-
-    if (tokenId) {
-      this.$router.push({ path: "/home" });
+    const oAuth2Id = localStorage.getItem("oAuth2Id");
+    debugger;
+    // Nếu tồn tại oAuth2Id in localStorage
+    if (oAuth2Id) {
+      await this.loginAppByAuthId({
+        oAuth2Id: oAuth2Id,
+      });
+      // Check tokenId
+      const tokenId = this.$store.state.mongoModule.tokenId;
+      if (tokenId) {
+        // Login success
+        this.$router.push({ path: "/home" });
+      } else {
+        // Login false : account not exist
+        this.$router.push({ name: "login-page" }).catch(() => {});
+      }
     } else {
+      // Login false : account not exist
       this.$router.push({ name: "login-page" }).catch(() => {});
     }
   },

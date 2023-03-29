@@ -236,7 +236,6 @@ export default {
 
   methods: {
     async previewImages() {
-      debugger;
       const imageFiles = event.target.files;
       for (let index = 0; index < imageFiles.length; index++) {
         const element = imageFiles[index];
@@ -247,7 +246,6 @@ export default {
     },
 
     scrollToBottom() {
-      debugger;
       this.$refs.chatContainer.scrollTop =
         this.$refs.chatContainer.scrollHeight;
     },
@@ -257,7 +255,6 @@ export default {
     },
 
     async onUpdateLoadImage(val) {
-      debugger;
       const storage = getStorage();
       const storageRef = ref(storage, "dating/" + val.name);
       await uploadBytes(storageRef, val).then((snapshot) => {
@@ -269,7 +266,7 @@ export default {
         const dataImage = {
           url: url,
         };
-        debugger;
+
         this.urlImageUpdated.push(url);
         console.log(dataImage);
       });
@@ -278,7 +275,7 @@ export default {
     onSendMessage() {
       const userId1 = "use03";
       const userId2 = "use04";
-      debugger;
+
       const images = this.urlImageUpdated;
       setData(refData(database, "messages/" + `${userId1}_${userId2}`), {
         username: "sadsas",
@@ -288,12 +285,9 @@ export default {
     },
   },
   mounted() {
-    debugger;
     this.scrollToBottom();
   },
-  created() {
-    debugger;
-  },
+  created() {},
 };
 </script>
 

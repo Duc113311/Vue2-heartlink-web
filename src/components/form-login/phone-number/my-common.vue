@@ -181,7 +181,7 @@ export default {
 
           await this.checkExistUserId(userID);
           const isExist = this.$store.state.loginModule.isExistUserId;
-          debugger;
+
           if (isExist) {
             this.$router.push({ path: "/home-new" }).catch(() => {});
           } else {

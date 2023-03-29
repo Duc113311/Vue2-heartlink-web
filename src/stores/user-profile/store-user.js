@@ -326,7 +326,6 @@ const mutations = {
    * @param {*} location
    */
   setLocation(state, location) {
-    debugger;
     state.user_profile.latitude = location.latitude;
     state.user_profile.longitude = location.longitude;
 
@@ -370,7 +369,6 @@ const mutations = {
 
   setLeftRighAvatar(state, data) {
     if (data === true) {
-      debugger;
       const idNew = parseInt(state.urlAvatarUser.id) + 1;
       if (idNew < state.userProfileDetail.avatars.length) {
         const findValue = state.userProfileDetail.avatars.find(
@@ -379,7 +377,6 @@ const mutations = {
         state.urlAvatarUser = findValue;
       }
     } else {
-      debugger;
       if (state.urlAvatarUser.id === 0) {
         // Ko cho next
         state.urlAvatarUser = data.avatars[0];

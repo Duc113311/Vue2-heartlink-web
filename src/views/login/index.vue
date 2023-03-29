@@ -28,7 +28,7 @@
               </div>
               <!-- Body -->
               <div class="h-30 justify-center flex p-10">
-                <LoginBtn></LoginBtn>
+                <LoginBtn @onShowWelcome="onShowWelcome"></LoginBtn>
               </div>
 
               <div
@@ -58,24 +58,34 @@
         </div>
       </div>
     </div>
+
+    <NewAccount v-show="isShowWelcome"></NewAccount>
   </div>
 </template>
 
 <script>
 import LoginBtn from "../../components/layout/btn-sign/login-btn";
+import NewAccount from "../../components/welcome/new-account";
 // import NavbarPage from "../../components/layout/navbar-login/navbar-page";
 export default {
   components: {
     LoginBtn,
+    NewAccount,
     // NavbarPage,
   },
   name: "login-page",
 
   data() {
-    return {};
+    return {
+      isShowWelcome: false,
+    };
   },
 
-  methods: {},
+  methods: {
+    onShowWelcome(val) {
+      this.isShowWelcome = val;
+    },
+  },
 };
 </script>
 

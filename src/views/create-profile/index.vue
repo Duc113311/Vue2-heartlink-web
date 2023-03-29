@@ -173,7 +173,6 @@ export default {
 
     onActionShowMe(val) {
       console.log(val);
-      debugger;
 
       if (this.isScream === 2) {
         this.setShowStatusGender(val);
@@ -186,7 +185,6 @@ export default {
   },
 
   async created() {
-    debugger;
     await this.getListLifeStyleForRegister();
   },
 };

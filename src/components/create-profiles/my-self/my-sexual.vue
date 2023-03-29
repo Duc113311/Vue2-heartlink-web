@@ -74,7 +74,6 @@ export default {
   computed: {
     ...mapState(["user_profile"]),
     listDataSexuals() {
-      debugger;
       return this.$store.state.commonModule.listLifeStyle.sexuals;
     },
 
@@ -94,7 +93,6 @@ export default {
     ...mapActions(["getListDataSexuals"]),
 
     onClickChose(val, indexValue) {
-      debugger;
       const listDarks = document.getElementsByClassName("dark-theme-check");
       const checkActive = document.getElementsByClassName("check-active");
       const notCheckActive =

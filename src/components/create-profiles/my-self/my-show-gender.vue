@@ -75,7 +75,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     this.showMeGender = this.$store.state.userModule.user_profile.showMeGender;
     this.setShowProfileCreate({
       isShowProfile: true,

@@ -304,7 +304,6 @@ export default {
 
     onChangeCancel() {
       const objectLifeStyle = this.$store.state.userModule.lifeStyle;
-      debugger;
       const documentZodiacs = document.getElementsByClassName("zodiac");
       const documentEducation = document.getElementsByClassName("education");
       const documentPersonality =

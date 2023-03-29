@@ -47,11 +47,8 @@ export default {
 
     async showPosition(position) {
       if (position.coords) {
-        debugger;
         this.setLocation(position.coords);
       }
-
-      debugger;
 
       this.$emit("onShowAvoid", true);
     },
@@ -60,7 +57,6 @@ export default {
      */
     onClickLocations() {
       if (navigator.geolocation) {
-        debugger;
         navigator.geolocation.getCurrentPosition(this.showPosition);
       }
     },

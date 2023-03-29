@@ -30,7 +30,6 @@ export default {
 
   methods: {
     onShowWelcome(val) {
-      debugger;
       this.isShowWelcome = val;
     },
   },

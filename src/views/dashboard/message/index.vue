@@ -164,7 +164,6 @@ export default {
 
   methods: {
     onClickShowChat() {
-      debugger;
       this.$router.push({ path: "/chat" });
     },
   },

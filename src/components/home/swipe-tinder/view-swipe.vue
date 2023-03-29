@@ -137,7 +137,6 @@ export default {
     ...mapState("userProfileList"),
 
     listDataUser() {
-      debugger;
       return this.$store.state.userModule.userProfileList
         ? this.$store.state.userModule.userProfileList
         : [];
@@ -221,7 +220,6 @@ export default {
       this.$emit("onShowDetailUser", value);
     },
     async onSubmit({ item }) {
-      debugger;
       this.setUrlNameAvatarUser("");
       this.isActiveImag = true;
 
@@ -251,7 +249,6 @@ export default {
       this.history.push(item);
     },
     async decide(choice) {
-      debugger;
       console.log(choice);
       if (choice === "rewind") {
         if (this.history.length) {
@@ -267,15 +264,10 @@ export default {
     },
   },
 
-  beforeUpdate() {
-    debugger;
-  },
+  beforeUpdate() {},
 
-  beforeMount() {
-    debugger;
-  },
+  beforeMount() {},
   mounted() {
-    debugger;
     // const documentImage = document.getElementsByClassName("imageAvatar");
     // documentImage[0].classList.add("active-image");
     // documentImage[0].classList.remove("no-active");

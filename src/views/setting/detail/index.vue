@@ -918,14 +918,12 @@ export default {
     onChangeGlobal() {},
 
     onChangeAgeRange(val) {
-      debugger;
       this.valueAge = val;
 
       localStorage.setItem("startAge", this.valueAge[0]);
       localStorage.setItem("endAge", this.valueAge[1]);
     },
     onChangeLocations(val) {
-      debugger;
       this.valueLocation = val;
 
       localStorage.setItem("locations", val);

@@ -94,7 +94,6 @@ export default {
     },
 
     onHideMayBeLater(val) {
-      debugger;
       this.$emit("onHidePopupSendSuperLike", val);
     },
   },

@@ -41,7 +41,6 @@ export default {
 
   computed: {
     showFormQuit() {
-      debugger;
       return this.isShowQuitSing;
     },
   },

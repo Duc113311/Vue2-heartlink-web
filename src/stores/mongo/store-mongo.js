@@ -57,7 +57,6 @@ const mutations = {
    * @param {*} data
    */
   setListDataCards_Mongo(state, data) {
-    debugger;
     state.listDataCard = data;
   },
 };
@@ -72,7 +71,6 @@ const actions = {
     await http_mongo
       .post(`api/v1/register`, data)
       .then((response) => {
-        debugger;
         commit("setProfileUserRegister_Mongo", response.data.data);
       })
       .catch((error) => {
@@ -106,7 +104,6 @@ const actions = {
     await http_mongo
       .get(`api/v1/profile`, data)
       .then((response) => {
-        debugger;
         commit("setDetailProfileAuth_Mongo", response.data.data);
       })
       .catch((error) => {
@@ -123,7 +120,6 @@ const actions = {
     await http_mongo
       .post(`api/v1/updateGPS`, data)
       .then((response) => {
-        debugger;
         commit("setUpdateLocation_Mongo", response);
       })
       .catch((error) => {
@@ -140,7 +136,6 @@ const actions = {
     await http_mongo
       .get(`api/v1/cards`, data)
       .then((response) => {
-        debugger;
         commit("setListDataCards_Mongo", response.data.data);
       })
       .catch((error) => {

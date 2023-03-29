@@ -88,7 +88,6 @@ export default {
 
   computed: {
     isShowMatchs() {
-      debugger;
       return this.$store.state.homeModule.statusMatch;
     },
   },
@@ -115,7 +114,6 @@ export default {
 
     ...mapMutations(["setStatusLikeUser"]),
     onHideLikeYou(val) {
-      debugger;
       this.setStatusLikeUser(val);
       this.isSendSuccess = true;
     },
@@ -146,22 +144,15 @@ export default {
     },
 
     onHidePopupSendSuperLike(val) {
-      debugger;
       this.isSendSuccess = val;
     },
   },
 
-  beforeUpdate() {
-    debugger;
-  },
+  beforeUpdate() {},
 
-  beforeMount() {
-    debugger;
-  },
+  beforeMount() {},
 
-  mounted() {
-    debugger;
-  },
+  mounted() {},
 };
 </script>
 

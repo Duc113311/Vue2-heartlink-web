@@ -128,7 +128,6 @@ export default {
 
   methods: {
     onShowDialogQuit() {
-      debugger;
       this.$emit("onCloseWelcome", true);
       this.$router.push({
         path: "create-user",

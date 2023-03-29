@@ -154,7 +154,6 @@ export default {
     },
 
     onAngleUp() {
-      debugger;
       this.isShowMeet = false;
       if (document.getElementsByClassName("meet-people")[0]) {
         document.getElementsByClassName("meet-people")[0].style.display =
@@ -164,7 +163,6 @@ export default {
   },
 
   mounted() {
-    debugger;
     if (document.getElementsByClassName("angle-up")[0]) {
       document.getElementsByClassName("angle-up")[0].style.display = "none";
     }

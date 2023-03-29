@@ -45,7 +45,7 @@ import {
   provider,
 } from "../../../configs/firebase";
 
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   components: {},
@@ -60,7 +60,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(["postTokenByUserID", "checkExistUserId"]),
+    ...mapMutations(["setOAuth2Id"]),
+    ...mapActions(["postTokenByUserID", "loginAppByAuthId"]),
     onShowDialogQuit(val) {
       this.isShowWellcome = val;
     },
@@ -79,23 +80,22 @@ export default {
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
+          console.log(token);
           // The signed-in user info.
           const userID = result.user.uid;
-          const providerId = result.providerId;
-          console.log(token);
+          await this.setOAuth2Id(userID);
 
-          await this.postTokenByUserID({
-            id: userID,
-            providerId: providerId,
+          await this.loginAppByAuthId({
+            oAuth2Id: userID,
           });
+          const tokenIdParam = this.$store.state.mongoModule.tokenId;
 
-          await this.checkExistUserId(userID);
-
-          const userIds = this.$store.state.loginModule.isExistUserId;
-          if (userIds) {
-            this.$router.push({ path: "/home-new" });
+          // Tồn tại account
+          if (tokenIdParam) {
+            this.$router.push({ path: "/home" });
           } else {
-            this.isShowWellcome = true;
+            // Không tồn tại account
+            this.$emit("onShowWelcome", true);
           }
         })
         .catch((error) => {

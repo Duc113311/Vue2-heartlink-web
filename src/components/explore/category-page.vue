@@ -81,8 +81,6 @@ export default {
 
   methods: {
     onClickBlindDate() {
-      debugger;
-
       this.$router.push("/explore-new/blind-date");
     },
   },

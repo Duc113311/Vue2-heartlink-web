@@ -96,7 +96,6 @@ export default {
     },
 
     onBackComponent(value) {
-      debugger;
       if (value) {
         if (this.screenNumber === 0) {
           this.$router.push({ path: "/" });
@@ -131,7 +130,7 @@ export default {
      */
     async onChangeContinue(value) {
       console.log(value);
-      debugger;
+
       this.isLoadings = true;
       this.isStatusRequire = true;
       this.isHide = true;
@@ -177,24 +176,29 @@ export default {
       }, 2000);
     },
 
+    /**
+     * Xác thực mã codeId & OTP
+     * @param {*} sentCodeId
+     */
     singWithPhone(sentCodeId) {
       const credential = PhoneAuthProvider.credential(sentCodeId, this.codeOTP);
       signInWithCredential(auth, credential)
         .then(async (result) => {
           const userID = result.user.uid;
 
-          await this.setOAuth2Id({
-            oAuth2Id: userID,
-          });
+          // Xét giá trị cho OAuth
+          await this.setOAuth2Id(userID);
 
           await this.loginAppByAuthId({
             oAuth2Id: userID,
           });
           const tokenIdParam = this.$store.state.mongoModule.tokenId;
-          debugger;
+
+          // Tồn tại account
           if (tokenIdParam) {
             this.$router.push({ path: "/home" });
           } else {
+            // Không tồn tại account
             this.$router.push({ path: "/email" });
           }
         })
