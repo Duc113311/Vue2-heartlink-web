@@ -9,7 +9,18 @@
       </div>
 
       <div class="content-bg flex justify-center items-center">
-        <OptionPage v-if="show === 'so1'" @update="show = $event"></OptionPage>
+        <OptionPage1
+          v-if="show === 'so1'"
+          @update="show = $event"
+        ></OptionPage1>
+        <OptionPage2
+          v-if="show === 'so2'"
+          @update="show = $event"
+        ></OptionPage2>
+        <OptionPage3
+          v-if="show === 'so3'"
+          @update="show = $event"
+        ></OptionPage3>
       </div>
 
       <div class="footer-bg">
@@ -66,12 +77,16 @@
 </template>
 
 <script>
-import OptionPage from "../../explore/blind-date/fliter-option/option-page";
+import OptionPage3 from "./fliter-option/option-page3";
+import OptionPage1 from "./fliter-option/option-page1";
+import OptionPage2 from "./fliter-option/option-page2";
 import BhBack from "../../bh-element-ui/button/bh-back";
 export default {
   components: {
+    OptionPage3,
+    OptionPage1,
+    OptionPage2,
     BhBack,
-    OptionPage,
   },
 
   name: "blind-option",

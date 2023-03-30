@@ -60,6 +60,21 @@ const actions = {
         console.log(error);
       });
   },
+
+  /**
+   * Lấy danh sách life style khi đã đăng ký: màn update profile
+   * @param {*} param0
+   */
+  async getListLifeStyle({ commit }) {
+    await http_mongo
+      .get(`api/v1/statics`)
+      .then((response) => {
+        commit("setListLifeStyle", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 export default {
   state,

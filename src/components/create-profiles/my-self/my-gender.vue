@@ -90,7 +90,7 @@ export default {
   },
 
   mounted() {
-    this.genders = this.$store.state.userModule.user_profile.gender;
+    this.genders = this.$store.state.userModule.user_profile.profiles.gender;
     const screamShow = this.$store.state.commonModule.listScreamShowMes;
     console.log(screamShow);
 

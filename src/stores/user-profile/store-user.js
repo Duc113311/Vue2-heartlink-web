@@ -1,13 +1,54 @@
 import { http_request } from "../../configs/http-host";
+import { http_mongo } from "../../configs/http-mongo";
 
 const state = {
+  // Thông tin của user
   user_profile: {
-    orientationSexuals: [],
-    interests: [],
-    avatars: [],
-    showGender: false,
-    showSexual: false,
-    university: "",
+    profiles: {
+      avatars: [],
+      about: "",
+      zodiac: "",
+      pet: "",
+      smoking: "",
+      education: "",
+      university: "",
+      company: "",
+      jobTitle: "",
+      gender: "",
+      showGender: false,
+      orientationSexuals: [],
+      showSexual: false,
+      interests: [],
+      favoriteSongs: [],
+      address: "",
+      showAge: false,
+      showDistance: false,
+    },
+    settings: {
+      distancePreference: {
+        range: 10,
+        unit: "km",
+        onlyShowInThis: false,
+      },
+      agePreference: {
+        min: 15,
+        max: 30,
+        onlyShowInThis: false,
+      },
+      showOnlineStatus: false,
+      showActiveStatus: false,
+      autoPlayVideo: "no",
+      notiSeenMsg: false,
+      genderShowMe: "",
+      showMePersonLikeMe: false,
+      global: false,
+      incognitoMode: false,
+    },
+    verifyStatus: false,
+    coins: 0,
+    numberBooster: 0,
+    numberSuperLike: 0,
+    numberNotiSeenMsg: 0,
   },
   isCheckBox: false,
   listSexuals: [],
@@ -32,13 +73,30 @@ const state = {
   keyZodiac: "",
 
   lifeStyle: {},
-
+  // Mongo
+  detailProfile: {},
   avatarChecked: [],
 };
 
 const getters = {};
 
 const actions = {
+  /**
+   * API lấy chi tiết thông tin theo Authorization
+   * @param {*} param0
+   * @param {*} data
+   */
+  async getDetailProfileByAuthorization({ commit }, data) {
+    await http_mongo
+      .get(`api/v1/profile`, data)
+      .then((response) => {
+        commit("setDetailProfileAuth_Mongo", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
   /**
    * API thêm thông tin của user
    * @param {*} param
@@ -207,14 +265,57 @@ const actions = {
 };
 
 const mutations = {
-  setUserProfiles(state, data) {
-    state.user_profile = data;
+  /**
+   * Xét giá trị cho user_profile khi gọi API detail
+   * @param {*} state
+   * @param {*} data
+   */
+  setDetailProfileAuth_Mongo(state, data) {
+    state.detailProfile = data;
+    debugger;
+    for (let index = 0; index < data.profiles.avatars.length; index++) {
+      const element = data.profiles.avatars[index];
+
+      const indexBody = {
+        id: index,
+        url: element,
+      };
+      state.avatarChecked.push(indexBody);
+    }
+    debugger;
+    (state.user_profile.dob = data.dob),
+      (state.user_profile.email = data.email),
+      (state.user_profile.fullname = data.fullname),
+      (state.user_profile.verifyStatus = data.verifyStatus),
+      (state.user_profile.location = data.location),
+      (state.user_profile.coins = data.coins),
+      (state.user_profile.numberBooster = data.numberBooster),
+      (state.user_profile.numberSuperLike = data.numberSuperLike),
+      (state.user_profile.numberNotiSeenMsg = data.numberNotiSeenMsg),
+      // user profile
+      (state.user_profile.profiles = {
+        ...state.user_profile.profiles,
+        ...data.profiles,
+      });
+    // setting
+    state.user_profile.settings = {
+      ...state.user_profile.settings,
+      ...data.settings,
+    };
+
+    debugger;
   },
 
+  /**
+   * Xét giá trị OAuth2Id
+   * @param {*} state
+   * @param {*} oAuth2Id
+   */
   setOAuth2Id(state, oAuth2Id) {
     state.user_profile.oAuth2Id = oAuth2Id;
     localStorage.setItem("oAuth2Id", oAuth2Id);
   },
+
   /**
    * Xét giá trị firstName
    * @param {*} state
@@ -224,6 +325,11 @@ const mutations = {
     state.user_profile.fullname = firstName;
   },
 
+  /**
+   * Xét giá trị email
+   * @param {*} state
+   * @param {*} email
+   */
   setEmailForUser(state, email) {
     state.user_profile.email = email;
   },
@@ -238,12 +344,62 @@ const mutations = {
   },
 
   /**
+   * Xét giá trị about
+   * @param {*} state
+   * @param {*} value
+   */
+  setAbout(state, value) {
+    state.user_profile.profiles.about = value;
+  },
+
+  /**
    * Xét giá trị gender
    * @param {*} state
    * @param {*} gender
    */
   setGender(state, gender) {
-    state.user_profile.gender = gender;
+    state.user_profile.profiles.gender = gender;
+  },
+
+  /**
+   * Xét giá trị ẩn/hiện độ tuổi
+   * @param {*} state
+   * @param {*} value
+   */
+  setShowAge(state, value) {
+    state.user_profile.profiles.showAge = value;
+  },
+
+  /**
+   * Xét giá trị ẩn/hiện khoảng cách
+   * @param {*} state
+   * @param {*} value
+   */
+  setShowDistance(state, value) {
+    state.user_profile.profiles.showDistance = value;
+  },
+
+  /**
+   * Xét giá trị orientationSexuals
+   * @param {*} state
+   * @param {*} sexual
+   */
+  setSexuals(state, sexuals) {
+    debugger;
+    const index =
+      state.user_profile.profiles.orientationSexuals.indexOf(sexuals);
+    if (index > -1) {
+      // only splice array when item is found
+      state.user_profile.profiles.orientationSexuals.splice(index, 1);
+      state.isCheckBox = false;
+      // 2nd parameter means remove one item only
+    } else {
+      if (state.user_profile.profiles.orientationSexuals.length < 3) {
+        state.user_profile.profiles.orientationSexuals.push(sexuals);
+      } else {
+        state.isCheckBox = true;
+      }
+    }
   },
 
   /**
@@ -252,40 +408,19 @@ const mutations = {
    * @param {*} gender
    */
   setShowGender(state, showGender) {
-    state.user_profile.genderShowMe = showGender;
+    state.user_profile.settings.genderShowMe = showGender;
   },
 
   setShowStatusGender(state, value) {
-    state.user_profile.showGender = value;
+    state.user_profile.profiles.showGender = value;
   },
 
   setShowStatusSexual(state, value) {
-    state.user_profile.showSexual = value;
+    state.user_profile.profiles.showSexual = value;
   },
 
   setAddressLocation(state, data) {
-    state.user_profile.address = data;
-  },
-
-  /**
-   * Xét giá trị sexuals
-   * @param {*} state
-   * @param {*} sexual
-   */
-  setSexuals(state, sexuals) {
-    const index = state.user_profile.orientationSexuals.indexOf(sexuals);
-    if (index > -1) {
-      // only splice array when item is found
-      state.user_profile.orientationSexuals.splice(index, 1);
-      state.isCheckBox = false;
-      // 2nd parameter means remove one item only
-    } else {
-      if (state.user_profile.orientationSexuals.length < 3) {
-        state.user_profile.orientationSexuals.push(sexuals);
-      } else {
-        state.isCheckBox = true;
-      }
-    }
+    state.user_profile.profiles.address = data;
   },
 
   /**
@@ -294,14 +429,14 @@ const mutations = {
    * @param {*} interest
    */
   setInterest(state, interests) {
-    const index = state.user_profile.interests.indexOf(interests);
+    const index = state.user_profile.profiles.interests.indexOf(interests);
     if (index > -1) {
       // only splice array when item is found
-      state.user_profile.interests.splice(index, 1); // 2nd parameter means remove one item only
+      state.user_profile.profiles.interests.splice(index, 1); // 2nd parameter means remove one item only
       state.isActiveId = false;
     } else {
-      if (state.user_profile.interests.length < 5) {
-        state.user_profile.interests.push(interests);
+      if (state.user_profile.profiles.interests.length < 5) {
+        state.user_profile.profiles.interests.push(interests);
         state.isActiveId = true;
       } else {
         state.isActiveId = false;
@@ -321,8 +456,9 @@ const mutations = {
       // only splice array when item is found
       state.avatarChecked.splice(index, 1); // 2nd parameter means remove one item only
     } else {
+      debugger;
       state.avatarChecked.push(photos);
-      state.user_profile.avatars.push(photos.url);
+      state.user_profile.profiles.avatars.push(photos.url);
     }
   },
 
@@ -339,6 +475,33 @@ const mutations = {
 
     localStorage.setItem("latitude", location.latitude);
     localStorage.setItem("longitude", location.longitude);
+  },
+
+  /**
+   * Xét giá trị cho jobTitle
+   * @param {*} state
+   * @param {*} value
+   */
+  setJobTitle(state, value) {
+    state.user_profile.jobTitle = value;
+  },
+
+  /**
+   * Xét giá trị cho university
+   * @param {*} state
+   * @param {*} value
+   */
+  setSchool(state, value) {
+    state.user_profile.university = value;
+  },
+
+  /**
+   * Xét giá trị cho address
+   * @param {*} state
+   * @param {*} value
+   */
+  setAddress(state, value) {
+    state.user_profile.address = value;
   },
 
   /**
@@ -425,14 +588,14 @@ const mutations = {
 
   setSkipProfiles(state, data) {
     if (data === 3) {
-      state.user_profile.sexuals = [];
+      state.user_profile.profiles.sexuals = [];
     }
     if (data === 4) {
-      state.user_profile.interests = [];
+      state.user_profile.profiles.interests = [];
     }
 
     if (data === 4) {
-      state.user_profile.avatars = [];
+      state.user_profile.profiles.avatars = [];
     }
   },
 

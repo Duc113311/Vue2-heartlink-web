@@ -83,46 +83,47 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorages } from "@/configs/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default {
   name: "my-photos",
   data() {
     return {
       fileListValue: [
         {
-          id: 1,
+          id: 0,
           url: "image1",
         },
         {
-          id: 2,
+          id: 1,
           url: "image2",
         },
         {
-          id: 3,
+          id: 2,
           url: "image3",
         },
         {
-          id: 4,
+          id: 3,
           url: "image4",
         },
         {
-          id: 5,
+          id: 4,
           url: "image5",
         },
         {
-          id: 6,
+          id: 5,
           url: "image6",
         },
         {
-          id: 7,
+          id: 6,
           url: "image7",
         },
         {
-          id: 8,
+          id: 7,
           url: "image8",
         },
         {
-          id: 9,
+          id: 8,
           url: "image9",
         },
       ],
@@ -156,7 +157,7 @@ export default {
     async toggleUpload(event, data) {
       this.loading = true;
       const image = event.target.files[0];
-
+      debugger;
       console.log(data);
       const idUrl = data.id;
       // const reader = new FileReader();
@@ -167,7 +168,7 @@ export default {
       // };
       this.isShowImage = true;
 
-      const storage = getStorage();
+      const storage = getStorages();
       const storageRef = ref(storage, "dating/" + image.name);
       await uploadBytes(storageRef, image).then((snapshot) => {
         console.log("Uploaded a blob or file!");
@@ -177,7 +178,7 @@ export default {
       // img.setAttribute("src", url);
 
       loading.style.display = "block";
-
+      debugger;
       await getDownloadURL(storageRef, image)
         .then((url) => {
           this.dialogImageUrl = url;
@@ -252,12 +253,14 @@ export default {
         this.$emit("onStatusActive", true);
       }
     } else {
-      const image = this.$store.state.userModule.avatarChecked;
+      debugger;
+      const image =
+        this.$store.state.userModule.detailProfile?.profiles?.avatars;
       for (let index = 0; index < image.length; index++) {
         const element = image[index];
-        const img = document.getElementById(element.id);
-        const avatar = document.getElementById("avatar" + element.id);
-        const close = document.getElementById("close" + element.id);
+        const img = document.getElementById(parseInt(index));
+        const avatar = document.getElementById("avatar" + parseInt(index));
+        const close = document.getElementById("close" + parseInt(index));
         // img.setAttribute("src", url);
         setTimeout(() => {
           this.loading = false;

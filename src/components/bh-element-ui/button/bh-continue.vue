@@ -71,8 +71,9 @@ export default {
     },
 
     isShowNumberInterests() {
-      return this.$store.state.userModule.user_profile?.interests.length
-        ? this.$store.state.userModule.user_profile?.interests.length
+      return this.$store.state.userModule.user_profile?.profiles.interests
+        .length
+        ? this.$store.state.userModule.user_profile?.profiles.interests.length
         : 0;
     },
 

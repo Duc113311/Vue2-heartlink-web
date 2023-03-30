@@ -26,14 +26,14 @@
 
             <div class="w-full h-12 mb-2">
               <div class="w-full">
-                <span v-for="(item, index) in listDataChecked" :key="index">
+                <span v-for="(item, index) in listChecked" :key="index">
                   <button
                     @click="onSelectInterest(index)"
                     :id="index"
                     class="border-interest-checked pr-3 mr-2 p-2"
                     size="large"
                   >
-                    {{ item }}
+                    {{ item.value }}
 
                     <i class="fa-solid fa-xmark"></i>
                   </button>
@@ -62,11 +62,11 @@
               <span v-for="(item, index) in listDataInterests" :key="index">
                 <button
                   @click="onSelectInterest(index)"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white"
                   size="large"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </span>
             </div>
@@ -87,6 +87,7 @@ export default {
       links: [],
       state: "",
       timeout: null,
+      listChecked: [],
     };
   },
 
@@ -95,7 +96,8 @@ export default {
       return ["Dancing", "Singing", "Ballet", "BBQ"];
     },
     listDataInterests() {
-      return this.$store.state.userModule.listInterests;
+      debugger;
+      return this.$store.state.commonModule.listLifeStyle.interests;
     },
   },
 
@@ -108,17 +110,17 @@ export default {
     onChangeSaveInterest() {
       this.$emit("onClickSaveInterest", true);
     },
-    loadAll() {
-      return [
-        { value: "vue", link: "https://github.com/vuejs/vue" },
-        { value: "element", link: "https://github.com/ElemeFE/element" },
-        { value: "cooking", link: "https://github.com/ElemeFE/cooking" },
-        { value: "mint-ui", link: "https://github.com/ElemeFE/mint-ui" },
-        { value: "vuex", link: "https://github.com/vuejs/vuex" },
-        { value: "vue-router", link: "https://github.com/vuejs/vue-router" },
-        { value: "babel", link: "https://github.com/babel/babel" },
-      ];
-    },
+    // loadAll() {
+    //   return [
+    //     { value: "vue", link: "https://github.com/vuejs/vue" },
+    //     { value: "element", link: "https://github.com/ElemeFE/element" },
+    //     { value: "cooking", link: "https://github.com/ElemeFE/cooking" },
+    //     { value: "mint-ui", link: "https://github.com/ElemeFE/mint-ui" },
+    //     { value: "vuex", link: "https://github.com/vuejs/vuex" },
+    //     { value: "vue-router", link: "https://github.com/vuejs/vue-router" },
+    //     { value: "babel", link: "https://github.com/babel/babel" },
+    //   ];
+    // },
     querySearchAsync(queryString, cb) {
       var links = this.links;
       var results = queryString
@@ -143,19 +145,25 @@ export default {
   },
 
   async created() {
-    await this.getListDataInterests({
-      entityName: "interests",
-      entityId: "en",
-    });
+    debugger;
   },
 
   mounted() {
-    this.links = this.loadAll();
-
-    const interestsData = this.$store.state.userModule.user_profile.interests;
+    // this.links = this.loadAll();
+    debugger;
+    const interestsData =
+      this.$store.state.userModule.user_profile.profiles.interests;
     for (let index = 0; index < interestsData.length; index++) {
       const element = interestsData[index];
       document.getElementById(element).classList.add("bg-active");
+      const nameInterest = document
+        .getElementById(element)
+        .innerHTML.toString();
+      const objectChecked = {
+        code: element,
+        value: nameInterest,
+      };
+      this.listChecked.push(objectChecked);
     }
   },
 };

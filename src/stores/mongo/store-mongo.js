@@ -7,6 +7,7 @@ const state = {
   detailProfile: {}, // Thông tin user khi gọi API lấy chi tiết
   listDataCard: [], // Danh sách màn quet
   listLifeStyle: {}, // Thông tin chung gồm: sexual, gender, showMeGender, interest
+  statusUpdateUser: "",
 };
 const getters = {};
 
@@ -31,15 +32,6 @@ const mutations = {
   },
 
   /**
-   * Xét giá trị cho detail profile
-   * @param {*} state
-   * @param {*} data
-   */
-  setDetailProfileAuth_Mongo(state, data) {
-    state.detailProfile = data;
-  },
-
-  /**
    * Xét giá trị
    * @param {*} state
    * @param {*} data
@@ -55,6 +47,11 @@ const mutations = {
    */
   setListDataCards_Mongo(state, data) {
     state.listDataCard = data;
+  },
+
+  setUpdateProfile_Mongo(state, data) {
+    debugger;
+    state.statusUpdateUser = data;
   },
 };
 
@@ -92,22 +89,6 @@ const actions = {
   },
 
   /**
-   * API lấy chi tiết thông tin theo Authorization
-   * @param {*} param0
-   * @param {*} data
-   */
-  async getDetailProfileByAuthorization({ commit }, data) {
-    await http_mongo
-      .get(`api/v1/profile`, data)
-      .then((response) => {
-        commit("setDetailProfileAuth_Mongo", response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
-
-  /**
    * APi update location user
    * @param {*} param0
    * @param {*} data
@@ -135,6 +116,22 @@ const actions = {
       })
       .then((response) => {
         commit("setListDataCards_Mongo", response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  /**
+   * Update thông tin user-profile
+   * @param {*} param0
+   * @param {*} data
+   */
+  async updateProfileUser({ commit }, data) {
+    await http_mongo
+      .post(`api/v1/profile`, data)
+      .then((response) => {
+        commit("setUpdateProfile_Mongo", response);
       })
       .catch((error) => {
         console.log(error);

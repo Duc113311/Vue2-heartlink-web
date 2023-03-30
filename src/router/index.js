@@ -129,6 +129,15 @@ const routes = [
       ),
 
     children: [
+      // Dashboard màn chat: List user friend
+      {
+        path: "/",
+        name: "dashboard-chat",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard-chat" */ "../views/message-page/dashboard-chat/index.vue"
+          ),
+      },
       // Chat with user
       {
         path: "/chat/:userId",

@@ -49,16 +49,16 @@ export default {
 
     onClickLikeTopic() {
       this.$router.push({
-        path: "/like-topic-news",
+        path: "/like-topic",
       });
     },
 
     onClickMessage() {
-      this.$router.push({ path: "/message-new" });
+      this.$router.push({ path: "/message" });
     },
 
     onClickProfile() {
-      this.$router.push({ path: "/setting" });
+      this.$router.push({ path: "/profile" });
     },
   },
 
@@ -74,19 +74,19 @@ export default {
         .getElementsByClassName("fa-magnifying-glass")[0]
         .classList.add("icon-active");
     }
-    if (this.$route.name === "like-topic-news") {
+    if (this.$route.name === "like-topic-page") {
       document
         .getElementsByClassName("fa-hand-holding-heart")[0]
         .classList.add("icon-active");
     }
-    if (this.$route.name === "message-new") {
+    if (this.$route.name === "dashboard-chat") {
       document
         .getElementsByClassName("fa-message")[0]
         .classList.add("icon-active");
     }
     if (
-      this.$route.name === "setting-page" ||
-      this.$route.name === "setting-detail" ||
+      this.$route.name === "default-page" ||
+      this.$route.name === "setting" ||
       this.$route.name === "edit-profile"
     ) {
       document

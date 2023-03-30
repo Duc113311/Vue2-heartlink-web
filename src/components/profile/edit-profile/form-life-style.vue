@@ -40,11 +40,11 @@
                 <button
                   v-for="(item, index) in listZodiacParams"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white zodiac"
-                  @click="onChoseZodiac(index)"
+                  @click="onChoseZodiac(item.code)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -177,22 +177,22 @@ export default {
     },
 
     listZodiacParams() {
-      return this.$store.state.userModule.listZodiacs;
+      return this.$store.state.commonModule.zodiacs;
     },
     listEducationParams() {
-      return this.$store.state.userModule.listEducations;
+      return this.$store.state.commonModule.educations;
     },
     listPersonalityParams() {
-      return this.$store.state.userModule.listPersonalitys;
+      return this.$store.state.commonModule.personalities;
     },
     listDietaryPreferenceParam() {
-      return this.$store.state.userModule.listDietaryPreferences;
+      return this.$store.state.commonModule.foodPreferences;
     },
     listSmokeParams() {
-      return this.$store.state.userModule.listSmokes;
+      return this.$store.state.commonModule.smokes;
     },
     listFavoritePetParams() {
-      return this.$store.state.userModule.listPets;
+      return this.$store.state.commonModule.pets;
     },
   },
 

@@ -4,6 +4,7 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 import { getMessaging } from "firebase/messaging";
 import { getDatabase } from "firebase/database";
 import { ref, set } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 import {
   signInWithPopup,
@@ -38,6 +39,7 @@ const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
 const refData = ref;
 const setData = set;
+const getStorages = getStorage;
 provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
 // provider.setCustomParameters({
@@ -64,4 +66,5 @@ export {
   database,
   refData,
   setData,
+  getStorages,
 };

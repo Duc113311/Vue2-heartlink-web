@@ -92,6 +92,7 @@ export default {
     ...mapActions(["getListDataSexuals"]),
 
     onClickChose(val, indexValue) {
+      debugger;
       const listDarks = document.getElementsByClassName("dark-theme-check");
       const checkActive = document.getElementsByClassName("check-active");
       const notCheckActive =
@@ -100,7 +101,7 @@ export default {
       this.setSexuals(indexValue);
 
       const sexualsData =
-        this.$store.state.userModule.user_profile.orientationSexuals;
+        this.$store.state.userModule.user_profile.profiles.orientationSexuals;
       const lengthSexual = sexualsData.length;
 
       const findIndex = sexualsData.findIndex((x) => x === indexValue);
@@ -138,7 +139,8 @@ export default {
       this.setSexuals(val);
 
       const lengthSexual =
-        this.$store.state.userModule.user_profile.orientationSexuals.length;
+        this.$store.state.userModule.user_profile.profiles.orientationSexuals
+          .length;
 
       if (this.$store.state.userModule.isCheckBox) {
         document.getElementById(val).checked = false;
@@ -195,9 +197,10 @@ export default {
     }
 
     const lengthSexual =
-      this.$store.state.userModule.user_profile.orientationSexuals.length;
+      this.$store.state.userModule.user_profile.profiles.orientationSexuals
+        .length;
     const dataSexuals =
-      this.$store.state.userModule.user_profile.orientationSexuals;
+      this.$store.state.userModule.user_profile.profiles.orientationSexuals;
     for (let index = 0; index < dataSexuals.length; index++) {
       const element = dataSexuals[index];
       listDarks[element].classList.add("border-active");

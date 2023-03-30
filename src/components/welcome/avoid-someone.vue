@@ -87,15 +87,36 @@ export default {
   },
 
   async created() {
+    debugger;
     const userProfile = this.$store.state.userModule.user_profile;
-    await this.registerUserByAuthId(userProfile);
+
+    const userParam = {
+      oAuth2Id: userProfile.oAuth2Id,
+      fullname: userProfile.fullname,
+      dob: userProfile.dob,
+      gender: userProfile.profiles.gender,
+      address: userProfile.profiles.address,
+      location: userProfile.location,
+      genderShowMe: userProfile.settings.genderShowMe,
+      university: userProfile.profiles.university,
+      avatars: userProfile.profiles.avatars,
+      orientationSexuals: userProfile.profiles.orientationSexuals,
+      interests: userProfile.profiles.interests,
+      showGender: userProfile.profiles.showGender,
+      showSexual: userProfile.profiles.showSexual,
+    };
+    console.log(userParam);
+    debugger;
+    await this.registerUserByAuthId(userParam);
 
     await this.loginAppByAuthId({
       oAuth2Id: userProfile.oAuth2Id,
     });
   },
 
-  mounted() {},
+  mounted() {
+    debugger;
+  },
 
   methods: {
     ...mapActions([

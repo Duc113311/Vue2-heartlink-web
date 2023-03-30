@@ -64,7 +64,8 @@ export default {
     onSelectInterest(val) {
       // document.querySelector("oftion-interests")
       this.setInterest(val);
-      const interestsData = this.$store.state.userModule.user_profile.interests;
+      const interestsData =
+        this.$store.state.userModule.user_profile.profiles.interests;
 
       if (this.$store.state.userModule.isActiveId) {
         document.getElementById(val).classList.add("bg-active");
@@ -83,7 +84,8 @@ export default {
   },
 
   mounted() {
-    const interestsData = this.$store.state.userModule.user_profile.interests;
+    const interestsData =
+      this.$store.state.userModule.user_profile.profiles.interests;
     this.setShowProfileCreate({
       isShowProfile: true,
       isNotShowProfile: true,
