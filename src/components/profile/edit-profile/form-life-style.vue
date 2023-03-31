@@ -4,10 +4,8 @@
     <div
       class="w-full h-full flex justify-center items-center absolute top-0 left-0"
     >
-      <div class="rounded-lg items-center w-form-life relative">
-        <div
-          class="w-full justify-between flex items-center pl-5 pr-5 h-title-close"
-        >
+      <div class="rounded-lg items-center w-form-life relative p-5">
+        <div class="w-full justify-between flex items-center h-title-close">
           <div @click="onChangeCancel()">
             <i class="fa-solid fa-xmark size-icon-default"></i>
           </div>
@@ -16,9 +14,7 @@
           </div>
         </div>
         <div class="w-full flex justify-center items-center h-form-data">
-          <div
-            class="w-full items-center h-full height-scroll overflow-scroll pl-4 pr-4"
-          >
+          <div class="w-full items-center h-full height-scroll overflow-scroll">
             <!-- Title -->
             <div class="w-full">
               <div class="padding-title">Basic information</div>
@@ -42,7 +38,7 @@
                   :key="index"
                   :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white zodiac"
-                  @click="onChoseZodiac(item.code)"
+                  @click="onChoseZodiac(item)"
                 >
                   {{ item.value }}
                 </button>
@@ -58,11 +54,11 @@
                 <button
                   v-for="(item, index) in listFavoritePetParams"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white pets"
-                  @click="onChoseFavoritePets(index)"
+                  @click="onChoseFavoritePets(item)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -75,11 +71,11 @@
                 <button
                   v-for="(item, index) in listEducationParams"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white education"
-                  @click="onChoseEducation(index)"
+                  @click="onChoseEducation(item)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -92,11 +88,11 @@
                 <button
                   v-for="(item, index) in listSmokeParams"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white smoke"
-                  @click="onChoseSmoke(index)"
+                  @click="onChoseSmoke(item)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -111,11 +107,11 @@
                 <button
                   v-for="(item, index) in listPersonalityParams"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white personality"
-                  @click="onChosePersonality(index)"
+                  @click="onChosePersonality(item)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -128,11 +124,11 @@
                 <button
                   v-for="(item, index) in listDietaryPreferenceParam"
                   :key="index"
-                  :id="index"
+                  :id="item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white dietary-preferences"
-                  @click="onChoseChildren(index)"
+                  @click="onChosePreferences(item)"
                 >
-                  {{ item }}
+                  {{ item.value }}
                 </button>
               </div>
             </div>
@@ -177,37 +173,44 @@ export default {
     },
 
     listZodiacParams() {
-      return this.$store.state.commonModule.zodiacs;
+      return this.$store.state.commonModule.listLifeStyle.zodiacs;
     },
     listEducationParams() {
-      return this.$store.state.commonModule.educations;
+      return this.$store.state.commonModule.listLifeStyle.educations;
     },
     listPersonalityParams() {
-      return this.$store.state.commonModule.personalities;
+      return this.$store.state.commonModule.listLifeStyle.personalities;
     },
     listDietaryPreferenceParam() {
-      return this.$store.state.commonModule.foodPreferences;
+      return this.$store.state.commonModule.listLifeStyle.foodPreferences;
     },
     listSmokeParams() {
-      return this.$store.state.commonModule.smokes;
+      return this.$store.state.commonModule.listLifeStyle.smokes;
     },
     listFavoritePetParams() {
-      return this.$store.state.commonModule.pets;
+      return this.$store.state.commonModule.listLifeStyle.pets;
     },
   },
 
   methods: {
-    ...mapMutations(["setLifeStyle"]),
+    ...mapMutations([
+      "setLifeStyle",
+      "setZodiac",
+      "setEducation",
+      "setPersonality",
+      "setSmoke",
+      "setFavoritePets",
+      "setPreferences",
+    ]),
     onChoseZodiac(val) {
+      debugger;
+
       const documentZodiacs = document.getElementsByClassName("zodiac");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keyZodiac: index,
-            nameZodiac: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setZodiac(val);
+
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -219,12 +222,8 @@ export default {
       const documentZodiacs = document.getElementsByClassName("education");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keyEducation: index,
-            nameEducation: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setEducation(val);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -236,12 +235,8 @@ export default {
       const documentZodiacs = document.getElementsByClassName("personality");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keyPersonality: index,
-            namePersonality: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setPersonality(val);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -253,12 +248,8 @@ export default {
       const documentZodiacs = document.getElementsByClassName("smoke");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keySmoke: index,
-            nameSmoke: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setSmoke(val);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -267,15 +258,12 @@ export default {
     },
 
     onChoseFavoritePets(val) {
+      debugger;
       const documentZodiacs = document.getElementsByClassName("pets");
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keyPets: index,
-            namePets: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setFavoritePets(val);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");
@@ -283,18 +271,14 @@ export default {
       }
     },
 
-    onChoseChildren(val) {
+    onChosePreferences(val) {
       const documentZodiacs = document.getElementsByClassName(
         "dietary-preferences"
       );
       for (let index = 0; index < documentZodiacs.length; index++) {
         const element = documentZodiacs[index];
-        if (val === element.id) {
-          const data = {
-            keyPreferences: index,
-            namePreferences: element.innerText,
-          };
-          this.setLifeStyle(data);
+        if (val.code === element.id) {
+          this.setPreferences(val);
           element.classList.add("bg-active");
         } else {
           element.classList.remove("bg-active");

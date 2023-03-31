@@ -76,9 +76,27 @@ const state = {
   // Mongo
   detailProfile: {},
   avatarChecked: [],
+
+  profileLife: {
+    zodiac: "",
+    education: "",
+    personality: "",
+    dietaryPreference: "",
+    pet: "",
+    smoking: "",
+  },
 };
 
-const getters = {};
+const getters = {
+  showAge: (state) => {
+    debugger;
+    return state.user_profile.profiles.showAge;
+  },
+  showDistance: (state) => {
+    debugger;
+    return state.user_profile.profiles.showDistance;
+  },
+};
 
 const actions = {
   /**
@@ -303,7 +321,12 @@ const mutations = {
       ...data.settings,
     };
 
-    debugger;
+    (state.profileLife.zodiac = data.profiles.zodiac),
+      (state.profileLife.education = data.profiles.education),
+      (state.profileLife.personality = data.profiles.personality),
+      (state.profileLife.dietaryPreference = data.profiles.dietaryPreference),
+      (state.profileLife.pet = data.profiles.pet),
+      (state.profileLife.smoking = data.profiles.smoking);
   },
 
   /**
@@ -367,6 +390,7 @@ const mutations = {
    * @param {*} value
    */
   setShowAge(state, value) {
+    debugger;
     state.user_profile.profiles.showAge = value;
   },
 
@@ -477,13 +501,20 @@ const mutations = {
     localStorage.setItem("longitude", location.longitude);
   },
 
+  setLifeStyleUser(state, data) {
+    state.user_profile.profiles = {
+      ...state.user_profile.profiles,
+      ...data,
+    };
+  },
+
   /**
    * Xét giá trị cho jobTitle
    * @param {*} state
    * @param {*} value
    */
   setJobTitle(state, value) {
-    state.user_profile.jobTitle = value;
+    state.user_profile.profiles.jobTitle = value;
   },
 
   /**
@@ -492,7 +523,7 @@ const mutations = {
    * @param {*} value
    */
   setSchool(state, value) {
-    state.user_profile.university = value;
+    state.user_profile.profiles.university = value;
   },
 
   /**
@@ -631,7 +662,69 @@ const mutations = {
 
   setLifeStyle(state, data) {
     // Object.assign(lifeStyle, { data })
+    debugger;
     state.lifeStyle = { ...state.lifeStyle, ...data };
+    debugger;
+  },
+  /**
+   * Xét giá trị cho Zodiac
+   * @param {*} state
+   * @param {*} value
+   */
+  setZodiac(state, value) {
+    debugger;
+    state.profileLife.zodiac = value.value;
+    state.user_profile.profiles.zodiac = value.code;
+  },
+
+  /**
+   * Xét giá trị cho Education
+   * @param {*} state
+   * @param {*} value
+   */
+  setEducation(state, value) {
+    state.profileLife.education = value.value;
+    state.user_profile.profiles.education = value.code;
+  },
+
+  /**
+   * Xét giá trị cho Personality
+   * @param {*} state
+   * @param {*} value
+   */
+  setPersonality(state, value) {
+    state.profileLife.personality = value.value;
+    state.user_profile.profiles.personality = value.code;
+  },
+
+  /**
+   * Xét giá trị cho Smoke
+   * @param {*} state
+   * @param {*} value
+   */
+  setSmoke(state, value) {
+    state.profileLife.smoking = value.value;
+    state.user_profile.profiles.smoking = value.code;
+  },
+
+  /**
+   * Xét giá trị cho Preferences
+   * @param {*} state
+   * @param {*} value
+   */
+  setPreferences(state, value) {
+    state.profileLife.dietaryPreference = value.value;
+    state.user_profile.profiles.dietaryPreference = value.code;
+  },
+
+  /**
+   * Xét giá trị cho Pets
+   * @param {*} state
+   * @param {*} value
+   */
+  setFavoritePets(state, value) {
+    state.profileLife.pet = value.value;
+    state.user_profile.profiles.pet = value.code;
   },
 
   setShowGenderSetting(state, data) {

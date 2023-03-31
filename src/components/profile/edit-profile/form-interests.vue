@@ -4,10 +4,8 @@
     <div
       class="w-full h-full flex justify-center items-center absolute top-0 left-0"
     >
-      <div class="rounded-lg items-center w-form-life relative">
-        <div
-          class="w-full justify-between flex items-center pl-5 pr-5 h-title-close"
-        >
+      <div class="rounded-lg items-center w-form-life relative p-5">
+        <div class="w-full justify-between flex items-center h-title-close">
           <div @click="onChangeCancel()">
             <i class="fa-solid fa-xmark size-icon-default"></i>
           </div>
@@ -17,20 +15,24 @@
         </div>
 
         <div class="w-full flex justify-center items-center h-form-data">
-          <div class="w-full items-center h-full pl-4 pr-4 pb-4">
+          <div class="w-full items-center h-full">
             <div class="flex w-full justify-between items-center h-12 mb-2">
               <div class="padding-title">Interest</div>
               <div class="padding-describe-item">5 out of 5</div>
             </div>
             <!-- Những thứ đã chọn -->
 
-            <div class="w-full h-12 mb-2">
+            <div class="w-full mb-2">
               <div class="w-full">
-                <span v-for="(item, index) in listChecked" :key="index">
+                <span
+                  class="mr-2 mb-2"
+                  v-for="(item, index) in listChecked"
+                  :key="index"
+                >
                   <button
                     @click="onSelectInterest(index)"
                     :id="index"
-                    class="border-interest-checked pr-3 mr-2 p-2"
+                    class="border-interest-checked pr-3 p-2 mb-2"
                     size="large"
                   >
                     {{ item.value }}
@@ -42,7 +44,7 @@
             </div>
 
             <!-- Tìm kiếm -->
-            <div class="w-full h-12 mb-2">
+            <div class="w-full h-search mb-2">
               <div class="w-full">
                 <el-autocomplete
                   v-model="state"
@@ -81,7 +83,7 @@
 import { mapActions } from "vuex";
 export default {
   name: "form-interests",
-
+  components: {},
   data() {
     return {
       links: [],
@@ -104,11 +106,11 @@ export default {
   methods: {
     ...mapActions(["getListDataInterests"]),
     onChangeCancel() {
-      this.$emit("onClickHideInterest", true);
+      this.$emit("onClickHideInterest", false);
     },
 
     onChangeSaveInterest() {
-      this.$emit("onClickSaveInterest", true);
+      this.$emit("onClickSaveInterest", false);
     },
     // loadAll() {
     //   return [
@@ -170,7 +172,10 @@ export default {
 </script>
 
 <style lang="css">
+.h-search {
+  height: 6%;
+}
 .list-interest {
-  height: calc(100% - 13rem);
+  height: calc(100% - 28%);
 }
 </style>

@@ -50,26 +50,6 @@
 
         <!-- About -->
 
-        <div class="w-full flex justify-center items-center">
-          <div class="w-full">
-            <div class="w-full flex justify-between p-3 bh-title">
-              <div>ABOUT ME</div>
-              <div v-show="!completeAbout">+22%</div>
-            </div>
-            <div>
-              <el-input
-                type="textarea"
-                :rows="2"
-                placeholder="About me - maximise 500 words"
-                v-model="valueAbout"
-                @input="onChangeAbout()"
-                @change="onChangeSaveAbout()"
-              >
-              </el-input>
-            </div>
-          </div>
-        </div>
-
         <div class="w-full flex items-center">
           <div class="w-full">
             <div class="w-full flex justify-between bh-title p-3">
@@ -111,86 +91,110 @@
           <div class="w-full relative">
             <div class="w-full flex justify-between p-3 bh-title">
               <div class="">LIFE STYLE</div>
-              <div class="">+22%</div>
+              <div v-show="!completeLifeStyle">+22%</div>
             </div>
 
             <div class="w-full bg-life">
               <div class="w-full item-life">
-                <div class="w-5/6 bh-item-title">Zodiac</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  {{ zodiacParam }}
-                </div>
-                <div class="cursor-pointer" @click="onShowFormLife">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
-                </div>
-              </div>
-              <div class="w-full item-life">
-                <div class="w-5/6 bh-item-title">Pets free</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  {{ petsParam }}
-                </div>
-                <div class="cursor-pointer">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
+                <div class="w-6/12 bh-item-title">Zodiac</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ zodiacParam }}
+                    </div>
+                    <div class="cursor-pointer" @click="onShowFormLife">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="w-full item-life">
-                <div class="w-5/6 bh-item-title">Education</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  {{ educationParam }}
-                </div>
-                <div class="cursor-pointer">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
-                </div>
-              </div>
-              <div class="w-full item-life">
-                <div class="w-5/6 bh-item-title">Smocking smoker</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  {{ smokeParam }}
-                </div>
-                <div class="cursor-pointer">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
+                <div class="w-6/12 bh-item-title">Pets free</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ petsParam }}
+                    </div>
+                    <div class="cursor-pointer">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="w-full item-life">
-                <div class="w-5/6 bh-item-title">Character</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  {{ personalityParam }}
+                <div class="w-6/12 bh-item-title">Education</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ educationParam }}
+                    </div>
+                    <div class="cursor-pointer">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
-                <div class="cursor-pointer">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
+              </div>
+              <div class="w-full item-life">
+                <div class="w-6/12 bh-item-title">Smocking smoker</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ smokeParam }}
+                    </div>
+                    <div class="cursor-pointer">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full item-life">
+                <div class="w-6/12 bh-item-title">Character</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ personalityParam }}
+                    </div>
+                    <div class="cursor-pointer">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="w-full item-life-end">
-                <div class="w-5/6 bh-item-title">Dietary Preferences</div>
-                <div
-                  class="w-2/12 bh-describe whitespace-nowrap text-ellipsis mr-3 overflow-hidden"
-                >
-                  Carnivore
-                </div>
-                <div class="cursor-pointer">
-                  <i
-                    class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
-                  ></i>
+                <div class="w-6/12 bh-item-title">Dietary Preferences</div>
+                <div class="flex w-6/12 justify-end">
+                  <div class="flex">
+                    <div
+                      class="bh-describe whitespace-nowrap mr-3 overflow-hidden"
+                    >
+                      {{ preferencesParam }}
+                    </div>
+                    <div class="cursor-pointer">
+                      <i
+                        class="fa-solid bh-chevron-right cursor-pointer fa-chevron-right"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -376,7 +380,7 @@
                       v-model="showValueAge"
                       active-color="#FB5D65"
                       inactive-color="#5F6A86"
-                      @change="onChangeValueAge(showValueAge)"
+                      @change="onChangeValueAge()"
                     >
                     </el-switch>
                   </div>
@@ -391,7 +395,7 @@
                       v-model="showDistance"
                       active-color="#FB5D65"
                       inactive-color="#5F6A86"
-                      @change="onChangeValueDistance(showDistance)"
+                      @change="onChangeValueDistance()"
                     >
                     </el-switch>
                   </div>
@@ -437,7 +441,7 @@ import MyPhotos from "../../../components/create-profiles/my-self/my-photos";
 import BhBack from "../../../components/bh-element-ui/button/bh-back";
 import BhMedia from "../../../components/bh-element-ui/button/bh-media.vue";
 
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     Footer,
@@ -469,7 +473,7 @@ export default {
       nameJobTitle: "",
       nameSchool: "",
       nameLiving: "",
-      nameZodiac: "Trống",
+      nameDefault: "Trống",
       nameSmoke: "Trống",
       namePets: "Trống",
       namePersonality: "Trống",
@@ -486,19 +490,35 @@ export default {
   },
 
   computed: {
-    // Show Age
-    showValueAge() {
-      const age = this.$store.state.userModule.user_profile?.profiles?.showAge;
+    ...mapGetters({
+      nameShowAge: "showAge",
+      nameShowDistance: "showDistance",
+    }),
 
-      return age;
+    // Show age
+    showValueAge: {
+      get() {
+        const age = this.nameShowAge;
+
+        return age;
+      },
+      set(newName) {
+        return newName;
+      },
     },
+
     // Show Distance
-    showDistance() {
-      const distance =
-        this.$store.state.userModule.user_profile?.profiles?.showDistance;
+    showDistance: {
+      get() {
+        const age = this.nameShowDistance;
 
-      return distance ? distance : this.valShowDistance;
+        return age;
+      },
+      set(newName) {
+        return newName;
+      },
     },
+
     listDataInterests() {
       const interestData =
         this.$store.state.userModule.user_profile?.profiles.interests;
@@ -570,7 +590,6 @@ export default {
       get() {
         const about =
           this.$store.state.userModule.user_profile?.profiles?.address;
-
         return about ? about : this.nameLiving;
       },
       // setter
@@ -580,83 +599,43 @@ export default {
       },
     },
 
-    zodiacParam: {
-      get() {
-        const zodiacData =
-          this.$store.state.userModule.user_profile?.profiles?.zodiac;
+    zodiacParam() {
+      const zodiacData = this.$store.state.userModule.profileLife.zodiac;
 
-        return zodiacData ? zodiacData : this.nameZodiac;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.nameZodiac = newValue;
-      },
+      return zodiacData ? zodiacData : this.nameDefault;
     },
 
-    petsParam: {
-      get() {
-        const petsFreeData =
-          this.$store.state.userModule.user_profile?.profiles?.pet;
+    petsParam() {
+      const petsFreeData = this.$store.state.userModule.profileLife.pet;
 
-        return petsFreeData ? petsFreeData : this.namePets;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.namePets = newValue;
-      },
+      return petsFreeData ? petsFreeData : this.nameDefault;
     },
 
-    educationParam: {
-      get() {
-        const educationData =
-          this.$store.state.userModule.user_profile?.profiles?.education;
+    educationParam() {
+      const educationData = this.$store.state.userModule.profileLife.education;
 
-        return educationData ? educationData : this.nameEducation;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.nameEducation = newValue;
-      },
+      return educationData ? educationData : this.nameDefault;
     },
 
-    personalityParam: {
-      get() {
-        const personalityData =
-          this.$store.state.userModule.user_profile?.profiles?.typePersonality;
+    personalityParam() {
+      debugger;
+      const personalityData =
+        this.$store.state.userModule.profileLife.personality;
 
-        return personalityData ? personalityData : this.namePersonality;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.namePersonality = newValue;
-      },
+      return personalityData ? personalityData : this.nameDefault;
     },
 
-    smokeParam: {
-      get() {
-        const smokeData =
-          this.$store.state.userModule.user_profile?.profiles?.smoking;
+    smokeParam() {
+      const smokeData = this.$store.state.userModule.profileLife.smoking;
 
-        return smokeData ? smokeData : this.nameSmoke;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.nameSmoke = newValue;
-      },
+      return smokeData ? smokeData : this.nameDefault;
     },
 
-    preferenceParam: {
-      get() {
-        const personalityData =
-          this.$store.state.userModule.user_profile?.profiles
-            ?.dietaryPreferences;
+    preferencesParam() {
+      const personalityData =
+        this.$store.state.userModule.profileLife.dietaryPreference;
 
-        return personalityData ? personalityData : this.namePersonality;
-      },
-      set(newValue) {
-        // Note: we are using destructuring assignment syntax here.
-        this.namePersonality = newValue;
-      },
+      return personalityData ? personalityData : this.nameDefault;
     },
   },
 
@@ -667,26 +646,31 @@ export default {
       "setShowAge",
       "setAbout",
       "setShowDistance",
+      "setLifeStyleUser",
+      "setJobTitle",
+      "setSchool",
+      "setShowDistance",
     ]),
 
     ...mapActions(["updateProfileUser"]),
-    onChangeValueAge(val) {
+    onChangeValueAge() {
       debugger;
-      console.log();
-      if (val) {
+      const age = this.$store.state.userModule.user_profile.profiles.showAge;
+      if (age) {
         this.setShowAge(false);
       } else {
         this.setShowAge(true);
       }
     },
 
-    onChangeValueDistance(val) {
+    onChangeValueDistance() {
       debugger;
-      console.log();
-      if (val) {
-        this.setShowAge(false);
+      const distance =
+        this.$store.state.userModule.user_profile.profiles.showDistance;
+      if (distance) {
+        this.setShowDistance(false);
       } else {
-        this.setShowAge(true);
+        this.setShowDistance(true);
       }
     },
     onChangeGender(val) {
@@ -698,9 +682,13 @@ export default {
       this.isShowInterest = true;
     },
 
-    onClickSaveInterest() {},
+    onClickSaveInterest(val) {
+      this.isShowInterest = val;
+    },
 
-    onClickHideInterest() {},
+    onClickHideInterest(val) {
+      this.isShowInterest = val;
+    },
 
     onBackEditProfile(val) {
       console.log(val);
@@ -741,14 +729,22 @@ export default {
       this.isShowLifeStyle = val;
     },
     onClickSaveLife(val) {
-      const lifeData = this.$store.state.userModule.lifeStyle;
-      this.zodiacParam = lifeData.nameZodiac;
-      this.petsParam = lifeData.namePets;
-      this.educationParam = lifeData.nameEducation;
-      this.personalityParam = lifeData.namePersonality;
-      this.smokeParam = lifeData.nameSmoke;
-
+      debugger;
       this.isShowLifeStyle = val;
+
+      debugger;
+      if (
+        (this.zodiacParam ||
+          this.petsParam ||
+          this.educationParam ||
+          this.personalityParam ||
+          this.preferencesParam ||
+          this.smokeParam) !== "Trống"
+      ) {
+        this.completeAbout = true;
+      } else {
+        this.completeAbout = false;
+      }
     },
 
     onShowFormLife() {

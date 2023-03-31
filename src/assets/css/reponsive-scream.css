@@ -132,11 +132,11 @@
   }
 
   .h-title-close {
-    height: 8%;
+    height: 5%;
   }
 
   .h-form-data {
-    height: calc(100% - 11%);
+    height: calc(100% - 5%);
   }
 
   .h-title-data {
