@@ -30,8 +30,8 @@
                   :key="index"
                 >
                   <button
-                    @click="onSelectInterest(index)"
-                    :id="index"
+                    @click="onRemoveItem(item.code)"
+                    :id="item.code"
                     class="border-interest-checked pr-3 p-2 mb-2"
                     size="large"
                   >
@@ -63,8 +63,8 @@
             >
               <span v-for="(item, index) in listDataInterests" :key="index">
                 <button
-                  @click="onSelectInterest(index)"
-                  :id="item.code"
+                  @click="onSelectInterest(item.code)"
+                  :id="`not-check_` + item.code"
                   class="oftion-interests mr-3 mb-3 p-3 text-white"
                   size="large"
                 >
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   name: "form-interests",
   components: {},
@@ -90,6 +90,7 @@ export default {
       state: "",
       timeout: null,
       listChecked: [],
+      listInterestCode: [],
     };
   },
 
@@ -102,14 +103,26 @@ export default {
       return this.$store.state.commonModule.listLifeStyle.interests;
     },
   },
-
   methods: {
+    ...mapMutations(["setListInterests"]),
     ...mapActions(["getListDataInterests"]),
+
+    onRemoveItem(val) {
+      debugger;
+      console.log(val);
+      this.listChecked = this.listChecked.filter(function (el) {
+        return el.code != val;
+      });
+      document.getElementById("not-check_" + val).classList.remove("bg-active");
+      const index = this.listInterestCode.indexOf(val);
+      this.listInterestCode.splice(index, 1);
+    },
     onChangeCancel() {
       this.$emit("onClickHideInterest", false);
     },
 
     onChangeSaveInterest() {
+      this.setListInterests(this.listInterestCode);
       this.$emit("onClickSaveInterest", false);
     },
     // loadAll() {
@@ -123,6 +136,22 @@ export default {
     //     { value: "babel", link: "https://github.com/babel/babel" },
     //   ];
     // },
+
+    onSelectInterest(val) {
+      debugger;
+      if (this.listChecked.length < 5) {
+        document.getElementById("not-check_" + val).classList.add("bg-active");
+        const nameInterest = document
+          .getElementById("not-check_" + val)
+          .innerHTML.toString();
+        const objectChecked = {
+          code: val,
+          value: nameInterest,
+        };
+        this.listInterestCode.push(val);
+        this.listChecked.push(objectChecked);
+      }
+    },
     querySearchAsync(queryString, cb) {
       var links = this.links;
       var results = queryString
@@ -157,14 +186,17 @@ export default {
       this.$store.state.userModule.user_profile.profiles.interests;
     for (let index = 0; index < interestsData.length; index++) {
       const element = interestsData[index];
-      document.getElementById(element).classList.add("bg-active");
+      document
+        .getElementById("not-check_" + element)
+        .classList.add("bg-active");
       const nameInterest = document
-        .getElementById(element)
+        .getElementById("not-check_" + element)
         .innerHTML.toString();
       const objectChecked = {
         code: element,
         value: nameInterest,
       };
+      this.listInterestCode.push(element);
       this.listChecked.push(objectChecked);
     }
   },

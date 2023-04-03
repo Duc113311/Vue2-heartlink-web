@@ -355,9 +355,9 @@ export default {
   },
 
   async created() {
+    await this.getListLifeStyle();
     debugger;
     await this.getDetailProfileByAuthorization();
-    await this.getListLifeStyle();
   },
 };
 </script>

@@ -321,12 +321,35 @@ const mutations = {
       ...data.settings,
     };
 
-    (state.profileLife.zodiac = data.profiles.zodiac),
-      (state.profileLife.education = data.profiles.education),
-      (state.profileLife.personality = data.profiles.personality),
-      (state.profileLife.dietaryPreference = data.profiles.dietaryPreference),
-      (state.profileLife.pet = data.profiles.pet),
-      (state.profileLife.smoking = data.profiles.smoking);
+    debugger;
+    const findZodiac = this.state.commonModule.listLifeStyle.zodiacs.find(
+      (x) => x.code === data.profiles.zodiac
+    );
+    const findEducation = this.state.commonModule.listLifeStyle.educations.find(
+      (x) => x.code === data.profiles.education
+    );
+    const findPersonality =
+      this.state.commonModule.listLifeStyle.personalities.find(
+        (x) => x.code === data.profiles.personality
+      );
+    const findDietaryPreference =
+      this.state.commonModule.listLifeStyle.foodPreferences.find(
+        (x) => x.code === data.profiles.dietaryPreference
+      );
+    const findPet = this.state.commonModule.listLifeStyle.pets.find(
+      (x) => x.code === data.profiles.pet
+    );
+    const findSmoking = this.state.commonModule.listLifeStyle.smokes.find(
+      (x) => x.code === data.profiles.smoking
+    );
+
+    console.log(findZodiac.value);
+    (state.profileLife.zodiac = findZodiac.value),
+      (state.profileLife.education = findEducation.value),
+      (state.profileLife.personality = findPersonality.value),
+      (state.profileLife.dietaryPreference = findDietaryPreference.value),
+      (state.profileLife.pet = findPet.value),
+      (state.profileLife.smoking = findSmoking.value);
   },
 
   /**
@@ -466,6 +489,11 @@ const mutations = {
         state.isActiveId = false;
       }
     }
+  },
+
+  setListInterests(state, data) {
+    debugger;
+    state.user_profile.profiles.interests = data;
   },
 
   /**
