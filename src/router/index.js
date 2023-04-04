@@ -190,11 +190,30 @@ const routes = [
       // Setting profile
       {
         path: "/setting",
-        name: "setting",
+        name: "setting-page",
         component: () =>
           import(
-            /* webpackChunkName: "setting" */ "../views/profile-page/setting/index.vue"
+            /* webpackChunkName: "setting-page" */ "../views/profile-page/setting/index.vue"
           ),
+
+        children: [
+          {
+            path: "/",
+            name: "setting-default",
+            component: () =>
+              import(
+                /* webpackChunkName: "setting-default" */ "../views/profile-page/setting/default/index.vue"
+              ),
+          },
+          {
+            path: "/phone-number",
+            name: "phone-number-setting",
+            component: () =>
+              import(
+                /* webpackChunkName: "phone-number-setting" */ "../views/profile-page/setting/phone-number/index.vue"
+              ),
+          },
+        ],
       },
     ],
   },

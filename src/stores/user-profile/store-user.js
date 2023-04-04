@@ -96,6 +96,19 @@ const getters = {
     debugger;
     return state.user_profile.profiles.showDistance;
   },
+
+  showGlobal: (state) => {
+    debugger;
+    return state.user_profile.settings.global;
+  },
+
+  showPeopleDistance: (state) => {
+    return state.user_profile.settings.distancePreference.onlyShowInThis;
+  },
+
+  showAgePreference: (state) => {
+    return state.user_profile.settings.agePreference.onlyShowInThis;
+  },
 };
 
 const actions = {
@@ -424,6 +437,38 @@ const mutations = {
    */
   setShowDistance(state, value) {
     state.user_profile.profiles.showDistance = value;
+  },
+
+  /**
+   * Xét giá trị ẩn/hiện toàn cầu
+   * @param {*} state
+   * @param {*} value
+   */
+  setShowGlobal(state, value) {
+    debugger;
+    state.user_profile.settings.global = value;
+  },
+
+  setPeopleDistance(state, value) {
+    state.user_profile.settings.distancePreference.onlyShowInThis = value;
+  },
+  setAgePreference(state, value) {
+    state.user_profile.settings.agePreference.onlyShowInThis = value;
+  },
+  /**
+   * Xét giá trị value distance
+   * @param {*} state
+   * @param {*} value
+   */
+  setValueDistance(state, value) {
+    debugger;
+    state.user_profile.settings.distancePreference.range = value;
+  },
+
+  setValueAgeRange(state, value) {
+    state.user_profile.settings.agePreference.min = value[0];
+    state.user_profile.settings.agePreference.max = value[1];
+    debugger;
   },
 
   /**

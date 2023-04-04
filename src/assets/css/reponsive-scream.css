@@ -267,4 +267,13 @@
   .icon-close-infor {
     top: 31.5rem;
   }
+
+  /* setting */
+  .header-detail {
+    height: 10%;
+  }
+
+  .body-detail {
+    height: 80%;
+  }
 }
