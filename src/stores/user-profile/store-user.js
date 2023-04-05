@@ -109,6 +109,31 @@ const getters = {
   showAgePreference: (state) => {
     return state.user_profile.settings.agePreference.onlyShowInThis;
   },
+
+  showCardStack: (state) => {
+    return state.user_profile.settings.toppicksDiscoverable;
+  },
+  showAutoPlay: (state) => {
+    debugger;
+    return state.user_profile.settings.autoPlayVideo;
+  },
+  showTopPick: (state) => {
+    return state.user_profile.settings.showMePersonLikeMe;
+  },
+  showReadReceipt: (state) => {
+    return state.user_profile.settings.notiSeenMsg;
+  },
+  showActivityStatus: (state) => {
+    return state.user_profile.settings.showActiveStatus;
+  },
+
+  showDistanceLocation: (state) => {
+    return state.user_profile.settings.distancePreference.unit;
+  },
+
+  showIncognitoMode: (state) => {
+    return state.user_profile.settings.incognitoMode;
+  },
 };
 
 const actions = {
@@ -449,11 +474,40 @@ const mutations = {
     state.user_profile.settings.global = value;
   },
 
+  /**
+   * Xét giá trị ẩn hiện
+   * @param {*} state
+   * @param {*} value
+   */
   setPeopleDistance(state, value) {
     state.user_profile.settings.distancePreference.onlyShowInThis = value;
   },
+  /**
+   * Xét giá trị ẩn hiện age
+   * @param {*} state
+   * @param {*} value
+   */
   setAgePreference(state, value) {
     state.user_profile.settings.agePreference.onlyShowInThis = value;
+  },
+
+  setCardStack(state, value) {
+    state.user_profile.settings.toppicksDiscoverable = value;
+  },
+
+  setAutoPlayVideo(state, value) {
+    state.user_profile.settings.autoPlayVideo = value;
+  },
+
+  setShowTopPicks(state, value) {
+    state.user_profile.settings.showMePersonLikeMe = value;
+  },
+
+  setReadReceipts(state, value) {
+    state.user_profile.settings.notiSeenMsg = value;
+  },
+  setActivityStatus(state, value) {
+    state.user_profile.settings.showActiveStatus = value;
   },
   /**
    * Xét giá trị value distance

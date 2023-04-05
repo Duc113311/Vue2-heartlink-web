@@ -13,146 +13,7 @@
 
       <div class="body-detail height-scroll overflow-scroll w-full">
         <!--package -->
-        <div class="w-full gold-package overflow-scroll mt-3">
-          <div class="border-package">
-            <carousel
-              :per-page="1"
-              :mouse-drag="true"
-              :autoplay="true"
-              :paginationActiveColor="isColorActive"
-              :paginationColor="isColor"
-            >
-              <slide
-                data-index="0"
-                data-name="MySlideName"
-                @slideclick="handleSlideClick"
-              >
-                <div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-slate-900">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_platium_package.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Platinum package</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div>
-              </slide>
-              <slide
-                ><div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-amber-300">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_gold_package.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Gold package</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-
-              <slide>
-                <div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-blue-400">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_gold_package.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Gold package</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-              <slide>
-                <div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-zinc-400">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_silver_package.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Silver package</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-              <slide>
-                <div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-orange-500">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_super_like.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Get Supper Like</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-              <slide
-                ><div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-yellow-500">
-                    <div class="flex justify-center">
-                      <img src="@/assets/icon/package/ic_boost.svg" alt="" />
-                    </div>
-                    <div class="mt-2 text-xl">Get Boost Profile</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-              <slide
-                ><div
-                  class="w-full flex justify-center text-center mb-2 dash-packages"
-                >
-                  <div class="item-package bg-teal-400">
-                    <div class="flex justify-center">
-                      <img
-                        src="@/assets/icon/package/ic_read_receipts.svg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="mt-2 text-xl">Get Read Receipts</div>
-                    <div class="mt-2 text-sm">
-                      Level up everyone action you take on HeartLink
-                    </div>
-                  </div>
-                </div></slide
-              >
-            </carousel>
-          </div>
-        </div>
+        <slider-gold></slider-gold>
 
         <!-- account setting -->
 
@@ -329,23 +190,32 @@
             </div>
             <div class="w-full flex items-center">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full bd-input items-center">
+                <div
+                  class="flex justify-between w-full bd-input items-center"
+                  @click="onChangeGenderShowMe(`men`)"
+                >
                   <div class="bh-item-title form-set-item">Men</div>
-                  <div>
+                  <div v-if="showMeGender === `men`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
 
-                <div class="flex justify-between w-full bd-input items-center">
+                <div
+                  class="flex justify-between w-full bd-input items-center"
+                  @click="onChangeGenderShowMe(`women`)"
+                >
                   <div class="bh-item-title form-set-item">Women</div>
-                  <div>
+                  <div v-if="showMeGender === `women`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
 
-                <div class="flex justify-between w-full items-center">
+                <div
+                  class="flex justify-between w-full items-center"
+                  @click="onChangeGenderShowMe(`all`)"
+                >
                   <div class="bh-item-title form-set-item">Everyone</div>
-                  <div>
+                  <div v-if="showMeGender === `all`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -378,7 +248,7 @@
                       See the most relevant people to you (default settings)
                     </div>
                   </div>
-                  <div>
+                  <div v-if="valueIncognitoMode">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -392,7 +262,7 @@
                       See the most recently active people first
                     </div>
                   </div>
-                  <div>
+                  <div v-if="!valueIncognitoMode">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -421,7 +291,7 @@
                       recommendations
                     </div>
                   </div>
-                  <div>
+                  <div v-if="!valueIncognitoMode">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -437,7 +307,7 @@
                       Only people you have liked will see me
                     </div>
                   </div>
-                  <div>
+                  <div v-if="valueIncognitoMode">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -461,9 +331,10 @@
                       </div>
                       <div>
                         <el-switch
-                          v-model="value2"
+                          v-model="valueCardStack"
                           active-color="#FB5D65"
                           inactive-color="#5F6A86"
+                          @change="onChangeCardStack()"
                         >
                         </el-switch>
                       </div>
@@ -488,23 +359,32 @@
             </div>
             <div class="w-full flex items-center bh-item-title">
               <div class="w-full style-bg-common">
-                <div class="flex justify-between w-full form-set-item bd-input">
+                <div
+                  class="flex justify-between w-full form-set-item bd-input"
+                  @click="onChangeAutoPlayVideo('no')"
+                >
                   <div class="bh-item-title">Only Wi-fi Only</div>
-                  <div>
+                  <div v-if="valueAutoPlayVideo === `no`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
 
-                <div class="flex justify-between w-full form-set-item bd-input">
+                <div
+                  class="flex justify-between w-full form-set-item bd-input"
+                  @click="onChangeAutoPlayVideo('wifi')"
+                >
                   <div class="bh-item-title">On Wi-fi and mobile data</div>
-                  <div>
+                  <div v-if="valueAutoPlayVideo === `wifi`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
 
-                <div class="flex justify-between w-full form-set-item">
+                <div
+                  class="flex justify-between w-full form-set-item"
+                  @click="onChangeAutoPlayVideo('always')"
+                >
                   <div class="bh-item-title">Never autoplay videos</div>
-                  <div>
+                  <div v-if="valueAutoPlayVideo === `always`">
                     <img src="@/assets/icon/ic_checked.svg" alt="" srcset="" />
                   </div>
                 </div>
@@ -556,9 +436,10 @@
                       <div class="">Show me Top picks</div>
                       <div>
                         <el-switch
-                          v-model="value2"
+                          v-model="valueShowTopPicks"
                           active-color="#FB5D65"
                           inactive-color="#5F6A86"
+                          @change="onChangeShowTopPicks()"
                         >
                         </el-switch>
                       </div>
@@ -586,9 +467,10 @@
                       <div class="">Send Read Receipts</div>
                       <div>
                         <el-switch
-                          v-model="value2"
+                          v-model="valueReadReceipts"
                           active-color="#FB5D65"
                           inactive-color="#5F6A86"
+                          @change="onChangeReadReceipts()"
                         >
                         </el-switch>
                       </div>
@@ -617,9 +499,10 @@
                       <div class="">Activity Status</div>
                       <div>
                         <el-switch
-                          v-model="value2"
+                          v-model="valueActivityStatus"
                           active-color="#FB5D65"
                           inactive-color="#5F6A86"
+                          @change="onChangeActivityStatus()"
                         >
                         </el-switch>
                       </div>
@@ -639,7 +522,7 @@
 
         <div class="w-full">
           <div class="w-full">
-            <div class="w-full flex justify-between bh-title p-3">
+            <div class="w-full flex justify-between bh-title">
               <div class="w-full bh-item-title title-size">App Setiings</div>
             </div>
             <div class="w-full form-set-list">
@@ -649,11 +532,17 @@
               </div>
 
               <div
-                class="w-full flex justify-center items-center form-set-item"
+                class="w-full flex justify-center items-center form-set-item gap-6"
               >
-                <div class="style-km">Km.</div>
-
-                <div class="style-mi">Mi.</div>
+                <div
+                  v-for="(item, index) in listDistance"
+                  :key="index"
+                  :id="`location_` + item"
+                  class="style-distance no-active-distance"
+                  @click="onChangeDistanceLocation(item)"
+                >
+                  {{ item.charAt(0).toUpperCase() + item.slice(1) + "." }}
+                </div>
               </div>
             </div>
           </div>
@@ -875,6 +764,7 @@
         <Footer></Footer>
       </div>
     </div>
+    <popup-gold v-if="isShowPackage"></popup-gold>
   </div>
 </template>
 
@@ -882,16 +772,22 @@
 import Footer from "../../../../components/layout/footer-home/footer";
 import BhBack from "../../../../components/bh-element-ui/button/bh-back";
 import { mapGetters, mapMutations } from "vuex";
+import PopupGold from "@/components/packages/default/popup-gold.vue";
+import SliderGold from "@/components/packages/common/slider-gold.vue";
+
 export default {
   components: {
     Footer,
     BhBack,
+
+    PopupGold,
+    SliderGold,
   },
   name: "setting-default",
   data() {
     return {
       value1: 4,
-
+      isShowPackage: false,
       valueAge: [
         this.$store.state.userModule.user_profile.settings.agePreference.min,
         this.$store.state.userModule.user_profile.settings.agePreference.max,
@@ -903,6 +799,8 @@ export default {
       valueDistance:
         this.$store.state.userModule.user_profile.settings.distancePreference
           .range,
+
+      listDistance: ["km", "mi"],
     };
   },
 
@@ -911,7 +809,32 @@ export default {
       nameGlobal: "showGlobal",
       namePeopleDistance: "showPeopleDistance",
       nameAgePreference: "showAgePreference",
+      nameDistanceLocation: "showDistanceLocation",
+      nameCardStack: "showCardStack",
+      nameAutoPlayVideo: "showAutoPlay",
+      nameShowTopPicks: "showTopPick",
+      nameReadReceipts: "showReadReceipt",
+      nameActivityStatus: "showActivityStatus",
+      nameIncognitoMode: "showIncognitoMode",
     }),
+
+    isShowDistance: {
+      get() {
+        const statusDistance = this.nameDistanceLocation;
+        debugger;
+        if (statusDistance === "km") {
+          return true;
+        }
+        return false;
+      },
+      set(newName) {
+        debugger;
+        if (newName === "km") {
+          return true;
+        }
+        return false;
+      },
+    },
 
     showAgeMin() {
       return this.valueAge[0];
@@ -960,6 +883,91 @@ export default {
       },
     },
 
+    showMeGender() {
+      const genderShowMe =
+        this.$store.state.userModule.user_profile?.settings.genderShowMe;
+      debugger;
+      return genderShowMe;
+    },
+
+    // Show me on Card Stack
+    valueCardStack: {
+      get() {
+        const cardStack = this.nameCardStack;
+
+        return cardStack;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
+    // Auto play video
+    valueAutoPlayVideo: {
+      get() {
+        const autoPlayVideo = this.nameAutoPlayVideo;
+
+        return autoPlayVideo;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
+    // Show me Top picks
+    valueShowTopPicks: {
+      get() {
+        const showTopPicks = this.nameShowTopPicks;
+
+        return showTopPicks;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
+    // Send Read Receipts
+    valueReadReceipts: {
+      get() {
+        const readReceipts = this.nameReadReceipts;
+
+        return readReceipts;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
+    // Activity Status
+    valueActivityStatus: {
+      get() {
+        const activityStatus = this.nameActivityStatus;
+
+        return activityStatus;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
+    // nameIncognitoMode
+    valueIncognitoMode: {
+      get() {
+        const incognitoMode = this.nameIncognitoMode;
+
+        return incognitoMode;
+      },
+      set(newName) {
+        debugger;
+        return newName;
+      },
+    },
+
     addressLocation() {
       const addressParam =
         this.$store.state.userModule.user_profile.profiles.address;
@@ -973,7 +981,24 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setShowGlobal", "setValueDistance", "setValueAgeRange"]),
+    ...mapMutations([
+      "setShowGlobal",
+      "setValueDistance",
+      "setValueAgeRange",
+      "setPeopleDistance",
+      "setAgePreference",
+      "setShowGender",
+      "setCardStack",
+      "setAutoPlayVideo",
+      "setShowTopPicks",
+      "setReadReceipts",
+      "setActivityStatus",
+    ]),
+
+    onChangeShowPackage() {
+      debugger;
+      this.isShowPackage = true;
+    },
     onBackSetting(val) {
       console.log(val);
       this.$router.push({ path: "/setting" });
@@ -999,7 +1024,28 @@ export default {
       debugger;
       this.setValueDistance(this.valueDistance);
     },
-
+    onChangeDistanceLocation(val) {
+      debugger;
+      console.log(val);
+      for (let index = 0; index < this.listDistance.length; index++) {
+        const element = this.listDistance[index];
+        if (element === val) {
+          document
+            .getElementById("location_" + val)
+            .classList.add("active-distance");
+          document
+            .getElementById("location_" + val)
+            .classList.remove("no-active-distance");
+        } else {
+          document
+            .getElementById("location_" + element)
+            .classList.remove("active-distance");
+          document
+            .getElementById("location_" + element)
+            .classList.add("no-active-distance");
+        }
+      }
+    },
     /**
      * Xự kiện xử lý giá trị age max-min
      */
@@ -1009,8 +1055,9 @@ export default {
     },
 
     onChangePeopleDistance() {
+      debugger;
       const distance =
-        this.$store.state.userModule.user_profile.settings.agePreference
+        this.$store.state.userModule.user_profile.settings.distancePreference
           .onlyShowInThis;
       if (distance) {
         this.setPeopleDistance(false);
@@ -1020,14 +1067,66 @@ export default {
     },
 
     onChangeAgePreference() {
+      debugger;
       const preference =
-        this.$store.state.userModule.user_profile.settings.distancePreference
+        this.$store.state.userModule.user_profile.settings.agePreference
           .onlyShowInThis;
       if (preference) {
         this.setAgePreference(false);
       } else {
         this.setAgePreference(true);
       }
+    },
+
+    onChangeCardStack() {
+      const cardStack =
+        this.$store.state.userModule.user_profile.settings.toppicksDiscoverable;
+      if (cardStack) {
+        this.setCardStack(false);
+      } else {
+        this.setCardStack(true);
+      }
+    },
+
+    onChangeAutoPlayVideo(val) {
+      debugger;
+      this.setAutoPlayVideo(val);
+    },
+
+    onChangeShowTopPicks() {
+      const topPicks =
+        this.$store.state.userModule.user_profile.settings.showMePersonLikeMe;
+      if (topPicks) {
+        this.setShowTopPicks(false);
+      } else {
+        this.setShowTopPicks(true);
+      }
+    },
+
+    onChangeReadReceipts() {
+      const readReceipts =
+        this.$store.state.userModule.user_profile.settings.notiSeenMsg;
+      if (readReceipts) {
+        this.setReadReceipts(false);
+      } else {
+        this.setReadReceipts(true);
+      }
+    },
+
+    onChangeActivityStatus() {
+      const activityStatus =
+        this.$store.state.userModule.user_profile.settings.showActiveStatus;
+      if (activityStatus) {
+        this.setActivityStatus(false);
+      } else {
+        this.setActivityStatus(true);
+      }
+    },
+
+    onChangeGenderShowMe(val) {
+      debugger;
+      console.log(val);
+      this.setShowGender(val);
     },
 
     onChangeLocations(val) {
@@ -1048,6 +1147,19 @@ export default {
         .catch(() => {});
     },
   },
+
+  mounted() {
+    debugger;
+
+    const location = this.nameDistanceLocation;
+    console.log(location);
+    document
+      .getElementById("location_" + location)
+      .classList.add("active-distance");
+    document
+      .getElementById("location_" + location)
+      .classList.remove("no-active-distance");
+  },
 };
 </script>
 
@@ -1056,57 +1168,16 @@ export default {
   background-color: #242a38;
 }
 
-.gold-package {
+.style-distance {
+  width: 28%;
+  padding: 10px;
   border-radius: 10px;
-  height: 27%;
+  text-align: center;
 }
-
-.gold-package {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
+.active-distance {
+  background-color: #fd5d65;
 }
-
-.gold-package::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
-
-.border-package {
-  width: 100%;
-  height: 200px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.dash-packages {
-  height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.VueCarousel-pagination {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-bottom: 40px;
-}
-.VueCarousel-dot {
-  padding: 5px !important;
-  width: 8px !important;
-  height: 8px !important;
-}
-
-.item-package {
-  padding: 20px;
-  width: 100%;
-  color: white;
-  height: 100%;
+.no-active-distance {
+  background-color: #5f6a86;
 }
 </style>

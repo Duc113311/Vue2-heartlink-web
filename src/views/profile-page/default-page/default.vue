@@ -3,143 +3,7 @@
     <div class="height-setting p-3">
       <!-- package -->
 
-      <div class="w-full gold-package overflow-scroll">
-        <div class="border-package">
-          <carousel
-            :per-page="1"
-            :mouse-drag="true"
-            :autoplay="true"
-            :paginationActiveColor="isColorActive"
-            :paginationColor="isColor"
-          >
-            <slide
-              data-index="0"
-              data-name="MySlideName"
-              @slideclick="handleSlideClick"
-            >
-              <div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-slate-900">
-                  <div class="flex justify-center">
-                    <img
-                      src="@/assets/icon/package/ic_platium_package.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="mt-2 text-xl">Platinum package</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div>
-            </slide>
-            <slide
-              ><div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-amber-300">
-                  <div class="flex justify-center">
-                    <img
-                      src="@/assets/icon/package/ic_gold_package.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="mt-2 text-xl">Gold package</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-
-            <slide>
-              <div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-blue-400">
-                  <div class="flex justify-center">
-                    <img
-                      src="@/assets/icon/package/ic_gold_package.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="mt-2 text-xl">Gold package</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-            <slide>
-              <div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-zinc-400">
-                  <div class="flex justify-center">
-                    <img
-                      src="@/assets/icon/package/ic_silver_package.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="mt-2 text-xl">Silver package</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-            <slide>
-              <div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-orange-500">
-                  <div class="flex justify-center">
-                    <img src="@/assets/icon/package/ic_super_like.svg" alt="" />
-                  </div>
-                  <div class="mt-2 text-xl">Get Supper Like</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-            <slide
-              ><div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-yellow-500">
-                  <div class="flex justify-center">
-                    <img src="@/assets/icon/package/ic_boost.svg" alt="" />
-                  </div>
-                  <div class="mt-2 text-xl">Get Boost Profile</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-            <slide
-              ><div
-                class="w-full flex justify-center text-center mb-2 dash-packages"
-              >
-                <div class="item-package bg-teal-400">
-                  <div class="flex justify-center">
-                    <img
-                      src="@/assets/icon/package/ic_read_receipts.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="mt-2 text-xl">Get Read Receipts</div>
-                  <div class="mt-2 text-sm">
-                    Level up everyone action you take on HeartLink
-                  </div>
-                </div>
-              </div></slide
-            >
-          </carousel>
-        </div>
-      </div>
+      <slider-gold></slider-gold>
 
       <!-- <div class="w-full gold-package overflow-scroll">
         <carousel :per-page="1" :mouse-drag="true" :autoplay="true">
@@ -318,15 +182,13 @@
 <script>
 import Footer from "../../../components/layout/footer-home/footer";
 // import FormPackages from "../../assets/packages/form-packages";
-import { Carousel, Slide } from "vue-carousel";
 import { mapActions } from "vuex";
+import SliderGold from "@/components/packages/common/slider-gold.vue";
 
 export default {
   components: {
     Footer,
-    // FormPackages,
-    Carousel,
-    Slide,
+    SliderGold,
   },
   name: "default-page",
 
@@ -449,7 +311,6 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-bottom: 40px;
 }
 
 .border-package {

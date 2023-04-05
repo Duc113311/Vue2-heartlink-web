@@ -995,7 +995,6 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-bottom: 40px;
 }
 .VueCarousel-dot {
   padding: 5px !important;
