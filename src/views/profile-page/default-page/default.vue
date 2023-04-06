@@ -281,13 +281,6 @@ export default {
   color: #ffffff;
 }
 
-.item-package {
-  padding: 20px;
-  width: 100%;
-  color: white;
-  height: 100%;
-}
-
 .gold-package {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */

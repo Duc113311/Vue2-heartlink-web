@@ -16,7 +16,7 @@
   }
   .layout-detail {
     width: 34rem;
-    height: 90%;
+    height: 100%;
   }
   .phone-login,
   .email-login,
@@ -76,7 +76,7 @@
   }
   .layout-detail {
     width: 34rem;
-    height: 90%;
+    height: 100%;
   }
   .phone-login,
   .email-login,
@@ -159,7 +159,7 @@
 
   .layout-detail {
     width: 34rem;
-    height: 90%;
+    height: 100%;
   }
 
   .footer-body {
@@ -215,16 +215,21 @@
   }
   .layout-detail {
     width: 34rem;
-    height: 90%;
+    height: 100%;
   }
 
   .footer-body {
-    gap: 50px;
-    font-size: 44px;
+    gap: 56px;
+    font-size: 46px;
+  }
+
+  .body-page-home {
+    height: 80%;
   }
 
   .btns {
-    min-width: 450px !important;
+    min-width: 500px !important;
+    gap: 8px;
   }
   .btns img:nth-child(2n + 1) {
     width: 85px !important;

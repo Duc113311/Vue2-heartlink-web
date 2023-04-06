@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full mt-5">
     <div class="w-full pl-6 pr-6">
       <div class="flex w-full bg-input">
         <img src="@/assets/icon/ic_search.svg" class="mr-7" alt="" />

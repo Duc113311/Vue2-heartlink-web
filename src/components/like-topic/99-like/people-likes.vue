@@ -23,7 +23,7 @@
     >
       <span>Upgrade to Gold to see people who are interested in you</span>
     </div>
-    <div class="w-full p-3 h-likes">
+    <!-- <div class="w-full p-3 h-likes">
       <div class="items-center list-likes grid h-full">
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
@@ -78,7 +78,7 @@
           ></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="absolute w-full bottom-0 z-10 mb-14">
       <BhSeeLike></BhSeeLike>
     </div>

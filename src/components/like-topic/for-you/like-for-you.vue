@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative">
     <div class="w-full p-5">Recently Active</div>
-    <div class="w-full p-3 h-likes">
+    <!-- <div class="w-full p-3 h-likes">
       <div class="items-center list-likes grid h-full">
         <div class="item-user m-3 relative overflow-hidden">
           <div class="image absolute bottom-0 w-full p-4 z-10 text-white">
@@ -55,7 +55,7 @@
           ></div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

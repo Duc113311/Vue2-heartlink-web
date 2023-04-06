@@ -76,7 +76,7 @@
           >
             <div
               class="item-package supper-like-bg"
-              @click="onClickShowPackages('supper-like')"
+              @click="onClickShowPackages('supperLike')"
             >
               <div class="flex justify-center">
                 <img src="@/assets/icon/package/ic_super_like.svg" alt="" />
@@ -112,7 +112,7 @@
           >
             <div
               class="item-package read-receipts-bg"
-              @click="onClickShowPackages('read-receipts')"
+              @click="onClickShowPackages('readReceipt')"
             >
               <div class="flex justify-center">
                 <img src="@/assets/icon/package/ic_read_receipts.svg" alt="" />
@@ -127,7 +127,11 @@
       </carousel>
     </div>
 
-    <PopupGold></PopupGold>
+    <PopupGold
+      v-if="isShowPackage"
+      :nameGoldPackage="nameGoldPackage"
+      @onClickHidePackage="onHidePackage"
+    ></PopupGold>
   </div>
 </template>
 
@@ -144,13 +148,23 @@ export default {
     Slide,
   },
   data() {
-    return {};
+    return {
+      nameGoldPackage: "",
+      isShowPackage: false,
+    };
   },
 
   methods: {
     onClickShowPackages(val) {
       console.log(val);
+      this.isShowPackage = true;
+      this.nameGoldPackage = val;
       debugger;
+    },
+
+    onHidePackage(val) {
+      debugger;
+      this.isShowPackage = val;
     },
   },
 };
@@ -196,7 +210,7 @@ export default {
 }
 
 .item-package {
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   color: white;
   height: 100%;
